@@ -10,7 +10,7 @@ class Product(models.Model):
 class Comment(models.Model):
     pass
 class Like_product(models.Model):
-
+    pass
 class Category(models.Model):
     pass
 
