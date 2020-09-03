@@ -14,7 +14,7 @@ class User(models.Model):
                                   ('female', 'female')
                               ))
     birth = models.DateField(auto_now=False, auto_now_add=False)
-    rank = models.CharField(max_length=8, verbose_name='등급',
+    rank = models.CharField(max_length=16, verbose_name='등급',
                             choices=(
                                 ('admin', 'admin'),
                                 ('user', 'user')
