@@ -35,7 +35,7 @@ class Product(models.Model):
     stock               = models.IntegerField(verbose_name='재고')
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
-    available_display   = models.BooleanField('Display', default= True) 
+    available_display   = models.BooleanField('판매 가능?', default= True) 
     def __str__(self):
         return self.name
 

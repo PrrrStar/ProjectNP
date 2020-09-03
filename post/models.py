@@ -17,19 +17,6 @@ class Post(models.Model):
         verbose_name        = '게시글'
         verbose_name_plural = '게시글'
 
-
-class Post_recomment(models.Model):
-    post        = models.ForeignKey(Post, on_delete=models.CASCADE)
-    content     = models.TextField(verbose_name='내용')
-    created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
-
-
-    class Meta:
-        db_table            = 'post_recomment'
-        verbose_name        = '게시글 추천'
-        verbose_name_plural = '게시글 추천'
-    
-
 class Post_comment(models.Model):
     post        = models.ForeignKey(Post, on_delete=models.CASCADE)
     img         = models.ImageField(upload_to="post_comment/%Y/%m/%d", blank=True)
@@ -39,9 +26,21 @@ class Post_comment(models.Model):
     
     class Meta:
         db_table            = 'post_comment'
-        verbose_name        = '게시글 코멘트'
-        verbose_name_plural = '게시글 코멘트'
+        verbose_name        = '게시글 댓글'
+        verbose_name_plural = '게시글 댓글'
         
+
+class Post_recomment(models.Model):
+    post_comment    = models.ForeignKey(Post_comment, on_delete=models.CASCADE)
+    content         = models.TextField(verbose_name='내용')
+    created_at      = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
+
+
+    class Meta:
+        db_table            = 'post_recomment'
+        verbose_name        = '게시글 대댓글'
+        verbose_name_plural = '게시글 대댓글'
+    
 
 class Like_post_comment(models.Model):
     post_comment    = models.ForeignKey(Post_comment, on_delete=models.CASCADE)
