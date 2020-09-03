@@ -1,0 +1,63 @@
+1. model의 각 class는 대문자로 시작하고 나머지는 모두 소문자입니다.
+
+2. 단어와 단어의 연결은 '_'로 통일했습니다.
+
+3. myside app에는 Product, Category, Product_has_brand, Brand, Like_product, Comment, Like_comment, Recomment, Like_recomment 가 있습니다.
+
+4. postside app에는 Post, post_comment, Like_post_comment, Post_recomment, Like_post_recomment 가 있습니다.
+
+5. user app에는 User만 있습니다.
+
+6. 각 db_table은 class에서 첫문자만 소문자로 바꾼것과 같습니다. ex) User=>user
+
+7. img_url은 일단 초기값인 max_length=200으로 하고 URL_field로 설정해놨습니다.
+
+8. ForeignKey의 모든 on_delete값은 models.CASCADE로 설정해놨습니다. 
+
+9. User에서 gender는 charField를 choices를 사용해 male이나 female 선택형으로 만들었습니다.
+
+10. User에서 rank는 일단 charField를 choices를 사용해 admin이나 user 선택형으로 만들었습니다. (제가 이해한게 맞는지 확인 부탁드립니다.)
+
+11. img_url을 제외한 max_length는 명시된 것의 2배 만큼 지정해놨습니다.
+
+12. Brand, Product, User은 __str__을 self.name, Post는 self.title으로 설정 해놨습니다.(나머지는 설정X)
+
+13. img_url은 blank=True로 설정했습니다.
+
+14. Comment나 Recomment의 bad,good은 default값을 0으로 설정했습니다.
+
+15. Product에 brands변수를 추가해 Brand와 Product_has_brand를 통해(through) manytomany형식으로 연결했습니다. (확실한지 모르겠어요...)
+
+16. 더 필요한거 있으시면 말해주세요 :)
+
+You are trying to add a non-nullable field 'content' to comment without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+>>> 0
+
+You are trying to add the field 'created_at' with 'auto_now_add=True' to comment without a default; the database needs something to populate existing rows.
+Please enter the default value now, as valid Python
+You can accept the default 'timezone.now' by pressing 'Enter' or you can provide another value.
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+[default: timezone.now] >>>
+
+You are trying to add a non-nullable field 'product_id' to comment without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+>>> 1
+
+You are trying to add a non-nullable field 'user_id' to comment without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+>>> 1
+
+You are trying to add a non-nullable field 'product_id' to like_product without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+>>> 1
+
+15. 위는 makemigrations 부분에서의 초기값 설정입니다.( 읽지 않으셔도 되는데 만약을 위해 적었습니다. )
