@@ -1,15 +1,15 @@
 from django.db import models
 from django.urls import reverse
 
-from mptt.models import MTPPModel, TreeForeignKey
+from mptt.models import MPTTModel, TreeForeignKey
 
 # Create your models here.
 
-class Category(models.Model):
+class Category(MPTTModel):
 
-    name    = models.CharField(max_length=20, verbose_name='상위 카테고리')
-    parent  = TreeForeignKey('self', null=True, blank= True, related_name='children', db_index=True)
-    slug    = models.SlugField(max_length=20, unique=True)
+    name    = models.CharField(max_length=20, verbose_name='카테고리', unique=True)
+    parent  = TreeForeignKey('self', null=True, blank= True, verbose_name='상위 카테고리',related_name='children', on_delete=models.CASCADE)
+    slug    = models.SlugField(max_length=20)
 
     class MPTTMeta:
         order_insertion_by = ['name']
@@ -31,8 +31,8 @@ class Category(models.Model):
             slugs.append('/'.join(ancestors[:i+1]))
         return slugs
 
-    class __str__(self):
-        return self.first
+    def __str__(self):
+        return self.name
 
 
 class Brand(models.Model):
