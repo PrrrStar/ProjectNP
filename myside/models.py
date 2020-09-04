@@ -6,6 +6,7 @@ from mptt.models import MTPPModel, TreeForeignKey
 # Create your models here.
 
 class Category(models.Model):
+
     name    = models.CharField(max_length=20, verbose_name='상위 카테고리')
     parent  = TreeForeignKey('self', null=True, blank= True, related_name='children', db_index=True)
     slug    = models.SlugField(max_length=20, unique=True)
@@ -33,6 +34,7 @@ class Category(models.Model):
     class __str__(self):
         return self.first
 
+
 class Brand(models.Model):
     name    = models.CharField(max_length=20, verbose_name='브랜드')
     img     = models.ImageField(upload_to="brand/%Y/%m/%d", blank=True)
@@ -49,7 +51,7 @@ class Product(models.Model):
     brand               = models.ManyToManyField(Brand, through='Product_has_brand')
 
     name                = models.CharField(max_length = 20, verbose_name='제품명')
-    SlugField           = models.SlugField(max_length = 20, unique = True)
+    slug                = models.SlugField(max_length = 20, unique = True)
     img                 = models.ImageField(upload_to="product/%Y/%m/%d", blank=True)
     description         = models.TextField(verbose_name='설명')
     price               = models.IntegerField(verbose_name='가격')
@@ -64,6 +66,7 @@ class Product(models.Model):
         verbose_name        = 'product'
         verbose_name_plural = 'products'
 
+
 class Product_has_brand(models.Model):
     product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.SET_NULL, null=True)
     brand       = models.ForeignKey(Brand, verbose_name="브랜드명", on_delete=models.SET_NULL, null=True)
@@ -74,6 +77,7 @@ class Comment(models.Model):
     img         = models.ImageField(upload_to="comment/%Y/%m/%d", blank=True)
     content     = models.TextField(verbose_name='내용')
     created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
+
 
     class Meta:
         verbose_name        = 'comment'
@@ -88,3 +92,22 @@ class Recomment(models.Model):
     class Meta:
         verbose_name        = 'recomment'
         verbose_name_plural = 'recomments'
+
+
+class Like_product(models.Model):
+    product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE)
+    good        = models.IntegerField(verbose_name="좋아요", default=0)
+    bad         = models.IntegerField(verbose_name="싫어요", default=0)
+
+
+class Like_comment(models.Model):
+    comment     = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    good        = models.IntegerField(verbose_name="좋아요", default=0)
+    bad         = models.IntegerField(verbose_name="싫어요", default=0)
+
+
+class Like_recomment(models.Model):
+    recomment   = models.ForeignKey(Recomment, on_delete=models.CASCADE)
+    good        = models.IntegerField(verbose_name="좋아요", default=0)
+    bad         = models.IntegerField(verbose_name="싫어요", default=0)
+
