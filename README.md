@@ -14,11 +14,12 @@
 <br/>
 
 ## Environment
-> Language  : Python 3.8 <br/>
+> Language  : Python 3.8.5 <br/>
 Framework   : Django  <br/>
 IDE         : VS Code <br/>
-Database    : sqlite3 <br/>
-Server      : AWS
+Database    : PostgreSQL 12<br/>
+Server      : Heroku 3.1.1 <br/>
+OS          : Window 10
 
 
 ## 프로젝트 실행하기
