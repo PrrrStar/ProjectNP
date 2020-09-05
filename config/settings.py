@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
-import os, json
+import os
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -24,6 +25,7 @@ secret_file = os.path.join(BASE_DIR, '.secrets.json')
 with open(secret_file) as f:
     secrets = json.loads(f.read())
 
+
 def get_secret(setting, secrets=secrets):
     try:
         return secrets[setting]
@@ -31,9 +33,8 @@ def get_secret(setting, secrets=secrets):
         error_msg = "Set the {} env var".format(setting)
         raise ImproperlyConfigured(error_msg)
 
+
 SECRET_KEY = get_secret("SECRET_KEY")
-
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -71,7 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
 
 ]
 
@@ -80,7 +81,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'staticfiles')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,11 +103,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST':'db-project-np.cuhffvh7u64m.ap-northeast-2.rds.amazonaws.com',
+        'HOST': 'db-project-np.cuhffvh7u64m.ap-northeast-2.rds.amazonaws.com',
         'NAME': 'project_NP',
-        'USER':'NPadmin',
-        'PASSWORD':get_secret("DATABASE"),
-        'PORT':'5432',
+        'USER': 'NPadmin',
+        'PASSWORD': get_secret("DATABASE"),
+        'PORT': '5432',
     }
 }
 
