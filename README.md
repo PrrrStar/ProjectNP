@@ -1,6 +1,5 @@
 # **내편** : 전국 편의점 상품 공유 플랫폼 <br>- Project NP
 
----
 
 ## 기획 의도
 
@@ -28,6 +27,8 @@ OS          : Window 10
    + 편의점 상품 예약
    + 내 주변 편의점 검색
    + 커뮤니티 (편의점 레시피)
+<br>
+<br>
 
 + **프로젝트 구조**
    ```
@@ -39,6 +40,7 @@ OS          : Window 10
    ┗━db.sqlite3
    ┗━manage.py          # runserver 등 웹 서버를 실행하고 관리하는 기능
    ```
+<br>
 
       
 + **프로젝트 실행하기**
@@ -58,6 +60,7 @@ OS          : Window 10
       ```
       $ deactivate
       ```
+      <br>
 
    + **Requirements 로 패키지 관리** <br>
       가상환경이 실행되었다면 패키지 설치를 합니다.
@@ -68,28 +71,32 @@ OS          : Window 10
       ```
       $ pip freeze > requirements.txt
       ```
+      <br>
 
-   + 서버 실행하기
+   + **서버 실행하기**
       ```python
-      $python manage.py runserver
+      $ python manage.py runserver
       ```
+      <br>
 
-   + 마이그레이션 파일 생성
+
+   + **마이그레이션** <br>
+      마이그레이션 파일 생성
       ```python
-      $python manage.py makemigrations [app 이름]
+      $ python manage.py makemigrations [app 이름]
       ```  
 
-   + 마이그레이션 파일 DB에 적용
+      마이그레이션 파일 DB 에 적용
       ```python
-      $python manage.py migrate [app 이름] [migration 이름]
+      $ python manage.py migrate [app 이름] [migration 이름]
       ```
 
-   + 마이그레이션 적용 상태 조회
+      마이그레이션 적용 상태 조회
       ```python
-      $python manage.py showmigrations [app 이름] [migration 이름]
+      $ python manage.py showmigrations [app 이름] [migration 이름]
       ```
 
-   + sql 쿼리 확인
+      sql 쿼리 확인
       ```python
-      $python manage.py sqlmigrations [app 이름] [migration 이름]
+      $ python manage.py sqlmigrations [app 이름] [migration 이름]
       ```  
