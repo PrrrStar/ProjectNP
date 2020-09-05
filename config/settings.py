@@ -12,17 +12,35 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import dj_database_url
-import os
+from django.core.exceptions import ImproperlyConfigured
+import os, json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+
+
+secret_file = os.path.join(BASE_DIR, '.secrets.json')
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} env var".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_secret("SECRET_KEY")
+
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vy$q=w%2-djnz%on6+s1tl(0lxqnkv+s6qawxuc8u!+n9ngsao'
+SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -87,7 +105,7 @@ DATABASES = {
         'HOST':'db-project-np.cuhffvh7u64m.ap-northeast-2.rds.amazonaws.com',
         'NAME': 'project_NP',
         'USER':'NPadmin',
-        'PASSWORD':'12341234',
+        'PASSWORD':get_secret("DATABASE"),
         'PORT':'5432',
     }
 }
