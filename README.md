@@ -36,9 +36,12 @@ OS          : Window 10
    ┗━config             # root, admin 관련 Configuration
    ┗━myside             # 편의점 상품 조회, 예약 등 메인 기능 관련
    ┗━post               # 커뮤니티 (나만의 편의점 레시피, 꿀팁 등 공유)
-   ┗━venv
-   ┗━db.sqlite3
+   ┗━staticfiles        # static file을 모아둔 디렉터리
+
+   ┗━Procfile           # 배포 시 웹사이트 시작하기 위해 실행할 명령 순서
    ┗━manage.py          # runserver 등 웹 서버를 실행하고 관리하는 기능
+   ┗━requirements.txt   # 패키지 설치 파일 목록
+   ┗━runtime.txt        # python version
    ```
 <br>
 
