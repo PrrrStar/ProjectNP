@@ -9,7 +9,7 @@
 <ul>
     <h1>상품</h1>
     {% for product in products %}
-    <li><h2>Name : {{product.name}}</h2></li>
+    <li><h2><a href="{{product.get_absolute_url}}">Name : {{product.name}}</a></h2></li>
     {% endfor %} 
 </ul>
 {% endblock %}
