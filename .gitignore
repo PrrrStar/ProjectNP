@@ -5,3 +5,4 @@ __pycache__
 local_settings.py
 *.pyc
 .secrets.json
+static_root
