@@ -1,12 +1,13 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="{% static 'css/test.css' %}">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
-    <style>
-      {% block style %} {% endblock %}
-    </style>
+
   </head>
   <body>
     <h2 class="">환영합니다 Project NP 내편 팀원님들!!</h2>
