@@ -37,7 +37,7 @@ class Category(MPTTModel):
 
 class Brand(models.Model):
     name    = models.CharField(max_length=20, verbose_name='브랜드')
-    img     = models.ImageField(upload_to="brand/%Y/%m/%d", blank=True, null=True)
+    img     = models.ImageField(upload_to="img/brand", blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -52,7 +52,7 @@ class Product(models.Model):
 
     name                = models.CharField(max_length = 20, db_index=True, verbose_name='제품명')
     slug                = models.SlugField(max_length = 20, db_index=True, allow_unicode=True)
-    img                 = models.ImageField(upload_to="product/%Y/%m/%d", blank=True, null=True)
+    img                 = models.ImageField(upload_to="img/products/%Y/%m/%d", blank=True, null=True)
     description         = models.TextField(verbose_name='설명', blank=True)
     price               = models.DecimalField(verbose_name='가격', max_digits = 10, decimal_places=0)
     stock               = models.PositiveIntegerField(verbose_name='재고')
@@ -81,7 +81,7 @@ class Product_has_brand(models.Model):
 
 class Comment(models.Model):
     product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE)
-    img         = models.ImageField(upload_to="comment/%Y/%m/%d", blank=True)
+    img         = models.ImageField(upload_to="img/comments/%Y/%m/%d", blank=True)
     content     = models.TextField(verbose_name='내용')
     created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
 
