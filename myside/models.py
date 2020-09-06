@@ -7,7 +7,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class Category(MPTTModel):
 
-    name    = models.CharField(max_length=20, verbose_name='카테고리')
+    name    = models.CharField(max_length=20, verbose_name='카테고리', unique=True)
     parent  = TreeForeignKey('self', null=True, blank= True, verbose_name='상위 카테고리',related_name='children', on_delete=models.CASCADE)
     slug    = models.SlugField(max_length=20, db_index = True, allow_unicode=True)
 
