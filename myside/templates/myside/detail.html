@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %}상세페이지{% endblock %} {% block style %} {% comment %} 일단은 여기에 css를 적용시키면 됩니다. {% endcomment %} {% endblock %} {% block content %}
+<h1>Myside Templates Test</h1>
+<h3>여기는 detail.html(상세페이지) 입니다.</h3>
+<ul>
+  {% for product in products %}
+  <li><h1>Name : {{product.name}}</h1></li>
+  <li><h2>Slug : {{product.slug}}</h2></li>
+  <li><h2>Description : {{product.description}}</h2></li>
+  <li><h2>Price : {{product.price}}</h2></li>
+  <li><h2>Stock : {{product.stock}}</h2></li>
+  <li><h2>Created_at : {{product.created_at}}</h2></li>
+  <li><h2>Modified_at : {{product.modified_at}}</h2></li>
+  <li><h2>Available_display : {{product.available_display}}</h2></li>
+  {% endfor %}
+</ul>
+{% endblock %}

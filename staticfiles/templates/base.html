@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
+    <style>
+      {% block style %} {% endblock %}
+    </style>
   </head>
   <body>
     <h2 class="">환영합니다 Project NP 내편 팀원님들!!</h2>
     <h1 class="">base.html 입니다.</h1>
-    <hr>
+    <hr />
     {% block content%} {% endblock %}
-    
   </body>
 </html>
