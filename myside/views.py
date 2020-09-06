@@ -6,7 +6,9 @@ from .models import *
 
 def index(request):
     products = Product.objects.all()
-    return render(request, 'myside/index.html', {'products': products})
+    categories = Category.objects.all()
+    return render(request, 'myside/index.html', {'products': products, 'categories': categories})
+
 
 def product_detail(request, id, product_slug=None):
     product = get_object_or_404(Product, id=id, slug=product_slug)
