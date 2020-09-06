@@ -5,11 +5,13 @@
   <ul class="categories">
     <h1>카테고리</h1>
     {% for category in categories %} {% if category.parent == None %}
-    <h2>{{category.name}}</h2>
+    <h2 class="parent">{{category.name}}</h2>
     {% else %}
-    <h4>{{category.name}}</h4>
+    <h4 class="child">{{category.name}}</h4>
     {% endif %} {% endfor %}
   </ul>
+
+  
   <ul class="products">
     <h1>상품</h1>
     {% for product in products %}

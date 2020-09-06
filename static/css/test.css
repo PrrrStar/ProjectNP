@@ -1,3 +1,7 @@
-h2 {
-    color:blue;
+.parent {
+    color:red;
+}
+
+.child {
+    color:cyan;
 }
