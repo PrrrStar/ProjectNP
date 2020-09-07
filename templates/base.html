@@ -7,31 +7,69 @@
     <link rel="stylesheet" href="{% static 'css/test.css' %}">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <title>{% block title %}{% endblock %}</title>
+    <style>
+    a { 
+      text-decoration:none;
+      color: black;
+    } 
+
+    header {
+      padding: 0px 100px;
+      height: 113px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid black;
+    }
+
+    .header__logo {
+      width: 70px;
+      height: 70px;
+      border: 1px solid black;
+    }
+
+    .header__menus {
+      display: flex;
+      font-family: 'Jua', sans-serif;
+      line-height: 1.46;
+      letter-spacing: 2.4px;
+    }
+
+    .header__menu {
+      list-style: none;
+      font-size: 24px;
+      margin: 0px 55px;
+    }
+
+    .header__login {
+      width: 70px;
+      height: 70px;
+      border: 1px solid black;
+    }
+    </style>
   </head>
   <body>
     <header>
       <div>
         <!-- logo -->
+        <div class="header__logo">로고</div>
       </div>
       <nav>
         <!-- 상단 메뉴 -->
-        <ul>
-          <li><a href="#">내편찾기</a></li>
-          <li><a href="#">할인행사</a></li>
-          <li><a href="#">커뮤니티</a></li>
-          <li><a href="#">Brand Story</a></li>
+        <ul class="header__menus">
+          <li class="header__menu"><a href="#">내편찾기</a></li>
+          <li class="header__menu"><a href="#">할인행사</a></li>
+          <li class="header__menu"><a href="#">커뮤니티</a></li>
+          <li class="header__menu"><a href="#">Brand Story</a></li>
         </ul>
       </nav>
       <div>
         <!-- Log in -->
+        <div class="header__login">로그인</div>
       </div>
     </header>
-    <hr>
-
-    <h2 class="">내가 찾던 편의점</h2>
-    <h1 class="">base.html</h1>
-    <hr />
     {% block content%}{% endblock %}
     <footer>
 
