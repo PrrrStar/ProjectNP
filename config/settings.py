@@ -15,6 +15,7 @@ import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 import os
 import json
+from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -59,6 +60,12 @@ INSTALLED_APPS = [
     'post',
     'mptt',
     'rest_framework',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.naver',
+    'member',
 ]
 
 MIDDLEWARE = [
@@ -104,7 +111,7 @@ DATABASES = {
         'HOST': 'db-project-np.cuhffvh7u64m.ap-northeast-2.rds.amazonaws.com',
         'NAME': 'project_NP',
         'USER': 'NPadmin',
-        'PASSWORD': get_secret("DATABASE"), 
+        'PASSWORD': get_secret("DATABASE"),
         'PORT': '5432',
     }
 }
@@ -156,19 +163,19 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AWS_ACCESS_KEY_ID = get_secret("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY=get_secret("AWS_SECRET_ACCESS_KEY")
+AWS_SECRET_ACCESS_KEY = get_secret("AWS_SECRET_ACCESS_KEY")
 AWS_REGION = 'ap-northeast-2'
 AWS_STORAGE_BUCKET_NAME = 'projectnp-bucket'
 AWS_S3_CUSTOM_DOMAIN = f's3.{AWS_REGION}.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}'
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl':'max-age=86400',
+    'CacheControl': 'max-age=86400',
 }
 AWS_DEFAULT_ACL = 'public-read'
 AWS_LOCATION = ''
 
-DATA_UPLOAD_MAX_MEMORY_SIZE = 1024000000 # value in bytes 1GB here
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1024000000  # value in bytes 1GB here
 FILE_UPLOAD_MAX_MEMORY_SIZE = 1024000000
 
 DEFAULT_FILE_STORAGE = 'config.storages.S3DefaultStorage'
@@ -178,3 +185,18 @@ MPTT_ADMIN_LEVEL_INDENT = 20
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
+SOCIALACCOUNT_AUTO_SIGNUP = False
+ACCOUNT_SIGNUP_FORM_CLASS = 'member.forms.SignupForm'
+
+SITE_ID = 1
