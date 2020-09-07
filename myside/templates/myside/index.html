@@ -1,41 +1,17 @@
-{% extends 'base.html' %} {% block title %}메인페이지{% endblock %} {% block content %}
-{% load mptt_tags %}
+{% extends 'base.html' %} {% block title %}메인페이지{% endblock %} 
+{% block content %}
 <style>
-.container {
-  display: flex;
-}
 
-.categories__children {
-  display: none;
-}
 </style>
-<div class="container">
-  <ul class="category">
-    <h1>카테고리</h1>
-    <ul class="categories">
-      {% recursetree categories %}
-        <li class="categories-box" onclick="dropDown();">
-        {{ node.name }}
-        {% if not node.is_leaf_node %}
-          <ul class="categories__children">
-          {{ children }}
-          </ul>
-        {% endif %}
-        </li>
-      {% endrecursetree %}
-    </ul>
-  </ul>  
-
-  <ul class="products">
-    <h1>상품</h1>
-    {% for product in products %}
-    <li>
-      <h2><a href="{{product.get_absolute_url}}">Name : {{product.name}}</a></h2>
-    </li>
-    {% endfor %}
-  </ul>
-  {% endblock %}
-</div>
+<ul class="products">
+  <h1>상품</h1>
+  {% for product in products %}
+  <li>
+    <h2><a href="{{product.get_absolute_url}}">Name : {{product.name}}</a></h2>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
 
 <script type="text/javascript">
 
