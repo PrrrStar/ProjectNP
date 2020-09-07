@@ -11,6 +11,9 @@
     <title>{% block title %}{% endblock %}</title>
     <style>
     @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+    body {
+      box-sizing: border-box;
+    }
 
     a { 
       text-decoration:none;
@@ -67,21 +70,25 @@
     .category {
       width: 300px;
       font-family: "Noto Sans KR", sans-serif !important;
+    }
+
+    .category__container {
+      margin-top: 47.7px;
+      margin-left: 110px;
+    }
+
+    .category__parent {
       font-size: 20px;
       line-height: 1.45;
       letter-spacing: 2px;
       color: #999999;
     }
-    
-    .categories {
-      margin-top: 47.7px;
-    }
 
-    .categories li:not(:last-child) {
+    .category__parent:not(:last-child){
       margin-bottom: 30px;
     }
 
-    .categories__children {
+    .category__children {
       display: none;
     }
 
@@ -117,18 +124,15 @@
     <div class="container">
       <!-- category -->
       <ul class="category">
-        <ul class="categories">
-          {% recursetree categories %}
-          <li>
-            {{ node.name }}
-            {% if not node.is_leaf_node %}
-            <ul class="categories__children">
-              {{ children }}
-            </ul>
-            {% endif %}
-          </li>
-          {% endrecursetree %}
-        </ul>
+        <div class="category__container">
+          {% for category in categories %} 
+            {% if category.parent == None %}
+              <li class="category__parent">{{category.name}}</li>
+            {% else %}
+              <li class="category__children"> <a href="{{category.get_absolute_url}}">{{category.name}}</a></li>
+            {% endif %} 
+          {% endfor %}
+        </div>
       </ul>
     {% block content%}{% endblock %}
     </div>
