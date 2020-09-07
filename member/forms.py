@@ -3,13 +3,13 @@ from .models import Profile
 
 
 class SignupForm(forms.Form):
-    first_name = forms.CharField(label=('First name'),
+    first_name = forms.CharField(label=('이름'),
                                  max_length=30,
                                  widget=forms.TextInput())
-    last_name = forms.CharField(label=('Last name'),
+    last_name = forms.CharField(label=('성'),
                                 max_length=30,
                                 widget=forms.TextInput())
-    phone = forms.CharField(label=('Phone number'),
+    phone = forms.CharField(label=('전화번호'),
                             max_length=30,
                             widget=forms.TextInput())
 
