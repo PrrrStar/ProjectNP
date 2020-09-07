@@ -33,6 +33,9 @@ class Category(MPTTModel):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('myside:product_in_category', args=[self.id, self.slug])
 
 
 class Brand(models.Model):
@@ -48,6 +51,8 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+    
+
 
 class Product(models.Model):
     name                = models.CharField(max_length = 20, db_index=True, verbose_name='제품명')
