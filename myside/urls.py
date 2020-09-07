@@ -5,5 +5,6 @@ app_name = 'myside'
 
 urlpatterns = [
     path('', index, name='index'),
-    path('<int:id>/<product_slug>/', product_detail, name='product_detail'),
+    path('detail/<int:id>/', product_detail, name='product_detail'),
+    path('category/<category_slug>/', product_in_category, name='product_in_category'),
 ]
