@@ -123,20 +123,53 @@
     <!-- Main container ( category, main_contents ) -->
     <div class="container">
       <!-- category -->
-      <ul class="category">
+      <div class="category">
         <div class="category__container">
           {% for category in categories %} 
             {% if category.parent == None %}
-              <li class="category__parent">{{category.name}}</li>
+              <div class="category__parent">{{category.name}}</div>
             {% else %}
-              <li class="category__children"> <a href="{{category.get_absolute_url}}">{{category.name}}</a></li>
+              <div class="category__children" value="{{category.parent}}"> <a href="{{category.get_absolute_url}}">{{category.name}}</a></div>
             {% endif %} 
           {% endfor %}
         </div>
-      </ul>
+      </div>
     {% block content%}{% endblock %}
     </div>
     <footer>
     </footer>
+    <script type="text/javascript">
+      const parents = document.querySelectorAll(".category__parent");
+      const children = document.querySelectorAll(".category__children");
+      let drop = false;
+
+      function dropDown(event){
+        if(drop == false){
+          name = event.target.innerHTML;
+          for (var i=0; i<children.length; i++){
+            if(name == children[i].getAttribute("value")){
+              children[i].style.display = "flex";
+            }
+          }
+          drop = true;
+          event.target.addEventListener("click", dropUp);
+        }
+      }
+
+      function dropUp(event){
+        if(drop == true){
+          for (var i=0; i<children.length; i++){
+            if(children[i].style.display = "flex"){
+              children[i].style.display = "none";
+            }
+          }
+          drop = false;
+        }
+      }
+
+      for (var i=0; i<parents.length; i++){
+        parents[i].addEventListener("click", dropDown);
+      }
+    </script>
   </body>
 </html>
