@@ -4,14 +4,16 @@
 <div class="container">
   <ul class="categories">
     <h1>카테고리</h1>
-    {% for category in categories %} {% if category.parent == None %}
-    <h2 class="parent">{{category.name}}</h2>
-    {% else %}
-    <h4 class="child">{{category.name}}</h4>
-    {% endif %} {% endfor %}
-  </ul>
+    {% for category in categories %} 
+      {% if category.parent == None %}
+        <h2 class="parent">{{category.name}}</h2>
+      {% else %}
+        <h4 class="child">{{category.name}}</h4>
+      {% endif %} 
+    {% endfor %}
 
-  
+  </ul>  
+
   <ul class="products">
     <h1>상품</h1>
     {% for product in products %}
