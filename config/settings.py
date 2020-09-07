@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'myside',
     'post',
     'mptt',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
