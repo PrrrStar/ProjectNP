@@ -1,16 +1,36 @@
 {% extends 'base.html' %} {% block title %}메인페이지{% endblock %} {% block style %} .container { display: flex; } {% endblock %} {% block content %}
+{% load mptt_tags %}
 <h1>Myside Templates Test</h1>
 <h3>여기는 index.html(메인페이지) 입니다.</h3>
 <div class="container">
   <ul class="categories">
     <h1>카테고리</h1>
+
+    <!-- 카테고리 1 -->
+    <ul class="root">
+      {% recursetree categories %}
+        <li>
+        {{ node.name }}
+        {% if not node.is_leaf_node %}
+          <ul class="children">
+          {{ children }}
+          </ul>
+        {% endif %}
+        </li>
+      {% endrecursetree %}
+    </ul>
+      
+    <!-- 카테고리 2 -->
     {% for category in categories %} 
-      {% if category.parent == None %}
-        <h2 class="parent">{{category.name}}</h2>
+      {% if category.level == 0 %}
+      <h2 class="parent">{{category.name}}</h2>
       {% else %}
-        <h4 class="child"> <a href="{{category.get_absolute_url}}">{{category.name}}</a></h4>
+      <h4 class="child"> 
+        <a href="{{category.get_absolute_url}}">{{category.name}}</a>
+      </h4>
       {% endif %} 
     {% endfor %}
+
 
   </ul>  
 
