@@ -8,12 +8,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
-
   </head>
   <body>
-    <h2 class="">환영합니다 Project NP 내편 팀원님들!!</h2>
-    <h1 class="">base.html 입니다.</h1>
+    <header>
+      <div>
+        <!-- logo -->
+      </div>
+      <nav>
+        <!-- 상단 메뉴 -->
+        <ul>
+          <li><a href="#">내편찾기</a></li>
+          <li><a href="#">할인행사</a></li>
+          <li><a href="#">커뮤니티</a></li>
+          <li><a href="#">Brand Story</a></li>
+        </ul>
+      </nav>
+      <div>
+        <!-- Log in -->
+      </div>
+    </header>
+    <hr>
+
+    <h2 class="">내가 찾던 편의점</h2>
+    <h1 class="">base.html</h1>
     <hr />
-    {% block content%} {% endblock %}
+    {% block content%}{% endblock %}
+    <footer>
+
+    </footer>
   </body>
 </html>
