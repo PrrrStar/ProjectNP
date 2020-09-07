@@ -20,9 +20,9 @@ def product_in_category(request, category_slug = None):
 
     if category_slug:
         current_category = get_object_or_404(Category, slug=category_slug)
-        products = products.filter(available_display=True)
+        products = products.filter(category=current_category, available_display=True)
 
-    return render(request, 'myside/detail.html', {
+    return render(request, 'myside/list.html', {
                 'current_category': current_category,
                 'products': products,
                 })

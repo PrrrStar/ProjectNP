@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Category Page{% endblock %}
+{% block content %}
+    {% if current_category %}Current Category : {{current_category.name}}{% else %}All Products{% endif %}
+    <br>
+    <table>
+        {% if products %}
+            <tr><th>NAME</th><th>PRICE</th><th>DESCRIPTION</th></tr>
+            {% for product in products %}
+                <tr>
+                    <td><a href="{{product.get_absolute_url}}">{{product.name}}</a></td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.description}}</td>
+                </tr>
+            {% endfor %}    
+        {% endif %}
+    </table>
+{% endblock %}
