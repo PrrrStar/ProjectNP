@@ -60,9 +60,14 @@ OS          : Window 10
       $ source [가상환경 이름]/bin/activate        #리눅스, 맥
       ```
 
-      가상환경을 비활성화합니다.
+      가상환경안에 개발 모드로 실행하기 위한 환경변수를 등록합니다.
       ```
-      $ deactivate
+      $ DJANGO_SETTINGS_MODULES=config.settings.debug
+      ```
+
+      배포환경에서 실행하기 위해서는 환경변수를 아래와 같이 바꿔줍니다.
+      ```
+      $ DJANGO_SETTINGS_MODULES=config.settings.deploy
       ```
       <br>
 
