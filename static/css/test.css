@@ -1,3 +1,87 @@
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+body {
+    box-sizing: border-box;
+}
+
+a { 
+    text-decoration:none;
+    color: black;
+} 
+
+ul {
+    list-style: none;
+}
+
+header {
+    padding: 0px 100px;
+    height: 113px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.header__logo {
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+}
+
+.header__menus {
+    display: flex;
+    font-family: 'Jua', sans-serif;
+    line-height: 1.46;
+    letter-spacing: 2.4px;
+}
+
+.header__menu {
+    font-size: 24px;
+    margin: 0px 55px;
+}
+
+.header__login {
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+}
+
+.banner {
+    height: 386px;
+    border-bottom: 1px solid black;
+    background-color: aquamarine;
+}
+
 .container {
-    color:red;
+    display: flex;
+}
+
+.category {
+    width: 300px;
+    font-family: "Noto Sans KR", sans-serif !important;
+}
+
+.category__container {
+    margin-top: 47.7px;
+    margin-left: 110px;
+}
+
+.category__parent {
+    font-size: 20px;
+    line-height: 1.45;
+    letter-spacing: 2px;
+    color: #999999;
+}
+
+.category__parent:not(:last-child){
+    margin-bottom: 30px;
+}
+
+.category__children {
+    display: none;
+}
+
+footer {
+    background-color: #e9e9e9;
+    height: 350px;
 }
