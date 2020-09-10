@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="{% static 'css/test.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
@@ -49,7 +50,7 @@
           {% endfor %}
         </div>
       </div>
-    {% block content%}{% endblock %}
+      {% block content%}{% endblock %}
     </div>
     <footer>
     </footer>
