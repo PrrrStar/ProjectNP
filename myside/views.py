@@ -29,3 +29,18 @@ def product_in_category(request, category_slug=None):
         'current_category': current_category,
         'products': products,
     })
+
+
+
+from .models import *
+from .serializers import ProductSerializer
+
+from rest_framework import generics
+
+class ProductList(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
