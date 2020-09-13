@@ -50,3 +50,12 @@
   height: 250px;
   background-color: blue;
 }
+
+.products__banner {
+  width: 1200px;
+  height: 200px;
+  border-radius: 25px;
+  background-color: #ffc10e;
+  margin-top: 50px;
+  margin-bottom: 108px;
+}
