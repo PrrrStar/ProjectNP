@@ -68,7 +68,11 @@ class Product(models.Model):
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
 
-
+    @property
+    def image_url(self):
+        if self.img:
+            return self.img.url
+        return '#'
 
     class Meta:
         ordering = ['-created_at','-modified_at']
@@ -84,25 +88,15 @@ class Product(models.Model):
 
 
 class Comment(models.Model):
-    product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE)
+    product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE, related_name='comments')
+    parent      = models.ForeignKey('self', related_name='reply', on_delete=models.CASCADE, null=True, blank=True)
     img         = models.ImageField(upload_to="comments/%Y/%m/%d", blank=True)
-    content     = models.TextField(verbose_name='내용')
+    content     = models.TextField(max_length = 100, verbose_name='내용')
     created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
-
 
     class Meta:
         verbose_name        = 'comment'
         verbose_name_plural = 'comments'
-
-
-class Recomment(models.Model):
-    comment     = models.ForeignKey(Comment, verbose_name="댓글", on_delete=models.CASCADE)
-    content     = models.TextField(verbose_name='대댓글내용')
-    created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
-
-    class Meta:
-        verbose_name        = 'recomment'
-        verbose_name_plural = 'recomments'
 
 
 class Like_product(models.Model):
@@ -115,10 +109,3 @@ class Like_comment(models.Model):
     comment     = models.ForeignKey(Comment, on_delete=models.CASCADE)
     good        = models.IntegerField(verbose_name="좋아요", default=0)
     bad         = models.IntegerField(verbose_name="싫어요", default=0)
-
-
-class Like_recomment(models.Model):
-    recomment   = models.ForeignKey(Recomment, on_delete=models.CASCADE)
-    good        = models.IntegerField(verbose_name="좋아요", default=0)
-    bad         = models.IntegerField(verbose_name="싫어요", default=0)
-
