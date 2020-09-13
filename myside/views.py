@@ -33,14 +33,38 @@ def product_in_category(request, category_slug=None):
 
 
 from .models import *
+from .serializers import ProductCategorySerializer
 from .serializers import ProductSerializer
 
 from rest_framework import generics
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
+
+class ApiRoot(generics.GenericAPIView):
+    name = 'api-root'
+    def get(self, request, *args, **kwargs):
+        return Response({
+            'product-categories':reverse(ProductCategoryList.name, request=request),
+            'products':reverse(ProductList.name, request=request),
+        })
+
+class ProductCategoryList(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = ProductCategorySerializer
+    name = 'productcategory-list'
+
+class ProductCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = ProductCategorySerializer
+    name = 'productcategory-detail'
+
 
 class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    name='product-list'
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    name='product-detail'
