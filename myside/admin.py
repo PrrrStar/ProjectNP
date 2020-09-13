@@ -22,10 +22,6 @@ class ProductAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display=('content',)
 
-@admin.register(Recomment)
-class RecommentAdmin(admin.ModelAdmin):
-    list_display=('content',)
-
 
 
 
