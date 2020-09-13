@@ -15,9 +15,8 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
-    product_category = serializers.SlugRelatedField(queryset=Category.objects.all(), slug_field='name')
-    
+
     class Meta:
         model = Product
-        fields = ('name','category','product_category','brand','img','description','price','stock','available_display','slug','created_at','modified_at',)
+        fields = ('name','category','brand','img','description','price','stock','available_display','slug','created_at','modified_at',)
         
