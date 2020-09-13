@@ -3,7 +3,7 @@ import os
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', u'https://project-np.herokuapp.com/']
+ALLOWED_HOSTS = [*]
 
 
 DATABASES = {
