@@ -41,10 +41,8 @@
   color: #fe4737;
 }
 
-.slick-slide {
-  width: 250px;
-  height: 340px;
-  background-color: yellow;
+.products__main {
+  width: 1200px;
 }
 
 .slide__img {

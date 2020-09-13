@@ -7,19 +7,21 @@
     <i class="fas fa-search"></i>
   </div>
 </div>
-<div class="products__slider">
-  {% for product in products %}
-  <a href="{{product.get_absolute_url}}">
-    <img src="{{product.image_url}}" alt="Product IMG" />
-    <div class="slide__content">
-      <div class="slide__content--header">
-        <span class="slider__content--name">{{product.name}}</span>
-        <i class="fas fa-thumbs-up">100</i>
+<div class="products__main">
+  <div class="products__slider">
+    {% for product in products %}
+    <a href="{{product.get_absolute_url}}">
+      <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
+      <div class="slide__content">
+        <div class="slide__content--header">
+          <span class="slider__content--name">{{product.name}}</span>
+          <i class="fas fa-thumbs-up">100</i>
+        </div>
+        <div class="slider__content--description">{{product.description}}</div>
       </div>
-      <div class="slider__content--description">{{product.description}}</div>
-    </div>
-  </a>
-  {% endfor %}
+    </a>
+    {% endfor %}
+  </div>
 </div>
 
 {% endblock %}
