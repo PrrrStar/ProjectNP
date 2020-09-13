@@ -1,0 +1,54 @@
+/* products css */
+
+.products__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.products__header--title,
+.products__header--search {
+  margin: 50px;
+}
+
+.products__header--title {
+  font-family: "Jua", sans-serif;
+  line-height: 1.46;
+  letter-spacing: 2.8px;
+  font-size: 28px;
+}
+
+.products__header--search {
+  width: 320px;
+  height: 50px;
+  border-radius: 25px;
+  border: solid 1px #cccccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.products__header--search input {
+  border: none;
+  font-size: 16px;
+}
+
+.products__header--search::placeholder {
+  color: #999999;
+}
+
+.products__header--search i {
+  font-size: 25px;
+  color: #fe4737;
+}
+
+.slick-slide {
+  width: 250px;
+  height: 340px;
+  background-color: yellow;
+}
+
+.slide__img {
+  width: 250px;
+  height: 250px;
+  background-color: blue;
+}
