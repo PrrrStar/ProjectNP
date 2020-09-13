@@ -14,6 +14,9 @@ urlpatterns = [
     path('api/product-categories/<int:pk>/', ProductCategoryDetail.as_view(), name=ProductCategoryDetail.name),
     path('api/products/', ProductList.as_view(), name=ProductList.name),
     path('api/products/<int:pk>/', ProductDetail.as_view(), name=ProductDetail.name),
+    path('api/comments', CommentList.as_view(),name=CommentList.name),
+    path('api/comments/<int:pk>', CommentDetail.as_view(),name=CommentDetail.name),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

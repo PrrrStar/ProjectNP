@@ -35,6 +35,7 @@ def product_in_category(request, category_slug=None):
 from .models import *
 from .serializers import ProductCategorySerializer
 from .serializers import ProductSerializer
+from .serializers import CommentSerializer
 
 from rest_framework import generics
 from rest_framework.reverse import reverse
@@ -68,3 +69,13 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     name='product-detail'
+
+class CommentList(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    name='comment-list'
+
+class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    name='comment-detail'
