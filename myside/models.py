@@ -89,14 +89,29 @@ class Product(models.Model):
 
 class Comment(models.Model):
     product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE, related_name='comments')
-    parent      = models.ForeignKey('self', related_name='reply', on_delete=models.CASCADE, null=True, blank=True)
     img         = models.ImageField(upload_to="comments/%Y/%m/%d", blank=True)
     content     = models.TextField(max_length = 100, verbose_name='내용')
-    created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
+    created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록일')
+    modified_at  = models.DateTimeField(auto_now = True)
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name        = 'comment'
         verbose_name_plural = 'comments'
+
+class Reply(models.Model):
+    comment     = models.ForeignKey(Comment, on_delete = models.CASCADE, related_name='replies')
+    content     = models.TextField(max_length=100, verbose_name='reply')
+    created_at  = models.DateTimeField(auto_now_add= True, verbose_name='등록일')
+    modified_at  = models.DateTimeField(auto_now = True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name        = 'reply'
+        verbose_name_plural = 'replies'
+
+    def __str__(self):
+        return self.content
 
 
 class Like_product(models.Model):

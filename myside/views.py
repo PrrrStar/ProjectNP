@@ -30,7 +30,7 @@ def index(request):
     return render(request, 'myside/index.html', {'products': products, 'categories': categories, 'query':query})
 
 
-def product_detail(request, id, product_slug=None):
+def product_detail(request, id):
     product = get_object_or_404(Product, id=id)
     categories = Category.objects.all()
     return render(request, 'myside/detail.html', {'product': product, 'categories': categories})

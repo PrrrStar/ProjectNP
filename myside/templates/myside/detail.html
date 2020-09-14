@@ -4,6 +4,15 @@
   <li><h1>Name : {{product.name}}</h1></li>
   <li><h2>Img  : <img src='{{product.img.url}}' alt="Product IMG"/></h2></li>
   <li><h2>Slug : {{product.slug}}</h2></li>
+  
+  <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
+  <li><h2>brand : 
+    {% for brand in product.brand.all %}
+      {{brand.name}}
+    {% endfor %}
+  </h2></li>
+
+
   <li><h2>Description : {{product.description}}</h2></li>
   <li><h2>Price : {{product.price}}</h2></li>
   <li><h2>Stock : {{product.stock}}</h2></li>
@@ -11,4 +20,32 @@
   <li><h2>Modified_at : {{product.modified_at}}</h2></li>
   <li><h2>Available_display : {{product.available_display}}</h2></li>
 </ul>
+
+<br>
+<br>
+<!-- 댓글 -->
+<div style="border: 1px solid black;">
+  {% for comment in product.comments.all %}
+    <li>댓글 내용 : {{ comment.content}}</li>
+    
+    <!-- 댓글 이미지 조정 부탁드립니당 -->
+    {% if comment.img %}
+    <li><h2>Img  : <img src='{{ comment.img.url}}' alt="comment IMG"/></h2></li>
+    {% endif %}
+    <li>생성 날짜 : {{ comment.created_at}}</li>
+
+    <hr>
+    <div style="border: 1px solid black; margin-left: 40px;">
+      {% for reply in comment.replies.all %}
+      <li>댓글 내용 : {{ reply.content}}</li>
+      <li>생성 날짜 : {{ reply.created_at}}</li>
+      <hr>
+      {% endfor %}
+    </div>
+
+  {% endfor %}
+  
+</div>
+
 {% endblock %}
+

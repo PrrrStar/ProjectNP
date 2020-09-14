@@ -22,6 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display=('content',)
 
-
-
+@admin.register(Reply)
+class ReplyAdmin(admin.ModelAdmin):
+    list_display=('content',)
 
