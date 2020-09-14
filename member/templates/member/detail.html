@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %}{% endblock %} {% block content %}
+{% load socialaccount %}
+
+<body>
+
+    {% if user.is_authenticated %}
+    <span>{{ user }}님이 로그인중입니다.</span>
+
+    {% for account in user.socialaccount_set.all %}
+
+    {% comment %} show avatar from url {% endcomment %}
+    <h2 style="text-transform:capitalize;">{{ account.provider }} </h2>
+    {% endfor %}
+    {% endif %}
+</body>
+{% endblock %}
