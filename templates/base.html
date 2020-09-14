@@ -40,7 +40,9 @@
       {% if user.is_authenticated %}
       <li><a href="{% url 'account_logout' %}">로그아웃</a></li>
       {% else %}
-      <li><a href="">로그인</a></li>
+
+      <li><a href="/member/login">로그인</a></li>
+
       {% endif %}
     </div>
   </header>
