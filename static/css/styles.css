@@ -16,6 +16,11 @@ input:focus {
   outline: none;
 }
 
+button {
+  border: none;
+  outline: none;
+}
+
 header {
   padding: 0px 100px;
   height: 113px;
@@ -72,6 +77,7 @@ header {
   line-height: 1.45;
   letter-spacing: 2px;
   color: #999999;
+  cursor: pointer;
 }
 
 .category__parent:not(:last-child) {
