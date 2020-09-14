@@ -52,8 +52,25 @@ def comment_create(request, id):
         comment_from = CommentForm()
     
     context = {
-        'comments':comments,
         'comment_form':comment_from,
+        }
+    return render(request, 'myside/detail.html', context)
+    
+def reply_create(request, product_id, id):
+    product = get_object_or_404(Product, id=product_id)
+    comment = get_object_or_404(Comment, id=id)
+    if request.method == 'POST':
+        reply_form = ReplyForm(request.POST or None)
+        if reply_form.is_valid():
+            content = request.POST.get('content')
+            reply = Reply.objects.create(comment=comment, content=content)
+            reply.save()
+            return HttpResponseRedirect(product.get_absolute_url())
+    else:
+        reply_from = ReplyForm()
+    
+    context = {
+        'reply_form':comment_from,
         }
     return render(request, 'myside/detail.html', context)
     

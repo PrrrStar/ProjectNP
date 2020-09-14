@@ -20,11 +20,14 @@
   <li><h2>Modified_at : {{product.modified_at}}</h2></li>
   <li><h2>Available_display : {{product.available_display}}</h2></li>
 </ul>
-
+<hr>
+<br>
 <br>
 <br>
 <!-- 댓글 -->
-<h3>후기 쓰셈 {{product.comments.count}} COMMENT{{ product.comments|pluralize}}</h3>
+<h1>후기 쓰셈 {{product.comments.count }}개의 댓글</h1>
+<br>
+
 <div style="border: 1px solid black;">
   <form action = "{% url 'comment_create' id=product.id %}" method="POST">
     {% csrf_token %}
@@ -45,8 +48,16 @@
 
     <hr>
 
-    <div style="border: 1px solid black; margin-left: 40px;">
 
+    <!-- 대댓글 -->
+    <div style="border: 1px solid black; margin-left: 40px;">
+      <form action = "{% url 'reply_create' product_id=product.id id=comment.id %}" method="POST">
+        {% csrf_token %}
+        
+        <input type="text" name="content" placeholder="대댓글임"/>
+        <input type="submit" value="write"/>
+      </form>
+      <hr>
       <hr>
       {% for reply in comment.replies.all %}
       <li>댓글 내용 : {{ reply.content}}</li>

@@ -1,6 +1,5 @@
-{% extends 'base.html' %}
-{% block title %}Category Page{% endblock %}
-{% block content %}
+{% extends 'base.html' %} {% block title %}카테고리{% endblock %}
+{% block products-content %}
     {% if current_category %}Current Category : {{current_category.name}}{% else %}All Products{% endif %}
     <br>
     <table>
