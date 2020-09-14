@@ -1,19 +1,41 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
+from django.db.models import Q
+
 
 # Create your views here.
+def get_product_queryset(query=None):
+    queryset = []
+    queries = query.split(' ') #백종원 도시락 => ['백종원', '도시락']
+    for q in queries:
+        products = Product.objects.filter(
+            Q(name__icontains=q)|
+            Q(description__icontains=q)
+        ).distinct()
+
+        for product in products:
+            queryset.append(product)
+    return list(set(queryset))
 
 
 def index(request):
-    products = Product.objects.all()
+    query = ""
+    if request.GET:
+        query = request.GET['q']
+        products = get_product_queryset(query)
+    else:
+        products = Product.objects.all()
+
     categories = Category.objects.all()
-    return render(request, 'myside/index.html', {'products': products, 'categories': categories})
+    return render(request, 'myside/index.html', {'products': products, 'categories': categories, 'query':query})
 
 
 def product_detail(request, id, product_slug=None):
     product = get_object_or_404(Product, id=id)
     categories = Category.objects.all()
     return render(request, 'myside/detail.html', {'product': product, 'categories': categories})
+
+
 
 
 def product_in_category(request, category_slug=None):

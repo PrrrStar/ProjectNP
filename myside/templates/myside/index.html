@@ -2,10 +2,22 @@
 
 <div class="products__header">
   <span class="products__header--title">추천상품</span>
-  <div class="products__header--search">
-    <input placeholder="Search" />
-    <i class="fas fa-search"></i>
-  </div>
+
+
+<!-- 검색 기능 -->
+  <form action="" class=""method="get">
+    {% csrf_token %}
+    <div class="products__header--search">
+      <input type="text" name ='q' id='search-bar' placeholder="Search"/>
+      <button><i class="fas fa-search"></i></button>
+    </div>
+  </form>
+
+  <script type = "text/javascript">
+    document.getElementById("search-bar").value = "{{query}}"
+  </script>
+
+
 </div>
 <div class="products__main">
   <div class="products__slider">
