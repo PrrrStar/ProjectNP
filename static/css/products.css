@@ -5,6 +5,11 @@
   justify-content: space-between;
 }
 
+.products__header button {
+  background-color: white;
+  cursor: pointer;
+}
+
 .products__header--title,
 .products__header--search {
   margin: 50px;
