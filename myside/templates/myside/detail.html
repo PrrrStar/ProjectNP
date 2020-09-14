@@ -24,7 +24,16 @@
 <br>
 <br>
 <!-- 댓글 -->
+<h3>후기 쓰셈 {{product.comments.count}} COMMENT{{ product.comments|pluralize}}</h3>
 <div style="border: 1px solid black;">
+  <form action = "{% url 'comment_create' id=product.id %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="text" name="content" placeholder="후기쓰셈"/>
+    <input type="submit" value="write"/>
+  </form>
+  <hr>
+
   {% for comment in product.comments.all %}
     <li>댓글 내용 : {{ comment.content}}</li>
     
@@ -35,12 +44,17 @@
     <li>생성 날짜 : {{ comment.created_at}}</li>
 
     <hr>
+
     <div style="border: 1px solid black; margin-left: 40px;">
+
+      <hr>
       {% for reply in comment.replies.all %}
       <li>댓글 내용 : {{ reply.content}}</li>
       <li>생성 날짜 : {{ reply.created_at}}</li>
       <hr>
       {% endfor %}
+
+
     </div>
 
   {% endfor %}

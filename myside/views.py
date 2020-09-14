@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .models import *
+from django.http import HttpResponseRedirect
 from django.db.models import Q
+
+from .models import *
+from .forms import *
 
 
 # Create your views here.
@@ -33,9 +36,27 @@ def index(request):
 def product_detail(request, id):
     product = get_object_or_404(Product, id=id)
     categories = Category.objects.all()
+
     return render(request, 'myside/detail.html', {'product': product, 'categories': categories})
 
-
+def comment_create(request, id):
+    product = get_object_or_404(Product, id=id)
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST or None)
+        if comment_form.is_valid():
+            content = request.POST.get('content')
+            comment = Comment.objects.create(product=product, content=content)
+            comment.save()
+            return HttpResponseRedirect(product.get_absolute_url())
+    else:
+        comment_from = CommentForm()
+    
+    context = {
+        'comments':comments,
+        'comment_form':comment_from,
+        }
+    return render(request, 'myside/detail.html', context)
+    
 
 
 def product_in_category(request, category_slug=None):

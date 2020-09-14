@@ -8,6 +8,8 @@ urlpatterns = [
     path('', index, name='index'),
     path('products/<int:id>/', product_detail, name='product_detail'),
     path('category/<category_slug>/', product_in_category, name='product_in_category'),
+    path('products/<int:id>/comment/', comment_create, name='comment_create'),
+    
 
     path('api/', ApiRoot.as_view(), name=ApiRoot.name),
     path('api/product-categories/', ProductCategoryList.as_view(), name=ProductCategoryList.name),

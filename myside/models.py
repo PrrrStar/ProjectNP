@@ -89,6 +89,7 @@ class Product(models.Model):
 
 class Comment(models.Model):
     product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE, related_name='comments')
+    #user       =
     img         = models.ImageField(upload_to="comments/%Y/%m/%d", blank=True)
     content     = models.TextField(max_length = 100, verbose_name='내용')
     created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록일')
@@ -101,6 +102,7 @@ class Comment(models.Model):
 
 class Reply(models.Model):
     comment     = models.ForeignKey(Comment, on_delete = models.CASCADE, related_name='replies')
+    #user       =
     content     = models.TextField(max_length=100, verbose_name='reply')
     created_at  = models.DateTimeField(auto_now_add= True, verbose_name='등록일')
     modified_at  = models.DateTimeField(auto_now = True)
