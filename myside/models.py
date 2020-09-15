@@ -96,7 +96,7 @@ class Comment(models.Model):
     modified_at  = models.DateTimeField(auto_now = True)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering            = ['-created_at']
         verbose_name        = 'comment'
         verbose_name_plural = 'comments'
 
@@ -108,7 +108,7 @@ class Reply(models.Model):
     modified_at  = models.DateTimeField(auto_now = True)
     
     class Meta:
-        ordering = ['-created_at']
+        ordering            = ['-created_at']
         verbose_name        = 'reply'
         verbose_name_plural = 'replies'
 
