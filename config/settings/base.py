@@ -48,16 +48,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'myside',
-    'post',
     'mptt',
     'rest_framework',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.naver',
-    'member',
+    'bootstrap_modal_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -120,7 +116,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 MPTT_ADMIN_LEVEL_INDENT = 20
 
 AUTHENTICATION_BACKENDS = [
@@ -128,14 +123,4 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED=False
-SOCIALACCOUNT_AUTO_SIGNUP = False
-ACCOUNT_SIGNUP_FORM_CLASS = 'member.forms.SignupForm'
-LOGIN_REDIRECT_URL = "/"
-ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
-ACCOUNT_LOGOUT_REDIRECT_URL = "/"
-ACCOUNT_LOGOUT_ON_GET=True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-SITE_ID = 4
+SITE_ID = 1
