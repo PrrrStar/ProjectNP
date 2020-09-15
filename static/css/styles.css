@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
+
 body {
   box-sizing: border-box;
 }
@@ -8,7 +9,8 @@ a {
   color: black;
 }
 
-ul, li {
+ul,
+li {
   list-style: none;
 }
 
@@ -33,7 +35,6 @@ header {
 .header__logo {
   width: 70px;
   height: 70px;
-  border: 1px solid black;
 }
 
 .header__menus {
@@ -54,10 +55,14 @@ header {
   border: 1px solid black;
 }
 
-.banner {
+.banner-box {
+  max-width: 100%;
+  overflow: hidden;
   height: 386px;
   border-bottom: 1px solid black;
-  background-color: aquamarine;
+}
+
+.banner {
 }
 
 .container {
