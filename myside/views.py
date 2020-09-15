@@ -78,6 +78,7 @@ def reply_create(request, product_id, id):
 
 def product_in_category(request, category_slug=None):
     current_category = None
+    categories = Category.objects.all()
     products = Product.objects.filter(available_display=True)
 
     if category_slug:
@@ -88,6 +89,7 @@ def product_in_category(request, category_slug=None):
     return render(request, 'myside/list.html', {
         'current_category': current_category,
         'products': products,
+        'categories' : categories,
     })
 
 
@@ -96,6 +98,7 @@ from .models import *
 from .serializers import ProductCategorySerializer
 from .serializers import ProductSerializer
 from .serializers import CommentSerializer
+from .serializers import ReplySerializer
 
 from rest_framework import generics
 from rest_framework.reverse import reverse
@@ -139,3 +142,13 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     name='comment-detail'
+
+class ReplyList(generics.ListCreateAPIView):
+    queryset = Reply.objects.all()
+    serializer_class = ReplySerializer
+    name='reply-list'
+
+class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Reply.objects.all()
+    serializer_class = ReplySerializer
+    name='reply-detail'
