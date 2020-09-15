@@ -1,0 +1,39 @@
+<h1>{{product.comments.count }}개의 댓글이 있습니다.</h1>
+<br>
+
+<div style="border: 1px solid black;">
+  <form action = "{% url 'comment_create' id=product.id %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="text" name="content" placeholder="댓글 작성"/>
+    <input type="submit" value="write"/>
+  </form>
+  <hr>
+
+  {% for comment in product.comments.all %}
+    <li>댓글 내용 : {{ comment.content}}</li>
+    <!-- 댓글 이미지 조정 부탁드립니당 -->
+    {% if comment.img %}
+    <li><h2>Img  : <img src='{{ comment.img.url}}' alt="comment IMG"/></h2></li>
+    {% endif %}
+    <li>생성 날짜 : {{ comment.created_at}}</li>
+    <hr>
+    <!-- 대댓글 -->
+    <div style="border: 1px solid black; margin-left: 40px;">
+      <form action = "{% url 'reply_create' product_id=product.id id=comment.id %}" method="POST">
+        {% csrf_token %}
+        
+        <input type="text" name="content" placeholder="대댓글 작성"/>
+        <input type="submit" value="write"/>
+      </form>
+      <hr>
+      <hr>
+      {% for reply in comment.replies.all %}
+      <li>댓글 내용 : {{ reply.content}}</li>
+      <li>생성 날짜 : {{ reply.created_at}}</li>
+      <hr>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
