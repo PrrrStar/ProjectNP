@@ -78,6 +78,7 @@ def reply_create(request, product_id, id):
 
 def product_in_category(request, category_slug=None):
     current_category = None
+    categories = Category.objects.all()
     products = Product.objects.filter(available_display=True)
 
     if category_slug:
@@ -88,6 +89,7 @@ def product_in_category(request, category_slug=None):
     return render(request, 'myside/list.html', {
         'current_category': current_category,
         'products': products,
+        'categories' : categories,
     })
 
 
