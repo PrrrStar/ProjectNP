@@ -36,8 +36,8 @@ def index(request):
 def product_detail(request, id):
     product = get_object_or_404(Product, id=id)
     categories = Category.objects.all()
-
-    return render(request, 'myside/detail.html', {'product': product, 'categories': categories})
+    current_category = get_object_or_404(Category, slug = product.category)
+    return render(request, 'myside/detail.html', {'product': product, 'categories': categories, 'current_category':current_category})
 
 def comment_create(request, id):
     product = get_object_or_404(Product, id=id)
