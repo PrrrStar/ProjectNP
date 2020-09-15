@@ -1,9 +1,15 @@
 {% extends 'base.html' %} {% block title %}상세페이지{% endblock %}
+{% block category %}
+    {% include 'myside/_category.html' %}
+{% endblock %}
+
 {% block products-content %}
 
 <div class="products__header">
   <span class="products__header--title">
-      {% if current_category %} {{current_category.name}}{% else %}All Products{% endif %}
+      {% if current_category %}{{current_category.name}}
+      {% else %}All Products
+      {% endif %}
   </span>
   <!-- 검색 기능 -->
   {% include 'myside/_search.html' %}
@@ -15,12 +21,12 @@
   <li><h2>Slug : {{product.slug}}</h2></li>
   
   <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
-  <li><h2>brand : 
+  <li><h2>
+    brand : 
     {% for brand in product.brand.all %}
       {{brand.name}}
     {% endfor %}
   </h2></li>
-
 
   <li><h2>Description : {{product.description}}</h2></li>
   <li><h2>Price : {{product.price}}</h2></li>

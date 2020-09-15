@@ -14,7 +14,7 @@
     <li>댓글 내용 : {{ comment.content}}</li>
     <!-- 댓글 이미지 조정 부탁드립니당 -->
     {% if comment.img %}
-    <li><h2>Img  : <img src='{{ comment.img.url}}' alt="comment IMG"/></h2></li>
+      <li><h2>Img  : <img src='{{ comment.img.url}}' alt="comment IMG"/></h2></li>
     {% endif %}
     <li>생성 날짜 : {{ comment.created_at}}</li>
     <hr>
@@ -29,9 +29,9 @@
       <hr>
       <hr>
       {% for reply in comment.replies.all %}
-      <li>댓글 내용 : {{ reply.content}}</li>
-      <li>생성 날짜 : {{ reply.created_at}}</li>
-      <hr>
+        <li>댓글 내용 : {{ reply.content}}</li>
+        <li>생성 날짜 : {{ reply.created_at}}</li>
+        <hr>
       {% endfor %}
     </div>
   {% endfor %}

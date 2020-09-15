@@ -1,29 +1,30 @@
-{% extends 'base.html' %} {% load static %} {% block title %}메인페이지{% endblock %} {% block products-content %}
+{% extends 'base.html' %} {% load static %} {% block title %}메인페이지{% endblock %} 
+{% block category %}
+    {% include 'myside/_category.html' %}
+{% endblock %}
 
-<div class="products__header">
-  <span class="products__header--title">추천상품</span>
-
-
-<!-- 검색 기능 -->
-{% include 'myside/_search.html' %}
-
-</div>
-<div class="products__main">
-  <div class="products__slider">
-    {% for product in products %}
-    <a href="{{product.get_absolute_url}}">
-      <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
-      <div class="slide__content">
-        <div class="slide__content--header">
-          <span class="slider__content--name">{{product.name}}</span>
-          <i class="fas fa-thumbs-up">100</i>
-        </div>
-        <div class="slider__content--description">{{product.description}}</div>
-      </div>
-    </a>
-    {% endfor %}
+{% block products-content %}
+  <div class="products__header">
+    <span class="products__header--title">추천상품</span>
+    <!-- 검색 기능 -->
+    {% include 'myside/_search.html' %}
   </div>
-  <div class="products__banner"></div>
-</div>
 
+  <div class="products__main">
+    <div class="products__slider">
+      {% for product in products %}
+      <a href="{{product.get_absolute_url}}">
+        <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
+        <div class="slide__content">
+          <div class="slide__content--header">
+            <span class="slider__content--name">{{product.name}}</span>
+            <i class="fas fa-thumbs-up">100</i>
+          </div>
+          <div class="slider__content--description">{{product.description}}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <div class="products__banner"></div>
+  </div>
 {% endblock %}
