@@ -96,6 +96,7 @@ from .models import *
 from .serializers import ProductCategorySerializer
 from .serializers import ProductSerializer
 from .serializers import CommentSerializer
+from .serializers import ReplySerializer
 
 from rest_framework import generics
 from rest_framework.reverse import reverse
@@ -139,3 +140,13 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     name='comment-detail'
+
+class ReplyList(generics.ListCreateAPIView):
+    queryset = Reply.objects.all()
+    serializer_class = ReplySerializer
+    name='reply-list'
+
+class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Reply.objects.all()
+    serializer_class = ReplySerializer
+    name='reply-detail'
