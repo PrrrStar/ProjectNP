@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
     # 'bootstrap_modal_forms',
     'community',
+    'accounts',
 
 
 ]
@@ -121,19 +122,6 @@ USE_TZ = True
 MPTT_ADMIN_LEVEL_INDENT = 20
 
 
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-SITE_ID = 3
+SITE_ID = 1
 
 
-LOGIN_REDIRECT_URL = '/'
-
-
-# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_USERNAME_REQUIRED = False
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'
