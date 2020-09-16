@@ -50,6 +50,10 @@
   width: 1200px;
 }
 
+.products__slider {
+  background-color: red;
+}
+
 .slide__img {
   width: 250px;
   height: 250px;
