@@ -3,7 +3,7 @@
 
 <!-- index.html에서만 쓰는 css -->
 {% block style %} 
-  <link rel="stylesheet" href="{% static 'css/products.css' %}?ver=1"/>
+  <link rel="stylesheet" href="{% static 'css/products.css' %}?ver=3"/>
 {% endblock %}
 
 {% block title %}메인페이지{% endblock %} 
@@ -31,15 +31,18 @@
           <div class="slide__content">
             <div class="slide__content--header">
               <span class="slider__content--name">{{product.name}}</span>
-              <i class="fas fa-thumbs-up">100</i>
+              <div>
+                <img class="slider__content--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
+                <span>100</span>
+              </div>
             </div>
-            <div class="slider__content--description">{{product.description}}</div>
+            <div class="slider__content--description"><p>{{product.description}}</p></div>
           </div>
         </a>
         {% endfor %}
       </div>
       <!-- 광고 배너 -->
-      <div class="products__banner"></div>
+      <img class="products__banner" src="{% static 'logo/sub__bn.png' %}"></img>
     </div>
   </div>
 {% endblock %}
