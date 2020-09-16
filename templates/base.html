@@ -5,26 +5,29 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
   <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
 
   {% block style %} {% endblock %}
   <title>{% block title %}{% endblock %}</title>
 </head>
 
 <body>
+  <button class="api-server" , onclick="location.href='/api'" style='margin:10px'>API 서버로 이동</button>
   <header>
     <div>
       <!-- logo -->
       <img src="{% static 'logo/logo-02.jpg' %}" class="header__logo" , onclick="location.href='/'" />
     </div>
-    <div class="header__logo" , onclick="location.href='/api'">API 서버로 이동</div>
     <nav>
       <!-- 상단 메뉴 -->
       <ul class="header__menus">
@@ -35,16 +38,16 @@
       </ul>
     </nav>
     <!-- 로그인 로그아웃 -->
-    <div>
+    <nav>
       {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
-      <a href="" class="nav-link">Logout</a>
+        <a href="{% url 'logout' %}" class="nav-link">Logout</a>
       {% else %}
-
-      <li><a href="">로그인</a></li>
-
+        <a href="{% url 'login' %}">로그인</a>
+        <a href="{% url 'signup' %}" data-toggle='modal' data-target="#modal-signup">회원가입</a>
       {% endif %}
-    </div>
+    </nav>
   </header>
+
   <!-- Slide banner -->
   <div class="banner-box">
     <img src="{% static 'logo/logo-03.jpg' %}" class="banner"></img>
@@ -53,21 +56,45 @@
   <div class="container">
     <!-- category -->
     {% block category %}{% endblock %}
+    
     <!-- products -->
     {% block index-products %}{% endblock %}
     <!-- detail -->
     {% block detail-products %}{% endblock %}
+    
+    <!-- Signup & Login -->
+    
+    <div class="modal" tabindex="-1" id='modal-signup'>
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <p>Modal body text goes here.</p>
+                  {% block auth-window %}{% endblock %}
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    
     <!-- 찜 기능 -->
     <div class="jjim">
       <div class="jjim__box"></div>
     </div>
   </div>
   <footer></footer>
-  <script src="{% static 'assets/js/bootstrap.js' %}"></script>
-  <script src="{% static 'assets/js/jquery.js' %}"></script>
-  <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
-  <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
 
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   {% block script %} {% endblock %}
   
 </body>

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block auth-window %}
+
+    <h1>회원 가입</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ signup_form }}
+        <input type="submit" name="Submit" value="회원가입~"/>
+    </form>
+
+{% endblock %}

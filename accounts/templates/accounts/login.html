@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block auth-window %}
+<h1>로그인</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ login_form }}
+    <input type="submit" value="Submit"/>
+</form>
+{% endblock %}
