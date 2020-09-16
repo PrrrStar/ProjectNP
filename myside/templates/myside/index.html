@@ -3,7 +3,7 @@
 
 <!-- index.html에서만 쓰는 css -->
 {% block style %} 
-  <link rel="stylesheet" href="{% static 'css/products.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/products.css' %}?ver=1"/>
 {% endblock %}
 
 {% block title %}메인페이지{% endblock %} 
@@ -15,14 +15,14 @@
 
 {% block index-products %}
   <div class="products">
-    <div class="products__header">
-      <span class="products__header--title">{{title}}</span>
-      <!-- 검색 기능 -->
-      {% include 'myside/_search.html' %}
-    </div>
-
     <!-- 상품 목록 -->
     <div class="products__main">
+      <div class="products__header">
+        <span class="products__header--title"><img src="{% static 'logo/point.png' %}" class="point" />{{title}}</span>
+        <!-- 검색 기능 -->
+        {% include 'myside/_search.html' %}
+      </div>
+
       <!-- Slick을 이용한 슬라이더 -->
       <div class="products__slider">
         {% for product in products %}

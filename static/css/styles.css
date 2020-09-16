@@ -23,6 +23,12 @@ button {
   outline: none;
 }
 
+.point {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+}
+
 header {
   padding: 0px 100px;
   height: 113px;
@@ -67,7 +73,7 @@ header {
   height: 100%;
 }
 
-.container {
+.main__container {
   display: flex;
 }
 

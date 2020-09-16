@@ -12,7 +12,7 @@
 
 .products__header--title,
 .products__header--search {
-  margin: 50px;
+  margin: 50px 60px 50px 20px;
 }
 
 .products__header--title {
@@ -20,6 +20,7 @@
   line-height: 1.46;
   letter-spacing: 2.8px;
   font-size: 28px;
+  position: relative;
 }
 
 .products__header--search {
@@ -47,17 +48,42 @@
 }
 
 .products__main {
-  width: 1200px;
+  width: 1320px;
+  padding: 0px 60px;
 }
 
 .products__slider {
-  background-color: red;
+  position: relative;
+}
+
+/* slick button css */
+.products__slider button {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.products__slider button.slick-prev {
+  left: 0;
+}
+
+.products__slider button.slick-next {
+  right: 0;
+}
+
+.products__slider a {
+  border: 1px solid black;
+  height: 340px;
+  margin: 0px 25px;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
 .slide__img {
   width: 250px;
   height: 250px;
-  background-color: blue;
 }
 
 .products__banner {

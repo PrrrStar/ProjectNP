@@ -14,7 +14,7 @@
   
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}?ver=1" />
 
 
   {% block style %} {% endblock %}
@@ -53,12 +53,13 @@
     <img src="{% static 'logo/logo-03.jpg' %}" class="banner"></img>
   </div>
   <!-- Main container ( category, main_contents ) -->
-  <div class="container">
+  <div class="main__container">
     <!-- category -->
     {% block category %}{% endblock %}
     
     <!-- products -->
     {% block index-products %}{% endblock %}
+
     <!-- detail -->
     {% block detail-products %}{% endblock %}
     
