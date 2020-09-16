@@ -30,7 +30,7 @@
         <img class="detail__info__img" src='{{product.img.url}}' alt="Product IMG"/>
       </div>
       <div class="detail__info__right-content">
-        <div class="detail__info__right-content__header">
+        <div class="detail__info__header">
           <span class="detail__info__name">{{product.name}}</span>
           <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
           <span class="detail__info__brand">
@@ -40,15 +40,34 @@
           </span>
         </div>
         <div class="detail__info__price">
-          <span>가격 {{product.price}}</span>
+          <span>가격 {{product.price}}원</span>
         </div>
         <div class="detail__info__description">
-          <span>상품설명</span>
-          <span>{{product.description}}</span>
-          <div class="detail__info__tag">
-            <span>연관태그</span>
-            <span><i class="fas fa-heart detail--heart"></i>12<span>
+          <div class="description__content">
+            <span>상품설명</span>
+            <span>{{product.description}}</span>
           </div>
+          <div class="detail__info__tag-box">
+            <div class="detail__info__tag">
+              <span>연관태그</span>
+              <!-- 이 부분에 해시태그들이 들어갑니다. -->
+            </div>
+            <div class="detail__info__tag--heart">
+              <i class="fas fa-heart"></i>
+              <!-- 임의로 12개의 하트로 설정했습니다. 변경할 예정입니다. -->
+              <span>12</span>
+            </div>
+          </div>
+        </div>
+        <div class="detail__info__button">
+          <button class="detail__info__stock">
+            <span>재고확인</span>
+            <img src="{% static 'logo/location__white.png' %}" />
+          </button>
+          <button class="detail__info__jjim">
+            <span>찜하기</span>
+            <img src="{% static 'logo/heart__white.png' %}" />
+          </button>
         </div>
       </div>
     </div>

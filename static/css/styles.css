@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
 
-body {
+* {
   box-sizing: border-box;
 }
 
@@ -72,7 +72,7 @@ header {
 
 .category {
   width: 300px;
-  font-family: "Noto Sans KR", sans-serif !important;
+  font-family: "Noto Sans KR", sans-serif;
   padding-top: 47.7px;
   display: flex;
   justify-content: center;
