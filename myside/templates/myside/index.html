@@ -10,7 +10,9 @@
     {% include 'myside/_search.html' %}
   </div>
 
+  <!-- 상품 목록 -->
   <div class="products__main">
+    <!-- Slick을 이용한 슬라이더 -->
     <div class="products__slider">
       {% for product in products %}
       <a href="{{product.get_absolute_url}}">
@@ -25,6 +27,7 @@
       </a>
       {% endfor %}
     </div>
+    <!-- 광고 배너 -->
     <div class="products__banner"></div>
   </div>
 {% endblock %}

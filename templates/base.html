@@ -34,6 +34,7 @@
         <li class="header__menu"><a href="#">Brand Story</a></li>
       </ul>
     </nav>
+    <!-- 로그인 로그아웃 -->
     <div>
       {% if user.is_authenticated %}
       <li><a href="">로그아웃</a></li>
@@ -64,6 +65,8 @@
   <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
   <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
   
+  <!-- Slick.js 슬라이더 -->
+  <!-- 우선은 한번에 4개씩 넘어가게 했습니다. -->
   <script type="text/javascript">
     $(".products__slider").slick({
       slidesToShow: 4,
