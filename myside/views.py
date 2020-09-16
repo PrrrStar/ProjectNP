@@ -82,16 +82,26 @@ def product_in_category(request, category_slug=None):
     current_category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available_display=True)
+    title = "All Products"
 
     if category_slug:
         current_category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(
             category=current_category, available_display=True)
+        title = current_category.name
+
+# ######### 이 부분을 주석해제하면 전체 상품 중에서 검색한 결과를 얻을 수 있습니다.
+#     if request.GET:
+#         query = request.GET['q']
+#         products = get_product_queryset(query)
+#         title = query + " 검색 결과"        
+# ##########
 
     return render(request, 'myside/list.html', {
         'current_category': current_category,
         'products': products,
         'categories' : categories,
+        'title' : title,
     })
 
 
