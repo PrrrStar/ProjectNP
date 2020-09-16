@@ -42,8 +42,8 @@
       {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
         <a href="{% url 'logout' %}" class="nav-link">Logout</a>
       {% else %}
-        <a href="{% url 'login' %}">로그인</a>
-        <a href="{% url 'signup' %}" data-toggle='modal' data-target="#modal-signup">회원가입</a>
+        <button data-toggle='modal' data-target="#modal-login">로그인</button>
+        <button data-toggle='modal' data-target="#modal-signup">회원가입</button>
       {% endif %}
     </nav>
   </header>
@@ -63,28 +63,10 @@
     {% block detail-products %}{% endblock %}
     
     <!-- Signup & Login -->
-    
-    <div class="modal" tabindex="-1" id='modal-signup'>
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  <p>Modal body text goes here.</p>
-                  {% block auth-window %}{% endblock %}
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-          </div>
-      </div>
-    </div>
-    
+    {% block auth-window %}{% endblock %}
+
+    {% include 'accounts/login.html' %}
+    {% include 'accounts/signup.html' %}
     <!-- 찜 기능 -->
     <div class="jjim">
       <div class="jjim__box"></div>

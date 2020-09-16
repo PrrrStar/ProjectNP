@@ -1,12 +1,37 @@
-{% extends 'base.html' %}
-
-{% block auth-window %}
-<h1>로그인</h1>
-
-<form method="POST">
+<form action = "" method="POST">
     {% csrf_token %}
+    <div class="modal" tabindex="-1" id='modal-login'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">로그인이다.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <span>아마 여기 로고 들어가겠지?</span> <br>
+                    <div class="form-group">
+                        <input type='text' name='email' placeholder="EMAIL"/><br/>
+                    </div>
+                    <div class="form-group">
+                        <input type='password' name='password' placeholder="PASSWORD"/><br/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    
+                    <input type="submit" class="btn btn-primary" value="내편하기"></input><br>
+                    
+                    <a href="" class="">아이디 찾기</a>
+                    <a href="" class="">비밀번호 찾기</a>
 
-    {{ login_form }}
-    <input type="submit" value="Submit"/>
+                </div>
+                <div>
+                    {% if error %}
+                        {{ error }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
-{% endblock %}
