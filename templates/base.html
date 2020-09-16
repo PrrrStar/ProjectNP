@@ -52,7 +52,10 @@
     <!-- category -->
     {% block category %}{% endblock %}
     <!-- products -->
-    <div class="products">{% block products-content %}{% endblock %}</div>
+    {% block index-products %}{% endblock %}
+    <!-- detail -->
+    {% block detail-products %}{% endblock %}
+    <!-- 찜 기능 -->
     <div class="jjim">
       <div class="jjim__box"></div>
     </div>

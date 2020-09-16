@@ -1,46 +1,56 @@
 {% extends 'base.html' %} 
-{% block title %}상세페이지{% endblock %}
-{% block category %}
-    {% include 'myside/_category.html' %}
+
+{% load static %}
+
+{% block style %} 
+  <link rel="stylesheet" href="{% static 'css/detail.css' %}" />
 {% endblock %}
 
-{% block products-content %}
+{% block title %}상세페이지{% endblock %}
 
-<div class="products__header">
-  <span class="products__header--title">
-      {% if current_category %}{{current_category.name}}
-      {% else %}All Products
-      {% endif %}
-  </span>
-  <!-- 검색 기능 우선 제외시키겠습니다.-->
-  {% include 'myside/_search.html' %}
-</div>
+{% block category %}
+  {% include 'myside/_category.html' %}
+{% endblock %}
 
-<ul>
-  <li><h1>Name : {{product.name}}</h1></li>
-  <li><h2>Img  : <img src='{{product.img.url}}' alt="Product IMG"/></h2></li>
-  <li><h2>Slug : {{product.slug}}</h2></li>
-  
-  <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
-  <li><h2>
-    brand : 
-    {% for brand in product.brand.all %}
-      {{brand.name}}
-    {% endfor %}
-  </h2></li>
-
-  <li><h2>Description : {{product.description}}</h2></li>
-  <li><h2>Price : {{product.price}}</h2></li>
-  <li><h2>Stock : {{product.stock}}</h2></li>
-  <li><h2>Created_at : {{product.created_at}}</h2></li>
-  <li><h2>Modified_at : {{product.modified_at}}</h2></li>
-  <li><h2>Available_display : {{product.available_display}}</h2></li>
-</ul>
-<hr>
-<br>
-<br>
-<br>
-<!-- 댓글 -->
-{% include 'myside/_comment.html' %}
+{% block detail-products %}
+  <div class="detail">
+    <div class="detail__info">
+      <div class="detail__info__left-content">
+        <span class="detail__info__title">
+          {% if current_category %}
+            {{current_category.name}}
+          {% else %}
+            All Products
+          {% endif %}
+        </span>
+        <!-- 검색 기능 우선 제외시키겠습니다.-->
+        <img class="detail__info__img" src='{{product.img.url}}' alt="Product IMG"/>
+      </div>
+      <div class="detail__info__right-content">
+        <div class="detail__info__right-content__header">
+          <span class="detail__info__name">{{product.name}}</span>
+          <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
+          <span class="detail__info__brand">
+            {% for brand in product.brand.all %}
+              {{brand.name}}
+            {% endfor %}
+          </span>
+        </div>
+        <div class="detail__info__price">
+          <span>가격 {{product.price}}</span>
+        </div>
+        <div class="detail__info__description">
+          <span>상품설명</span>
+          <span>{{product.description}}</span>
+          <div class="detail__info__tag">
+            <span>연관태그</span>
+            <span><i class="fas fa-heart detail--heart"></i>12<span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 댓글 -->
+    {% include 'myside/_comment.html' %}
+  </div>
 {% endblock %}
 

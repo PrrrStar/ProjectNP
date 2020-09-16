@@ -3,31 +3,33 @@
     {% include 'myside/_category.html' %}
 {% endblock %}
 
-{% block products-content %}
-  <div class="products__header">
-    <span class="products__header--title">{{title}}</span>
-    <!-- 검색 기능 -->
-    {% include 'myside/_search.html' %}
-  </div>
-
-  <!-- 상품 목록 -->
-  <div class="products__main">
-    <!-- Slick을 이용한 슬라이더 -->
-    <div class="products__slider">
-      {% for product in products %}
-      <a href="{{product.get_absolute_url}}">
-        <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
-        <div class="slide__content">
-          <div class="slide__content--header">
-            <span class="slider__content--name">{{product.name}}</span>
-            <i class="fas fa-thumbs-up">100</i>
-          </div>
-          <div class="slider__content--description">{{product.description}}</div>
-        </div>
-      </a>
-      {% endfor %}
+{% block index-products %}
+  <div class="products">
+    <div class="products__header">
+      <span class="products__header--title">{{title}}</span>
+      <!-- 검색 기능 -->
+      {% include 'myside/_search.html' %}
     </div>
-    <!-- 광고 배너 -->
-    <div class="products__banner"></div>
+
+    <!-- 상품 목록 -->
+    <div class="products__main">
+      <!-- Slick을 이용한 슬라이더 -->
+      <div class="products__slider">
+        {% for product in products %}
+        <a href="{{product.get_absolute_url}}">
+          <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
+          <div class="slide__content">
+            <div class="slide__content--header">
+              <span class="slider__content--name">{{product.name}}</span>
+              <i class="fas fa-thumbs-up">100</i>
+            </div>
+            <div class="slider__content--description">{{product.description}}</div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      <!-- 광고 배너 -->
+      <div class="products__banner"></div>
+    </div>
   </div>
 {% endblock %}

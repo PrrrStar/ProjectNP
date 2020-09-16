@@ -1,0 +1,9 @@
+/* 상세페이지 css 입니다. */
+.detail {
+    width: 1200px;
+}
+
+.detail__info__img {
+    width: 450px;
+    height: 450px;
+}
