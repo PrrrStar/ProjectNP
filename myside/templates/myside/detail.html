@@ -18,6 +18,7 @@
   <main class="detail">
     <!-- 상품 정보에 대한 박스 -->
     <div class="detail__info">
+      <!-- 박스의 왼쪽 부분 -->
       <div class="detail__info__left-content">
         <span class="detail__info__title">
           {% if current_category %}
@@ -29,7 +30,9 @@
         <!-- 검색 기능 우선 제외시키겠습니다.-->
         <img class="detail__info__img" src='{{product.img.url}}' alt="Product IMG"/>
       </div>
+      <!-- 박스의 오른쪽 부분 -->
       <div class="detail__info__right-content">
+        <!-- 오른쪽 부분의 헤더 -->
         <div class="detail__info__header">
           <span class="detail__info__name">{{product.name}}</span>
           <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
@@ -39,9 +42,11 @@
             {% endfor %}
           </span>
         </div>
+        <!-- 상품 가격 -->
         <div class="detail__info__price">
           <span>가격 {{product.price}}원</span>
         </div>
+        <!-- 상품 설명 -->
         <div class="detail__info__description">
           <div class="description__content">
             <span>상품설명</span>
@@ -59,6 +64,7 @@
             </div>
           </div>
         </div>
+        <!-- 버튼들 -->
         <div class="detail__info__button">
           <button class="detail__info__stock">
             <span>재고확인</span>
