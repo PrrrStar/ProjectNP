@@ -42,17 +42,17 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret("SECRET_KEY")
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
+    'django.contrib.admin',
     'myside',
     'mptt',
     'rest_framework',
-    'bootstrap_modal_forms',
+#   'bootstrap_modal_forms',
+
 
 ]
 
@@ -118,9 +118,20 @@ USE_TZ = True
 
 MPTT_ADMIN_LEVEL_INDENT = 20
 
+
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 1
+SITE_ID = 3
+
+
+LOGIN_REDIRECT_URL = '/'
+
+
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'

@@ -41,12 +41,10 @@
       </ul>
     </nav>
     <div>
-      {% if user.is_authenticated %}
-      <li><a href="">로그아웃</a></li>
+      {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
+      <a href="" class="nav-link">Logout</a>
       {% else %}
-
-      <li><a href="">로그인</a></li>
-
+      <a href="" class="nav-link">Login</a>
       {% endif %}
     </div>
   </header>
