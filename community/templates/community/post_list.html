@@ -1,0 +1,60 @@
+{% block contents %}
+<div class="row mt-5">
+  <div class="col-12">
+    <table class="table table-light">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>제목</th>
+          <th>조회수</th>
+          <th>일시</th>
+        </tr>
+      </thead>
+      <tbody class="text-dark">
+        {% for post in posts %}
+        <tr onclick="location.href='/community/detail/{{ post.id }}/'">
+          <th>{{ post.id }}</th>
+          <td>{{ post.title }}</td>
+          <td>{{ post.hits }}</td>
+          <td>{{ post.created_at }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col-12">
+    <nav>
+      <ul class="pagination justify-content-center">
+        {% if posts.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?p={{ posts.previous_page_number }}">이전으로</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">이전으로</a>
+        </li>
+        {% endif %}
+        <li class="page-item active">
+          <a class="page-link" href="#">{{ posts.number }} / {{ posts.paginator.num_pages }}</a>
+        </li>
+        {% if posts.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?p={{ posts.next_page_number }}">다음으로</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link disabled" href="#">다음으로</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary" onclick="location.href='/community/write/'">글쓰기</button>
+  </div>
+</div>
+{% endblock %}
