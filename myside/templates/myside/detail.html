@@ -1,76 +1,84 @@
-{% extends 'base.html' %} {% block title %}상세페이지{% endblock %}
-{% block products-content %}
-<ul>
-  <li><h1>Name : {{product.name}}</h1></li>
-  <li><h2>Img  : <img src='{{product.img.url}}' alt="Product IMG"/></h2></li>
-  <li><h2>Slug : {{product.slug}}</h2></li>
-  
-  <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
-  <li><h2>brand : 
-    {% for brand in product.brand.all %}
-      {{brand.name}}
-    {% endfor %}
-  </h2></li>
+{% extends 'base.html' %} 
 
+{% load static %}
 
-  <li><h2>Description : {{product.description}}</h2></li>
-  <li><h2>Price : {{product.price}}</h2></li>
-  <li><h2>Stock : {{product.stock}}</h2></li>
-  <li><h2>Created_at : {{product.created_at}}</h2></li>
-  <li><h2>Modified_at : {{product.modified_at}}</h2></li>
-  <li><h2>Available_display : {{product.available_display}}</h2></li>
-</ul>
-<hr>
-<br>
-<br>
-<br>
-<!-- 댓글 -->
-<h1>후기 쓰셈 {{product.comments.count }}개의 댓글</h1>
-<br>
+<!-- detail.html에서만 쓰이는 css -->
+{% block style %} 
+  <link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+{% endblock %}
 
-<div style="border: 1px solid black;">
-  <form action = "{% url 'comment_create' id=product.id %}" method="POST">
-    {% csrf_token %}
-    {{ comment_form }}
-    <input type="text" name="content" placeholder="후기쓰셈"/>
-    <input type="submit" value="write"/>
-  </form>
-  <hr>
+{% block title %}상세페이지{% endblock %}
 
-  {% for comment in product.comments.all %}
-    <li>댓글 내용 : {{ comment.content}}</li>
-    
-    <!-- 댓글 이미지 조정 부탁드립니당 -->
-    {% if comment.img %}
-    <li><h2>Img  : <img src='{{ comment.img.url}}' alt="comment IMG"/></h2></li>
-    {% endif %}
-    <li>생성 날짜 : {{ comment.created_at}}</li>
+{% block category %}
+  {% include 'myside/_category.html' %}
+{% endblock %}
 
-    <hr>
-
-
-    <!-- 대댓글 -->
-    <div style="border: 1px solid black; margin-left: 40px;">
-      <form action = "{% url 'reply_create' product_id=product.id id=comment.id %}" method="POST">
-        {% csrf_token %}
-        
-        <input type="text" name="content" placeholder="대댓글임"/>
-        <input type="submit" value="write"/>
-      </form>
-      <hr>
-      <hr>
-      {% for reply in comment.replies.all %}
-      <li>댓글 내용 : {{ reply.content}}</li>
-      <li>생성 날짜 : {{ reply.created_at}}</li>
-      <hr>
-      {% endfor %}
-
-
+{% block detail-products %}
+  <!-- 메인 컨텐츠 박스 -->
+  <main class="detail">
+    <!-- 상품 정보에 대한 박스 -->
+    <div class="detail__info">
+      <!-- 박스의 왼쪽 부분 -->
+      <div class="detail__info__left-content">
+        <span class="detail__info__title">
+          {% if current_category %}
+            {{current_category.name}}
+          {% else %}
+            All Products
+          {% endif %}
+        </span>
+        <!-- 검색 기능 우선 제외시키겠습니다.-->
+        <img class="detail__info__img" src='{{product.img.url}}' alt="Product IMG"/>
+      </div>
+      <!-- 박스의 오른쪽 부분 -->
+      <div class="detail__info__right-content">
+        <!-- 오른쪽 부분의 헤더 -->
+        <div class="detail__info__header">
+          <span class="detail__info__name">{{product.name}}</span>
+          <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
+          <span class="detail__info__brand">
+            {% for brand in product.brand.all %}
+              {{brand.name}}
+            {% endfor %}
+          </span>
+        </div>
+        <!-- 상품 가격 -->
+        <div class="detail__info__price">
+          <span>가격 {{product.price}}원</span>
+        </div>
+        <!-- 상품 설명 -->
+        <div class="detail__info__description">
+          <div class="description__content">
+            <span>상품설명</span>
+            <span>{{product.description}}</span>
+          </div>
+          <div class="detail__info__tag-box">
+            <div class="detail__info__tag">
+              <span>연관태그</span>
+              <!-- 이 부분에 해시태그들이 들어갑니다. -->
+            </div>
+            <div class="detail__info__tag--heart">
+              <i class="fas fa-heart"></i>
+              <!-- 임의로 12개의 하트로 설정했습니다. 변경할 예정입니다. -->
+              <span>12</span>
+            </div>
+          </div>
+        </div>
+        <!-- 버튼들 -->
+        <div class="detail__info__button">
+          <button class="detail__info__stock">
+            <span>재고확인</span>
+            <img src="{% static 'logo/location__white.png' %}" />
+          </button>
+          <button class="detail__info__jjim">
+            <span>찜하기</span>
+            <img src="{% static 'logo/heart__white.png' %}" />
+          </button>
+        </div>
+      </div>
     </div>
-
-  {% endfor %}
-  
-</div>
-
+    <!-- 댓글 -->
+    {% include 'myside/_comment.html' %}
+  </main>
 {% endblock %}
 

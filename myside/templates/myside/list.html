@@ -1,6 +1,15 @@
 {% extends 'base.html' %} {% block title %}카테고리{% endblock %}
+{% block category %}
+    {% include 'myside/_category.html' %}
+{% endblock %}
 {% block products-content %}
-    {% if current_category %}Current Category : {{current_category.name}}{% else %}All Products{% endif %}
+    <div class="products__header">
+        <span class="products__header--title">
+            {{ title }}
+        </span>
+        <!-- 검색 기능 -->
+        {% include 'myside/_search.html' %}
+    </div>
     <br>
     <table>
         {% if products %}
@@ -13,7 +22,7 @@
                 </tr>
             {% endfor %}    
         {% else %}
-                No result
+            No result
         {% endif %}
     </table>
 {% endblock %}

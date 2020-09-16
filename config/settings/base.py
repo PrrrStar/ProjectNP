@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     'myside',
     'mptt',
     'rest_framework',
-#   'bootstrap_modal_forms',
+
+    # 'bootstrap_modal_forms',
+    'community',
 
 
 ]
