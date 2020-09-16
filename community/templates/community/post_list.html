@@ -12,7 +12,7 @@
       </thead>
       <tbody class="text-dark">
         {% for post in posts %}
-        <tr onclick="location.href='/community/detail/{{ post.id }}/'">
+        <tr onclick="location.href='/community/{{ post.id }}/'">
           <th>{{ post.id }}</th>
           <td>{{ post.title }}</td>
           <td>{{ post.hits }}</td>

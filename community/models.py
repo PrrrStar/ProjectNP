@@ -8,6 +8,7 @@ class Post(models.Model):
     created_at      = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at     = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
     hits            = models.PositiveIntegerField(default=0, verbose_name='조회수')
+    
 
     def __str__(self):
         return self.title
