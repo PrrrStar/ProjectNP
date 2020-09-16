@@ -1,11 +1,11 @@
 <form action="" class=""method="get">
     {% csrf_token %}
     <div class="products__header--search">
-      <input type="text" name ='q' id='search-bar' placeholder="Search"/>
+      <input type="text" name ='q' id='search-bar' placeholder="Search" value="{{ query }}"/>
       <button><i class="fas fa-search"></i></button>
     </div>
   </form>
 
-  <script type = "text/javascript">
+  <!-- <script type = "text/javascript">
     document.getElementById("search-bar").value = "{{query}}"
-  </script>
+  </script> -->

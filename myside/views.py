@@ -23,14 +23,16 @@ def get_product_queryset(query=None):
 
 def index(request):
     query = ""
+    title = "추천상품"
     if request.GET:
         query = request.GET['q']
         products = get_product_queryset(query)
+        title = query + " 검색 결과"
     else:
         products = Product.objects.all()
 
     categories = Category.objects.all()
-    return render(request, 'myside/index.html', {'products': products, 'categories': categories, 'query':query})
+    return render(request, 'myside/index.html', {'title' : title, 'products': products, 'categories': categories, 'query':query})
 
 
 def product_detail(request, id):
