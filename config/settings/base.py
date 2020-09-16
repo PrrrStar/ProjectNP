@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'mptt',
     'rest_framework',
     # 'bootstrap_modal_forms',
+    'community',
 
 ]
 
