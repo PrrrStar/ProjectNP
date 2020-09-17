@@ -1,3 +1,10 @@
+from .serializers import ProductCategorySerializer
+from .serializers import ProductSerializer
+from .serializers import CommentSerializer
+from .serializers import ReplySerializer
+from rest_framework import generics
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.db.models import Q
@@ -83,12 +90,20 @@ def product_in_category(request, category_slug=None):
     categories = Category.objects.all()
     products = Product.objects.filter(available_display=True)
     title = "All Products"
+    query = ""
 
     if category_slug:
         current_category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(
             category=current_category, available_display=True)
         title = current_category.name
+
+    if request.GET:
+        query = request.GET['q']
+        products = get_product_queryset(query)
+        title = query + " 검색 결과"
+    else:
+        products = Product.objects.all()
 
 # ######### 이 부분을 주석해제하면 전체 상품 중에서 검색한 결과를 얻을 수 있습니다.
 #     if request.GET:
@@ -102,17 +117,8 @@ def product_in_category(request, category_slug=None):
         'products': products,
         'categories': categories,
         'title': title,
+        'query': query,
     })
-
-
-
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from rest_framework import generics
-from .serializers import ReplySerializer
-from .serializers import CommentSerializer
-from .serializers import ProductSerializer
-from .serializers import ProductCategorySerializer
 
 
 class ApiRoot(generics.GenericAPIView):
