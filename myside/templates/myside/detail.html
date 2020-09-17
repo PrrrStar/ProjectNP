@@ -4,7 +4,8 @@
 
 <!-- detail.html에서만 쓰이는 css -->
 {% block style %} 
-  <link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/detail.css' %}?ver=1" />
+  <link rel="stylesheet" href="{% static 'css/comment.css' %}" />
 {% endblock %}
 
 {% block title %}상세페이지{% endblock %}
@@ -34,7 +35,7 @@
       <div class="detail__info__right-content">
         <!-- 오른쪽 부분의 헤더 -->
         <div class="detail__info__header">
-          <span class="detail__info__name">{{product.name}}</span>
+          <span class="detail__info__name"><img src="{% static 'logo/point.png' %}" class="point" />{{product.name}}</span>
           <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
           <span class="detail__info__brand">
             {% for brand in product.brand.all %}
@@ -82,3 +83,6 @@
   </main>
 {% endblock %}
 
+{% block script %} 
+<script src="{% static 'js/commentAlert.js' %}"></script>
+{% endblock %}
