@@ -104,6 +104,10 @@ def product_in_category(request, category_slug=None):
         'title': title,
     })
 
+def mymap(request):
+    return render(request, 'myside/mymap.html', {
+
+    })
 
 
 from rest_framework.response import Response
