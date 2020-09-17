@@ -55,8 +55,7 @@ INSTALLED_APPS = [
     # 'bootstrap_modal_forms',
     'community',
     'accounts',
-
-
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
