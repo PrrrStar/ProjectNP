@@ -1,37 +1,36 @@
-<form action = "" method="POST">
-    {% csrf_token %}
-    <div class="modal" tabindex="-1" id='modal-login'>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">로그인이다.</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <span>아마 여기 로고 들어가겠지?</span> <br>
-                    <div class="form-group">
-                        <input type='text' name='email' placeholder="EMAIL"/><br/>
-                    </div>
-                    <div class="form-group">
-                        <input type='password' name='password' placeholder="PASSWORD"/><br/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    
-                    <input type="submit" class="btn btn-primary" value="내편하기"></input><br>
-                    
-                    <a href="" class="">아이디 찾기</a>
-                    <a href="" class="">비밀번호 찾기</a>
+{% load static %}
 
+<!-- Login Modal -->
+<div class="modal fade" id="modal-login" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">로그인</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="user-login" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="login-user-email" class="col-form-label">이메일 주소</label>
+                    <input type="text" placeholder="이메일 주소 입력" class="form-control" id="login-user-email" name="email">
                 </div>
-                <div>
-                    {% if error %}
-                        {{ error }}
-                    {% endif %}
+                <div class="form-group">
+                    <label for="login-user-password" class="col-form-label">비밀번호</label>
+                    <input type="password" placeholder="비밀번호 입력" class="form-control" id="login-user-password" name="password">
                 </div>
-            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-close btn btn-secondary" data-dismiss="modal">돌아가기</button>
+            <a type="button" href="{% url 'user_login' %}" class="btn-login btn btn-primary">로그인하기</a>
+        </div>
         </div>
     </div>
-</form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="{% static 'js/login.js' %}"></script>
