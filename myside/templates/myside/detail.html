@@ -9,9 +9,9 @@
 
 {% block title %}상세페이지{% endblock %}
 
-
-{% include 'myside/_category.html' %}
-
+{% block category %}
+  {% include 'myside/_category.html' %}
+{% endblock %}
 
 {% block detail-products %}
   <!-- 메인 컨텐츠 박스 -->
