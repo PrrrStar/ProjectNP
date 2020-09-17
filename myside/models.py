@@ -64,7 +64,7 @@ class Product(models.Model):
     stock               = models.PositiveIntegerField(verbose_name='재고')
     available_display   = models.BooleanField('판매 가능?', default= True) 
     slug                = models.SlugField(max_length = 20, db_index=True, allow_unicode=True)
-
+    #user               = models.ForeignKey(settings.AUTH_USER_MODEL)
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
 

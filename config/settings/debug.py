@@ -6,12 +6,8 @@ ALLOWED_HOSTS = ['127.0.0.1','localhost',]
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'db-project-np.cuhffvh7u64m.ap-northeast-2.rds.amazonaws.com',
-        'NAME': 'project_NP',
-        'USER': 'NPadmin',
-        'PASSWORD': get_secret("DATABASE"), 
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

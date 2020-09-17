@@ -14,7 +14,7 @@ from .models import User
 def user_login(request):
     if request.is_ajax():
         # 이메일 주소를 입력하지 않은 경우
-        if request.POST.get('email')=="" :
+        if request.POST.get('email')=="":
             return JsonResponse({'noEmail':True})
 
         # 비밀번호를 입력하지 않은 경우
@@ -23,8 +23,10 @@ def user_login(request):
 
         email = request.POST.get('email')
         password = request.POST.get('password')
+        print("email\t\t",email)
+        print("password\t",password)
         user = authenticate(username=email, password=password)
-
+        print("user\t\t",user)
         if user is not None:
             auth_login(request, user)
             return JsonResponse({'works':True})
@@ -34,7 +36,7 @@ def user_login(request):
 
 def user_logout(request):
     if request.is_ajax():
-        logout(request)
+        auth_logout(request)
         return JsonResponse({'works':True})
 
     return JsonResponse({'notAjax':True})
@@ -49,10 +51,10 @@ def user_signup(request):
         elif request.POST.get('realName') == "":
             return JsonResponse({'noRealName':True})
         # request 요청에서 file type이 있는 경우, 해당 데이터는 request.FILES.get(name)으로 가져온다.                
-        elif request.FILES.get('profile', None) is None:
-            return JsonResponse({'noProfile':True})
-        elif request.POST.get('phoneNumber') == "":
-            return JsonResponse({'noPhoneNumber': True})
+        
+        #elif request.FILES.get('profile', None) is None:
+        #    return JsonResponse({'noProfile':True})
+        
         elif request.POST.get('password') == "":
             return JsonResponse({'noPassword':True})
         elif request.POST.get('password2') == "":
@@ -72,24 +74,12 @@ def user_signup(request):
             return JsonResponse({'wrongEmail': True})
 
         # request로 받은 email 값이 이미 등록된 email인 경우
-        if User.objects.filter(username=request.POST.get('email')).exists():
+        if User.objects.filter(email=request.POST.get('email')).exists():
             return JsonResponse({'emailExists':True})
 
-        # request로 받은 phoneNumber 값이 이미 등록된 phoneNumber인 경우
-        if User.objects.filter(phone_number=request.POST.get('phoneNumber')).exists():
-            return JsonResponse({'phoneNumberExists':True})
-
-        # request로 받은 phoneNumber 길이가 적합하지 않은 경우
-        try:
-            int(request.POST.get('phoneNumber'))
-            pass
-        except ValueError:
-            return JsonResponse({'notNumber':True})
-
-        if len(request.POST.get('phoneNumber'))>11:
-            return JsonResponse({'tooLongNumber':True})
-        if len(request.POST.get('phoneNumber')) < 10:
-            return JsonResponse({'tooShortNumber':True})
+        # request로 받은 nickname 값이 이미 등록된 nickname인 경우
+        if User.objects.filter(nickname=request.POST.get('nickname')).exists():
+            return JsonResponse({'nicknameExists':True})
 
         # request로 받은 realName에 영문자, 숫자, 특수문자가 존재하는 경우
         wrong_str = re.compile('[a-zA-Z0-9-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]')
@@ -129,13 +119,17 @@ def user_signup(request):
 
 
         # 사용자가 작성한 회원가입 내용 형식이 정상인 경우
-        real_name = request.POST.get('realName')
+        username = request.POST.get('realName')
         email = request.POST.get('email')
-        phone_number = request.POST.get('phoneNumber')
+        nickname = request.POST.get('nickname')
         password = request.POST.get('password')
         profile = request.FILES.get('profile')
 
-        user = User(last_name = real_name[0], first_name=real_name[1:], profile=profile, phone_number=phone_number, username=email)
+        user = User(email=email,
+            username=username,
+            nickname=nickname,
+            profile=profile,
+            )
         user.set_password(password)
         user.save()
 

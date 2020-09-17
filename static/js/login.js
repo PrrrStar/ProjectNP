@@ -9,7 +9,6 @@ $(function(){
         var url = $(this).attr('href');
         var form = $('#user-login')[0];
         var formData = new FormData(form);
-
         $.ajax({
             url : url,
             enctype: 'multipart/form-data',
@@ -20,10 +19,10 @@ $(function(){
             data : formData,
         }).done(function(data){
             if(data.works){
-                alert('로그인되었습니다.')
+                alert('내편이군요 환영합니다!')
                 location.reload();
             } else if(data.wrongInformation) {
-                alert('입력된 정보와 일치하는 회원 정보가 없습니다.');
+                alert('당신은 내편이 아닙니다.');
                 $('#login-user-email').val("");
                 $('#login-user-password').val("");
 
