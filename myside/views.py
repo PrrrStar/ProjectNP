@@ -1,10 +1,3 @@
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from rest_framework import generics
-from .serializers import ReplySerializer
-from .serializers import CommentSerializer
-from .serializers import ProductSerializer
-from .serializers import ProductCategorySerializer
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.db.models import Q
@@ -13,7 +6,6 @@ from .models import *
 from .forms import *
 
 
-# Create your views here.
 def get_product_queryset(query=None):
     queryset = []
     queries = query.split(' ')  # 백종원 도시락 => ['백종원', '도시락']
@@ -111,6 +103,16 @@ def product_in_category(request, category_slug=None):
         'categories': categories,
         'title': title,
     })
+
+
+
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from rest_framework import generics
+from .serializers import ReplySerializer
+from .serializers import CommentSerializer
+from .serializers import ProductSerializer
+from .serializers import ProductCategorySerializer
 
 
 class ApiRoot(generics.GenericAPIView):
