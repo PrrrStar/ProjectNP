@@ -3,16 +3,13 @@
 .products__header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 50px 60px 40px 40px;
 }
 
 .products__header button {
   background-color: white;
   cursor: pointer;
-}
-
-.products__header--title,
-.products__header--search {
-  margin: 50px 60px 50px 20px;
 }
 
 .products__header--title {
@@ -56,28 +53,55 @@
   position: relative;
 }
 
+.slick-track {
+  padding: 10px 0px;
+}
+
 /* slick button css */
 .products__slider button {
   position: absolute;
   z-index: 10;
   top: 50%;
   transform: translateY(-50%);
+  border: 0;
+  outline: 0;
+  background-color: rgba(0,0,0,0);
+}
+
+.products__slider button::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 40px;
+  color: #777777;
 }
 
 .products__slider button.slick-prev {
-  left: 0;
+  left: -40px;
+  font-size: 0;
+  color: transparent;
 }
 
 .products__slider button.slick-next {
-  right: 0;
+  right: -40px;
+  font-size: 0;
+  color: transparent;
+}
+
+.products__slider button.slick-prev::before {
+  content: "\f053";
+}
+
+.products__slider button.slick-next::before {
+  content: "\f054";
 }
 
 .products__slider a {
-  border: 1px solid black;
   height: 340px;
   margin: 0px 25px;
   border-radius: 20px;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  -moz-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
   overflow: hidden;
 }
 
@@ -86,11 +110,50 @@
   height: 250px;
 }
 
+.slide__content {
+  padding: 10px 20px;
+}
+
+.slide__content--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.slide__content--header div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fe4737;
+}
+
+.slider__content--name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333333;
+}
+
+.slider__content--description {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #777777;
+}
+
+.slider__content--description p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+  height: 22px;
+}
+
 .products__banner {
   width: 1200px;
   height: 200px;
-  border-radius: 25px;
-  background-color: #ffc10e;
   margin-top: 50px;
   margin-bottom: 108px;
 }
