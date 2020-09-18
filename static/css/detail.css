@@ -47,6 +47,7 @@
 /* Jua 글꼴을 사용하는 박스들 모음 */
 .detail__info__name {
     font-family: "Jua", sans-serif;
+    position: relative;
 }
 
 .detail__info__name {

@@ -5,3 +5,4 @@ local_settings.py
 *.pyc
 .secrets.json
 static_root
+db.sqlite3

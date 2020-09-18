@@ -1,28 +1,48 @@
-{% extends 'base.html' %} {% block title %}카테고리{% endblock %}
-{% block category %}
-    {% include 'myside/_category.html' %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+	<link rel="stylesheet" href="{% static 'css/products.css' %}?ver=5" />
 {% endblock %}
+
+{% block title %}카테고리{% endblock %}
+
+{% block category %}
+	{% include 'myside/_category.html' %}
+{% endblock %}
+
 {% block products-content %}
-    <div class="products__header">
-        <span class="products__header--title">
-            {{ title }}
-        </span>
-        <!-- 검색 기능 -->
-        {% include 'myside/_search.html' %}
-    </div>
-    <br>
-    <table>
-        {% if products %}
-            <tr><th>NAME</th><th>PRICE</th><th>DESCRIPTION</th></tr>
-            {% for product in products %}
-                <tr>
-                    <td><a href="{{product.get_absolute_url}}">{{product.name}}</a></td>
-                    <td>{{product.price}}</td>
-                    <td>{{product.description}}</td>
-                </tr>
-            {% endfor %}    
-        {% else %}
-            No result
-        {% endif %}
-    </table>
+<div class="products">
+	<div class="products__main">
+		<div class="products__header">
+			<span class="products__header--title">
+				<img src="{% static 'logo/point.png' %}" class="point" />
+				{{title}}
+			</span>
+			<!-- 검색 기능 -->
+			{% include 'myside/_search.html' %}
+		</div>
+
+		<div class="products__box">
+			{% for product in products %}
+			<a href="{{product.get_absolute_url}}">
+				<img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
+				<div class="slide__content">
+					<div class="slide__content--header">
+						<span class="slider__content--name">{{product.name}}</span>
+						<div>
+							<img class="slider__content--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
+							<span>100</span>
+						</div>
+					</div>
+					<div class="slider__content--description">
+						<p>{{product.description}}</p>
+					</div>
+				</div>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
 {% endblock %}

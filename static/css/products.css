@@ -157,3 +157,21 @@
   margin-top: 50px;
   margin-bottom: 108px;
 }
+
+
+/* 여기서부터는 slug를 통해 보여지는 페이지의 products css 입니다. */
+.products__box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.products__box a {
+  height: 340px;
+  width: 250px;
+  margin: 25px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  -moz-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  overflow: hidden;
+}
