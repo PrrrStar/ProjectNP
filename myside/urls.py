@@ -10,7 +10,7 @@ urlpatterns = [
     path('products/<int:id>/', product_detail, name='product_detail'),
     path('products/<int:id>/comment/', comment_create, name='comment_create'),
     path('products/<int:product_id>/comments/<int:id>/reply/', reply_create, name='reply_create'),
-    
+    path('mymap/', mymap, name='mymap'),
 
     path('api/', ApiRoot.as_view(), name=ApiRoot.name),
     path('api/product-categories/', ProductCategoryList.as_view(), name=ProductCategoryList.name),

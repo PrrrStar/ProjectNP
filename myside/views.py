@@ -120,6 +120,10 @@ def product_in_category(request, category_slug=None):
         'query': query,
     })
 
+def mymap(request):
+    return render(request, 'myside/mymap.html', {
+
+    })
 
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
