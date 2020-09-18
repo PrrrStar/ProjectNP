@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from django.conf import settings
 from mptt.models import MPTTModel, TreeForeignKey
 
 # Create your models here.
@@ -62,9 +62,9 @@ class Product(models.Model):
     description         = models.TextField(verbose_name='설명', blank=True)
     price               = models.DecimalField(verbose_name='가격', max_digits = 10, decimal_places=0)
     stock               = models.PositiveIntegerField(verbose_name='재고')
+    like                = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='product_likes')
     available_display   = models.BooleanField('판매 가능?', default= True) 
     slug                = models.SlugField(max_length = 20, db_index=True, allow_unicode=True)
-    #user               = models.ForeignKey(settings.AUTH_USER_MODEL)
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
 
@@ -86,6 +86,13 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.id])
 
+    def get_like_url(self):
+        return reverse('product_like-toggle', kwargs={'id':self.id})
+
+    def get_api_like_url(self):
+        return reverse('product_like-api-toggle', kwargs={'pk':self.pk})
+
+    
 
 class Comment(models.Model):
     product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE, related_name='comments')

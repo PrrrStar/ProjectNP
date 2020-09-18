@@ -106,9 +106,31 @@ def product_in_category(request, category_slug=None):
 
 
 
+from django.views.generic import RedirectView
+
+class ProductLikeToggle(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        id = self.kwargs.get('id')
+        product = get_object_or_404(Product, id = id)
+        url_ = product.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated:
+            if user in product.like.all():
+                product.like.remove(user)
+            else:
+                product.like.add(user)
+        return url_
+
+
+
+
+from rest_framework.views import APIView
+
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import generics
+from rest_framework import authentication, permissions
+
 from .serializers import ReplySerializer
 from .serializers import CommentSerializer
 from .serializers import ProductSerializer
@@ -123,7 +145,6 @@ class ApiRoot(generics.GenericAPIView):
             'product-categories': reverse(ProductCategoryList.name, request=request),
             'products': reverse(ProductList.name, request=request),
         })
-
 
 class ProductCategoryList(generics.ListCreateAPIView):
     queryset = Category.objects.all()
@@ -148,6 +169,30 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     name = 'product-detail'
 
+class ProductLikeAPIToggle(APIView):
+    authentication_classes  = [authentication.SessionAuthentication,]
+    permission_classes      = [permissions.IsAuthenticated,]
+    name = 'product_like-api-toggle'
+    def get(self, request, pk=None, format=None):
+
+        product = get_object_or_404(Product, pk=pk)
+        url_ = product.get_absolute_url()
+        user = self.request.user
+        updated = False
+        liked = False
+        if user.is_authenticated:
+            if user in product.like.all():
+                liked = False
+                product.like.remove(user)
+            else:
+                liked = True
+                product.like.add(user)
+            upudated = True
+        data = {
+            "updated": updated,
+            "liked":liked,
+        }
+        return Response(data)
 
 class CommentList(generics.ListCreateAPIView):
     queryset = Comment.objects.all()

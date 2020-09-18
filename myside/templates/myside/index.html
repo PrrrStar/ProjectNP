@@ -33,7 +33,7 @@
               <span class="slider__content--name">{{product.name}}</span>
               <div>
                 <img class="slider__content--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
-                <span>100</span>
+                <span>{{ product.like.count }}</span>
               </div>
             </div>
             <div class="slider__content--description"><p>{{product.description}}</p></div>
