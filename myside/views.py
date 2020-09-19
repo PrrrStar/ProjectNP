@@ -54,9 +54,15 @@ def comment_create(request, id):
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
         if comment_form.is_valid():
-            content = request.POST.get('content')
-            comment = Comment.objects.create(product=product, content=content)
-            comment.save()
+            author  = request.user
+            if author.is_authenticated:
+                content = request.POST.get('content')
+                comment = Comment.objects.create(
+                    product=product,
+                    author =author, 
+                    content=content
+                    )
+                comment.save()
             return HttpResponseRedirect(product.get_absolute_url())
     else:
         comment_from = CommentForm()

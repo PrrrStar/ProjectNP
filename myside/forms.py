@@ -6,7 +6,7 @@ from django import forms
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['content','img',]
+        fields = ['content','author','img',]
 
 class ReplyForm(forms.ModelForm):
     class Meta:
