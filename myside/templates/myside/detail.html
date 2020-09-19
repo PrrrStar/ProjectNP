@@ -53,10 +53,15 @@
             <span>상품설명</span>
             <span>{{product.description}}</span>
           </div>
+
+          <!-- 이 부분에 해시태그들이 들어갑니다. -->
           <div class="detail__info__tag-box">
             <div class="detail__info__tag">
-              <span>연관태그</span>
-              <!-- 이 부분에 해시태그들이 들어갑니다. -->
+              <span>연관태그
+                {% for tag in product.tag.all %}
+                  {{tag.name }}
+                {% endfor %}
+              </span>
             </div>
             <div class="detail__info__tag--heart">
               <i class="fas fa-heart"></i>

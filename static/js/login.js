@@ -8,6 +8,7 @@ $(function () {
     e.preventDefault();
     var url = $(this).attr("href");
     var form = $("#user-login")[0];
+
     var formData = new FormData(form);
     $.ajax({
       url: url,

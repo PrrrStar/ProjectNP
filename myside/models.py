@@ -51,7 +51,18 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
+class Tag(models.Model):
+    name        = models.CharField(max_length=32, verbose_name='태그명')
+    created_at  = models.DateTimeField(auto_now_add=True, verbose_name="등록시간")
+
+    def __str__(self):
+        return self.name
     
+    class Meta:
+        db_table            = "product_tag"
+        verbose_name        = "Tag"
+        verbose_name_plural = "Tags"
 
 
 class Product(models.Model):
@@ -65,6 +76,7 @@ class Product(models.Model):
     like                = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='product_likes')
     available_display   = models.BooleanField('판매 가능?', default= True) 
     slug                = models.SlugField(max_length = 20, db_index=True, allow_unicode=True)
+    tag                 = models.ManyToManyField(Tag)
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
 
