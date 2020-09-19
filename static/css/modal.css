@@ -1,0 +1,104 @@
+/* login modal css */
+
+.modal-content {
+  width: 500px;
+  height: 600px;
+  border-radius: 25px;
+}
+
+.login-modal__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-modal__button-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.login-modal__header .close {
+  padding: 20px;
+}
+
+.login-modal__close {
+  width: 18px;
+  height: 18px;
+}
+
+.login-modal__logo {
+  margin-top: 22px;
+  margin-bottom: 50px;
+  width: 100px;
+  height: 100px;
+}
+
+.modal-body {
+  padding: 0px 50px;
+}
+
+.login-modal__input-box {
+  margin-bottom: 24px;
+}
+
+.login-modal__input {
+  width: 400px;
+  height: 50px;
+  border-radius: 60px;
+  border: 1px solid #cccccc;
+  padding: 14px 30px;
+}
+
+.login-modal__input::placeholder {
+  color: #cccccc;
+}
+
+.login-modal__login {
+  width: 400px;
+  height: 50px;
+  border-radius: 60px;
+  background-color: #fe4737;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.login-modal__login:hover,
+.login-modal__login:active {
+  background-color: #fe4737;
+}
+
+.login-modal__login span {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 1.6px;
+  color: #ffffff;
+}
+
+.login-modal__find {
+  width: 400px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+  letter-spacing: 1.6px;
+}
+
+.find__id,
+.find__password {
+  width: 200px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.find__id {
+  border-right: 1px solid black;
+}
+
+/* sign-up modal css */
