@@ -22,7 +22,8 @@
 			<!-- 검색 기능 -->
 			{% include 'myside/_search.html' %}
 		</div>
-
+		
+		{% if products %}
 		<div class="products__box">
 			{% for product in products %}
 			<a href="{{product.get_absolute_url}}">
@@ -42,6 +43,9 @@
 			</a>
 			{% endfor %}
 		</div>
+		{% else %}
+			No result
+		{% endif %}
 	</div>
 </div>
 

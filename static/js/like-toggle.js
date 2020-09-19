@@ -1,7 +1,5 @@
 
-function updateCount(likeCount, newCount){
-    likeCount.text(newCount)
-}
+
 $("#btn-like").click(function(e){
     e.preventDefault();
     var likeCount =$('#like-count')

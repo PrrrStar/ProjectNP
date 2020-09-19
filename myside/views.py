@@ -13,15 +13,16 @@ from .models import *
 from .forms import *
 
 
-def get_product_queryset(query=None):
+def get_product_queryset(query=None, current_category = None):
     queryset = []
     queries = query.split(' ')  # 백종원 도시락 => ['백종원', '도시락']
     for q in queries:
         products = Product.objects.filter(
-            Q(name__icontains=q) |
+                category=current_category.id
+            ).filter(
+            Q(name__icontains=q)|
             Q(description__icontains=q)
         ).distinct()
-
         for product in products:
             queryset.append(product)
     return list(set(queryset))
@@ -53,9 +54,15 @@ def comment_create(request, id):
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
         if comment_form.is_valid():
-            content = request.POST.get('content')
-            comment = Comment.objects.create(product=product, content=content)
-            comment.save()
+            author  = request.user
+            if author.is_authenticated:
+                content = request.POST.get('content')
+                comment = Comment.objects.create(
+                    product=product,
+                    author =author, 
+                    content=content
+                    )
+                comment.save()
             return HttpResponseRedirect(product.get_absolute_url())
     else:
         comment_from = CommentForm()
@@ -97,28 +104,20 @@ def product_in_category(request, category_slug=None):
         products = products.filter(
             category=current_category, available_display=True)
         title = current_category.name
+        if request.GET:
+            query = request.GET['q']
+            products = get_product_queryset(query, current_category)
+            title = query + " 검색 결과"
 
-    if request.GET:
-        query = request.GET['q']
-        products = get_product_queryset(query)
-        title = query + " 검색 결과"
-    else:
-        products = Product.objects.all()
 
-# ######### 이 부분을 주석해제하면 전체 상품 중에서 검색한 결과를 얻을 수 있습니다.
-#     if request.GET:
-#         query = request.GET['q']
-#         products = get_product_queryset(query)
-#         title = query + " 검색 결과"
-# ##########
-
-    return render(request, 'myside/list.html', {
-        'current_category': current_category,
-        'products': products,
-        'categories': categories,
-        'title': title,
-        'query': query,
-    })
+    context = {
+        'products':products,
+        'title':title,
+        'categories':categories,
+        'current_category':current_category,
+        'query':query,
+    }
+    return render(request, 'myside/list.html', context)
 
 def mymap(request):
     return render(request, 'myside/mymap.html', {

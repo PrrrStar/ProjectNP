@@ -6,3 +6,5 @@ local_settings.py
 .secrets.json
 static_root
 db.sqlite3
+db.*
+db.sqlite3
