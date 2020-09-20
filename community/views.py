@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import Http404
-from .models import Post, Recommend
+from .models import *
 from .forms import *
 # Create your views here.
 
@@ -28,7 +28,7 @@ def post_list(request):
     return render(request, 'community/post_list.html', {'posts': posts})
 
 def post_write(request):
-    if not request.session.get('user'):
+    if not request.user.is_authenticated:
          return redirect('/')
     elif request.method == 'POST':
         form = PostForm(request.POST)
@@ -36,19 +36,25 @@ def post_write(request):
             post = Post()
             post.title = form.cleaned_data['title']
             post.content = form.cleaned_data['content']
+            post.author=request.user
             post.save()
+            recommend=Recommend()
+            recommend.post=post
+            recommend.save()
             return redirect('/community/list/')
     else:
         form = PostForm()
     return render(request, 'community/post_write.html', {'form': form})
 
+@login_required
 def post_recommend(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
+    user = request.user
     recommend=Recommend.objects.get(post=post)
-    if request.user in recommend.user.all():
-        recommend.user.remove(request.user)
+    if user in recommend.user.all():
+        recommend.user.remove(user)
         post.minus_recommend_count
     else:
-        recommend.user.add(request.user)   
+        recommend.user.add(user)   
         post.plus_recommend_count
     return redirect('/community/list/')

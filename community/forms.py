@@ -1,4 +1,5 @@
 from django import forms
+from .models import *
 
 
 class PostForm(forms.Form):
@@ -12,3 +13,7 @@ class PostForm(forms.Form):
             'required': '내용을 입력해주세요.'
         },
         widget=forms.Textarea, label="내용")
+
+    class Meta:
+        model = Post
+        fields = ['title','content','author',]
