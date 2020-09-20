@@ -36,6 +36,9 @@ class Category(MPTTModel):
     
     def get_absolute_url(self):
         return reverse('product_in_category', args=[self.slug])
+    
+    def get_search_category_url(self):
+        return reverse('search_product', kwargs={'category_id':self.id})
 
 
 class Brand(models.Model):
@@ -134,14 +137,3 @@ class Reply(models.Model):
     def __str__(self):
         return self.content
 
-
-class Like_product(models.Model):
-    product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE)
-    good        = models.IntegerField(verbose_name="좋아요", default=0)
-    bad         = models.IntegerField(verbose_name="싫어요", default=0)
-
-
-class Like_comment(models.Model):
-    comment     = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    good        = models.IntegerField(verbose_name="좋아요", default=0)
-    bad         = models.IntegerField(verbose_name="싫어요", default=0)

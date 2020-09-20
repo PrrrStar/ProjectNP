@@ -13,19 +13,50 @@ from .models import *
 from .forms import *
 
 
-def get_product_queryset(query=None, current_category = None):
+def get_product_queryset(query=None, category_id = None):
     queryset = []
     queries = query.split(' ')  # 백종원 도시락 => ['백종원', '도시락']
-    for q in queries:
-        products = Product.objects.filter(
-                category=current_category.id
-            ).filter(
-            Q(name__icontains=q)|
-            Q(description__icontains=q)
-        ).distinct()
-        for product in products:
-            queryset.append(product)
+    if category_id:
+        for q in queries:   
+            print(query,category_id)
+            products = Product.objects.filter(
+                    category=category_id
+                ).filter(
+                Q(name__icontains=q)|
+                Q(description__icontains=q)
+            ).distinct()
+            for product in products:
+                queryset.append(product)
+    else:
+        for q in queries:   
+            products = Product.objects.filter(
+                Q(name__icontains=q)|
+                Q(description__icontains=q)
+            ).distinct()
+            for product in products:
+                queryset.append(product)
     return list(set(queryset))
+
+
+def search_product(request, category_id=None):
+    query = ""
+    if request.GET:
+        query = request.GET['q']
+        products = get_product_queryset(query, category_id)
+        print(products)
+        title = query + " 검색 결과"
+    else:
+        products = Product.objects.all()
+
+    categories = Category.objects.all()
+
+    context = {
+        'products':products,
+        'categories':categories,
+        'query':query,
+        'title':title,
+    }
+    return render(request, 'myside/list.html', context)
 
 
 def index(request):
@@ -33,13 +64,7 @@ def index(request):
     title1 = "전체 상품"
     title2 = "베스트 상품"
     best_products = Product.objects.annotate(like_count=Count('like')).order_by('-like_count')
-    if request.GET:
-        query = request.GET['q']
-        products = get_product_queryset(query)
-        title = query + " 검색 결과"
-    else:
-        products = Product.objects.all()
-
+    products = Product.objects.all()
     categories = Category.objects.all()
 
     context = {
@@ -53,6 +78,32 @@ def index(request):
     }
     return render(request, 'myside/index.html', context)
 
+def product_in_category(request, category_slug=None):
+    current_category = None
+    categories = Category.objects.all()
+    products = Product.objects.filter(available_display=True)
+    title = "All Products"
+    query = ""
+
+    if category_slug:
+        current_category = get_object_or_404(Category, slug=category_slug)
+        products = products.filter(
+            category=current_category, available_display=True)
+        title = current_category.name
+        if request.GET:
+            query = request.GET['q']
+            products = get_product_queryset(query, current_category)
+            title = query + " 검색 결과"
+
+
+    context = {
+        'products':products,
+        'title':title,
+        'categories':categories,
+        'current_category':current_category,
+        'query':query,
+    }
+    return render(request, 'myside/list.html', context)
 
 def product_detail(request, id):
     product = get_object_or_404(Product, id=id)
@@ -85,51 +136,6 @@ def comment_create(request, id):
     return render(request, 'myside/detail.html', context)
 
 
-def reply_create(request, product_id, id):
-    product = get_object_or_404(Product, id=product_id)
-    comment = get_object_or_404(Comment, id=id)
-    if request.method == 'POST':
-        reply_form = ReplyForm(request.POST or None)
-        if reply_form.is_valid():
-            content = request.POST.get('content')
-            reply = Reply.objects.create(comment=comment, content=content)
-            reply.save()
-            return HttpResponseRedirect(product.get_absolute_url())
-    else:
-        reply_from = ReplyForm()
-
-    context = {
-        'reply_form': comment_from,
-    }
-    return render(request, 'myside/detail.html', context)
-
-
-def product_in_category(request, category_slug=None):
-    current_category = None
-    categories = Category.objects.all()
-    products = Product.objects.filter(available_display=True)
-    title = "All Products"
-    query = ""
-
-    if category_slug:
-        current_category = get_object_or_404(Category, slug=category_slug)
-        products = products.filter(
-            category=current_category, available_display=True)
-        title = current_category.name
-        if request.GET:
-            query = request.GET['q']
-            products = get_product_queryset(query, current_category)
-            title = query + " 검색 결과"
-
-
-    context = {
-        'products':products,
-        'title':title,
-        'categories':categories,
-        'current_category':current_category,
-        'query':query,
-    }
-    return render(request, 'myside/list.html', context)
 
 def mymap(request):
     return render(request, 'myside/mymap.html', {

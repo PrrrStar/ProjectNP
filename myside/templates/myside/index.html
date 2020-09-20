@@ -20,7 +20,13 @@
       <div class="products__header">
         <span class="products__header--title"><img src="{% static 'logo/point.png' %}" class="point" />{{title2}}</span>
         <!-- 검색 기능 -->
-        {% include 'myside/_search.html' %}
+        <form action="{% url 'search_product' %}" class="" method="get">
+          {% csrf_token %}
+          <div class="products__header--search">
+            <input autocomplete="off" type="text" name ='q' id='search-bar' placeholder="Search" value="{{ query }}"/>
+            <button><i class="fas fa-search"></i></button>
+          </div>
+        </form>
       </div>
 
       <!-- Slick을 이용한 슬라이더 -->
