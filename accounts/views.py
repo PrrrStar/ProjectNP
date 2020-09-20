@@ -10,12 +10,15 @@ from django.http import JsonResponse, Http404
 
 from .models import User
 from myside.models import Category
+from myside.models import Product
 
 def user_profile(request, id=None):
     user = get_object_or_404(User, id=id)
+    products = Product.objects.all()
     categories = Category.objects.all()
     context = {
         'user':user,
+        'products':products,
         'categories':categories,
     }
     return render(request, 'accounts/profile.html',context)

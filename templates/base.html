@@ -63,6 +63,9 @@
     <!-- products -->
     {% block index-products %}{% endblock %}
 
+    <!-- like -->
+    {% block likeList %}{% endblock %}
+
     <!-- detail -->
     {% block detail-products %}{% endblock %}
 
@@ -73,11 +76,13 @@
     {% block mymap %}{% endblock %}
 
     <!-- user profile-->
-    {% block user_profile %}{% endblock %}
+    {% block user-profile %}{% endblock %}
 
     <!-- login, signup modal--> 
     {% include 'accounts/login.html' %}
     {% include 'accounts/signup.html' %}
+
+
     <!-- 찜 기능 -->
     <div class="jjim">
       <div class="jjim__box"></div>
