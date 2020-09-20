@@ -37,9 +37,6 @@ class Category(MPTTModel):
     def get_absolute_url(self):
         return reverse('product_in_category', args=[self.slug])
     
-    def get_search_category_url(self):
-        return reverse('search_product', kwargs={'category_id':self.id})
-
 
 class Brand(models.Model):
     name    = models.CharField(max_length=20, verbose_name='브랜드', db_index=True)

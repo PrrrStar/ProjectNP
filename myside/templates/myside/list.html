@@ -17,16 +17,10 @@
 		<div class="products__header">
 			<span class="products__header--title">
 				<img src="{% static 'logo/point.png' %}" class="point" />
-				{{title}}
+					{{title}}
 			</span>
 			<!-- 검색 기능 -->
-			<form action="{{ category.get_search_category_url }}" class="" method="get">
-				{% csrf_token %}
-				<div class="products__header--search">
-				  <input autocomplete="off" type="text" name ='q' id='search-bar' placeholder="Search" value="{{ query }}"/>
-				  <button><i class="fas fa-search"></i></button>
-				</div>
-			</form>
+			{% include 'myside/_search.html' %}
 		</div>
 		
 		{% if products %}
@@ -49,8 +43,10 @@
 			</a>
 			{% endfor %}
 		</div>
+		{% elif query %}
+			{{query}} 와 관련된 상품이 없어요 ㅠㅠ
 		{% else %}
-			No result
+			No Result
 		{% endif %}
 	</div>
 </div>

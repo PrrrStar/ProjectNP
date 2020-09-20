@@ -18,7 +18,6 @@ def get_product_queryset(query=None, category_id = None):
     queries = query.split(' ')  # 백종원 도시락 => ['백종원', '도시락']
     if category_id:
         for q in queries:   
-            print(query,category_id)
             products = Product.objects.filter(
                     category=category_id
                 ).filter(
@@ -38,43 +37,33 @@ def get_product_queryset(query=None, category_id = None):
     return list(set(queryset))
 
 
-def search_product(request, category_id=None):
-    query = ""
-    if request.GET:
-        query = request.GET['q']
-        products = get_product_queryset(query, category_id)
-        print(products)
-        title = query + " 검색 결과"
-    else:
-        products = Product.objects.all()
-
-    categories = Category.objects.all()
-
-    context = {
-        'products':products,
-        'categories':categories,
-        'query':query,
-        'title':title,
-    }
-    return render(request, 'myside/list.html', context)
-
-
 def index(request):
     query = ""
-    title1 = "전체 상품"
-    title2 = "베스트 상품"
+    title_all_product = "전체 상품"
+    title_best_product = "베스트 상품"
     best_products = Product.objects.annotate(like_count=Count('like')).order_by('-like_count')
     products = Product.objects.all()
     categories = Category.objects.all()
 
+    if request.GET:
+        query = request.GET['q']
+        products = get_product_queryset(query, None)
+        title = "전체 상품 > "+query + " 검색 결과"
+        context = {
+            'title':title,
+            'products':products,
+            'categories':categories,
+            'query':query,
+        }
+        return render(request, 'myside/list.html', context)
+
     context = {
-        'title1':title1,
-        'title2':title2,
+        'title_all_product':title_all_product,
+        'title_best_product':title_best_product,
         'products':products,
         'best_products':best_products,
         'categories':categories,
         'query':query,
-
     }
     return render(request, 'myside/index.html', context)
 
@@ -82,7 +71,7 @@ def product_in_category(request, category_slug=None):
     current_category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available_display=True)
-    title = "All Products"
+    title = ""
     query = ""
 
     if category_slug:
@@ -93,7 +82,7 @@ def product_in_category(request, category_slug=None):
         if request.GET:
             query = request.GET['q']
             products = get_product_queryset(query, current_category)
-            title = query + " 검색 결과"
+            title = current_category.name+" > "+query + " 검색 결과"
 
 
     context = {

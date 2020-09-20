@@ -23,7 +23,7 @@
       <div class="detail__info__left-content">
         <span class="detail__info__title">
           {% if current_category %}
-            {{current_category.name}}
+            {{current_category.parent}} > {{current_category.name}}
           {% else %}
             All Products
           {% endif %}

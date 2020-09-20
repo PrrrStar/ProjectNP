@@ -18,15 +18,11 @@
     <!-- 상품 목록 -->
     <div class="products__main">
       <div class="products__header">
-        <span class="products__header--title"><img src="{% static 'logo/point.png' %}" class="point" />{{title2}}</span>
+        <span class="products__header--title"><img src="{% static 'logo/point.png' %}" class="point" />
+          {{title_best_product}}
+        </span>
         <!-- 검색 기능 -->
-        <form action="{% url 'search_product' %}" class="" method="get">
-          {% csrf_token %}
-          <div class="products__header--search">
-            <input autocomplete="off" type="text" name ='q' id='search-bar' placeholder="Search" value="{{ query }}"/>
-            <button><i class="fas fa-search"></i></button>
-          </div>
-        </form>
+        {% include 'myside/_search.html' %}
       </div>
 
       <!-- Slick을 이용한 슬라이더 -->
@@ -48,7 +44,10 @@
         {% endfor %}
       </div>
 
-      <span class="products__header--title"><img src="{% static 'logo/point.png' %}" class="point" />{{title1}}</span>
+      
+      <span class="products__header--title"><img src="{% static 'logo/point.png' %}" class="point" />
+        {{title_all_product}}
+      </span>
       <div class="products__slider">
         {% for product in products %}
         <a href="{{product.get_absolute_url}}">
