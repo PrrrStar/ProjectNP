@@ -7,6 +7,7 @@
           <th>#</th>
           <th>제목</th>
           <th>조회수</th>
+          <th>추천</th>
           <th>일시</th>
         </tr>
       </thead>
@@ -16,6 +17,7 @@
           <th>{{ post.id }}</th>
           <td>{{ post.title }}</td>
           <td>{{ post.hits }}</td>
+          <td>{{ post.recommend_count }}</td>
           <td>{{ post.created_at }}</td>
         </tr>
         {% endfor %}

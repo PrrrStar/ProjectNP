@@ -8,6 +8,12 @@
       <label for="contents">내용</label>
       <textarea class="form-control" readonly>{{ post.content }}</textarea>
     </div>
+    <div>
+      <label for="hits">조회수 : {{ post.hits }} </label>
+      <label for="recommend"> 추천 : {{ post.recommend_count }}</label>
+    </div>
+
+    <a href="{% url 'recommend' post.id %}">추천</a>
     <button class="btn btn-primary" onclick="location.href='/community/list/'">돌아가기</button>
   </div>
 </div>
