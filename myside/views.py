@@ -98,7 +98,21 @@ def product_detail(request, id):
     product = get_object_or_404(Product, id=id)
     categories = Category.objects.all()
     current_category = get_object_or_404(Category, slug=product.category)
-    return render(request, 'myside/detail.html', {'product': product, 'categories': categories, 'current_category': current_category})
+    query = ""
+
+    if request.GET:
+        query = request.GET['tag']
+        products = get_product_queryset(query, None)
+        title = query + "태그 검색 결과"
+        context = {
+            'title':title,
+            'products':products,
+            'categories':categories,
+            'query':query,
+        }
+        return render(request, 'myside/list.html', context)
+
+    return render(request, 'myside/detail.html', {'product': product, 'categories': categories, 'current_category': current_category, 'query':query,})
 
 
 def comment_create(request, id):

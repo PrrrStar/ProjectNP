@@ -58,10 +58,12 @@
           <div class="detail__info__tag-box">
             <div class="detail__info__tag">
               <span>연관태그
-                {% for tag in product.tag.all %}
-                  {{tag.name }}
-                {% endfor %}
               </span>
+              <form method="get">
+                {% for tag in product.tag.all %}
+                  <button type="submit" name="tag" value="{{tag.name}}">{{tag.name}}</button>
+                {% endfor %}
+              </form>
             </div>
             <div class="detail__info__tag--heart">
               <i class="fas fa-heart"></i>
