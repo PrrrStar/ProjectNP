@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -9,6 +9,16 @@ import re
 from django.http import JsonResponse, Http404
 
 from .models import User
+from myside.models import Category
+
+def user_profile(request, id=None):
+    user = get_object_or_404(User, id=id)
+    categories = Category.objects.all()
+    context = {
+        'user':user,
+        'categories':categories,
+    }
+    return render(request, 'accounts/profile.html',context)
 
 # 사용자 로그인
 def user_login(request):

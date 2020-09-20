@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 
 '''
 이메일 (email)
@@ -30,4 +31,6 @@ class User(AbstractUser):
 
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ['nickname',]
-
+    
+    def get_user_profile_url(self):
+        return reverse('user_profile', kwargs={'id':self.id})

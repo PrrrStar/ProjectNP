@@ -16,7 +16,7 @@ class BrandAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name','category','img','price','stock','available_display','created_at','modified_at')
     prepopulated_fields = {'slug':('name',)}
-    filter_horizontal = ('brand','tag',)
+    filter_horizontal = ('brand','like','tag',)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

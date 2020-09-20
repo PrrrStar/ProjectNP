@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}내 정보{% endblock %}
+
+{% block category %}
+	{% include 'myside/_category.html' %}
+{% endblock %}
+
+
+{% block user_profile %}
+<br>
+<div class="">
+    <div class="">
+        <br><br><br>
+
+
+        <li>{{user.nickname}} 님의 프로필</li>
+        <hr>
+        <button type="submit">
+            {% if user.profile %}
+            <img class="round" src="{{user.profile.url}}" width="200"> <br>
+            {% else %}
+            <img class="round" src="{% static 'logo/logo-02.jpg' %}" width="200"> <br>
+            {% endif %}
+        </button>
+    </div>
+
+    <div class="">
+        <li>{{user.name}} </li>
+        <li>{{user.email}} </li>
+
+        {% if user.birth %}
+        <li>{{user.birth}} </li>
+        {% else %}
+        <li>등록된 생일이 없어요</li>
+        {% endif %}
+
+        <button type="button">프로필 편집</button>
+    </div>
+    <hr>
+    <div>
+        <div>내찜 목록
+            {% for user_like in user.product_likes.all %}
+            <li>
+                <p>{{ user_like.name }}</p>
+                <img src="{{ user_like.img.url }}" alt="">
+            </li>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

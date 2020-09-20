@@ -42,6 +42,8 @@
     <nav>
       {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
         <a href="{% url 'user_logout' %}" class="user-logout">Logout</a>
+        <a href="{{ user.get_user_profile_url }}" class="user-profile">내정보</a>
+        
       {% else %}
         <button data-toggle='modal' data-target="#modal-login" id="base__login-btn">로그인</button>
         <button data-toggle='modal' data-target="#modal-signup">회원가입</button>
@@ -70,9 +72,10 @@
     <!-- map -->
     {% block mymap %}{% endblock %}
 
-    <!-- Signup & Login -->
-    {% block auth-window %}{% endblock %}
+    <!-- user profile-->
+    {% block user_profile %}{% endblock %}
 
+    <!-- login, signup modal--> 
     {% include 'accounts/login.html' %}
     {% include 'accounts/signup.html' %}
     <!-- 찜 기능 -->
