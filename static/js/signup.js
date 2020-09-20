@@ -15,6 +15,8 @@ $(function () {
         var form = $('#user-signup')[0];
         // form 태그 안에 있는 모든 input으로 입력한 value값을 'name'을 key로 하여, formData 변수에 저장 
         // --> ex. <input type="text" placeholder="이메일 주소 입력" class="form-control" id="login-user-email" name="email"> 에서 유저가 positipman@gmail.com을 입력했다면, formData에서 key는 email, value는 positipman@gmail.com 이 된다.
+        
+        
         var formData = new FormData(form);
         // formData에 image 데이터가 없다면, set 함수를 이용하여 "profile"이라는 이름을 key로 하여 입력받은 이미지 데이터를 value로 업데이트 시켜준다.
         // formData.set("profile", $('#signup-user-profile')[0].files[0]);

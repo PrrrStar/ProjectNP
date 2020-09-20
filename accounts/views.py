@@ -61,8 +61,8 @@ def user_signup(request):
         # request 보낸 email 이 빈 문자열인 경우
         if request.POST.get('email') == "":
             return JsonResponse({'noEmail':True})            
-        elif request.POST.get('realName') == "":
-            return JsonResponse({'noRealName':True})
+        elif request.POST.get('nickname') == "":
+            return JsonResponse({'noNickname':True})
         # request 요청에서 file type이 있는 경우, 해당 데이터는 request.FILES.get(name)으로 가져온다.                
         
         #elif request.FILES.get('profile', None) is None:
@@ -95,13 +95,13 @@ def user_signup(request):
             return JsonResponse({'nicknameExists':True})
 
         # request로 받은 realName에 영문자, 숫자, 특수문자가 존재하는 경우
-        wrong_str = re.compile('[a-zA-Z0-9-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]')
-        if wrong_str.search(request.POST.get('realName')):
-            return JsonResponse({'wrongName':True})
+        #wrong_str = re.compile('[a-zA-Z0-9-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]')
+        #if wrong_str.search(request.POST.get('realName')):
+        #    return JsonResponse({'wrongName':True})
 
         # request로 받은 realName 길이가 5자리를 초과한 경우
-        if len(request.POST.get('realName')) > 5:
-            return JsonResponse({'tooLongName':True})
+        #if len(request.POST.get('realName')) > 5:
+        #    return JsonResponse({'tooLongName':True})
 
         # request로 받은 password가 비밀번호 형식에 적합하지 않은 경우 (8자리이상 & 영어 소문자/대문자/특수문자/숫자 중 3개 이상 조합)
         password = request.POST.get('password')
@@ -132,16 +132,13 @@ def user_signup(request):
 
 
         # 사용자가 작성한 회원가입 내용 형식이 정상인 경우
-        username = request.POST.get('realName')
         email = request.POST.get('email')
         nickname = request.POST.get('nickname')
         password = request.POST.get('password')
-        profile = request.FILES.get('profile')
 
-        user = User(email=email,
-            username=username,
+        user = User(
+            email=email,
             nickname=nickname,
-            profile=profile,
             )
         user.set_password(password)
         user.save()

@@ -7,7 +7,7 @@ from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from django.db.models import Q
+from django.db.models import Q, Count
 
 from .models import *
 from .forms import *
@@ -30,7 +30,9 @@ def get_product_queryset(query=None, current_category = None):
 
 def index(request):
     query = ""
-    title = "추천상품"
+    title1 = "전체 상품"
+    title2 = "베스트 상품"
+    best_products = Product.objects.annotate(like_count=Count('like')).order_by('-like_count')
     if request.GET:
         query = request.GET['q']
         products = get_product_queryset(query)
@@ -39,7 +41,17 @@ def index(request):
         products = Product.objects.all()
 
     categories = Category.objects.all()
-    return render(request, 'myside/index.html', {'title': title, 'products': products, 'categories': categories, 'query': query})
+
+    context = {
+        'title1':title1,
+        'title2':title2,
+        'products':products,
+        'best_products':best_products,
+        'categories':categories,
+        'query':query,
+
+    }
+    return render(request, 'myside/index.html', context)
 
 
 def product_detail(request, id):
