@@ -6,36 +6,64 @@
     <div class="modal-content">
       <div class="signup-modal__header">
         <div class="login-modal__button-box">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close signup-close" data-dismiss="modal" aria-label="Close">
             <img src="{% static 'logo/cancel.png' %}" class="login-modal__close" />
           </button>
         </div>
         <span class="signup-modal__title">회원가입</span>
       </div>
-      <div class="modal-body">
+      <div class="signup-modal__body">
         <form id="user-signup" enctype="multipart/form-data">
           {% csrf_token %}
-          <div class="form-group">
-            <label for="signup-user-email" class="col-form-label">이메일</label>
-            <input type="text" placeholder="EMAIL" class="form-control" id="signup-user-email" name="email" />
+          <div class="signup-form__group">
+            <div class="signup-form__title">
+              <span>이메일</span>
+            </div>
+            <div class="signup-form__write">
+              <input autocomplete="off" type="text" placeholder="EMAIL" class="signup-form__control" id="signup-user-email" name="email" />
+              <div class="signup-form__alert">
+                <span></span>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="signup-user-name" class="col-form-label">닉네임</label>
-            <input type="text" placeholder="NICKNAME" class="form-control" id="signup-user-nickname" name="nickname" />
+          <div class="signup-form__group">
+            <div class="signup-form__title">
+              <span>닉네임</span>
+            </div>
+            <div class="signup-form__write">
+              <input autocomplete="off" type="text" placeholder="NICKNAME" class="signup-form__control" id="signup-user-nickname" name="nickname" />
+              <div class="signup-form__alert">
+                <span>사용하실 수 있는 닉네임 입니다.</span>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="signup-user-password" class="col-form-label">비밀번호</label>
-            <input type="password" placeholder="8자리 이상 (영어 대문자, 소문자, 숫자, 특수문자 중 3종류 조합)" class="form-control" id="signup-user-password" name="password" />
+          <div class="signup-form__group">
+            <div class="signup-form__title">
+              <span>비밀번호</span>
+            </div>
+            <div class="signup-form__write">
+              <input autocomplete="off" type="password" placeholder="8자리 이상 (영어 대문자, 소문자, 숫자, 특수문자 중 3종류 조합)" class="signup-form__control" id="signup-user-password" name="password" />
+              <div class="signup-form__alert">
+                <span></span>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="signup-user-password2" class="col-form-label">비밀번호 확인</label>
-            <input type="password" placeholder="비밀번호 재입력" class="form-control" id="signup-user-password2" name="password2" />
+          <div class="signup-form__group">
+            <div class="signup-form__title">
+              <span>비밀번호확인</span>
+            </div>
+            <div class="signup-form__write">
+              <input autocomplete="off" type="password" placeholder="비밀번호 재입력" class="signup-form__control" id="signup-user-password2" name="password2" />
+              <div class="signup-form__alert">
+                <span></span>
+              </div>
+            </div>
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-close btn btn-secondary" data-dismiss="modal">돌아가기</button>
-        <a type="button" href="{% url 'user_signup' %}" class="btn-signup btn btn-primary">가입하기</a>
+      <div class="signup-modal__footer">
+        <button type="button" class="btn-close signup-modal__button" data-dismiss="modal">Pre</button>
+        <a type="button" href="{% url 'user_signup' %}" id="btn-signup" class="signup-modal__button btn-signup">Complete</a>
       </div>
     </div>
   </div>

@@ -102,3 +102,120 @@
 }
 
 /* sign-up modal css */
+.signup-modal__header {
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0px 30px;
+  border-bottom: 1px solid #fe4737;
+  margin-bottom: 50px;
+}
+
+.signup-close {
+  margin-right: -10px;
+  margin-top: 15px;
+}
+
+.signup-modal__title {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 2.4px;
+  color: #fe4737;
+  padding: 0px 0px 10px 20px;
+}
+
+.signup-modal__body {
+  padding: 0px 30px;
+}
+
+.signup-form__group {
+  width: 440px;
+  height: 60px;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.signup-form__title {
+  width: 143px;
+  height: 100%;
+}
+
+.signup-form__title span {
+  line-height: 1.5;
+  letter-spacing: 1.6px;
+  color: #333333;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.signup-form__write {
+  width: 297px;
+  padding-right: 10px;
+  padding-bottom: 6px;
+}
+
+.signup-form__control {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #cccccc;
+}
+
+.signup-form__alert {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.signup-form__alert span {
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 1.2px;
+  color: #33bb5c;
+}
+
+.signup-modal__footer {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-modal__footer button {
+  margin-right: 30px;
+  background-color: #333333;
+}
+
+.signup-modal__footer a {
+  background-color: #fe4737;
+}
+
+.signup-modal__footer a:hover, 
+.signup-modal__footer a:focus {
+  background-color: #fe4737;
+}
+
+.signup-modal__footer a:focus {
+  outline: none;
+}
+
+.signup-modal__footer a:hover {
+  color: #ffffff;
+}
+
+.signup-modal__button {
+  width: 180px;
+  height: 50px;
+  display: flex;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 1.6px;
+  color: #ffffff;
+}
