@@ -50,15 +50,15 @@ class Recommend(models.Model):
         verbose_name_plural = 'recommends'    
 
 
-# class Comment(models.Model):
-#     post        = models.ForeignKey(Post, verbose_name="글", on_delete=models.CASCADE, related_name='comment')
-#     author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment')
-#     content     = models.TextField(max_length = 100, verbose_name='내용')
-#     created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
-#     modified_at = models.DateTimeField(auto_now = True, verbose_name='수정날짜')
+class Comment(models.Model):
+    post        = models.ForeignKey(Post, verbose_name="글", on_delete=models.CASCADE, related_name='comment')
+    author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment')
+    content     = models.TextField(max_length = 100, verbose_name='내용')
+    created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
+    modified_at = models.DateTimeField(auto_now = True, verbose_name='수정날짜')
 
-#     class Meta:
-#         ordering            = ['-created_at']
-#         verbose_name        = 'comment'
-#         verbose_name_plural = 'comments'
+    class Meta:
+        ordering            = ['-created_at']
+        verbose_name        = 'comment'
+        verbose_name_plural = 'comments'
 
