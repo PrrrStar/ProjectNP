@@ -97,26 +97,26 @@
 
 
 
-              <!-- Slick을 이용한 슬라이더 -->
-    <div class="products__slider">연관 상품
+    <span>연관 상품</span>
+    <div class="products__slider">
       
-      {% for tag in product.tag.all %}
-      {{tag}}
+      {% for product in product_related %}
       <a href="{{product.get_absolute_url}}">
-        <img src="{{tag.image_url}}" alt="Product IMG" class="slide__img" />
+        <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
         <div class="slide__content">
           <div class="slide__content--header">
-            <span class="slider__content--name">{{tag.name}}</span>
+            <span class="slider__content--name">{{product.name}}</span>
             <div>
               <img class="slider__content--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
-              <span>{{ tag.like.count }}</span>
+              <span>{{ product.like.count }}</span>
             </div>
           </div>
-          <div class="slider__content--description"><p>{{tag.description}}</p></div>
+          <div class="slider__content--description"><p>{{product.description}}</p></div>
         </div>
       </a>
       {% endfor %}
     </div>
+
   </main>
 
 {% endblock %}
