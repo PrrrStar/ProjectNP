@@ -115,7 +115,7 @@ class Comment(models.Model):
     author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True,blank=True, related_name='comments')
     img         = models.ImageField(upload_to="comments/%Y/%m/%d", blank=True)
     content     = models.TextField(max_length = 100, verbose_name='내용')
-   # like        = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='comment_likes')
+    like        = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='comment_likes')
     created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록일')
     modified_at = models.DateTimeField(auto_now = True)
 

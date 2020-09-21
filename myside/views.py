@@ -99,17 +99,18 @@ def product_in_category(request, category_slug=None):
 
 def product_detail(request, slug):
     product             = get_object_or_404(Product, slug=slug)
+    product_related     = product.tags.similar_objects()
     categories          = Category.objects.all()
     current_category    = get_object_or_404(Category, slug=product.category)        
     context = {
             'product':product,
             'categories':categories,
             'current_category':current_category,
+            'product_related':product_related,
         }
     return render(request, 'myside/detail.html', context)
 
 def product_tagged(request, slug):
-    print("a)")
     tag                 = get_object_or_404(ProductTag, slug=slug)
     products            = Product.objects.filter(tags = tag)
     categories          = Category.objects.all()
