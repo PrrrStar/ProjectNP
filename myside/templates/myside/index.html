@@ -25,8 +25,8 @@
         {% include 'myside/_search.html' %}
       </div>
 
-      <!-- Slick을 이용한 슬라이더 -->
-      <div class="products__slider">
+      <!-- Slick을 이용한 슬라이더 (베스트 상품) -->
+      <div class="products__slider products__best-products">
         {% for product in best_products %}
         <a href="{{product.get_absolute_url}}">
           <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
@@ -43,9 +43,9 @@
         </a>
         {% endfor %}
       </div>
-
-        
-      <span class="products__header--title"><img src="{% static 'logo/point.png' %}" class="point" />
+      
+      <!-- Slick을 이용한 슬라이더 (전체상품) -->
+      <span class="products__header--title products__all-products"><img src="{% static 'logo/point.png' %}" class="point" />
         {{title_all_product}}
       </span>
       <div class="products__slider">

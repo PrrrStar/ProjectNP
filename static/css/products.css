@@ -53,6 +53,16 @@
   position: relative;
 }
 
+.products__best-products {
+  margin-bottom: 100px;
+}
+
+.products__all-products {
+  display: flex;
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+
 .slick-track {
   padding: 10px 0px;
 }
