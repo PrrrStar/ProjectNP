@@ -39,6 +39,10 @@ header {
   border-bottom: 1px solid black;
 }
 
+.header__logo-box {
+  width: 300px;
+}
+
 .header__logo {
   width: 70px;
   height: 70px;
@@ -57,10 +61,26 @@ header {
   margin: 0px 55px;
 }
 
-.header__login {
-  width: 70px;
-  height: 70px;
-  border: 1px solid black;
+.header__auth {
+  width: 300px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.base__auth-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.base__auth-btn span {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.71;
+  color: #333333;
 }
 
 .banner-box {

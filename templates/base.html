@@ -27,7 +27,9 @@
   <header id="header">
     <div>
       <!-- logo -->
-      <img src="{% static 'logo/logo-02.jpg' %}" class="header__logo" , onclick="location.href='/'" />
+      <div class="header__logo-box">
+        <img src="{% static 'logo/logo-02.jpg' %}" class="header__logo" , onclick="location.href='/'" />
+      </div>
     </div>
     <nav>
       <!-- 상단 메뉴 -->
@@ -39,14 +41,20 @@
       </ul>
     </nav>
     <!-- 로그인 로그아웃 -->
-    <nav>
+    <nav class="header__auth">
       {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
         <a href="{% url 'user_logout' %}" class="user-logout">Logout</a>
         <a href="{{ user.get_user_profile_url }}" class="user-profile">내정보</a>
         
       {% else %}
-        <button data-toggle='modal' data-target="#modal-login" id="base__login-btn">로그인</button>
-        <button data-toggle='modal' data-target="#modal-signup">회원가입</button>
+        <button data-toggle='modal' data-target="#modal-login" id="base__login-btn" class="base__auth-btn">
+          <img src="{% static 'logo/person-24px.png' %}" />
+          <span>Log in</span>
+        </button>
+        <button data-toggle='modal' data-target="#modal-signup" class="base__auth-btn">
+          <img src="{% static 'logo/person-24px.png' %}" />
+          <span>Sign up</span>
+        </button>
       {% endif %}
     </nav>
   </header>
