@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'myside',
     'mptt',
     'rest_framework',
+    'taggit',
 
     # 'bootstrap_modal_forms',
     'community',

@@ -14,9 +14,9 @@ class BrandAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name','category','img','price','stock','available_display','created_at','modified_at')
+    list_display = ('name','category','img','price','stock','tags','available_display','created_at','modified_at')
     prepopulated_fields = {'slug':('name',)}
-    filter_horizontal = ('brand','like','tag',)
+    filter_horizontal = ('brand','like',)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
@@ -26,6 +26,8 @@ class CommentAdmin(admin.ModelAdmin):
 class ReplyAdmin(admin.ModelAdmin):
     list_display=('content',)
 
-@admin.register(Tag)
+@admin.register(ProductTag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ('name','created_at',)
+    list_display=('name','slug')
+    prepopulated_fields = {'slug':('name',)}
+

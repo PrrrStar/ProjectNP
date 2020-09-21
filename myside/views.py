@@ -22,7 +22,8 @@ def get_product_queryset(query=None, category_id = None):
                     category=category_id
                 ).filter(
                 Q(name__icontains=q)|
-                Q(description__icontains=q)
+                Q(description__icontains=q)|
+                Q(brand__name=q)
             ).distinct()
             for product in products:
                 queryset.append(product)
@@ -30,11 +31,13 @@ def get_product_queryset(query=None, category_id = None):
         for q in queries:   
             products = Product.objects.filter(
                 Q(name__icontains=q)|
-                Q(description__icontains=q)
+                Q(description__icontains=q)|
+                Q(brand__name=q)
             ).distinct()
             for product in products:
                 queryset.append(product)
     return list(set(queryset))
+
 
 
 def index(request):
@@ -94,29 +97,33 @@ def product_in_category(request, category_slug=None):
     }
     return render(request, 'myside/list.html', context)
 
-def product_detail(request, id):
-    product = get_object_or_404(Product, id=id)
-    categories = Category.objects.all()
-    current_category = get_object_or_404(Category, slug=product.category)
-    query = ""
-
-    if request.GET:
-        query = request.GET['tag']
-        products = get_product_queryset(query, None)
-        title = query + "태그 검색 결과"
-        context = {
-            'title':title,
-            'products':products,
+def product_detail(request, slug):
+    product             = get_object_or_404(Product, slug=slug)
+    categories          = Category.objects.all()
+    current_category    = get_object_or_404(Category, slug=product.category)        
+    context = {
+            'product':product,
             'categories':categories,
-            'query':query,
+            'current_category':current_category,
         }
-        return render(request, 'myside/list.html', context)
+    return render(request, 'myside/detail.html', context)
 
-    return render(request, 'myside/detail.html', {'product': product, 'categories': categories, 'current_category': current_category, 'query':query,})
+def product_tagged(request, slug):
+    print("a)")
+    tag                 = get_object_or_404(ProductTag, slug=slug)
+    products            = Product.objects.filter(tags = tag)
+    categories          = Category.objects.all()
+    title               = tag.name + " 검색 결과"
+    context = {
+        'title':title,
+        'tag':tag,
+        'products':products,
+        'categories':categories,
+    }
+    return render(request, 'myside/list.html',context)
 
-
-def comment_create(request, id):
-    product = get_object_or_404(Product, id=id)
+def comment_create(request, slug):
+    product = get_object_or_404(Product, slug=slug)
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
         if comment_form.is_valid():
@@ -137,6 +144,7 @@ def comment_create(request, id):
         'comment_form': comment_from,
     }
     return render(request, 'myside/detail.html', context)
+
 
 
 

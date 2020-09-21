@@ -7,9 +7,10 @@ from django.conf import settings
 urlpatterns = [
     path('', index, name='index'),
     path('category/<category_slug>/', product_in_category, name='product_in_category'),
-    path('products/<int:id>/', product_detail, name='product_detail'),
-    path('products/<int:id>/comment/', comment_create, name='comment_create'),
-    path('products/<int:id>/like',ProductLikeToggle.as_view(), name='product_like-toggle'),
+    path('tag/<slug>/', product_tagged, name='product_tagged'),
+    path('products/<slug>/', product_detail, name='product_detail'),
+    path('products/<slug>/comment/', comment_create, name='comment_create'),
+    path('products/<slug>/like',ProductLikeToggle.as_view(), name='product_like-toggle'),
     path('mymap/', mymap, name='mymap'),
 
     path('api/', ApiRoot.as_view(), name=ApiRoot.name),

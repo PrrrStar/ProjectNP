@@ -32,6 +32,10 @@
     height: 450px;  
     border: 1px solid black;
 }
+.brand__info__img {
+    width: 35px;
+    height: 35px;  
+}
 
 .detail__info__right-content {
     width: 650px;

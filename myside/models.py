@@ -2,8 +2,25 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from mptt.models import MPTTModel, TreeForeignKey
-
+from taggit.managers import TaggableManager
+from taggit.models import TagBase, TaggedItemBase
 # Create your models here.
+
+class ProductTag(TagBase):
+    slug    = models.SlugField(verbose_name='slug', max_length=20, allow_unicode=True)
+    class Meta:
+        index_together = [['name','slug']]
+        unique_together = (('name', 'slug',))
+        verbose_name='tags'
+        verbose_name_plural='tags'
+
+
+class TaggedProduct(TaggedItemBase):
+    content_object  = models.ForeignKey('Product', on_delete=models.CASCADE)
+    tag             = models.ForeignKey('ProductTag', related_name='taggedProduct',on_delete=models.CASCADE)
+    class Meta:
+        verbose_name        = 'tagged product'
+        verbose_name_plural = 'tagged products'
 
 class Category(MPTTModel):
 
@@ -52,23 +69,10 @@ class Brand(models.Model):
     def __str__(self):
         return self.name
 
-class Tag(models.Model):
-    name        = models.CharField(max_length=32, verbose_name='태그명')
-    created_at  = models.DateTimeField(auto_now_add=True, verbose_name="등록시간")
-
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        db_table            = "product_tag"
-        verbose_name        = "Tag"
-        verbose_name_plural = "Tags"
-
-
 class Product(models.Model):
     name                = models.CharField(max_length = 20, db_index=True, verbose_name='제품명')
     category            = TreeForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name = 'products')
-    brand               = models.ManyToManyField(Brand)
+    brand               = models.ManyToManyField(Brand, related_name='product_brand')
     img                 = models.ImageField(upload_to="products/%Y/%m/%d", blank=True, null=True)
     description         = models.TextField(verbose_name='설명', blank=True)
     price               = models.DecimalField(verbose_name='가격', max_digits = 10, decimal_places=0)
@@ -76,7 +80,7 @@ class Product(models.Model):
     like                = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='product_likes')
     available_display   = models.BooleanField('판매 가능?', default= True) 
     slug                = models.SlugField(max_length = 20, db_index=True, allow_unicode=True)
-    tag                 = models.ManyToManyField(Tag)
+    tags                = TaggableManager(verbose_name='tags', blank=True, through=TaggedProduct)
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
 
@@ -96,10 +100,10 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('product_detail', args=[self.id])
+        return reverse('product_detail', args=[self.slug])
 
     def get_like_url(self):
-        return reverse('product_like-toggle', kwargs={'id':self.id})
+        return reverse('product_like-toggle', kwargs={'slug':self.slug})
 
     def get_api_like_url(self):
         return reverse('product_like-api-toggle', kwargs={'pk':self.pk})
