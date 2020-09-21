@@ -23,6 +23,17 @@ def user_profile(request, id=None):
     }
     return render(request, 'accounts/profile.html',context)
 
+def edit_user_profile(request, id=None):
+    user = request.user
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    context = {
+        'user':user,
+        'products':products,
+        'categories':categories,
+    }
+    return render(request, 'accounts/edit_profile.html.html',context)
+
 # 사용자 로그인
 def user_login(request):
     if request.is_ajax():

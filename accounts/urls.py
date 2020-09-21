@@ -7,5 +7,6 @@ urlpatterns = [
     path('user_signup/', user_signup, name='user_signup'),
     path('user_login/', user_login, name='user_login'), 
     path('user_logout/', csrf_exempt(user_logout), name='user_logout'), 
-    path('user_profile/<int:id>', user_profile, name= 'user_profile'),
+    path('profile/<int:id>/', user_profile, name= 'user_profile'),
+    path('profile/<int:id>/', edit_user_profile, name = 'edit_user_profile'),
 ]

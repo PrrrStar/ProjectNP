@@ -22,12 +22,13 @@ class User(AbstractUser):
         (GENDER_FEMALE,"Female"),
         (GENDER_OTHER,"Other"),
     )
-    username    = None
-    email       = models.EmailField(max_length=255, unique=True)
-    nickname    = models.CharField(max_length=10, null=True, unique=True)
-    profile     = models.ImageField(upload_to='profile', blank=True, null=True)
-    gender      = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True, null=True)
-    birth       = models.DateField(blank=True, null=True)
+    username        = None
+    email           = models.EmailField(max_length=255, unique=True)
+    nickname        = models.CharField(max_length=10, null=True, unique=True)
+    profile         = models.ImageField(upload_to='profile', blank=True, null=True)
+    introduction    = models.TextField(max_length=100, blank=True, null=True)
+    gender          = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True, null=True)
+    birth           = models.DateField(blank=True, null=True)
 
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ['nickname',]

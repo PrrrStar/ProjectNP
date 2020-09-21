@@ -36,21 +36,10 @@
         <li>등록된 생일이 없어요</li>
         {% endif %}
 
-        <a href="edit_profile.html">프로필 편집</a>
+
     </div>
     <hr>
-    <div>
-        <div>내찜 목록
-        {% for user_like in user.product_likes.all %}
-            <a href="{{user_like.get_absolute_url }}">
-                <li>
-                    <p>{{ user_like.name }}</p>
-                    <img src="{{ user_like.img.url }}" alt="">
-                </li>
-            </a>
-        </div>
-        {% endfor %}
-    </div>
+
 </div>
 
 {% endblock %}
