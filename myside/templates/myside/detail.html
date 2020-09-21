@@ -55,7 +55,7 @@
               <span>{{product.description}}</span>
             </div>
 
-            <!-- 이 부분에 해시태그들이 들어갑니다. -->
+            <!-- 상품 해시태그 -->
             <div class="detail__info__tag-box">
               <div class="detail__info__tag">
                 <span>연관태그
@@ -68,7 +68,6 @@
               </div>
               <div class="detail__info__tag--heart">
                 <i class="fas fa-heart"></i>
-                <!-- 임의로 12개의 하트로 설정했습니다. 변경할 예정입니다. -->
                 <span id='like-count'>{{ product.like.count }}</span>
               </div>
             </div>
@@ -124,8 +123,6 @@
 {% block script %} 
 <script src="{% static 'js/commentAlert.js' %}"></script>
 
-
-<!-- slick.js -->
 <script type="text/javascript">
   $(".products__slider").slick({
     slidesToShow: 4,
@@ -133,3 +130,4 @@
   });
 </script>
 {% endblock %}
+
