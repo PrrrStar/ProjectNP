@@ -15,7 +15,10 @@
         {% for post in posts %}
         <tr onclick="location.href='/community/{{ post.id }}/'">
           <th>{{ post.id }}</th>
-          <td>{{ post.title }}</td>
+          <td>
+            <span>{{ post.title }}</span>
+            <span>({{post.comment.count}})</span>
+          </td>
           <td>{{ post.hits }}</td>
           <td>{{ post.recommend_count }}</td>
           <td>{{ post.created_at }}</td>

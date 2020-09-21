@@ -17,3 +17,14 @@ class PostForm(forms.Form):
     class Meta:
         model = Post
         fields = ['title','content','author',]
+
+class CommentForm(forms.Form):
+    content = forms.CharField(
+        error_messages={
+            'required': '내용을 입력해주세요.'
+        },
+        widget=forms.Textarea, label="내용")
+
+    class Meta:
+        model = Comment
+        fields = ['content','author',]

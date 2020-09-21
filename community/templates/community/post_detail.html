@@ -12,9 +12,20 @@
       <label for="hits">조회수 : {{ post.hits }} </label>
       <label for="recommend"> 추천 : {{ post.recommend_count }}</label>
     </div>
-
-    <a href="{% url 'recommend' post.id %}">추천</a>
+    <a href="{% url 'post_recommend' post.pk %}">추천</a>
     <button class="btn btn-primary" onclick="location.href='/community/list/'">돌아가기</button>
   </div>
 </div>
+<form action="{% url 'comment_write' post.pk %}" method="POST">
+  {% csrf_token %}
+  <input type="text" name="content" placeholder="write your comment">
+  <input type="submit" value="Write" />
+</form>
+{% for comment in post.comment.all %}
+<div class="comment">
+  <span>{{ comment.author.nickname }} : </span>
+  <span>{{ comment.content }}</span>
+  <div class="date">{{ comment.created_at }}</div>
+</div>
+{% endfor %}
 {% endblock %}
