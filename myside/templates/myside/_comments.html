@@ -1,0 +1,30 @@
+<!-- 달린 댓글들만 있는 html -->
+{% load static %}
+
+{% for comment in product.comments.all %}
+<div class="comments__comment">
+  <div class="comments__comment--content">
+    <!-- comment__propfile에 프사가 들어갈거에요 -->
+    {% if user.profile %}
+    <img class="comment__profile" src="{{user.profile.url}}" />
+    {% else %}
+    <img class="comment__profile" src="{% static 'logo/logo-02.jpg' %}" />
+    {% endif %}
+    <div class="comment__comment-box">
+      <span class="comment__user">
+        {{ comment.author.nickname }}
+        <button>
+          <img src="{% static 'logo/thumb_up_alt-24px.png' %}" />
+        </button>
+      </span>
+      <span class="comment__comment">{{ comment.content }}</span>
+    </div>
+  </div>
+  {% if comment.img %}
+  <img src="{{ comment.img.url }}" alt="comment IMG" />
+  {% endif %}
+  <div class="fake-image" enlarge="f"></div>
+</div>
+{% endfor %}
+<div class="comment__main__show-more">더보기</div>
+<div class="image-layer"></div>
