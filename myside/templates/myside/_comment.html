@@ -10,34 +10,34 @@
     <span>{{product.comments.count }}개의 댓글이 있습니다.</span>
   </div>
   <div class="comment__main">
-
     <!-- 회원만 댓글달 수 있는 창이 보입니다. -->
     {% if request.user.is_authenticated %}
     <div class="comment__main__mycomment">
       <form action="{% url 'comment_create' product.slug %}" method="POST">
-        {% csrf_token %}
-        {{ comment_form }}
-        <input autocomplete="off" type="text" name="content" placeholder="댓글 작성" maxlength="100"
-          oninput="commentAlert(this);" />
+        {% csrf_token %} {{ comment_form }}
+        <input autocomplete="off" type="text" name="content" placeholder="댓글 작성" maxlength="100" oninput="commentAlert(this);" />
         <button type="submit" class="commentButtonJs">write</button>
       </form>
     </div>
     <!-- 달린 댓글들 표시 -->
     <div class="comment__main__comments">
-    {% endif %}
-
-      {% for comment in product.comments.all %}
+      {% endif %} {% for comment in product.comments.all %}
       <div class="comments__comment">
         <div class="comments__comment--content">
           <!-- comment__propfile에 프사가 들어갈거에요 -->
           <div class="comment__profile"></div>
           <div class="comment__comment-box">
-            <span class="comment__user">{{ comment.author.nickname }}</span>
+            <span class="comment__user">
+              {{ comment.author.nickname }}
+              <button>
+                <img src="{% static 'logo/thumb_up_alt-24px.png' %}" />
+              </button>
+            </span>
             <span class="comment__comment">{{ comment.content }}</span>
           </div>
         </div>
         {% if comment.img %}
-        <img src='{{ comment.img.url }}' alt="comment IMG" />
+        <img src="{{ comment.img.url }}" alt="comment IMG" />
         {% endif %}
         <div class="fake-image"></div>
       </div>
