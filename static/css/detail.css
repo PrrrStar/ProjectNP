@@ -167,8 +167,12 @@
 }
 
 .detail__info__jjim {
-    background-color: #fe4737;
+    background-color: #bbbbbb;
     margin-left: 10px;
+}
+
+.detail__info__jjim img {
+    margin-bottom: -3px;
 }
 
 .detail__info__stock span, .detail__info__jjim span {
