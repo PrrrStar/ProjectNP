@@ -59,7 +59,8 @@
             <!-- 상품 해시태그 -->
             <div class="detail__info__tag-box">
               <div class="detail__info__tag">
-                <span>연관태그
+                <span>
+                  <span>연관태그</span>
                   <form method="get">
                     {% for tag in product.tags.all %}
                     <a href="{% url 'product_tagged' slug=tag.slug %}">#{{tag.name}}</a>

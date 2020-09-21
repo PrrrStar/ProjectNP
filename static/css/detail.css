@@ -117,6 +117,18 @@
     letter-spacing: 2px;
 }
 
+.detail__info__tag span {
+    display: flex;
+}
+
+.detail__info__tag span form {
+    margin-left: 20px;
+}
+
+.detail__info__tag span form a {
+    color: #00b3b0;
+}
+
 .detail__info__tag--heart {
     font-size: 20px;
     line-height: 1.45;
