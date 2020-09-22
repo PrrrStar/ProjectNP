@@ -183,3 +183,7 @@
     color: #ffffff;
     padding-right: 5px;
 }
+
+.detail__related-container {
+    margin: 50px;
+}

@@ -6,6 +6,7 @@
 {% block style %} 
   <link rel="stylesheet" href="{% static 'css/detail.css' %}" />
   <link rel="stylesheet" href="{% static 'css/comment.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/products.css' %}"/>
 {% endblock %}
 
 {% block title %}상세페이지{% endblock %}
@@ -97,24 +98,30 @@
     {% include 'myside/_comment.html' %}
 
 
-
-    <span>연관 상품</span>
-    <div class="products__slider">
-      {% for product in product_related %}
-      <a href="{{product.get_absolute_url}}">
-        <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
-        <div class="slide__content">
-          <div class="slide__content--header">
-            <span class="slider__content--name">{{product.name}}</span>
-            <div>
-              <img class="slider__content--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
-              <span>{{ product.like.count }}</span>
-            </div>
-          </div>
-          <div class="slider__content--description"><p>{{product.description}}</p></div>
+    <div class="detail__related-container">
+      <div class="comment__header">
+        <div class="comment__header--title">
+          <img src="{% static 'logo/point.png' %}" class="point" />
+          연관상품
         </div>
-      </a>
-      {% endfor %}
+      </div>
+      <div class="products__slider">
+        {% for product in product_related %}
+        <a href="{{product.get_absolute_url}}">
+          <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
+          <div class="slide__content">
+            <div class="slide__content--header">
+              <span class="slider__content--name">{{product.name}}</span>
+              <div>
+                <img class="slider__content--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
+                <span>{{ product.like.count }}</span>
+              </div>
+            </div>
+            <div class="slider__content--description"><p>{{product.description}}</p></div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
     </div>
 
   </main>
@@ -125,12 +132,6 @@
 <script src="{% static 'js/commentAlert.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
-<script type="text/javascript">
-  $(".products__slider").slick({
-    slidesToShow: 4,
-    slidesToScroll: 4,
-  });
-</script>
+<script src="{% static 'js/slider.js' %}"></script>
 {% endblock %}
 
