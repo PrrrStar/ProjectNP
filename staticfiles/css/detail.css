@@ -1,0 +1,189 @@
+/* 상세페이지 css 입니다. */
+.detail {
+    width: 1320px;
+    padding: 58px 60px 0px 60px;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+.detail__info {
+    display: flex;
+}
+
+.detail__info__left-content {
+    width: 550px;
+    height: 500px;
+    margin: 0px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+.detail__info__title {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: 2px;
+    color: #000000;
+}
+
+.detail__info__title span {
+    font-size: 15px;
+}
+
+.detail__info__img {
+    width: 450px;
+    height: 450px;  
+    border: 1px solid black;
+}
+.brand__info__img {
+    width: 35px;
+    height: 35px;  
+}
+
+.detail__info__right-content {
+    width: 650px;
+    height: 500px;
+    margin: 0px 49px 0px 31px;
+}
+
+.detail__info__header {
+    padding-top: 36px;
+    margin-bottom: 12px;
+}
+
+/* Jua 글꼴을 사용하는 박스들 모음 */
+.detail__info__name {
+    font-family: "Jua", sans-serif;
+    position: relative;
+}
+
+.detail__info__name {
+    font-size: 28px;
+    line-height: 1.46;
+    letter-spacing: 2.8px;
+}
+
+.detail__info__price {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: 2px;
+    padding: 15px 0px;
+    border-top: 1px solid red;
+    border-bottom: 1px solid rgb(105, 93, 93);
+    display: flex;
+    align-items: center;
+}
+
+.detail__info__description {
+    height: 250px;
+    border-bottom: 1px solid black;
+    padding: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.detail__info__description .description__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.description__content span:first-child {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: 2px;
+}
+
+.description__content span:nth-child(2) {
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 1.6px;
+    padding-top: 15px;
+}
+
+.detail__info__tag-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail__info__tag {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: 2px;
+}
+
+.detail__info__tag span {
+    display: flex;
+}
+
+.detail__info__tag span form {
+    margin-left: 20px;
+}
+
+.detail__info__tag span form a {
+    color: #00b3b0;
+}
+
+.detail__info__tag--heart {
+    font-size: 20px;
+    line-height: 1.45;
+    letter-spacing: -0.24px;
+}
+
+.detail__info__tag--heart i {
+    color: #ff0808;
+}
+
+.detail__info__header,
+.detail__info__price,
+.detail__info__description {
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+.detail__info__button {
+    height: 96px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.detail__info__stock, .detail__info__jjim {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 152px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+.detail__info__stock {
+    background-color: #00b3b0;
+}
+
+.detail__info__jjim {
+    background-color: #bbbbbb;
+    margin-left: 10px;
+}
+
+.detail__info__jjim img {
+    margin-bottom: -3px;
+}
+
+.detail__info__stock span, .detail__info__jjim span {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: 2px;
+    color: #ffffff;
+    padding-right: 5px;
+}
+
+.detail__related-container {
+    margin: 50px;
+}

@@ -1,0 +1,187 @@
+/* products css */
+
+.products__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 60px 40px 40px;
+}
+
+.products__header button {
+  background-color: white;
+  cursor: pointer;
+}
+
+.products__header--title {
+  font-family: "Jua", sans-serif;
+  line-height: 1.46;
+  letter-spacing: 2.8px;
+  font-size: 28px;
+  position: relative;
+}
+
+.products__header--search {
+  width: 320px;
+  height: 50px;
+  border-radius: 25px;
+  border: solid 1px #cccccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.products__header--search input {
+  border: none;
+  font-size: 16px;
+}
+
+.products__header--search::placeholder {
+  color: #999999;
+}
+
+.products__header--search i {
+  font-size: 24px;
+  color: #fe4737;
+}
+
+.products__main {
+  width: 1320px;
+  padding: 0px 60px;
+}
+
+.products__slider {
+  position: relative;
+}
+
+.products__best-products {
+  margin-bottom: 100px;
+}
+
+.products__all-products {
+  display: flex;
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+
+.slick-track {
+  padding: 10px 0px;
+}
+
+/* slick button css */
+.products__slider button {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  outline: 0;
+  background-color: rgba(0,0,0,0);
+}
+
+.products__slider button::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 40px;
+  color: #777777;
+}
+
+.products__slider button.slick-prev {
+  left: -40px;
+  font-size: 0;
+  color: transparent;
+}
+
+.products__slider button.slick-next {
+  right: -40px;
+  font-size: 0;
+  color: transparent;
+}
+
+.products__slider button.slick-prev::before {
+  content: "\f053";
+}
+
+.products__slider button.slick-next::before {
+  content: "\f054";
+}
+
+.products__slider a {
+  height: 340px;
+  margin: 0px 25px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  -moz-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  overflow: hidden;
+}
+
+.slide__img {
+  width: 250px;
+  height: 250px;
+}
+
+.slide__content {
+  padding: 10px 20px;
+}
+
+.slide__content--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.slide__content--header div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fe4737;
+}
+
+.slider__content--name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333333;
+}
+
+.slider__content--description {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #777777;
+}
+
+.slider__content--description p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+  height: 22px;
+}
+
+.products__banner {
+  width: 1200px;
+  height: 200px;
+  margin-top: 50px;
+  margin-bottom: 108px;
+}
+
+
+/* 여기서부터는 slug를 통해 보여지는 페이지의 products css 입니다. */
+.products__box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.products__box a {
+  height: 340px;
+  width: 250px;
+  margin: 25px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  -moz-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+  overflow: hidden;
+}
