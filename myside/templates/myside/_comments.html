@@ -1,6 +1,7 @@
 <!-- 달린 댓글들만 있는 html -->
 {% load static %}
 
+
 {% for comment in product.comments.all %}
 <div class="comments__comment">
   <div class="comments__comment--content">
@@ -11,6 +12,7 @@
     <img class="comment__profile" src="{% static 'logo/person-24px.png' %}" />
     {% endif %}
     <div class="comment__comment-box">
+
       <span class="comment__user">
         {{ comment.author.nickname }}
         <button>
@@ -22,11 +24,23 @@
     <div>
       <span>별점 : {{comment.stars}}</span>
     </div>
+    
+
   </div>
   {% if comment.img %}
   <img src="{{ comment.img.url }}" alt="comment IMG" />
   {% endif %}
   <div class="fake-image" enlarge="f"></div>
+
+<!-- 로그인 유저 중 내가 쓴 댓글만 수정 삭제 보이게 설정-->
+  {% if user.is_authenticated %}
+    {% for user_comment in user.comments.all %}
+      {% if user_comment.id == comment.id %}
+      <button type='submit'>수정</button>
+      <button type='submit'>삭제</button>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 </div>
 {% endfor %}
 <div class="comment__main__show-more">더보기</div>
