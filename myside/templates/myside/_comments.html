@@ -8,7 +8,7 @@
     {% if user.profile %}
     <img class="comment__profile" src="{{user.profile.url}}" />
     {% else %}
-    <img class="comment__profile" src="{% static 'logo/logo-02.jpg' %}" />
+    <img class="comment__profile" src="{% static 'logo/person-24px.png' %}" />
     {% endif %}
     <div class="comment__comment-box">
       <span class="comment__user">
@@ -18,6 +18,9 @@
         </button>
       </span>
       <span class="comment__comment">{{ comment.content }}</span>
+    </div>
+    <div>
+      <span>별점 : {{comment.stars}}</span>
     </div>
   </div>
   {% if comment.img %}

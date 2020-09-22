@@ -1,11 +1,4 @@
-from .serializers import ProductCategorySerializer
-from .serializers import ProductSerializer
-from .serializers import CommentSerializer
-from .serializers import ReplySerializer
-from rest_framework import generics
-from rest_framework.reverse import reverse
-from rest_framework.response import Response
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
 
@@ -101,12 +94,27 @@ def product_detail(request, slug):
     product             = get_object_or_404(Product, slug=slug)
     product_related     = product.tags.similar_objects()
     categories          = Category.objects.all()
-    current_category    = get_object_or_404(Category, slug=product.category)        
+    current_category    = get_object_or_404(Category, slug=product.category)      
+    
+    comment_form = CommentForm(request.POST or None)
+    if comment_form.is_valid():
+        author= request.user
+        if author.is_authenticated:
+
+            comment = comment_form.save(commit=False)
+            comment.product = product
+            comment.author = author
+            comment.save()
+            return redirect(product)
+    else:
+        comment_form = CommentForm()
+
     context = {
             'product':product,
             'categories':categories,
             'current_category':current_category,
             'product_related':product_related,
+            'comment_form' :comment_form,
         }
     return render(request, 'myside/detail.html', context)
 
@@ -122,31 +130,6 @@ def product_tagged(request, slug):
         'categories':categories,
     }
     return render(request, 'myside/list.html',context)
-
-def comment_create(request, slug):
-    product = get_object_or_404(Product, slug=slug)
-    if request.method == 'POST':
-        comment_form = CommentForm(request.POST or None)
-        if comment_form.is_valid():
-            author  = request.user
-            if author.is_authenticated:
-                content = request.POST.get('content')
-                comment = Comment.objects.create(
-                    product=product,
-                    author =author, 
-                    content=content
-                    )
-                comment.save()
-            return HttpResponseRedirect(product.get_absolute_url())
-    else:
-        comment_from = CommentForm()
-
-    context = {
-        'comment_form': comment_from,
-    }
-    return render(request, 'myside/detail.html', context)
-
-
 
 
 def mymap(request):
