@@ -96,7 +96,7 @@ def product_detail(request, slug):
     categories          = Category.objects.all()
     current_category    = get_object_or_404(Category, slug=product.category)      
     
-    comment_form = CommentForm(request.POST or None)
+    comment_form = CommentForm(request.POST or None, request.FILES)
     if comment_form.is_valid():
         author= request.user
         if author.is_authenticated:
@@ -104,6 +104,7 @@ def product_detail(request, slug):
             comment = comment_form.save(commit=False)
             comment.product = product
             comment.author = author
+            comment.img     = request.FILES.get("img")
             comment.stars = request.POST.get("star-input")
             comment.save()
             return redirect(product)
