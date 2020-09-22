@@ -3,29 +3,25 @@
   <div class="col-12">
     <div class="form-group">
 
-      <label for="title">제목</label>
-      <input type="text" class="form-control" id="title" value="{{ post.title }}" readonly />
-      <label for="contents">내용</label>
-      <textarea class="form-control" readonly>{{ post.content }}</textarea>
+      <div>제목 : {{ post.title }}</div>
+      <div>{{ post.content | safe }}</div>
+      <div>조회수 : {{ post.hits }}</div>
+      <div>추천 : {{ post.recommend_count }}</div>
+      <div>작성일 : {{ post.created_at }}</div>
+      <a href="{% url 'post_recommend' post.pk %}">추천</a>
+      <button class="btn btn-primary" onclick="location.href='/community/list/'">돌아가기</button>
     </div>
-    <div>
-      <label for="hits">조회수 : {{ post.hits }} </label>
-      <label for="recommend"> 추천 : {{ post.recommend_count }}</label>
-    </div>
-    <a href="{% url 'post_recommend' post.pk %}">추천</a>
-    <button class="btn btn-primary" onclick="location.href='/community/list/'">돌아가기</button>
   </div>
-</div>
-<form action="{% url 'comment_write' post.pk %}" method="POST">
-  {% csrf_token %}
-  <input type="text" name="content" placeholder="write your comment">
-  <input type="submit" value="Write" />
-</form>
-{% for comment in post.comment.all %}
-<div class="comment">
-  <span>{{ comment.author.nickname }} : </span>
-  <span>{{ comment.content }}</span>
-  <div class="date">{{ comment.created_at }}</div>
-</div>
-{% endfor %}
-{% endblock %}
+  <form action="{% url 'comment_write' post.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="content" placeholder="write your comment">
+    <input type="submit" value="Write" />
+  </form>
+  {% for comment in post.comment.all %}
+  <div class="comment">
+    <span>{{ comment.author.nickname }} : </span>
+    <span>{{ comment.content }}</span>
+    <div class="date">{{ comment.created_at }}</div>
+  </div>
+  {% endfor %}
+  {% endblock %}
