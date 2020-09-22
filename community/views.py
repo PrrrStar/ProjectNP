@@ -45,7 +45,7 @@ def post_write(request):
 def post_recommend(request, pk):
     post = get_object_or_404(Post, pk=pk)
     user = request.user
-    recommend=Recommend.objects.get(post=post.id)
+    recommend=Recommend.objects.get(post=post)
     if user in recommend.user.all():
         recommend.user.remove(user)
         post.minus_recommend_count
@@ -60,10 +60,8 @@ def comment_write(request, pk):
     if not author.is_authenticated:
         return redirect('/')    
     elif request.method == 'POST':
-        print(1)
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            print(1)
             comment = Comment()
             comment.content = comment_form.cleaned_data['content']
             comment.author = author
