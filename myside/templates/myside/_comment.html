@@ -12,11 +12,21 @@
     <!-- 회원만 댓글달 수 있는 창이 보입니다. -->
     {% if request.user.is_authenticated %}
     <div class="comment__main__mycomment">
-      <form action="{% url 'comment_create' product.slug %}" method="POST">
-        {% csrf_token %} {{ comment_form }}
-        <input autocomplete="off" type="text" name="content" placeholder="댓글 작성" maxlength="100" oninput="commentAlert(this);" />
-        <button type="submit" class="commentButtonJs">write</button>
-      </form>
+      {% if user.profile %}
+      <img class="comment__profile" src="{{user.profile.url}}" />
+      {% else %}
+      <img class="comment__profile" src="{% static 'logo/logo-02.jpg' %}" />
+      {% endif %}
+      <div class="comment__comment-box">
+        <span class="comment__user">
+          {{ user.nickname }} 님의 후기
+        </span>
+        <form action="{% url 'comment_create' product.slug %}" method="POST">
+          {% csrf_token %} {{ comment_form }}
+          <input class="comment__mycomment--input" autocomplete="off" type="text" name="content" placeholder="후기를 써주세요." maxlength="100" oninput="commentAlert(this);" />
+          <button type="submit" class="commentButtonJs">write</button>
+        </form>
+      </div>
     </div>
     {% endif %}
     <!-- 달린 댓글들 표시 -->

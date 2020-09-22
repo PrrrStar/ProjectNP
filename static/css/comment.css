@@ -18,6 +18,22 @@
   margin-bottom: 8px;
 }
 
+.comment__main__mycomment {
+  margin: 0px 50px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
+}
+
+.comment__mycomment--input {
+  border: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid black;
+  width: 850px;
+}
+
 .comment__main__comments {
   padding: 0px 50px;
 }
