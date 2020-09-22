@@ -19,13 +19,33 @@
       <img class="comment__profile" src="{% static 'logo/logo-02.jpg' %}" />
       {% endif %}
       <div class="comment__comment-box">
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} 
         <span class="comment__user">
           {{ user.nickname }} 님의 후기
         </span>
-        <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %} 
-          {{comment_form.as_p}}
-          <button type="submit">Upload</button>
+        <span class="star-input">
+          <span class="input">
+            <input type="radio" name="star-input" id="p1" value="0.5"><label for="p1">0.5</label>
+            <input type="radio" name="star-input" id="p2" value="1"><label for="p2">1</label>
+            <input type="radio" name="star-input" id="p3" value="1.5"><label for="p3">1.5</label>
+            <input type="radio" name="star-input" id="p4" value="2"><label for="p4">2</label>
+            <input type="radio" name="star-input" id="p5" value="2.5"><label for="p5">2.5</label>
+            <input type="radio" name="star-input" id="p6" value="3"><label for="p6">3</label>
+            <input type="radio" name="star-input" id="p7" value="3.5"><label for="p7">3.5</label>
+            <input type="radio" name="star-input" id="p8" value="4"><label for="p8">4</label>
+            <input type="radio" name="star-input" id="p9" value="4.5"><label for="p9">4.5</label>
+            <input type="radio" name="star-input" id="p10" value="5"><label for="p10">5</label>
+          </span>
+          <output for="star-input"><b>0</b>점</output>
+        </span>
+        <span>
+          {{comment_form.content}}
+        </span>
+        <span>
+          {{comment_form.img}}
+        </span>
+        <button type="submit">Upload</button>
         </form>
       </div>
 

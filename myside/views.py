@@ -104,6 +104,7 @@ def product_detail(request, slug):
             comment = comment_form.save(commit=False)
             comment.product = product
             comment.author = author
+            comment.stars = request.POST.get("star-input")
             comment.save()
             return redirect(product)
     else:
