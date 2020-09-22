@@ -1,0 +1,14 @@
+{% load static %}
+<div class="jjim">
+    <div class="jjim__box">
+        {% for user_like in user.product_likes.all %}
+            <a href="{{user_like.get_absolute_url }}">
+                <li>
+                    <p>{{ user_like.name }}</p>
+                    <img src="{{ user_like.img.url }}" alt="">
+                </li>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>

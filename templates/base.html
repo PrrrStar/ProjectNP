@@ -85,16 +85,16 @@
 
     <!-- user profile-->
     {% block user-profile %}{% endblock %}
+    
+    <!-- 찜 기능 -->
+    {% block jjim %}{% endblock %}
 
     <!-- login, signup modal--> 
     {% include 'accounts/login.html' %}
     {% include 'accounts/signup.html' %}
 
 
-    <!-- 찜 기능 -->
-    <div class="jjim">
-      <div class="jjim__box"></div>
-    </div>
+
   </div>
   <footer>
     <a href="#header" class="base__top-btn"><img src="{% static 'logo/top.png' %}" /></a>
