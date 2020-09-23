@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-a, a:hover {
+a,
+a:hover {
   text-decoration: none;
   color: black;
 }
@@ -14,12 +15,13 @@ li {
   list-style: none;
 }
 
-*:focus { 
-  outline: none; 
+*:focus {
+  outline: none;
   border: none;
 }
 
-button, button:focus {
+button,
+button:focus {
   border: 0;
   outline: 0;
 }

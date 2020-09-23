@@ -14,8 +14,8 @@
   
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}?ver=2" />
-  <link rel="stylesheet" href="{% static 'css/modal.css' %}?ver=1" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/modal.css' %}" />
 
 
   {% block style %} {% endblock %}
@@ -43,8 +43,14 @@
     <!-- 로그인 로그아웃 -->
     <nav class="header__auth">
       {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
-        <a href="{% url 'user_logout' %}" class="user-logout">Logout</a>
-        <a href="{{ user.get_user_profile_url }}" class="user-profile">내정보</a>
+        <a href="{% url 'user_logout' %}" class="user-logout base__auth-btn">
+          <img src="{% static 'logo/person-24px.png' %}" />
+          <span>Logout</span>
+        </a>
+        <a href="{{ user.get_user_profile_url }}" class="user-profile base__auth-btn">
+          <img src="{% static 'logo/person-24px.png' %}" />
+          <span>내정보</span>
+        </a>
         
       {% else %}
         <button data-toggle='modal' data-target="#modal-login" id="base__login-btn" class="base__auth-btn">
