@@ -12,53 +12,60 @@
     <!-- 회원만 댓글달 수 있는 창이 보입니다. -->
     {% if request.user.is_authenticated %}
     <div class="comment__main__mycomment">
-
+      <!-- 프로필 사진이 있으면 있는대로, 없으면 없는대로 출력해줍니다. -->
       {% if user.profile %}
       <img class="comment__profile" src="{{user.profile.url}}" />
       {% else %}
       <img class="comment__profile" src="{% static 'logo/logo-02.jpg' %}" />
       {% endif %}
-      <div class="comment__comment-box">
-        <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %} 
-        <span class="comment__user">
-          {{ user.nickname }} 님의 후기
-        </span>
-        <span class="star-input">
-          <span class="input">
-            <input type="radio" name="star-input" id="p1" value="0.5"><label for="p1">0.5</label>
-            <input type="radio" name="star-input" id="p2" value="1"><label for="p2">1</label>
-            <input type="radio" name="star-input" id="p3" value="1.5"><label for="p3">1.5</label>
-            <input type="radio" name="star-input" id="p4" value="2"><label for="p4">2</label>
-            <input type="radio" name="star-input" id="p5" value="2.5"><label for="p5">2.5</label>
-            <input type="radio" name="star-input" id="p6" value="3"><label for="p6">3</label>
-            <input type="radio" name="star-input" id="p7" value="3.5"><label for="p7">3.5</label>
-            <input type="radio" name="star-input" id="p8" value="4"><label for="p8">4</label>
-            <input type="radio" name="star-input" id="p9" value="4.5"><label for="p9">4.5</label>
-            <input type="radio" name="star-input" id="p10" value="5"><label for="p10">5</label>
-          </span>
-          <output for="star-input"><b>0</b>점</output>
-        </span>
-        <span>
-          {{comment_form.content}}
-        </span>
-        <span>
-          {{comment_form.img}}
-        </span>
-        <button type="submit">Upload</button>
-        </form>
+      <!-- 댓글 작성하기 버튼입니다. -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">댓글 작성하기</button>
+      <!-- 버튼을 누르면 댓글을 작성하는 modal이 나타납니다. -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <span class="comment__user"> {{ user.nickname }} 님의 후기 </span>
+                <span class="star-input">
+                  <span class="input">
+                    <input type="radio" name="star-input" id="p1" value="0.5" /><label for="p1">0.5</label> <input type="radio" name="star-input" id="p2" value="1" /><label for="p2">1</label>
+                    <input type="radio" name="star-input" id="p3" value="1.5" /><label for="p3">1.5</label> <input type="radio" name="star-input" id="p4" value="2" /><label for="p4">2</label>
+                    <input type="radio" name="star-input" id="p5" value="2.5" /><label for="p5">2.5</label> <input type="radio" name="star-input" id="p6" value="3" /><label for="p6">3</label>
+                    <input type="radio" name="star-input" id="p7" value="3.5" /><label for="p7">3.5</label> <input type="radio" name="star-input" id="p8" value="4" /><label for="p8">4</label>
+                    <input type="radio" name="star-input" id="p9" value="4.5" /><label for="p9">4.5</label> <input type="radio" name="star-input" id="p10" value="5" /><label for="p10">5</label>
+                  </span>
+                  <output for="star-input"><b>0</b>점</output>
+                </span>
+                <span> {{comment_form.content}} </span>
+                <span> {{comment_form.img}} </span>
+                <button type="submit">Upload</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+          </div>
+        </div>
       </div>
-
+      <!-- 여기까지가 modal 입니다. -->
     </div>
     {% endif %}
     <!-- 달린 댓글들 표시 -->
-    <div class="comment__main__comments">
-      {% include 'myside/_comments.html' %}
-    </div>
+    <div class="comment__main__comments">{% include 'myside/_comments.html' %}</div>
   </div>
 </div>
 
 {% block script %}
 <script src="{% static 'js/moreComments.js' %}"></script>
 <script src="{% static 'js/enlargeImage.js' %}"></script>
+<script src="{% static 'js/commentWriteForm.js' %}"></script>
 {% endblock %}
