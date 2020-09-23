@@ -90,6 +90,9 @@ def product_in_category(request, category_slug=None):
     }
     return render(request, 'myside/list.html', context)
 
+
+from django.template.loader import render_to_string
+
 def product_detail(request, slug):
     product             = get_object_or_404(Product, slug=slug)
     product_related     = product.tags.similar_objects()
@@ -104,7 +107,7 @@ def product_detail(request, slug):
 
                 comment = comment_form.save(commit=False)
                 comment.product = product
-                comment.author = author
+                comment.author  = author
                 comment.img     = request.FILES.get("img")
                 comment.stars = request.POST.get("star-input")
                 comment.save()
@@ -119,8 +122,10 @@ def product_detail(request, slug):
             'product_related':product_related,
             'comment_form' :comment_form,
         }
+
     if request.is_ajax():
-        form = render(request, 'myside/detail.html',context)
+        print("request ajax")
+        form = render_to_string('myside/_comment.html',context, request=request)
         return JsonResponse({'form':form})
     return render(request, 'myside/detail.html', context)
 
@@ -185,7 +190,6 @@ class ProductLikeToggle(RedirectView):
             else:
                 product.like.add(user)
         return url_
-
 
 
 
@@ -255,6 +259,32 @@ class ProductLikeAPIToggle(APIView):
             else:
                 liked = True
                 product.like.add(user)
+            upudated = True
+        data = {
+            "updated": updated,
+            "liked":liked,
+        }
+        return Response(data)
+
+class CommentLikeAPIToggle(APIView):
+    authentication_classes  = [authentication.SessionAuthentication,]
+    permission_classes      = [permissions.IsAuthenticated,]
+    name = 'comment_like-api-toggle'
+    def get(self, request, pk=None, format=None):
+
+        comment = get_object_or_404(Comment, pk=pk)
+        product = get_object_or_404(Product, pk=comment.product.id)
+        url_ = product.get_absolute_url()
+        user = self.request.user
+        updated = False
+        liked = False
+        if user.is_authenticated:
+            if user in comment.like.all():
+                liked = False
+                comment.like.remove(user)
+            else:
+                liked = True
+                comment.like.add(user)
             upudated = True
         data = {
             "updated": updated,

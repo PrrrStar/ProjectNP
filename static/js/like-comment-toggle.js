@@ -1,8 +1,8 @@
-$("#btn-like").click(function (e) {
+$(".btn-like-comment").click(function (e) {
   e.preventDefault();
-  var likeCount = $("#like-count");
+  var likeCount = $(this).children('.like-comment-count');
   var likeURL = $(this).attr("data-url");
-  var likeBtn = $("#btn-like");
+
   $.ajax({
     url: likeURL,
     method: "GET",
@@ -13,11 +13,11 @@ $("#btn-like").click(function (e) {
       if (data.liked) {
         newLikes = parseInt(likeCount.text()) + 1;
         likeCount.text(newLikes);
-        likeBtn.css("backgroundColor", "#fe4737");
+
       } else {
         newLikes = parseInt(likeCount.text()) - 1;
         likeCount.text(newLikes);
-        likeBtn.css("backgroundColor", "#BBBBBB");
+
       }
     },
     error: function (error) {
@@ -26,4 +26,3 @@ $("#btn-like").click(function (e) {
     },
   });
 });
-

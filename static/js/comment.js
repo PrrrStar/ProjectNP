@@ -1,22 +1,28 @@
+$(function () {
+    $('#btn-comment').click(function(e){
 
-$(document).on('submit', '.comment-form', function(e){
-    e.preventDefault();
-    var id = $(this).attr('value');
-    $.ajax({
-        url: $(this).attr('action'),
-        enctype: "multipart/form-data",
-        processData: false,
-        contentType: false,
-        cache: false,
-        method: 'POST',
-        data: $(this).serialize(),
-        dataType: 'json',
-        success: function(response){
-            $('.main-comment-section').html(response['form']);
-            $('textarea').val('');
-        },
-        error: function(rs, e){
-            console.log(rs.responseText);
-        }
+        e.preventDefault();
+        var comment_form = $('#comment-form')[0];
+        var comment_formData = new FormData(comment_form);
+
+        var url = $('#comment-form').attr('action');
+        var form = $('#comment-form').serialize();
+
+        $.ajax({
+            url: url,
+            enctype: "multipart/form-data",
+            method: 'POST',
+            data: comment_formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(response){
+
+                $('.comment__main__comments').html(response.form);
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            }
+        });
     });
-});
+})
