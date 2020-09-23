@@ -10,6 +10,10 @@ urlpatterns = [
     path('tag/<slug>/', product_tagged, name='product_tagged'),
     path('products/<slug>/', product_detail, name='product_detail'),
     path('products/<slug>/like',ProductLikeToggle.as_view(), name='product_like-toggle'),
+    
+    path('comments/<int:id>/',comment_delete, name='comment_delete'),
+    path('comments/<int:id>/',comment_update, name='comment_update'),
+    
     path('mymap/', mymap, name='mymap'),
 
     path('api/', ApiRoot.as_view(), name=ApiRoot.name),
