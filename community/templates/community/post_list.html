@@ -1,5 +1,12 @@
 {% block contents %}
 <div class="row mt-5">
+  <select id="sort-select" onchange="location = this.value;">
+    <option class="sort-date" value="">---</option>
+    <option class="sort-date" value="?sort=id">최신순</option>
+    <option class="sort-hits" value="?sort=hits">조회순</option>
+    <option class="sort-recommends" value="?sort=recommends">추천순</option>
+    <option class="sort-comments" value="?sort=comments">댓글순</option>
+  </select>
   <div class="col-12">
     <table class="table table-light">
       <thead class="thead-light">
@@ -59,7 +66,7 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <button class="btn btn-primary" onclick="location.href='/community/write/'">글쓰기</button>
+    <button class="btn btn-primary" onclick="location.href='/community/creation/'">글쓰기</button>
   </div>
 </div>
 {% endblock %}

@@ -8,6 +8,12 @@
 
 {% block title %}메인페이지{% endblock %} 
 
+{% block banner %}
+  <div class="banner-box">
+    <img src="{% static 'logo/logo-03.jpg' %}" class="banner"></img>
+  </div>
+{% endblock %}
+
 {% block category %}
   {% include 'myside/_category.html' %}
 {% endblock %}

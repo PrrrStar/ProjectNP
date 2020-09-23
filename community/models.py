@@ -5,8 +5,10 @@ from django.conf import settings
 
 # Create your models here.
 class Post(models.Model):
+    BOARD_LISTS=(('자유게시판','자유게시판'),('레시피연구소','레시피연구소'))
     title               = models.CharField(max_length=50,verbose_name="제목")
     content             = RichTextUploadingField(verbose_name="내용")
+    board               = models.CharField(max_length=25, choices=BOARD_LISTS,verbose_name="게시판")
     author              = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='authored', verbose_name='글쓴이', on_delete=models.CASCADE)
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
@@ -35,8 +37,8 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-created_at']
-        verbose_name        = '게시글'
-        verbose_name_plural = '게시글'
+        verbose_name        = 'post'
+        verbose_name_plural = 'posts'
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[self.id])
