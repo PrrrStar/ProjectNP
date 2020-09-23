@@ -113,7 +113,7 @@ class Product(models.Model):
 
 class Comment(models.Model):
     product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE, related_name='comments')
-    author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True,blank=True, related_name='comments')
+    author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True,blank=True, related_name='comments_author')
     img         = models.ImageField(upload_to="comments/%Y/%m/%d", blank=True)
     content     = models.TextField(max_length = 100, verbose_name='내용')
     stars       = models.FloatField(validators=[MinValueValidator(1), MaxValueValidator(5)], null=True, blank=True)
@@ -125,7 +125,6 @@ class Comment(models.Model):
         ordering            = ['-created_at']
         verbose_name        = 'comment'
         verbose_name_plural = 'comments'
-    
 
 class Reply(models.Model):
     comment     = models.ForeignKey(Comment, on_delete = models.CASCADE, related_name='replies')

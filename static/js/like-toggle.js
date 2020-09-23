@@ -23,5 +23,5 @@ $("#btn-like").click(function(e){
         console.log("error");
       }
     })
-
 })
+

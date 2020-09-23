@@ -34,12 +34,13 @@
 
 <!-- 로그인 유저 중 내가 쓴 댓글만 수정 삭제 보이게 설정-->
   {% if user.is_authenticated %}
-    {% for user_comment in user.comments.all %}
-      {% if user_comment.id == comment.id %}
-      <button type='submit'>수정</button>
-      <button type='submit'>삭제</button>
+      {% if user == comment.author %}
+      <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+        <button onclick="location.href='{% url 'comment_update' comment.id %}'" type="submit">수정</button>
+        <button onclick="location.href='{% url 'comment_delete' comment.id %}'" type="submit">삭제</button>
+      </form>
       {% endif %}
-    {% endfor %}
   {% endif %}
 </div>
 {% endfor %}

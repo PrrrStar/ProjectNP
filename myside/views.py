@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.db.models import Q, Count
 
 from .models import *
@@ -97,19 +97,20 @@ def product_detail(request, slug):
     current_category    = get_object_or_404(Category, slug=product.category)      
     
     comment_form = CommentForm(request.POST or None, request.FILES)
-    if comment_form.is_valid():
-        author= request.user
-        if author.is_authenticated:
+    if request.POST:
+        if comment_form.is_valid():
+            author= request.user
+            if author.is_authenticated:
 
-            comment = comment_form.save(commit=False)
-            comment.product = product
-            comment.author = author
-            comment.img     = request.FILES.get("img")
-            comment.stars = request.POST.get("star-input")
-            comment.save()
-            return redirect(product)
-    else:
-        comment_form = CommentForm()
+                comment = comment_form.save(commit=False)
+                comment.product = product
+                comment.author = author
+                comment.img     = request.FILES.get("img")
+                comment.stars = request.POST.get("star-input")
+                comment.save()
+                return redirect(product)
+        else:
+            comment_form = CommentForm()
 
     context = {
             'product':product,
@@ -118,6 +119,9 @@ def product_detail(request, slug):
             'product_related':product_related,
             'comment_form' :comment_form,
         }
+    if request.is_ajax():
+        form = render(request, 'myside/detail.html',context)
+        return JsonResponse({'form':form})
     return render(request, 'myside/detail.html', context)
 
 def product_tagged(request, slug):
@@ -133,6 +137,34 @@ def product_tagged(request, slug):
     }
     return render(request, 'myside/list.html',context)
 
+def comment_update(request, id=id):
+    '''
+    comment = Comment.objects.get(id=id)
+    product = get_object_or_404(Product, id=comment.product.id)
+
+    form = CommentForm(instance=comment)
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect(product)
+
+    context = {'form':form}
+    return render(request, 'myside/detail.html', context)
+    '''
+
+    pass
+def comment_delete(request, id=id):
+    
+    comment = get_object_or_404(Comment, id=id)
+    product = get_object_or_404(Product, id=comment.product.id)
+    author= request.user
+    if request.POST:
+        if author.is_authenticated and author==comment.author:    
+            comment.delete()
+            print('a')
+            return redirect(product)
+    return render(request, 'myside/detail.html', {})
 
 def mymap(request):
     return render(request, 'myside/mymap.html', {
