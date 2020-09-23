@@ -1,8 +1,10 @@
 {% block contents %}
 <div class="row mt-5">
   <select id="sort-select" onchange="location = this.value;">
-    <option class="sort-date" value="/">최신순</option>
-    <option class="sort-likes" value="?sort=likes">추천순</option>
+    <option class="sort-date" value="">---</option>
+    <option class="sort-date" value="?sort=id">최신순</option>
+    <option class="sort-hits" value="?sort=hits">조회순</option>
+    <option class="sort-recommends" value="?sort=recommends">추천순</option>
     <option class="sort-comments" value="?sort=comments">댓글순</option>
   </select>
   <div class="col-12">

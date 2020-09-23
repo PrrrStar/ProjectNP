@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import Http404, HttpResponseRedirect
+from django.db.models import Count
 from .models import *
 from .forms import *
 # Create your views here.
@@ -16,12 +17,18 @@ def post_detail(request, pk):
     return render(request, 'community/post_detail.html', {'post': post})
 
 def post_list(request):
-    all_posts = Post.objects.prefetch_related('recommend').all().order_by('-id')
-    page = int(request.GET.get('p', 1))
-    paginator = Paginator(all_posts, 5)
-
-    posts = paginator.get_page(page)
+    sort = request.GET.get('sort','')
+    if sort == 'recommends':
+        posts = Post.objects.annotate(recommends_count=Count('recommend_count')).order_by('-recommend_count', '-created_at')
+    elif sort == 'hits':
+        posts = Post.objects.order_by('-hits', '-created_at')
+    elif sort == 'comments':
+        posts = Post.objects.annotate(comment_count=Count('comment')).order_by('-comment_count', '-created_at')
+    else :
+        posts = Post.objects.order_by('-created_at')
     return render(request, 'community/post_list.html', {'posts': posts})
+    
+    
 
 def post_create(request):
     if not request.user.is_authenticated:
