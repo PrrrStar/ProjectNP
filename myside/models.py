@@ -126,6 +126,9 @@ class Comment(models.Model):
         verbose_name        = 'comment'
         verbose_name_plural = 'comments'
 
+    def get_api_like_url(self):
+        return reverse('comment_like-api-toggle', kwargs={'pk':self.pk})
+
 class Reply(models.Model):
     comment     = models.ForeignKey(Comment, on_delete = models.CASCADE, related_name='replies')
     #user       =

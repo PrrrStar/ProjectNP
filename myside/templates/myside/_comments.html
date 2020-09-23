@@ -11,10 +11,13 @@
     <div class="comment__comment-box">
       <span class="comment__user">
         {{ comment.author.nickname }}
-        <button>
-          <img src="{% static 'logo/thumb_up_alt-24px.png' %}" />
-        </button>
       </span>
+      <button type="button" class='btn-like-comment' data-url='{{ comment.get_api_like_url }}' data-like='{{comment.like.count}}'>
+        <img src="{% static 'logo/thumb_up_alt-24px.png' %}" />
+          <span class="like-comment-count">
+            {{comment.like.count}}
+          </span>
+        </button>
       <span class="comment__comment">{{ comment.content }}</span>
     </div>
     <div>
@@ -29,8 +32,8 @@
   {% if user.is_authenticated %} {% if user == comment.author %}
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <button onclick="location.href='{% url 'comment_update' comment.id %}'" type="submit">수정</button>
-    <button onclick="location.href='{% url 'comment_delete' comment.id %}'" type="submit">삭제</button>
+    <button onclick="" type="submit">수정</button>
+    <button onclick="" type="submit">삭제</button>
   </form>
   {% endif %} {% endif %}
 </div>
