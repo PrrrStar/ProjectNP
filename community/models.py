@@ -35,8 +35,8 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-created_at']
-        verbose_name        = '게시글'
-        verbose_name_plural = '게시글'
+        verbose_name        = 'post'
+        verbose_name_plural = 'posts'
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[self.id])

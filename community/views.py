@@ -23,7 +23,7 @@ def post_list(request):
     posts = paginator.get_page(page)
     return render(request, 'community/post_list.html', {'posts': posts})
 
-def post_write(request):
+def post_create(request):
     if not request.user.is_authenticated:
         return redirect('/')
     elif request.method == 'POST':
@@ -40,7 +40,7 @@ def post_write(request):
             return redirect('/community/list/')
     else:
         form = PostForm()
-    return render(request, 'community/post_write.html', {'form': form})
+    return render(request, 'community/post_create.html', {'form': form})
 
 def post_recommend(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -54,7 +54,7 @@ def post_recommend(request, pk):
         post.plus_recommend_count
     return HttpResponseRedirect(post.get_absolute_url())
 
-def comment_write(request, pk):
+def comment_create(request, pk):
     author = request.user
     post = Post.objects.get(pk=pk)
     if not author.is_authenticated:
