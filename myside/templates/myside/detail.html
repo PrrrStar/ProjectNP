@@ -4,9 +4,10 @@
 
 <!-- detail.html에서만 쓰이는 css -->
 {% block style %} 
+  <link rel="stylesheet" href="{% static 'css/include/category.css' %}" />
   <link rel="stylesheet" href="{% static 'css/detail.css' %}" />
   <link rel="stylesheet" href="{% static 'css/comment.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/products.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/index/index-slider.css' %}" />
 {% endblock %}
 
 {% block title %}상세페이지{% endblock %}
@@ -19,10 +20,10 @@
   <!-- 메인 컨텐츠 박스 -->
   <main class="detail">
     <!-- 상품 정보에 대한 박스 -->
-    <div class="detail__info">
+    <div class="detailBox">
       <!-- 박스의 왼쪽 부분 -->
-      <div class="detail__info__left-content">
-        <span class="detail__info__title">
+      <div class="detail__leftContent">
+        <span class="detail__title">
           {% if current_category %}
             {{current_category.parent}} 
             <span> > {{current_category.name}}</span>
@@ -31,35 +32,35 @@
           {% endif %}
         </span>
         <!-- 검색 기능 우선 제외시키겠습니다.-->
-        <img class="detail__info__img" src='{{product.img.url}}' alt="Product IMG"/>
+        <img class="detail__img" src='{{product.img.url}}' alt="Product IMG"/>
       </div>
       <!-- 박스의 오른쪽 부분 -->
       {% if product %}
-        <div class="detail__info__right-content">
+        <div class="detail__rightContent">
           <!-- 오른쪽 부분의 헤더 -->
-          <div class="detail__info__header">
-            <span class="detail__info__name"><img src="{% static 'logo/point.png' %}" class="point" />{{product.name}}</span>
+          <div class="detail__header">
+            <span class="detail__name"><img src="{% static 'logo/point.png' %}" class="point" />{{product.name}}</span>
             <!-- 편의점은 many to many field 이므로 생성시 for문 한번 더 해야함-->
-            <span class="detail__info__brand">
+            <span class="detail__brand">
               {% for brand in product.brand.all %}
-                <img class="brand__info__img" src='{{brand.img.url}}' alt="Brand IMG"/>
+                <img class="brand__img" src='{{brand.img.url}}' alt="Brand IMG"/>
               {% endfor %}
             </span>
           </div>
           <!-- 상품 가격 -->
-          <div class="detail__info__price">
+          <div class="detail__price">
             <span>가격 {{product.price}}원</span>
           </div>
           <!-- 상품 설명 -->
-          <div class="detail__info__description">
+          <div class="detail__description">
             <div class="description__content">
               <span>상품설명</span>
               <span>{{product.description}}</span>
             </div>
 
             <!-- 상품 해시태그 -->
-            <div class="detail__info__tag-box">
-              <div class="detail__info__tag">
+            <div class="detail__tagBox">
+              <div class="detail__tag">
                 <span>
                   <span>연관태그</span>
                   <form method="get">
@@ -69,19 +70,19 @@
                   </form>
                 </span>
               </div>
-              <div class="detail__info__tag--heart">
+              <div class="detail__tag--heart">
                 <i class="fas fa-heart"></i>
                 <span id='like-count'>{{ product.like.count }}</span>
               </div>
             </div>
           </div>
           <!-- 버튼들 -->
-          <div class="detail__info__button">
-            <button class="detail__info__stock">
+          <div class="detail__button">
+            <button class="detail__stock">
               <span>재고확인</span>
               <img src="{% static 'logo/location__white.png' %}" />
             </button>
-            <button type="button" class="detail__info__jjim", id='btn-like' data-url='{{ product.get_api_like_url }}' data-like='{{product.like.count}}'>
+            <button type="button" class="detail__naeggu", id='btn-like' data-url='{{ product.get_api_like_url }}' data-like='{{product.like.count}}'>
               <span>내꺼하기</span>
               <img src="{% static 'logo/heart__white.png' %}" />
             </button>
@@ -109,16 +110,18 @@
       <div class="products__slider">
         {% for product in product_related %}
         <a href="{{product.get_absolute_url}}">
-          <img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
-          <div class="slide__content">
-            <div class="slide__content--header">
-              <span class="slider__content--name">{{product.name}}</span>
+          <img src="{{product.image_url}}" alt="Product IMG" class="index__slide--img" />
+          <div class="index__slideBox">
+            <div class="index__slide--header">
+              <span class="index__slide--name">{{product.name}}</span>
               <div>
-                <img class="slider__content--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
+                <img class="index__slide--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
                 <span>{{ product.like.count }}</span>
               </div>
             </div>
-            <div class="slider__content--description"><p>{{product.description}}</p></div>
+            <div class="index__slide--description">
+              <p>{{product.description}}</p>
+            </div>
           </div>
         </a>
         {% endfor %}
