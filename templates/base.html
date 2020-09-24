@@ -22,6 +22,7 @@
   <!-- base css -->
   <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
   <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/include/auth.css' %}" />
 
   <!-- 각 html에서만 필요한 style -->
   {% block style %} {% endblock %}
@@ -58,7 +59,7 @@
     {% block user-profile %}{% endblock %}
 
     <!-- 내꺼 목록 -->
-    {% block likeList %}{% endblock %}
+    {% block naeggu %}{% endblock %}
 
     <!-- login, signup modal-->
     {% include 'accounts/login.html' %}
@@ -70,7 +71,7 @@
   <!-- footer -->
   <footer>
     <!-- top button -->
-    <a href="#header" class="base__top-btn"><img src="{% static 'logo/top.png' %}" /></a>
+    <a href="#header" class="footer__topBtn"><img src="{% static 'logo/top.png' %}" /></a>
   </footer>
   <!-- Jquery -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
