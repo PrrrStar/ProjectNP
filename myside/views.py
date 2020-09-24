@@ -67,6 +67,12 @@ def product_in_category(request, category_slug=None):
     current_category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available_display=True)
+    '''
+    tag                 = get_object_or_404(ProductTag, slug=slug)
+    products            = Product.objects.filter(tags = tag)
+    categories          = Category.objects.all()
+    title               = tag.name + " 검색 결과"
+    '''
     title = ""
     query = ""
 

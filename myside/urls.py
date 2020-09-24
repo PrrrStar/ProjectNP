@@ -9,7 +9,6 @@ urlpatterns = [
     path('category/<category_slug>/', product_in_category, name='product_in_category'),
     path('tag/<slug>/', product_tagged, name='product_tagged'),
     path('products/<slug>/', product_detail, name='product_detail'),
-    path('products/<slug>/like',ProductLikeToggle.as_view(), name='product_like-toggle'),
     
     path('comments/<int:id>/',comment_delete, name='comment_delete'),
     path('comments/<int:id>/',comment_update, name='comment_update'),
