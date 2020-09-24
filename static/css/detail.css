@@ -149,7 +149,8 @@
     align-items: center;
 }
 
-.detail__stock, .detail__jjim {
+.detail__stock, 
+.detail__naeggu {
     display: flex;
     justify-content: center;
     align-items: center;
