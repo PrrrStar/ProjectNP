@@ -1,5 +1,5 @@
 from .base import * 
 try: 
-    from .deploy import * 
+    from .debug import * 
 except: 
     pass
