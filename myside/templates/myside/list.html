@@ -2,7 +2,10 @@
 {% load static %}
 
 {% block style %}
-	<link rel="stylesheet" href="{% static 'css/products.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/include/category.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/index/index.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/index/index-slider.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/include/naeggu.css' %}" />
 {% endblock %}
 
 {% block title %}카테고리{% endblock %}
@@ -12,10 +15,10 @@
 {% endblock %}
 
 {% block list %}
-<div class="products">
-	<div class="products__main">
-		<div class="products__header">
-			<span class="products__header--title">
+<div class="index">
+	<div class="index__main">
+		<div class="index__header">
+			<span class="index__header--title">
 				<img src="{% static 'logo/point.png' %}" class="point" />
 					{{title}}
 			</span>
@@ -24,19 +27,19 @@
 		</div>
 		
 		{% if products %}
-		<div class="products__box">
+		<div class="index__productsBox">
 			{% for product in products %}
 			<a href="{{product.get_absolute_url}}">
-				<img src="{{product.image_url}}" alt="Product IMG" class="slide__img" />
-				<div class="slide__content">
-					<div class="slide__content--header">
-						<span class="slider__content--name">{{product.name}}</span>
+				<img src="{{product.image_url}}" alt="Product IMG" class="index__slide--img" />
+				<div class="index__slideBox">
+					<div class="index__slide--header">
+						<span class="index__slide--name">{{product.name}}</span>
 						<div>
-							<img class="slider__content--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
+							<img class="index__slide--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
 							<span>{{ product.like.count }}</span>
 						</div>
 					</div>
-					<div class="slider__content--description">
+					<div class="index__slide--description">
 						<p>{{product.description}}</p>
 					</div>
 				</div>
@@ -51,4 +54,9 @@
 	</div>
 </div>
 
+{% endblock %}
+
+<!-- 내꺼 목록 -->
+{% block naeggu %}
+  {% include 'myside/_jjim.html' %}
 {% endblock %}
