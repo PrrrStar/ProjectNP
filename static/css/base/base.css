@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
 
+/* 여러가지 기본 속성 값 조정 */
 * {
   box-sizing: border-box;
 }
@@ -26,12 +27,16 @@ button:focus {
   outline: 0;
 }
 
+/* 제목 왼쪽 위에 점점점 */
 .point {
   position: absolute;
   top: -12px;
   left: -12px;
 }
 
+/* 메인페이지 css */
+
+/* header */
 header {
   padding: 0px 100px;
   height: 113px;
@@ -41,7 +46,8 @@ header {
   border-bottom: 1px solid black;
 }
 
-.header__logo-box {
+/* header 로고 */
+.header__logoBox {
   width: 300px;
 }
 
@@ -51,7 +57,8 @@ header {
   cursor: pointer;
 }
 
-.header__menus {
+/* header menu */
+.header__menuBox {
   display: flex;
   font-family: "Jua", sans-serif;
   line-height: 1.46;
@@ -63,13 +70,14 @@ header {
   margin: 0px 55px;
 }
 
+/* header 회원가입 로그인 로그아웃 내정보 */
 .header__auth {
   width: 300px;
   display: flex;
   justify-content: flex-end;
 }
 
-.base__auth-btn {
+.header__authBtn {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,14 +86,15 @@ header {
   background-color: rgba(0, 0, 0, 0);
 }
 
-.base__auth-btn span {
+.header__authBtn span {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.71;
   color: #333333;
 }
 
-.banner-box {
+/* banner */
+.bannerBox {
   max-width: 100%;
   height: 386px;
   border-bottom: 1px solid black;
@@ -96,58 +105,20 @@ header {
   height: 100%;
 }
 
-.main__container {
+/* main (배너와 푸터 사이 전부) */
+.main {
   display: flex;
 }
 
-.category {
-  width: 300px;
-  font-family: "Noto Sans KR", sans-serif;
-  padding-top: 47.7px;
-  display: flex;
-  justify-content: center;
-}
-
-.category__parent {
-  font-size: 20px;
-  line-height: 1.45;
-  letter-spacing: 2px;
-  color: #999999;
-  cursor: pointer;
-}
-
-.category__parent:not(:last-child) {
-  margin-bottom: 30px;
-}
-
-.category__children {
-  display: none;
-}
-
-.jjim {
-  width: 300px;
-  display: flex;
-  justify-content: center;
-}
-
-.jjim__box {
-  width: 130px;
-  height: 500px;
-  background-color: rgb(224, 255, 167);
-  margin-top: 55px;
-}
-
-.products {
-  width: 1320px;
-}
-
+/* footer */
 footer {
   background-color: #e9e9e9;
   height: 350px;
   position: relative;
 }
 
-.base__top-btn {
+/* top 버튼 */
+.footer__topBtn {
   position: absolute;
   top: -45px;
   right: 90px;

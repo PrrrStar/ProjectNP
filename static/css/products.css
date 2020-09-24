@@ -1,4 +1,7 @@
 /* products css */
+.products {
+  width: 1320px;
+}
 
 .products__header {
   display: flex;

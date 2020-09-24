@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block style %}
-	<link rel="stylesheet" href="{% static 'css/products.css' %}?ver=5" />
+	<link rel="stylesheet" href="{% static 'css/products.css' %}" />
 {% endblock %}
 
 {% block title %}카테고리{% endblock %}
@@ -11,7 +11,7 @@
 	{% include 'myside/_category.html' %}
 {% endblock %}
 
-{% block products-content %}
+{% block list %}
 <div class="products">
 	<div class="products__main">
 		<div class="products__header">

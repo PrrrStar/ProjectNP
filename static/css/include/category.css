@@ -1,0 +1,24 @@
+/* category */
+.category {
+    width: 300px;
+    font-family: "Noto Sans KR", sans-serif;
+    padding-top: 47.7px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .category__parent {
+    font-size: 20px;
+    line-height: 1.45;
+    letter-spacing: 2px;
+    color: #999999;
+    cursor: pointer;
+  }
+  
+  .category__parent:not(:last-child) {
+    margin-bottom: 30px;
+  }
+  
+  .category__children {
+    display: none;
+  }
