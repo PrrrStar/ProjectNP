@@ -12,7 +12,7 @@ DATABASES = {
         'HOST': 'db-project-np.cuhffvh7u64m.ap-northeast-2.rds.amazonaws.com',
         'NAME': 'project_NP',
         'USER': 'NPadmin',
-        'PASSWORD': get_secret("DATABASE"), 
+        'PASSWORD': DATABASE_PASSWORD, 
         'PORT': '5432',
     }
 }
@@ -35,8 +35,7 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-AWS_ACCESS_KEY_ID = get_secret("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY=get_secret("AWS_SECRET_ACCESS_KEY")
+
 AWS_REGION = 'ap-northeast-2'
 AWS_STORAGE_BUCKET_NAME = 'projectnp-bucket'
 AWS_S3_CUSTOM_DOMAIN = f's3.{AWS_REGION}.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}'

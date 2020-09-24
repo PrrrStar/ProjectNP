@@ -34,12 +34,10 @@ def get_secret(setting, secrets=secrets):
         error_msg = "Set the {} env var".format(setting)
         raise ImproperlyConfigured(error_msg)
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret("SECRET_KEY")
+SECRET_KEY              = get_secret("SECRET_KEY")
+DATABASE_PASSWORD       = get_secret("DATABASE")
+AWS_ACCESS_KEY_ID       = get_secret("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY   = get_secret("AWS_SECRET_ACCESS_KEY")
 
 INSTALLED_APPS = [
     'django.contrib.auth',
