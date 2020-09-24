@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.db.models import Q, Count
 
+from django.conf import settings
+
 from .models import *
 from .forms import *
 
@@ -178,8 +180,13 @@ def comment_delete(request, id=id):
     return render(request, 'myside/detail.html', {})
 
 def mymap(request):
-    return render(request, 'myside/mymap.html', {
-})
+
+    KAKAO_MAP_API_KEY = getattr(settings, 'KAKAO_MAP_API_KEY', 'KAKAO_MAP_API_KEY')
+    print(KAKAO_MAP_API_KEY)
+    context = {
+        'KAKAO_MAP_API_KEY':KAKAO_MAP_API_KEY
+    }
+    return render(request, 'myside/mymap.html', context)
 
 
 from django.views.generic import RedirectView
