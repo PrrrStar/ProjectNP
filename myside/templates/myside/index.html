@@ -2,8 +2,10 @@
 {% load static %} 
 
 <!-- index.html에서만 쓰는 css -->
-{% block style %} 
-  <link rel="stylesheet" href="{% static 'css/products.css' %}"/>
+{% block style %}
+  <link rel="stylesheet" href="{% static 'css/include/category.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/products.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/include/naeggu.css' %}" />
 {% endblock %}
 
 {% block title %}메인페이지{% endblock %} 
@@ -18,11 +20,11 @@
   {% include 'myside/_category.html' %}
 {% endblock %}
 
-{% block jjim %}
+{% block likeList %}
   {% include 'myside/_jjim.html' %}
 {% endblock %}
 
-{% block index-products %}
+{% block index %}
   <div class="products">
     <!-- 상품 목록 -->
     <div class="products__main">

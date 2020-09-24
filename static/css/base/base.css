@@ -1,5 +1,130 @@
-/* login modal css */
+@import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
 
+/* 여러가지 기본 속성 값 조정 */
+* {
+  box-sizing: border-box;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+*:focus {
+  outline: none;
+  border: none;
+}
+
+button,
+button:focus {
+  border: 0;
+  outline: 0;
+}
+
+/* 제목 왼쪽 위에 점점점 */
+.point {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+}
+
+/* 메인페이지 css */
+
+/* header */
+header {
+  padding: 0px 100px;
+  height: 113px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+/* header 로고 */
+.header__logoBox {
+  width: 300px;
+}
+
+.header__logo {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+/* header menu */
+.header__menuBox {
+  display: flex;
+  font-family: "Jua", sans-serif;
+  line-height: 1.46;
+  letter-spacing: 2.4px;
+}
+
+.header__menu {
+  font-size: 24px;
+  margin: 0px 55px;
+}
+
+/* header 회원가입 로그인 로그아웃 내정보 */
+.header__auth {
+  width: 300px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header__authBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.header__authBtn span {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.71;
+  color: #333333;
+}
+
+/* banner */
+.bannerBox {
+  max-width: 100%;
+  height: 386px;
+  border-bottom: 1px solid black;
+}
+
+.banner {
+  width: 100%;
+  height: 100%;
+}
+
+/* main (배너와 푸터 사이 전부) */
+.main {
+  display: flex;
+}
+
+/* footer */
+footer {
+  background-color: #e9e9e9;
+  height: 350px;
+  position: relative;
+}
+
+/* top 버튼 */
+.base__top-btn {
+  position: absolute;
+  top: -45px;
+  right: 90px;
+}
+
+/* 로그인 로그아웃 modal css */
 .modal-content {
   width: 500px;
   height: 600px;

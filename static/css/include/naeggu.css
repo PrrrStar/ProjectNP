@@ -1,0 +1,13 @@
+/* 내꺼하기 */
+.jjim {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .jjim__box {
+    width: 130px;
+    height: 500px;
+    background-color: rgb(224, 255, 167);
+    margin-top: 55px;
+  }

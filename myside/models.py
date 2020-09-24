@@ -7,41 +7,49 @@ from taggit.managers import TaggableManager
 from taggit.models import TagBase, TaggedItemBase
 # Create your models here.
 
+
 class ProductTag(TagBase):
-    slug    = models.SlugField(verbose_name='slug', max_length=20, allow_unicode=True)
+    slug = models.SlugField(verbose_name='slug',
+                            max_length=20, allow_unicode=True)
+
     class Meta:
-        index_together = [['name','slug']]
+        index_together = [['name', 'slug']]
         unique_together = (('name', 'slug',))
-        verbose_name='tags'
-        verbose_name_plural='tags'
+        verbose_name = 'tags'
+        verbose_name_plural = 'tags'
 
 
 class TaggedProduct(TaggedItemBase):
-    content_object  = models.ForeignKey('Product', on_delete=models.CASCADE)
-    tag             = models.ForeignKey('ProductTag', related_name='taggedProduct',on_delete=models.CASCADE)
+    content_object = models.ForeignKey('Product', on_delete=models.CASCADE)
+    tag = models.ForeignKey(
+        'ProductTag', related_name='taggedProduct', on_delete=models.CASCADE)
+
     class Meta:
-        verbose_name        = 'tagged product'
+        verbose_name = 'tagged product'
         verbose_name_plural = 'tagged products'
+
 
 class Category(MPTTModel):
 
-    name    = models.CharField(max_length=20, verbose_name='카테고리', unique=True, db_index=True)
-    parent  = TreeForeignKey('self', null=True, blank= True, verbose_name='상위 카테고리',related_name='children', on_delete=models.CASCADE)
-    slug    = models.SlugField(max_length=20, db_index = True, allow_unicode=True)
+    name = models.CharField(
+        max_length=20, verbose_name='카테고리', unique=True, db_index=True)
+    parent = TreeForeignKey('self', null=True, blank=True, verbose_name='상위 카테고리',
+                            related_name='children', on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=20, db_index=True, allow_unicode=True)
 
     class MPTTMeta:
         order_insertion_by = ['name']
 
     class Meta:
         unique_together = (('parent', 'slug',))
-        verbose_name        = 'category'
+        verbose_name = 'category'
         verbose_name_plural = 'categories'
-        
+
     def get_slug_list(self):
         try:
-            ancestors = self.get_ancestors(include_self = True)
+            ancestors = self.get_ancestors(include_self=True)
         except:
-            ancestors= []
+            ancestors = []
         else:
             ancestors = [i.slug for i in ancestors]
         slugs = []
@@ -51,39 +59,45 @@ class Category(MPTTModel):
 
     def __str__(self):
         return self.name
-    
+
     def get_absolute_url(self):
         return reverse('product_in_category', args=[self.slug])
-    
+
 
 class Brand(models.Model):
-    name    = models.CharField(max_length=20, verbose_name='브랜드', db_index=True)
-    slug    = models.SlugField(max_length= 20, db_index=True, allow_unicode=True)
-    img     = models.ImageField(upload_to="brand", blank=True, null=True)
+    name = models.CharField(max_length=20, verbose_name='브랜드', db_index=True)
+    slug = models.SlugField(max_length=20, db_index=True, allow_unicode=True)
+    img = models.ImageField(upload_to="brand", blank=True, null=True)
 
     class Meta:
         ordering = ['-name']
-        index_together = [['id','slug']]
-        verbose_name        = 'brand'
+        index_together = [['id', 'slug']]
+        verbose_name = 'brand'
         verbose_name_plural = 'brands'
 
     def __str__(self):
         return self.name
 
+
 class Product(models.Model):
-    name                = models.CharField(max_length = 20, db_index=True, verbose_name='제품명')
-    category            = TreeForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name = 'products')
-    brand               = models.ManyToManyField(Brand, related_name='product_brand')
-    img                 = models.ImageField(upload_to="products/%Y/%m/%d", blank=True, null=True)
-    description         = models.TextField(verbose_name='설명', blank=True)
-    price               = models.DecimalField(verbose_name='가격', max_digits = 10, decimal_places=0)
-    stock               = models.PositiveIntegerField(verbose_name='재고')
-    like                = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='product_likes')
-    available_display   = models.BooleanField('판매 가능?', default= True) 
-    slug                = models.SlugField(max_length = 20, db_index=True, allow_unicode=True)
-    tags                = TaggableManager(verbose_name='tags', blank=True, through=TaggedProduct)
-    created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
-    modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
+    name = models.CharField(max_length=20, db_index=True, verbose_name='제품명')
+    category = TreeForeignKey(
+        Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
+    brand = models.ManyToManyField(Brand, related_name='product_brand')
+    img = models.ImageField(
+        upload_to="products/%Y/%m/%d", blank=True, null=True)
+    description = models.TextField(verbose_name='설명', blank=True)
+    price = models.DecimalField(
+        verbose_name='가격', max_digits=10, decimal_places=0)
+    stock = models.PositiveIntegerField(verbose_name='재고')
+    like = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, blank=True, related_name='product_likes')
+    available_display = models.BooleanField('판매 가능?', default=True)
+    slug = models.SlugField(max_length=20, db_index=True, allow_unicode=True)
+    tags = TaggableManager(verbose_name='tags',
+                           blank=True, through=TaggedProduct)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
+    modified_at = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
 
     @property
     def image_url(self):
@@ -92,11 +106,11 @@ class Product(models.Model):
         return '#'
 
     class Meta:
-        ordering = ['-created_at','-modified_at']
-        index_together = [['id','slug']]
-        verbose_name        = 'product'
+        ordering = ['-created_at', '-modified_at']
+        index_together = [['id', 'slug']]
+        verbose_name = 'product'
         verbose_name_plural = 'products'
-        
+
     def __str__(self):
         return self.name
 
@@ -104,43 +118,48 @@ class Product(models.Model):
         return reverse('product_detail', args=[self.slug])
 
     def get_like_url(self):
-        return reverse('product_like-toggle', kwargs={'slug':self.slug})
+        return reverse('product_like-toggle', kwargs={'slug': self.slug})
 
     def get_api_like_url(self):
-        return reverse('product_like-api-toggle', kwargs={'pk':self.pk})
+        return reverse('product_like-api-toggle', kwargs={'pk': self.pk})
 
-    
 
 class Comment(models.Model):
-    product     = models.ForeignKey(Product, verbose_name="제품명", on_delete=models.CASCADE, related_name='comments')
-    author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True,blank=True, related_name='comments_author')
-    img         = models.ImageField(upload_to="comments/%Y/%m/%d", blank=True)
-    content     = models.TextField(max_length = 100, verbose_name='내용')
-    stars       = models.FloatField(validators=[MinValueValidator(1), MaxValueValidator(5)], null=True, blank=True)
-    like        = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='comment_likes')
-    created_at  = models.DateTimeField(auto_now_add=True, verbose_name='등록일')
-    modified_at = models.DateTimeField(auto_now = True)
+    product = models.ForeignKey(
+        Product, verbose_name="제품명", on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                               null=True, blank=True, related_name='comments_author')
+    img = models.ImageField(
+        upload_to="comments/%Y/%m/%d", blank=True, null=True)
+    content = models.TextField(max_length=100, verbose_name='내용')
+    stars = models.FloatField(validators=[MinValueValidator(
+        1), MaxValueValidator(5)], null=True, blank=True)
+    like = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, blank=True, related_name='comment_likes')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='등록일')
+    modified_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering            = ['-created_at']
-        verbose_name        = 'comment'
+        ordering = ['-created_at']
+        verbose_name = 'comment'
         verbose_name_plural = 'comments'
 
     def get_api_like_url(self):
-        return reverse('comment_like-api-toggle', kwargs={'pk':self.pk})
+        return reverse('comment_like-api-toggle', kwargs={'pk': self.pk})
+
 
 class Reply(models.Model):
-    comment     = models.ForeignKey(Comment, on_delete = models.CASCADE, related_name='replies')
-    #user       =
-    content     = models.TextField(max_length=100, verbose_name='reply')
-    created_at  = models.DateTimeField(auto_now_add= True, verbose_name='등록일')
-    modified_at = models.DateTimeField(auto_now = True)
-    
+    comment = models.ForeignKey(
+        Comment, on_delete=models.CASCADE, related_name='replies')
+    # user       =
+    content = models.TextField(max_length=100, verbose_name='reply')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='등록일')
+    modified_at = models.DateTimeField(auto_now=True)
+
     class Meta:
-        ordering            = ['-created_at']
-        verbose_name        = 'reply'
+        ordering = ['-created_at']
+        verbose_name = 'reply'
         verbose_name_plural = 'replies'
 
     def __str__(self):
         return self.content
-
