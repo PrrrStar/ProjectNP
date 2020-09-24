@@ -1,0 +1,33 @@
+#info-window{
+    font-size: large;
+    padding: 10px;
+}
+#info-window:hover{
+    background-color: honeydew;
+}
+#myCvsList{
+    height: 320px;
+    overflow: auto;
+}
+#cvsList{
+    margin-top: 10px;
+    height:300px;
+}
+#cvsInfo{
+    visibility: hidden;
+    padding : 20px;
+    background-color: honeydew;
+}
+#info-title{
+    font-size: x-large;
+}
+#info-route, #info-url{
+    margin-left: 10px;
+}
+#info-my, #info-not-my{
+    margin-left: 10px;
+    display:none;
+}
+.list-group-item:hover{
+    background-color: honeydew;
+}
