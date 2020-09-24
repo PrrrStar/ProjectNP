@@ -22,22 +22,33 @@ import json
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-secret_file = os.path.join(BASE_DIR, '.secrets.json')
+if os.path.isfile(os.path.join(BASE_DIR, '.secrets.json'))==True:
+    ##LOCAL
+    secret_file = os.path.join(BASE_DIR, '.secrets.json')
 
-with open(secret_file) as f:
-    secrets = json.loads(f.read())
+    with open(secret_file) as f:
+        secrets = json.loads(f.read())
 
-def get_secret(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {} env var".format(setting)
-        raise ImproperlyConfigured(error_msg)
+    def get_secret(setting, secrets=secrets):
+        try:
+            return secrets[setting]
+        except KeyError:
+            error_msg = "Set the {} env var".format(setting)
+            raise ImproperlyConfigured(error_msg)
 
-SECRET_KEY              = get_secret("SECRET_KEY")
-DATABASE_PASSWORD       = get_secret("DATABASE")
-AWS_ACCESS_KEY_ID       = get_secret("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY   = get_secret("AWS_SECRET_ACCESS_KEY")
+    SECRET_KEY              = get_secret("SECRET_KEY")
+    DATABASE_PASSWORD       = get_secret("DATABASE")
+    AWS_ACCESS_KEY_ID       = get_secret("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY   = get_secret("AWS_SECRET_ACCESS_KEY")
+    KAKAO_MAP_API_KEY       = get_secret("KAKAO_MAP_API_KEY")
+    
+else:
+    ##DEPLOY
+    SECRET_KEY              = os.environ.get("SECRET_KEY")
+    DATABASE_PASSWORD       = os.environ.get("DATABASE")
+    AWS_ACCESS_KEY_ID       = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY   = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    KAKAO_MAP_API_KEY       = os.environ.get("KAKAO_MAP_API_KEY")
 
 INSTALLED_APPS = [
     'django.contrib.auth',
