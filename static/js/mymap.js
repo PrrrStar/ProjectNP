@@ -17,7 +17,13 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 var ps = new kakao.maps.services.Places(map);
 
 // 마커 이미지
-var imageSrc = "{% static 'logo/point__circle-01.png' %}"; 
+var imageSrc_origin = "{% static 'logo/point__circle-01.png' %}"
+alert(imageSrc_origin)
+
+var mapContainer = document.getElementById('map');
+var imageSrc = mapContainer.getAttribute('marker-url');
+alert(imageSrc)
+
 var imageSize = new kakao.maps.Size(30, 30); 
 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
     
