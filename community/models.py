@@ -13,8 +13,7 @@ class Post(models.Model):
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
     hits                = models.PositiveIntegerField(default=0, verbose_name='조회수')
-    recommend_count     = models.PositiveIntegerField(default=0, verbose_name='추천')
-    #derecommend_user   = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='derecommend_posts', verbose_name='비추')
+    recommends = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='recommends',blank=True)
     
     def __str__(self):
         return self.title
@@ -25,15 +24,8 @@ class Post(models.Model):
         self.save()
     
     @property
-    def plus_recommend_count(self):
-        self.recommend_count+=1
-        self.save()
-    
-    @property
-    def minus_recommend_count(self):
-        self.recommend_count-=1
-        self.save()
-        
+    def total_recommends(self):
+        return self.recommends.count()
     
     class Meta:
         ordering = ['-created_at']
@@ -42,15 +34,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[self.id])
-
-
-class Recommend(models.Model):
-    post        = models.ForeignKey(Post, verbose_name="글", on_delete=models.CASCADE, related_name='recommend')
-    user        = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='recommend')
-    class Meta:
-        ordering            = ['-id']
-        verbose_name        = 'recommend'
-        verbose_name_plural = 'recommends'    
 
 
 class Comment(models.Model):

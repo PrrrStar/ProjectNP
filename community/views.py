@@ -1,7 +1,9 @@
+import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonResponse
 from django.db.models import Count
 from .models import *
 from .forms import *
@@ -27,8 +29,23 @@ def post_list(request):
     else :
         posts = Post.objects.order_by('-created_at')
     return render(request, 'community/post_list.html', {'posts': posts})
-    
-    
+
+@login_required
+@require_POST
+def post_recommend(request):
+    pk = request.POST.get('pk', None)
+    post = get_object_or_404(Post, pk=pk)
+    user = request.user
+
+    if user in post.recommends.all():
+        post.recommends.remove(user)
+        message = '추천 취소'
+    else:
+        post.recommends.add(user)
+        message = '추천'
+
+    context = {'recommends_count':post.recommends.count(), 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")   
 
 def post_create(request):
     if not request.user.is_authenticated:
@@ -41,25 +58,10 @@ def post_create(request):
             post.content = form.cleaned_data['content']
             post.author = request.user
             post.save()
-            recommend=Recommend()
-            recommend.post=post
-            recommend.save()
             return redirect('/community/list/')
     else:
         form = PostForm()
     return render(request, 'community/post_create.html', {'form': form})
-
-def post_recommend(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    user = request.user
-    recommend=Recommend.objects.get(post=post)
-    if user in recommend.user.all():
-        recommend.user.remove(user)
-        post.minus_recommend_count
-    else:
-        recommend.user.add(user)   
-        post.plus_recommend_count
-    return HttpResponseRedirect(post.get_absolute_url())
 
 def comment_create(request, pk):
     author = request.user

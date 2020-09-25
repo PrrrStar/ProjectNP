@@ -6,10 +6,6 @@ from .models import *
 class PostAdmin(admin.ModelAdmin):
     list_display=('id','title','author','hits','created_at')
 
-@admin.register(Recommend)
-class RecommendAdmin(admin.ModelAdmin):
-    list_display=('post',)
-
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display=('post',)

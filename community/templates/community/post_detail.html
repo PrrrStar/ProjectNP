@@ -6,11 +6,12 @@
       <div>제목 : {{ post.title }}</div>
       <div>{{ post.content | safe }}</div>
       <div>조회수 : {{ post.hits }}</div>
-      <div>추천 : {{ post.recommend_count }}</div>
+      <div id="count-{{ post.id }}">추천 : {{ post.total_recommends }}</div>
       <div>작성일 : {{ post.created_at }}</div>
-      <a href="{% url 'post_recommend' post.pk %}">추천</a>
+      <input type="button" class="btn btn-info btn-sm recommend" name="{{ post.id }}" value="추천">
       <button class="btn btn-primary" onclick="location.href='/community/list/'">돌아가기</button>
     </div>
+
   </div>
   <form action="{% url 'comment_create' post.pk %}" method="POST">
     {% csrf_token %}
@@ -24,4 +25,25 @@
     <div class="date">{{ comment.created_at }}</div>
   </div>
   {% endfor %}
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript">
+    $(".recommend").click(function () { // .like 버튼을 클릭 감지
+      var pk = $(this).attr('name')
+      $.ajax({ // ajax로 서버와 통신
+        type: "POST", // 데이터를 전송하는 방법
+        url: "{% url 'post_recommend' %}", // 통신할 url을 지정
+        data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, // 서버로 데이터 전송시 옵션, pk를 넘겨야 어떤 video인지 알 수 있음
+        dataType: "json",
+        success: function (response) { // 성공
+          alert(response.message);
+          $("#count-" + pk).html("추천 : " + response.recommends_count); // 좋아요 개수 변경
+        },
+        error: function (request, status, error) { // 실패
+          alert("로그인이 필요합니다.")
+          window.location.replace("/") // 로그인 페이지로 넘어가기
+        },
+      });
+    })
+  </script>
   {% endblock %}
