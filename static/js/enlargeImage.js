@@ -1,5 +1,5 @@
-const commentImage = document.querySelectorAll(".fake-image");
-const layer = document.querySelector(".image-layer");
+var commentImage = document.querySelectorAll(".fake-image");
+var layer = document.querySelector(".image-layer");
 
 function enlargeImage(event) {
     if (event.target.getAttribute("enlarge") == "f") {

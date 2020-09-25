@@ -106,23 +106,8 @@ def product_detail(request, slug):
     product_related     = product.tags.similar_objects()
     categories          = Category.objects.all()
     current_category    = get_object_or_404(Category, slug=product.category)      
+    comment_form        = CommentForm(request.POST or None, request.FILES)
     
-    comment_form = CommentForm(request.POST or None, request.FILES)
-    if request.POST:
-        if comment_form.is_valid():
-            author= request.user
-            if author.is_authenticated:
-
-                comment = comment_form.save(commit=False)
-                comment.product = product
-                comment.author  = author
-                comment.img     = request.FILES.get("img")
-                comment.stars = request.POST.get("star-input")
-                comment.save()
-                return redirect(product)
-        else:
-            comment_form = CommentForm()
-
     context = {
             'product':product,
             'categories':categories,
@@ -130,12 +115,46 @@ def product_detail(request, slug):
             'product_related':product_related,
             'comment_form' :comment_form,
         }
+    return render(request, 'myside/detail.html', context)
 
+
+
+import json
+from django.http import HttpResponse
+
+def comment_create(request, slug):
+    comment_form = CommentForm(request.POST or None, request.FILES)
+    product = get_object_or_404(Product, slug=slug)
+    if request.POST:
+        if comment_form.is_valid():
+            author= request.user
+            if author.is_authenticated:
+
+                comment         = comment_form.save(commit=False)
+                comment.product = product
+                comment.author  = author
+                comment.img     = request.FILES.get("img")
+                comment.stars   = request.POST.get("star-input")
+                comment.save()
+                #redirect(product)
+        else:
+            comment_form = CommentForm()
+
+    context = {
+            'comment_form' :comment_form,
+            'product':product,
+        }
+    form = render_to_string('myside/_comments.html', context, request=request)
+    return JsonResponse({'form':form})
+
+'''
+    print(context)
+    return HttpResponse(json.dumps(context), content_type="application/json")   
+    
     if request.is_ajax():
         print("request ajax")
         form = render_to_string('myside/_comment.html',context, request=request)
-        return JsonResponse({'form':form})
-    return render(request, 'myside/detail.html', context)
+        return JsonResponse({'form':form})'''
 
 def product_tagged(request, slug):
     tag                 = get_object_or_404(ProductTag, slug=slug)

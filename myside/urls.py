@@ -10,6 +10,7 @@ urlpatterns = [
     path('tag/<slug>/', product_tagged, name='product_tagged'),
     path('products/<slug>/', product_detail, name='product_detail'),
     
+    path('products/<slug>/comments/', comment_create, name='comment_create'),
     path('comments/<int:id>/',comment_delete, name='comment_delete'),
     path('comments/<int:id>/',comment_update, name='comment_update'),
 

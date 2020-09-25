@@ -1,6 +1,6 @@
-const comments = document.querySelectorAll(".comments__comment");
-const showMore = document.querySelector(".comment__main__show-more");
-let startNum = 3;
+var comments = document.querySelectorAll(".comments__comment");
+var showMore = document.querySelector(".comment__main__show-more");
+var startNum = 3;
 
 if (comments.length > 3) {
     for (i = 3; i < comments.length; i++) {

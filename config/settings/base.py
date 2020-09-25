@@ -60,8 +60,6 @@ INSTALLED_APPS = [
     'mptt',
     'rest_framework',
     'taggit',
-
-    # 'bootstrap_modal_forms',
     'community',
     'accounts',
     'mycvs',

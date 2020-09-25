@@ -26,7 +26,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST" action="{{ product.get_absolute_url }}" id="comment-form" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'comment_create' product.slug %}" id="comment-form" enctype="multipart/form-data">
             {% csrf_token %}
               <div class="modal-body">
                 <span class="comment__user"> {{ user.nickname }} 님의 후기 </span>
@@ -63,7 +63,7 @@
     {% endif %}
     <!-- 달린 댓글들 표시 -->
 
-    <div class="comment__main__commentss">
+    <div class="comment__main__comments">
       {% include 'myside/_comments.html' %}</div>
   </div>
 </div>
