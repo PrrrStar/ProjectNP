@@ -69,12 +69,6 @@ def product_in_category(request, category_slug=None):
     current_category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available_display=True)
-    '''
-    tag                 = get_object_or_404(ProductTag, slug=slug)
-    products            = Product.objects.filter(tags = tag)
-    categories          = Category.objects.all()
-    title               = tag.name + " 검색 결과"
-    '''
     title = ""
     query = ""
 
@@ -147,27 +141,6 @@ def comment_create(request, slug):
     form = render_to_string('myside/_comments.html', context, request=request)
     return JsonResponse({'form':form})
 
-'''
-    print(context)
-    return HttpResponse(json.dumps(context), content_type="application/json")   
-    
-    if request.is_ajax():
-        print("request ajax")
-        form = render_to_string('myside/_comment.html',context, request=request)
-        return JsonResponse({'form':form})'''
-
-def product_tagged(request, slug):
-    tag                 = get_object_or_404(ProductTag, slug=slug)
-    products            = Product.objects.filter(tags = tag)
-    categories          = Category.objects.all()
-    title               = tag.name + " 검색 결과"
-    context = {
-        'title':title,
-        'tag':tag,
-        'products':products,
-        'categories':categories,
-    }
-    return render(request, 'myside/list.html',context)
 
 def comment_update(request, id=id):
     '''

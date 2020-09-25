@@ -7,7 +7,6 @@ from django.conf import settings
 urlpatterns = [
     path('', index, name='index'),
     path('category/<category_slug>/', product_in_category, name='product_in_category'),
-    path('tag/<slug>/', product_tagged, name='product_tagged'),
     path('products/<slug>/', product_detail, name='product_detail'),
     
     path('products/<slug>/comments/', comment_create, name='comment_create'),

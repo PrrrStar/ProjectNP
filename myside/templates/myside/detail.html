@@ -63,9 +63,9 @@
               <div class="detail__tag">
                 <span>
                   <span>연관태그</span>
-                  <form method="get">
+                  <form method="get", action="{% url 'index' %}">
                     {% for tag in product.tags.all %}
-                    <a href="{% url 'product_tagged' slug=tag.slug %}">#{{tag.name}}</a>
+                    #<input type='submit' name='q' value='{{tag.name}}'></input>
                     {% endfor %}
                   </form>
                 </span>
