@@ -36,8 +36,6 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 1024000000
 DEFAULT_FILE_STORAGE = 'config.storages.S3DefaultStorage'
 STATICFILES_STORAGE = 'config.storages.S3StaticStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
