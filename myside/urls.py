@@ -12,8 +12,7 @@ urlpatterns = [
     
     path('comments/<int:id>/',comment_delete, name='comment_delete'),
     path('comments/<int:id>/',comment_update, name='comment_update'),
-    
-    path('mymap/', mymap, name='mymap'),
+
 
     path('api/', ApiRoot.as_view(), name=ApiRoot.name),
     path('api/product-categories/', ProductCategoryList.as_view(), name=ProductCategoryList.name),

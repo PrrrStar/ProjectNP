@@ -179,15 +179,6 @@ def comment_delete(request, id=id):
             return redirect(product)
     return render(request, 'myside/detail.html', {})
 
-def mymap(request):
-
-    KAKAO_MAP_API_KEY = getattr(settings, 'KAKAO_MAP_API_KEY', 'KAKAO_MAP_API_KEY')
-    print(KAKAO_MAP_API_KEY)
-    context = {
-        'KAKAO_MAP_API_KEY':KAKAO_MAP_API_KEY
-    }
-    return render(request, 'myside/mymap.html', context)
-
 
 from django.views.generic import RedirectView
 
