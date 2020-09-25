@@ -18,21 +18,9 @@ DATABASES = {
 
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 AWS_REGION = 'ap-northeast-2'
-AWS_STORAGE_BUCKET_NAME = 'projectnp-bucket'
+AWS_STORAGE_BUCKET_NAME = 'bucket-np'
 AWS_S3_CUSTOM_DOMAIN = f's3.{AWS_REGION}.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}'
 
 AWS_S3_FILE_OVERWRITE = False
@@ -47,3 +35,15 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 1024000000
 
 DEFAULT_FILE_STORAGE = 'config.storages.S3DefaultStorage'
 STATICFILES_STORAGE = 'config.storages.S3StaticStorage'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
