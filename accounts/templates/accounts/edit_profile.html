@@ -12,9 +12,13 @@
 
         <form method="POST" action="{% url 'edit_user_profile' %}" id="user-form" enctype="multipart/form-data">
             {% csrf_token %}
-            {{form.as_p}}
-
-            <button type="submit" id="btn-profile" class="btn btn-primary">댓글 쓰기</button>
+            {{ form.nickname }}
+            {{ form.email }}
+            {{ form.profile }}
+            {{ form.introduction }}
+            {{ form.gender }}
+            {{ form.birth }}
+            <button type="submit" id="btn-profile" class="btn btn-primary">프로필 수정</button>
         </form>
 </div>
 
