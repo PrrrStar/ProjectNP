@@ -12,27 +12,46 @@ from .models import User
 from myside.models import Category
 from myside.models import Product
 
-def user_profile(request, id=None):
-    user = get_object_or_404(User, id=id)
-    products = Product.objects.all()
-    categories = Category.objects.all()
-    context = {
+from .forms import *
+
+def user_profile(request):
+    user        = request.user
+    products    = Product.objects.all()
+    categories  = Category.objects.all()
+    context     = {
         'user':user,
         'products':products,
         'categories':categories,
     }
     return render(request, 'accounts/profile.html',context)
 
-def edit_user_profile(request, id=None):
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def edit_user_profile(request):
     user = request.user
-    products = Product.objects.all()
-    categories = Category.objects.all()
-    context = {
+
+    if request.method == "POST":
+        form        = EditProfileForm(request.POST, instance =  request.user)
+        
+        if form.is_valid():
+            profile                 = form.save(commit=False)
+            profile.email           = form.cleaned_data['email']
+            profile.nickname        = form.cleaned_data['nickname']
+            profile.profile         = form.cleaned_data['profile']
+            profile.introduction    = form.cleaned_data['introduction']
+            profile.gender          = form.cleaned_data['gender']
+            profile.birth           = form.cleaned_data['birth']
+            profile.save()
+            return redirect('user_profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+
+    context     = {
         'user':user,
-        'products':products,
-        'categories':categories,
+        'form':form,
     }
-    return render(request, 'accounts/edit_profile.html.html',context)
+    return render(request, 'accounts/edit_profile.html',context)
 
 # 사용자 로그인
 def user_login(request):
@@ -47,10 +66,7 @@ def user_login(request):
 
         email = request.POST.get('email')
         password = request.POST.get('password')
-        print("email\t\t",email)
-        print("password\t",password)
         user = authenticate(username=email, password=password)
-        print("user\t\t",user)
         if user is not None:
             auth_login(request, user)
             return JsonResponse({'works':True})
@@ -157,43 +173,3 @@ def user_signup(request):
         return JsonResponse({'works':True})
 
     return JsonResponse({'notValid':True})
-
-
-
-
-    '''
-#Session Create
-def login(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-
-        user = authenticate(request, email=email, password=password)
-
-        if user is not None:
-            auth_login(request, user)
-            return redirect('/')
-        else:
-            return redirect(request,'/', {'error':'돌아가. 당신은 내편이 아닙니다.'})
-    else:
-        return redirect(request,'/')
-
-def logout(request):
-    auth_logout(request)
-    return redirect('/')
-
-
-def signup(request):
-    #redirect_to = request.REQUEST.get('next','')
-    if request.method == "POST":
-        signup_form = UserCreationForm(request.POST)
-        if signup_form.is_valid():
-            signup_form.save()
-        #return HttpResponseRedirect(redirect_to)
-        return redirect('/')
-    else:
-        signup_form = UserCreationForm()
-    return render(request, 'accounts/signup.html',{'signup_form':signup_form})
-
-
-    '''

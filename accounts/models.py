@@ -32,6 +32,3 @@ class User(AbstractUser):
 
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ['nickname',]
-    
-    def get_user_profile_url(self):
-        return reverse('user_profile', kwargs={'id':self.id})
