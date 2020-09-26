@@ -150,9 +150,15 @@
           <!-- 여기까지가 modal 입니다. -->
         </div>
         {% endif %}
-        <!-- 달린 댓글들 표시 -->
       </div>
-      {% include 'myside/_comment.html' %}
+
+      <!-- 댓글 리스트 -->
+      <div class="comment__comments">
+        {% include 'myside/_comment.html' %}
+        <div class="comments__showMore">더보기</div>
+        <div class="image-layer"></div>
+      </div>
+
     </div>
     <div class="detail__related-container">
       <div class="comment__header">

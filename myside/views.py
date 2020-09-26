@@ -123,7 +123,6 @@ def comment_create(request, slug):
         if comment_form.is_valid():
             author= request.user
             if author.is_authenticated:
-
                 comment         = comment_form.save(commit=False)
                 comment.product = product
                 comment.author  = author
@@ -133,14 +132,15 @@ def comment_create(request, slug):
                 #redirect(product)
         else:
             comment_form = CommentForm()
-
-    context = {
-            'comment_form' :comment_form,
-            'product':product,
-        }
-    form = render_to_string('myside/_comment.html', context, request=request)
-    return JsonResponse({'form':form})
-
+    context={
+        'comment':comment,
+        'comment_form':comment_form,
+        'product':product,
+    }
+    if request.is_ajax():
+        html = render_to_string('myside/_comment.html', context, request=request)
+        return JsonResponse({'form':html})
+    return redirect(product)
 
 def comment_update(request, id=id):
     '''

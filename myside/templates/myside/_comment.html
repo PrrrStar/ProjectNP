@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="comment__comments">
+
   {% for comment in product.comments.all %}
   <div class="comments">
     <div class="comments__content">
@@ -35,6 +35,4 @@
     {% endif %} {% endif %}
   </div>
   {% endfor %}
-  <div class="comments__showMore">더보기</div>
-  <div class="image-layer"></div>
-</div>
+
