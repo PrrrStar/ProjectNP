@@ -1,5 +1,4 @@
 import json
-import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -16,33 +15,8 @@ def post_detail(request, pk):
         post = Post.objects.get(pk=pk)
     except Post.DoesNotExist:
         raise Http404('게시글을 찾을 수 없습니다')
-    context={'post': post}
-    response= render(request, 'community/post_detail.html', context)
-    
-    if request.session.get('authUser') is None:
-        cookie_name = 'hit'
-    else:
-        cookie_name = f'hit:{request.session["authUser"]["id"]}'
-
-    tomorrow = datetime.datetime.replace(datetime.datetime.now(), hour=23, minute=59, second=0)
-    expires = datetime.datetime.strftime(tomorrow, "%a, %d-%b-%Y %H:%M:%S GMT")
-
-    if request.COOKIES.get(cookie_name) is not None:
-        
-        cookies = request.COOKIES.get(cookie_name)
-        cookies_list = cookies.split('|')
-        if str(pk) not in cookies_list:
-            response.set_cookie(cookie_name, cookies + f'|{pk}', expires =expires)
-            post.update_hits
-            return response
-    else:
-        response.set_cookie(cookie_name, pk, expires =expires)
-        post.update_hits
-        return response
-
-    return render(request, 'community/post_detail.html', context)
-
-
+    post.update_hits
+    return render(request, 'community/post_detail.html', {'post': post})
 
 def post_list(request):
     sort = request.GET.get('sort','')
