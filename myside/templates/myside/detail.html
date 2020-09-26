@@ -31,7 +31,6 @@
             All Products
           {% endif %}
         </span>
-        <!-- 검색 기능 우선 제외시키겠습니다.-->
         <img class="detail__img" src='{{product.img.url}}' alt="Product IMG"/>
       </div>
       <!-- 박스의 오른쪽 부분 -->
@@ -82,7 +81,7 @@
               <span>재고확인</span>
               <img src="{% static 'logo/location__white.png' %}" />
             </button>
-            <button type="button" class="detail__naeggu", id='btn-like' data-url='{{ product.get_api_like_url }}' data-like='{{product.like.count}}'>
+            <button type="button" class="detail__naeggu {% if user in product.like.all %}active{%endif%}", id='btn-like' data-url='{{ product.get_api_like_url }}' data-like='{{product.like.count}}'>
               <span>내꺼하기</span>
               <img src="{% static 'logo/heart__white.png' %}" />
             </button>
