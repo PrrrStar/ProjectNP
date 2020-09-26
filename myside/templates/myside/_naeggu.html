@@ -1,11 +1,12 @@
 {% load static %}
 <div class="naeggu">
   <div class="naeggu__container">
+    
+    <div class="naeggu__header">찜 상품
+      <i class="fas fa-heart"></i>
+    </div>
     {% for user_like in user.product_likes.all %}
       <div class="naeggu__list">
-        <div class="naeggu__header">찜 상품
-          <i class="fas fa-heart"></i>
-        </div>
         <a href="{{user_like.get_absolute_url }}">
           <img class="naeggu__listImg" src="{{ user_like.img.url }}"alt="" />
         </a>
