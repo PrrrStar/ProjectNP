@@ -92,14 +92,11 @@
       No product
       {% endif %}
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="{% static 'js/like-toggle.js' %}"></script>
-
+    
     <!-- 댓글 -->
     <div class="comment__main__comment">
-    {% include 'myside/_comment.html' %}
+      {% include 'myside/_comment.html' %}
     </div>
-    <script src="{% static 'js/like-comment-toggle.js' %}"></script>
     <div class="detail__related-container">
       <div class="comment__header">
         <div class="comment__header--title">
@@ -127,16 +124,18 @@
         {% endfor %}
       </div>
     </div>
-
+    
   </main>
-
-{% endblock %}
-
-{% block script %} 
-<script src="{% static 'js/commentAlert.js' %}"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="{% static 'js/slider.js' %}"></script>
-
-<script src="{% static 'js/comment.js' %}"></script>
-{% endblock %}
-
+  
+  {% endblock %}
+  
+  {% block script %} 
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="{% static 'js/commentAlert.js' %}"></script>
+  <script src="{% static 'js/like-comment-toggle.js' %}"></script>
+  <script src="{% static 'js/like-toggle.js' %}"></script>
+  <script src="{% static 'js/slider.js' %}"></script>
+  <script src="{% static 'js/comment.js' %}"></script>
+  {% endblock %}
+  
+  
