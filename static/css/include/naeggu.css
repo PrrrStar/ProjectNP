@@ -17,6 +17,10 @@
   line-height: 50px;
 }
 
+.naeggu__header i {
+  color: #ff0808;
+}
+
 .naeggu__list {
   width: 130px;
   height: 500px;
@@ -27,6 +31,6 @@
 .naeggu__listImg {
   display: block;
   margin: auto;
-  width:"120px"; 
-  height:"120px"; 
+  width: 120px; 
+  height: 120px; 
 }

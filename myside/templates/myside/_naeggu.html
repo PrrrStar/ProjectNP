@@ -3,7 +3,9 @@
   <div class="naeggu__container">
     {% for user_like in user.product_likes.all %}
       <div class="naeggu__list">
-        <div class="naeggu__header">찜 상품</div>
+        <div class="naeggu__header">찜 상품
+          <i class="fas fa-heart"></i>
+        </div>
         <a href="{{user_like.get_absolute_url }}">
           <img class="naeggu__listImg" src="{{ user_like.img.url }}"alt="" />
         </a>
