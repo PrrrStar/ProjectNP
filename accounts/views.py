@@ -17,11 +17,9 @@ from .forms import *
 def user_profile(request):
     user        = request.user
     products    = Product.objects.all()
-    categories  = Category.objects.all()
     context     = {
         'user':user,
         'products':products,
-        'categories':categories,
     }
     return render(request, 'accounts/profile.html',context)
 
@@ -52,6 +50,13 @@ def edit_user_profile(request):
         'form':form,
     }
     return render(request, 'accounts/edit_profile.html',context)
+
+@login_required
+def delete_user_profile(request):
+    if request.method =="POST":
+        request.user.delete()
+        return redirect('/')
+    return render(request, 'accounts/delete.html')
 
 # 사용자 로그인
 def user_login(request):

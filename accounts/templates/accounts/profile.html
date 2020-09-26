@@ -12,7 +12,6 @@
 <br>
 <div class="">
     <div class="">
-        <br><br><br>
 
 
         <li>{{user.nickname}} 님의 프로필</li>
@@ -27,16 +26,22 @@
     </div>
 
     <div class="">
-        <li>{{user.name}} </li>
-        <li>{{user.email}} </li>
-        <li>{{user.introduction}} </li>
-        {% if user.birth %}
-        <li>{{user.birth}} </li>
-        {% else %}
-        <li>등록된 생일이 없어요</li>
-        {% endif %}
-
-        <a href="{% url 'edit_user_profile' %}">프로필 편집</a>
+        <div>
+            <ul>
+                <li>{{user.name}} </li>
+                <li>{{user.email}} </li>
+                <li>{{user.introduction}} </li>
+                {% if user.birth %}
+                <li>{{user.birth}} </li>
+                {% else %}
+                <li>등록된 생일이 없어요</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div>
+            <a href="{% url 'edit_user_profile' %}">프로필 편집</a>
+            <a href="{% url 'delete_user_profile' %}">회원탈퇴</a>
+        </div>
     </div>
     <hr>
     <div>

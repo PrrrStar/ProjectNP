@@ -135,5 +135,4 @@ SITE_ID = 1
 
 AUTH_USER_MODEL = 'accounts.User'
 
-
 CKEDITOR_UPLOAD_PATH = "communities/"
