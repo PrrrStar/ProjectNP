@@ -81,7 +81,9 @@
               <span>재고확인</span>
               <img src="{% static 'logo/location__white.png' %}" />
             </button>
-            <button type="button" class="detail__naeggu {% if user in product.like.all %}active{%endif%}", id='btn-like' data-url='{{ product.get_api_like_url }}' data-like='{{product.like.count}}'>
+
+            <button type="button" class="detail__naeggu {% if user in product.like.all %}detail__naeggu__active{% endif %}", id='btn-like' data-url='{{ product.get_api_like_url }}' data-like='{{product.like.count}}'>
+
               <span>내꺼하기</span>
               <img src="{% static 'logo/heart__white.png' %}" />
             </button>
@@ -102,8 +104,8 @@
         </div>
       </div>
       <div class="comment__main">
+        {% if request.user.is_authenticated %}
         <div class="comment__mycomment">
-          {% if request.user.is_authenticated %}
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment-modal">댓글 작성하기</button>
     
           <!-- 댓글 작성하기 버튼입니다. -->
@@ -149,8 +151,8 @@
         </div>
         {% endif %}
         <!-- 달린 댓글들 표시 -->
-        {% include 'myside/_comment.html' %}
       </div>
+      {% include 'myside/_comment.html' %}
     </div>
     <div class="detail__related-container">
       <div class="comment__header">
