@@ -18,6 +18,7 @@
     <!-- 슬라이더 버튼 - 이미지 소스 수정 필요 -->
     <div class="naeggu__slider__btn">
       <img src="https://www.shareicon.net/data/2015/08/19/87501_left_512x512.png" alt="" width="20px" height="20px" class="naeggu__slider__prev">
+      <span class="naeggu__slider__count"></span>
       <img src="https://icons-for-free.com/iconfiles/png/512/next+right+icon-1320166862802397293.png" alt="" width="20px" height="20px" class="naeggu__slider__next">
       <!-- <span class="naeggu__slider__prev">prev</span>
       <span class="naeggu__slider__next">next</span> -->
@@ -44,6 +45,14 @@
 				// dotsClass : "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정
 				draggable : false, 	//드래그 가능 여부
 				
+    });
+
+    $(".naeggu__slider").on("init", function(event, slick){
+        $(".naeggu__slider__count").text(parseInt(slick.currentSlide + 1) + ' / ' + slick.slideCount);
+    });
+
+    $(".naeggu__slider").on("afterChange", function(event, slick, currentSlide){
+        $(".naeggu__slider__count").text(parseInt(slick.currentSlide + 1) + ' / ' + slick.slideCount);
     });
   })
   const slideElements = document.querySelectorAll(".naeggu__list");
