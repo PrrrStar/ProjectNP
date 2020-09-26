@@ -138,7 +138,7 @@ def comment_create(request, slug):
             'comment_form' :comment_form,
             'product':product,
         }
-    form = render_to_string('myside/detail.html', context, request=request)
+    form = render_to_string('myside/_comment.html', context, request=request)
     return JsonResponse({'form':form})
 
 
