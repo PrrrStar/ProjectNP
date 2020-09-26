@@ -18,7 +18,7 @@ $(function () {
       contentType: false,
       dataType: "json",
       success: function (response) {
-        $(".detail__comment").html(response.form);
+        $(".comment__comments").html(response.form);
       },
       error: function (rs, e) {
         console.log(rs.responseText);
