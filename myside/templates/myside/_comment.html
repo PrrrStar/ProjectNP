@@ -63,8 +63,8 @@
       <div class="comments__comment">
         <div class="comments__comment--content">
           <!-- comment__propfile에 프사가 들어갈거에요 -->
-          {% if user.profile %}
-          <img class="comment__profile" src="{{user.profile.url}}" />
+          {% if comment.author.profile %}
+          <img class="comment__profile" src="{{comment.author.profile.url}}" />
           {% else %}
           <img class="comment__profile" src="{% static 'logo/person-24px.png' %}" />
           {% endif %}
