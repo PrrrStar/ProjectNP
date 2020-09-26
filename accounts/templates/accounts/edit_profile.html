@@ -8,8 +8,6 @@
 <br>
 <div class="">
     <div class="">
-        <br><br><br>
-
         <form method="POST" action="{% url 'edit_user_profile' %}" id="user-form" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.nickname }}

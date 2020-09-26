@@ -36,7 +36,7 @@ def edit_user_profile(request):
             profile                 = form.save(commit=False)
             profile.email           = form.cleaned_data['email']
             profile.nickname        = form.cleaned_data['nickname']
-            profile.profile         = form.cleaned_data['profile']
+            profile.profile         = request.FILES.get("profile")
             profile.introduction    = form.cleaned_data['introduction']
             profile.gender          = form.cleaned_data['gender']
             profile.birth           = form.cleaned_data['birth']
