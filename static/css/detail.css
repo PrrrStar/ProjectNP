@@ -163,13 +163,17 @@
   border-radius: 30px;
 }
 
-.detail__stock {
-  background-color: #00b3b0;
-}
-
 .detail__naeggu {
   background-color: #bbbbbb;
   margin-left: 10px;
+}
+
+.detail__naeggu__active {
+  background-color: #fe4737;
+}
+
+.detail__stock {
+  background-color: #00b3b0;
 }
 
 .detail__naeggu img {
