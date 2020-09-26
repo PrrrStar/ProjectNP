@@ -19,6 +19,7 @@ $(function () {
             dataType: 'json',
             success: function(response){
                 $('.comment__main__comments').html(response.form);
+                
             },
             error: function(rs, e){
                 console.log(rs.responseText);
