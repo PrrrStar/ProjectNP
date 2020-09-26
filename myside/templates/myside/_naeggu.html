@@ -2,11 +2,12 @@
 <div class="naeggu">
   <div class="naeggu__container">
     {% for user_like in user.product_likes.all %}
-    <a href="{{user_like.get_absolute_url }}">
       <div class="naeggu__list">
-        <img class="naeggu__listImg" src="{{ user_like.img.url }}" alt="" />
+        <div class="naeggu__header">찜 상품</div>
+        <a href="{{user_like.get_absolute_url }}">
+          <img class="naeggu__listImg" src="{{ user_like.img.url }}"alt="" />
+        </a>
       </div>
-    </a>
     {% endfor %}
   </div>
 </div>

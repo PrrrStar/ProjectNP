@@ -8,11 +8,25 @@
 .naeggu__container {
   width: 130px;
   height: 500px;
-  background-color: rgb(224, 255, 167);
   margin-top: 55px;
 }
 
+.naeggu__header {
+  margin-left: 25px;
+  vertical-align: middle;
+  line-height: 50px;
+}
+
+.naeggu__list {
+  width: 130px;
+  height: 500px;
+  border-radius: 10.6px;
+  border: solid 1px rgb(204,204,204);
+  /* border__gray */
+}
 .naeggu__listImg {
-  width: 120px;
-  height: 120px;
+  display: block;
+  margin: auto;
+  width:"120px"; 
+  height:"120px"; 
 }
