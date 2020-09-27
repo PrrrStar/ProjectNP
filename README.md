@@ -39,6 +39,7 @@ OS          : Window 10
    ┗━community          # 커뮤니티 게시판 (나만의 편의점 레시피, 꿀팁 등 공유)
    ┗━config             # root, admin 관련 Configuration
    ┗━media              # 상품사진, 댓글 사진, 프로필 사진등 media 파일 관리
+   ┗━mycvs              # 지도에서 편의점 조회, 즐겨찾는 편의점(내편) 등록 및 삭제
    ┗━myside             # 편의점 상품 조회, 예약 등 메인 기능 관련
    ┗━static             # css, js, logo 디렉터리
    ┗━templates          # BASE Templates
