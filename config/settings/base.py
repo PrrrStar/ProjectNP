@@ -18,11 +18,12 @@ import json
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 #BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
 
 
-if os.path.isfile(os.path.join(BASE_DIR, '.secrets.json'))==True:
-    ##LOCAL
+if os.path.isfile(os.path.join(BASE_DIR, '.secrets.json')) == True:
+    # LOCAL
     secret_file = os.path.join(BASE_DIR, '.secrets.json')
 
     with open(secret_file) as f:
@@ -35,19 +36,19 @@ if os.path.isfile(os.path.join(BASE_DIR, '.secrets.json'))==True:
             error_msg = "Set the {} env var".format(setting)
             raise ImproperlyConfigured(error_msg)
 
-    SECRET_KEY              = get_secret("SECRET_KEY")
-    DATABASE_PASSWORD       = get_secret("DATABASE")
-    AWS_ACCESS_KEY_ID       = get_secret("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY   = get_secret("AWS_SECRET_ACCESS_KEY")
-    KAKAO_MAP_API_KEY       = get_secret("KAKAO_MAP_API_KEY")
-    
+    SECRET_KEY = get_secret("SECRET_KEY")
+    DATABASE_PASSWORD = get_secret("DATABASE")
+    AWS_ACCESS_KEY_ID = get_secret("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = get_secret("AWS_SECRET_ACCESS_KEY")
+    KAKAO_MAP_API_KEY = get_secret("KAKAO_MAP_API_KEY")
+
 else:
-    ##DEPLOY
-    SECRET_KEY              = os.environ.get("SECRET_KEY")
-    DATABASE_PASSWORD       = os.environ.get("DATABASE")
-    AWS_ACCESS_KEY_ID       = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY   = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    KAKAO_MAP_API_KEY       = os.environ.get("KAKAO_MAP_API_KEY")
+    # DEPLOY
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    DATABASE_PASSWORD = os.environ.get("DATABASE")
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    KAKAO_MAP_API_KEY = os.environ.get("KAKAO_MAP_API_KEY")
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -65,9 +66,11 @@ INSTALLED_APPS = [
     'mycvs',
     'ckeditor',
     'ckeditor_uploader',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -78,6 +81,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+)
 
 ROOT_URLCONF = 'config.urls'
 
@@ -91,14 +99,13 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',               
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 
 AUTH_PASSWORD_VALIDATORS = [
