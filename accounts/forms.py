@@ -75,6 +75,7 @@ class EditProfileForm(UserChangeForm):
         )
     )
     birth= forms.DateField(
+        required=False,
         widget = forms.DateInput(
             attrs={
                 'class':'form-control',

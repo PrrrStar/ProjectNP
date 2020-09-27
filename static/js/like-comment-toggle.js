@@ -21,6 +21,7 @@ $(".btn-like-comment").click(function (e) {
       }
     },
     error: function (error) {
+      alert('댓글 좋아요 실패 ㅠ')
       console.log(error);
       console.log("error");
     },

@@ -15,7 +15,7 @@ $(".comment_delete").click(function () {
         comment.remove();
       },
       error: function (request, status, error) { // 실패
-        alert("삭제에 실패했어요.ㅠㅠ")
+        alert("댓글 삭제 실패 ㅠ")
   //      window.location.replace("/") // 로그인 페이지로 넘어가기
       },
     });

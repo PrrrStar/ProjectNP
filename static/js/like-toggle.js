@@ -21,8 +21,8 @@ $("#btn-like").click(function (e) {
       }
     },
     error: function (error) {
+      alert('내꺼하기 실패 ㅠ')
       console.log(error);
-      console.log("error");
     },
   });
 });

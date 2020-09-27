@@ -30,7 +30,7 @@
     {% csrf_token %}
     <!-- 로그인 유저 중 내가 쓴 댓글만 수정 삭제 보이게 설정-->
     {% if user.is_authenticated %} {% if user == comment.author %}
-    <input type="button" class="btn btn-info btn-sm comment_delete" data-url="" value="삭제">
+    <input type="button" class="btn btn-info btn-sm comment_delete" value="삭제">
     {% endif %} {% endif %}
   </form>
 </div>
