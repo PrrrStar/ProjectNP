@@ -13,6 +13,12 @@ if (comments.length <= 3) {
 }
 
 function showMoreComments() {
+  if (showMore.innerText == "접기"){
+    for (i = 3; i < comments.length; i++) {
+      comments[i].style.display = "none";
+    }
+  }
+  
   if (comments.length - startNum > 3) {
     for (i = startNum; i < startNum + 3; i++) {
       comments[i].style.display = "flex";
@@ -22,8 +28,10 @@ function showMoreComments() {
     for (i = startNum; i < comments.length; i++) {
       comments[i].style.display = "flex";
     }
-    showMore.style.display = "none";
+    showMore.innerHTML="접기";
+   // showMore.style.display = "none";
   }
+
 }
 
 showMore.addEventListener("click", showMoreComments);
