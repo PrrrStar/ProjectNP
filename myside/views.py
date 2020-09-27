@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.views.decorators.http import require_POST
 from django.db.models import Q, Count
 
 from django.conf import settings
@@ -143,7 +144,7 @@ def comment_create(request, slug):
     return redirect(product)
 
 def comment_update(request, id=id):
-    '''
+
     comment = Comment.objects.get(id=id)
     product = get_object_or_404(Product, id=comment.product.id)
 
@@ -156,19 +157,20 @@ def comment_update(request, id=id):
 
     context = {'form':form}
     return render(request, 'myside/detail.html', context)
-    '''
 
-    pass
-def comment_delete(request, id=id):
-    
-    comment = get_object_or_404(Comment, id=id)
-    product = get_object_or_404(Product, id=comment.product.id)
+
+@require_POST
+def product_comment_delete(request):
+    pk = request.POST.get('pk', None)
+    comment = get_object_or_404(Comment, pk=pk)
+    product = get_object_or_404(Product, pk=comment.product.id)
     author= request.user
-    if request.POST:
-        if author.is_authenticated and author==comment.author:   
-            comment.delete()            
-            return redirect(product)
-    return render(request, 'myside/detail.html', {})
+    if author.is_authenticated and author==comment.author:   
+        comment.delete()
+        message = '댓글 삭제'            
+    context={'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json") 
+
 
 from django.views.generic import RedirectView
 
