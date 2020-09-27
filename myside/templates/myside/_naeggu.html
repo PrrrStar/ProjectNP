@@ -4,26 +4,32 @@
     <div class="naeggu__header">내 꺼
       <i class="fas fa-heart"></i>
     </div>
-    <!-- 내꺼 목록 슬라이더 -->
-    <div class="naeggu__slider">
-      <!-- 내꺼 목록 -->
-      {% for user_like in user.product_likes.all %}
-        <div class="naeggu__list">
-          <a href="{{user_like.get_absolute_url }}">
-            <img class="naeggu__listImg" src="{{ user_like.img.url }}"alt="" />
-          </a>
-        </div>
-      {% endfor %}
-      
-      <div class="fake" style="display:none;"></div>
-      <div class="fake" style="display:none;"></div>
-    </div>
-    <!-- 슬라이더 버튼 - 이미지 소스 수정 필요 -->
-    <div class="naeggu__slider__btn">
-      <i class="fas fa-chevron-left naeggu__slider__prev"></i>
-      <span class="naeggu__slider__count"></span>
-      <i class="fas fa-chevron-right naeggu__slider__next"></i>
-    </div>
+    {% if user.is_authenticated %}
+      <!-- 내꺼 목록 슬라이더 -->
+      <div class="naeggu__slider">
+        <!-- 내꺼 목록 -->
+        {% for user_like in user.product_likes.all %}
+          <div class="naeggu__list">
+            <a href="{{user_like.get_absolute_url }}">
+              <img class="naeggu__listImg" src="{{ user_like.img.url }}"alt="" />
+            </a>
+          </div>
+        {% empty %}
+          내꺼를 등록해주세요!
+        {% endfor %}
+        
+        <div class="fake" style="display:none;"></div>
+        <div class="fake" style="display:none;"></div>
+      </div>
+      <!-- 슬라이더 버튼 -->
+      <div class="naeggu__slider__btn">
+        <i class="fas fa-chevron-left naeggu__slider__prev"></i>
+        <span class="naeggu__slider__count"></span>
+        <i class="fas fa-chevron-right naeggu__slider__next"></i>
+      </div>
+    {% else %}
+      로그인이 필요한 서비스입니다
+    {% endif %}
   </div>
 </div>
 <script src="{% static 'js/naegguSlider.js' %}"></script>
