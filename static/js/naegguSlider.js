@@ -15,36 +15,35 @@ $(function () {
 
   });
 
-  // $(".naeggu__slider").on("init", function(event, slick, currentSlider){
-  //     $(".naeggu__slider__count").text(parseInt(slick.currentSlide + 1) + ' / ' + parseInt(slick.slideCount/3));
-  // });
-  // 처음 로드시 페이지 카운트 표시가 되지 않아 1 / {{user.product_likes.all|length}} 로 표시했습니다. 
-  
-
   $(".naeggu__slider").on("afterChange", function (event, slick) {
     var text = parseInt(slick.currentSlide) / 3 + 1;
     text += ' / ';
-    text += parseInt(slick.slideCount/3);
+    text += parseInt((slick.slideCount-1)/3) + 1;
     $(".naeggu__slider__count").text(text);
+    
   });
 })
+
 const slideElements = document.querySelectorAll(".naeggu__list");
 
 window.onload = function () {
+  var addElement = 3 - slideElements.length % 3;
+  console.log(addElement);
+
   for (var i = 0; i < slideElements.length; i++) {
     slideElements[i].style.height = "120px";
     slideElements[i].style.marginBottom = "10px";
   }
+  
+  for(var i = 0; i < addElement; i++) {
+    console.log("add");
+    $(".naeggu__slider").append('<div></div>');
+  }
 };
-
-const addElemnt = slideElements.length % 3;
-for(var i = 0; i < addElemnt.length; i++) {
-  $(".naeggu__slider").appendChild(div);
-}
 
 if(slideElements.length > 0) {
   var text = ' 1 / '
-              + parseInt(slideElements.length/3);
+              + (parseInt((slideElements.length-1)/3) + 1);
   $(".naeggu__slider__count").text(text);
 }
 

@@ -9,17 +9,14 @@
       <div class="naeggu__slider">
         <!-- 내꺼 목록 -->
         {% for user_like in user.product_likes.all %}
-          <div class="naeggu__list">
-            <a href="{{user_like.get_absolute_url }}">
-              <img class="naeggu__listImg" src="{{ user_like.img.url }}"alt="" />
-            </a>
-          </div>
+        <div class="naeggu__list">
+          <a href="{{user_like.get_absolute_url }}">
+            <img class="naeggu__listImg" src="{{ user_like.img.url }}"alt="" />
+          </a>
+        </div>
         {% empty %}
           내꺼를 등록해주세요!
         {% endfor %}
-        
-        <div class="fake" style="display:none;"></div>
-        <div class="fake" style="display:none;"></div>
       </div>
       <!-- 슬라이더 버튼 -->
       <div class="naeggu__slider__btn">
