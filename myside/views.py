@@ -165,12 +165,10 @@ def comment_delete(request, id=id):
     product = get_object_or_404(Product, id=comment.product.id)
     author= request.user
     if request.POST:
-        if author.is_authenticated and author==comment.author:    
-            comment.delete()
-            print('a')
+        if author.is_authenticated and author==comment.author:   
+            comment.delete()            
             return redirect(product)
     return render(request, 'myside/detail.html', {})
-
 
 from django.views.generic import RedirectView
 
