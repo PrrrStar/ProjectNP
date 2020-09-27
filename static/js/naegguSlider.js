@@ -16,12 +16,16 @@ $(function () {
   });
 
   // $(".naeggu__slider").on("init", function(event, slick, currentSlider){
-  //     $(".naeggu__slider__count").text(parseInt(slick.currentSlide + 1) + ' / ' + slick.slideCount);
+  //     $(".naeggu__slider__count").text(parseInt(slick.currentSlide + 1) + ' / ' + parseInt(slick.slideCount/3));
   // });
   // 처음 로드시 페이지 카운트 표시가 되지 않아 1 / {{user.product_likes.all|length}} 로 표시했습니다. 
+  
 
-  $(".naeggu__slider").on("afterChange", function (event, slick, currentSlide) {
-    $(".naeggu__slider__count").text(parseInt(slick.currentSlide + 1) + ' / ' + slick.slideCount);
+  $(".naeggu__slider").on("afterChange", function (event, slick) {
+    var text = parseInt(slick.currentSlide) / 3 + 1;
+    text += ' / ';
+    text += parseInt(slick.slideCount/3);
+    $(".naeggu__slider__count").text(text);
   });
 })
 const slideElements = document.querySelectorAll(".naeggu__list");
@@ -33,5 +37,14 @@ window.onload = function () {
   }
 };
 
+const addElemnt = slideElements.length % 3;
+for(var i = 0; i < addElemnt.length; i++) {
+  $(".naeggu__slider").appendChild(div);
+}
 
+if(slideElements.length > 0) {
+  var text = ' 1 / '
+              + parseInt(slideElements.length/3);
+  $(".naeggu__slider__count").text(text);
+}
 

@@ -14,14 +14,15 @@
           </a>
         </div>
       {% endfor %}
+      
+      <div class="fake" style="display:none;"></div>
+      <div class="fake" style="display:none;"></div>
     </div>
     <!-- 슬라이더 버튼 - 이미지 소스 수정 필요 -->
     <div class="naeggu__slider__btn">
       <i class="fas fa-chevron-left naeggu__slider__prev"></i>
-      <span class="naeggu__slider__count">1 / {{user.product_likes.all|length}}</span>
+      <span class="naeggu__slider__count"></span>
       <i class="fas fa-chevron-right naeggu__slider__next"></i>
-      <!-- <span class="naeggu__slider__prev">prev</span>
-      <span class="naeggu__slider__next">next</span> -->
     </div>
   </div>
 </div>
