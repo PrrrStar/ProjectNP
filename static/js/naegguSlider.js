@@ -27,8 +27,7 @@ $(function () {
 const slideElements = document.querySelectorAll(".naeggu__list");
 
 window.onload = function () {
-  var addElement = 3 - slideElements.length % 3;
-  console.log(addElement);
+  var addElement = (slideElements.length % 3 == 0)? 0: (3 - slideElements.length % 3);
 
   for (var i = 0; i < slideElements.length; i++) {
     slideElements[i].style.height = "120px";
@@ -36,14 +35,15 @@ window.onload = function () {
   }
   
   for(var i = 0; i < addElement; i++) {
-    console.log("add");
-    $(".naeggu__slider").append('<div></div>');
+    console.log(addElement);
+    $('.naeggu__slider').slick('slickAdd','<div></div>');  
   }
 };
 
-if(slideElements.length > 0) {
-  var text = ' 1 / '
+if(slideElements.length > 3) {
+  text = ' 1 / '
               + (parseInt((slideElements.length-1)/3) + 1);
   $(".naeggu__slider__count").text(text);
+  $('.naeggu__slider').slick('slickAdd','<div>add</div>');
 }
 
