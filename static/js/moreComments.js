@@ -17,9 +17,9 @@ function showMoreComments() {
     for (i = 3; i < comments.length; i++) {
       comments[i].style.display = "none";
     }
+    showMore.innerHTML="더보기";
   }
-  
-  if (comments.length - startNum > 3) {
+  else if (comments.length - startNum > 3) {
     for (i = startNum; i < startNum + 3; i++) {
       comments[i].style.display = "flex";
     }
@@ -31,7 +31,6 @@ function showMoreComments() {
     showMore.innerHTML="접기";
    // showMore.style.display = "none";
   }
-
 }
 
 showMore.addEventListener("click", showMoreComments);
