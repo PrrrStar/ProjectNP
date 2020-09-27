@@ -1,0 +1,77 @@
+<!-- 댓글 작성하기 버튼입니다. -->
+    <!-- 버튼을 누르면 댓글을 작성하는 modal이 나타납니다. -->
+    <div class="modal fade" id="comment-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="POST" action="{% url 'product_comment_create' product.slug %}" id="comment-form" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="modal-body">
+                <span class="comment__user"> {{ user.nickname }} 님의 후기 </span>
+                <span class="star-input">
+                  <span class="input">
+                    <div class="startRadio">
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p1" value="0.5" />
+                          <span class="startRadio__img"><span class="blindStar">별 0.5개</span></span>
+                      </label>
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p2" value="1" />
+                          <span class="startRadio__img"><span class="blindStar">별 1개</span></span>
+                      </label>
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p3" value="1.5" />
+                          <span class="startRadio__img"><span class="blindStar">별 1.5개</span></span>
+                      </label>
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p4" value="2" />
+                          <span class="startRadio__img"><span class="blindStar">별 2개</span></span>
+                      </label>
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p5" value="2.5" />
+                          <span class="startRadio__img"><span class="blindStar">별 2.5개</span></span>
+                      </label>
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p6" value="3" />
+                          <span class="startRadio__img"><span class="blindStar">별 3개</span></span>
+                      </label>
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p7" value="3.5" />
+                          <span class="startRadio__img"><span class="blindStar">별 3.5개</span></span>
+                      </label>
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p8" value="4" />
+                          <span class="startRadio__img"><span class="blindStar">별 4개</span></span>
+                      </label>
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p9" value="4.5" />
+                          <span class="startRadio__img"><span class="blindStar">별 4.5개</span></span>
+                      </label>
+                      <label class="startRadio__box">
+                          <input type="radio" name="star-input" id="p10" value="5" />
+                          <span class="startRadio__img"><span class="blindStar">별 5개</span></span>
+                      </label>
+                    </div>
+                  </span>
+                  <output for="star-input"><b>0</b>점</output>
+                </span>
+  
+                <div class="preview">
+                  <img src="" id="preview-img" width="100" height="100" />
+                </div>
+                <div>{{comment_form.content}} {{comment_form.img}}</div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" id="btn-comment" class="btn btn-primary">댓글 쓰기</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- 여기까지가 modal 입니다. -->

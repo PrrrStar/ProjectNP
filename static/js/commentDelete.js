@@ -1,11 +1,11 @@
 $(".comment_delete").click(function () {
 
   var delete_warning = confirm('댓글을 삭제하시겠습니까?');
-  var url = $('#comment__editForm').attr('action');
+  var url = $('.comment__editForm').attr('action');
   var csrf = $('input[name=csrfmiddlewaretoken]').val();
 
   if (delete_warning == true) {
-    comment = $('#comment__editForm').parent('.comments');
+    comment = $(this).parents('.comments');
     $.ajax({ // ajax로 서버와 통신
       type: "POST", // 데이터를 전송하는 방법
       url: url, // 통신할 url을 지정
