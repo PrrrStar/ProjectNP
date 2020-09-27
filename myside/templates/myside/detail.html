@@ -8,12 +8,18 @@
   <link rel="stylesheet" href="{% static 'css/detail.css' %}" />
   <link rel="stylesheet" href="{% static 'css/comment.css' %}" />
   <link rel="stylesheet" href="{% static 'css/index/index-slider.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/include/naeggu.css' %}" />
 {% endblock %}
 
 {% block title %}상세페이지{% endblock %}
 
 {% block category %}
   {% include 'myside/_category.html' %}
+{% endblock %}
+
+<!-- 내꺼 목록 -->
+{% block naeggu %}
+  {% include 'myside/_naeggu.html' %}
 {% endblock %}
 
 {% block detail %}
