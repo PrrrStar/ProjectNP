@@ -66,7 +66,7 @@ class Brand(models.Model):
     slug        = models.SlugField(max_length=20, db_index=True, allow_unicode=True)
     img         = models.ImageField(upload_to="brand", blank=True, null=True)
     
-    cvs_name    = models.ForeignKey(CVS, verbose_name="지점명", on_delete=models.CASCADE, related_name='cvs_name')
+    cvs_name    = models.ForeignKey(CVS, verbose_name="지점명", null=True, blank=True,on_delete=models.CASCADE, related_name='cvs_name')
 
 
     class Meta:
