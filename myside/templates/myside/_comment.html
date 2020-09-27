@@ -26,10 +26,13 @@
   <img src="{{ comment.img.url }}" alt="comment IMG" class="comments__img" enlarge="f" />
   {% endif %}
 
-  <!-- 로그인 유저 중 내가 쓴 댓글만 수정 삭제 보이게 설정-->
-  {% if user.is_authenticated %} {% if user == comment.author %}
-  <input type="button" class="btn btn-info btn-sm comment_delete" name="{{ comment.id }}" value="삭제">
-  {% endif %} {% endif %}
+  <form method="POST" id="comment__editForm" action="{% url 'product_comment_delete' product.slug comment.id %}">
+    {% csrf_token %}
+    <!-- 로그인 유저 중 내가 쓴 댓글만 수정 삭제 보이게 설정-->
+    {% if user.is_authenticated %} {% if user == comment.author %}
+    <input type="button" class="btn btn-info btn-sm comment_delete" data-url="" value="삭제">
+    {% endif %} {% endif %}
+  </form>
 </div>
 {% endfor %}
 
@@ -39,26 +42,4 @@
 <script src="{% static 'js/like-comment-toggle.js' %}"></script>
 <script src="{% static 'js/moreComments.js' %}"></script>
 <script src="{% static 'js/enlargeImage.js' %}"></script>
-
-<script type="text/javascript">
-  $(".comment_delete").click(function () {
-    var delete_warning = confirm('댓글을 삭제하시겠습니까?');
-    var pk = $(this).attr('name')
-    if (delete_warning == true) {
-      comment = $(this).parent('div');
-      $.ajax({ // ajax로 서버와 통신
-        type: "POST", // 데이터를 전송하는 방법
-        url: "{% url 'product_comment_delete' %}", // 통신할 url을 지정
-        data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, // 서버로 데이터 전송시 옵션, pk를 넘겨야 어떤 video인지 알 수 있음
-        dataType: "json",
-        success: function (response) { // 성공
-          comment.remove();
-        },
-        error: function (request, status, error) { // 실패
-          alert("로그인이 필요합니다.")
-          window.location.replace("/") // 로그인 페이지로 넘어가기
-        },
-      });
-    }
-  })
-</script>
+<script src="{% static 'js/commentDelete.js' %}"></script>

@@ -9,8 +9,8 @@ urlpatterns = [
     path('category/<category_slug>/', product_in_category, name='product_in_category'),
     path('products/<slug>/', product_detail, name='product_detail'),
     
-    path('products/<slug>/comments/', comment_create, name='comment_create'),
-    path('comments/delete/',product_comment_delete, name='product_comment_delete'),
+    path('products/<slug>/comments/', product_comment_create, name='product_comment_create'),
+    path('products/<slug>/comments/<int:id>',product_comment_delete, name='product_comment_delete'),
     path('comments/<int:id>/',comment_update, name='comment_update'),
 
 

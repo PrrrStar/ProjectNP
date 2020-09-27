@@ -117,7 +117,7 @@ def product_detail(request, slug):
 import json
 from django.http import HttpResponse
 
-def comment_create(request, slug):
+def product_comment_create(request, slug):
     comment_form = CommentForm(request.POST or None, request.FILES)
     product = get_object_or_404(Product, slug=slug)
     if request.POST:
@@ -160,11 +160,11 @@ def comment_update(request, id=id):
 
 
 @require_POST
-def product_comment_delete(request):
-    pk = request.POST.get('pk', None)
-    comment = get_object_or_404(Comment, pk=pk)
-    product = get_object_or_404(Product, pk=comment.product.id)
+def product_comment_delete(request, slug, id):
+    comment = get_object_or_404(Comment, id=id)
+    product = get_object_or_404(Product, slug=slug)
     author= request.user
+    print('view',comment,product)
     if author.is_authenticated and author==comment.author:   
         comment.delete()
         message = '댓글 삭제'            
