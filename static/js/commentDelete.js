@@ -3,7 +3,6 @@ $(".comment_delete").click(function () {
   var delete_warning = confirm('댓글을 삭제하시겠습니까?');
   var url = $(this).parents('.comment__editForm').attr('action');
   var csrf = $('input[name=csrfmiddlewaretoken]').val();
-  alert(url)
   if (delete_warning == true) {
     comment = $(this).parents('.comments');
     $.ajax({ // ajax로 서버와 통신
