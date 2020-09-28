@@ -13,7 +13,9 @@
 > Language  : Python 3.8.5 <br/>
 Framework   : Django 3.1.1  <br/>
 Database    : PostgreSQL 12<br/>
-Server      : Heroku 3.1.1 <br/>
+PaaS        : AWS RDS
+Server      : AWS EC2 - Ubuntu 18.04 <br/>
+Bucket      : AWS S3
 IDE         : VS Code <br/>
 OS          : Window 10
 
