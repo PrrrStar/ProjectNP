@@ -163,12 +163,14 @@ def comment_update(request, id=id):
 def product_comment_delete(request, slug, id):
     comment = get_object_or_404(Comment, id=id)
     product = get_object_or_404(Product, slug=slug)
-    author= request.user
-    
-    if author.is_authenticated and author==comment.author:   
+    user= request.user
+    print(comment.content)
+    if user.is_authenticated and user==comment.author: 
+        print(user)  
         comment.delete()
         message = '댓글 삭제'            
     context={'message': message}
+    print(context)
     return HttpResponse(json.dumps(context), content_type="application/json") 
 
 
