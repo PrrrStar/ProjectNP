@@ -3,59 +3,147 @@
 
 {% block title %}내 정보{% endblock %}
 
-{% block category %}
-	{% include 'myside/_category.html' %}
-{% endblock %}
-
-
 {% block user-profile %}
-<br>
-<div class="">
-    <div class="">
-
-
-        <li>{{user.nickname}} 님의 프로필</li>
-        <hr>
-        <button type="submit">
-            {% if user.profile %}
-            <img class="round" src="{{user.profile.url}}" width="200"> <br>
-            {% else %}
-            <img class="round" src="{% static 'logo/logo-02.jpg' %}" width="200"> <br>
-            {% endif %}
-        </button>
-    </div>
-
-    <div class="">
-        <div>
-            <ul>
-                <li>{{user.name}} </li>
-                <li>{{user.email}} </li>
-                <li>{{user.introduction}} </li>
-                {% if user.birth %}
-                <li>{{user.birth}} </li>
-                {% else %}
-                <li>등록된 생일이 없어요</li>
-                {% endif %}
-            </ul>
+<div class="profile">
+    <!-- 내 프로필 보기 -->
+    <div class="profile__myinfo">
+        <!-- 내 프로필 보기 헤더 -->
+        <div class="profile__myinfoHeader">
+            <span>내 프로필 보기</span>
         </div>
-        <div>
+        <!-- 내 프로필 보기 헤더 끝 -->
+
+        <!-- 내 프로필 보기 내용 -->
+        <div class="profile__myinfoContents">
+            <div class="myinfoContents__myImg">
+                {% if user.profile %}
+                <img class="round" src="{{user.profile.url}}" width="200"> <br>
+                {% else %}
+                <img class="round" src="{% static 'logo/logo-02.jpg' %}" width="200"> <br>
+                {% endif %}
+            </div>
+            <div class="myinfoContents__contents">
+                <div class="myinfoContents__content">
+                    <span class="content__key">이름</span>
+                    <span class="content__value">{{user.username}}</span>
+                </div>
+                <div class="myinfoContents__content">
+                    <span class="content__key">닉네임</span>
+                    <span class="content__value">{{user.nickname}}</span>
+                </div>
+                <div class="myinfoContents__content">
+                    <span class="content__key">이메일</span>
+                    <span class="content__value">{{user.email}}</span>
+                </div>
+                <div class="myinfoContents__content">
+                    <span class="content__key">생년월일</span>
+                    <span class="content__value">{{user.birth}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- 내 프로필 보기 내용 끝 -->
+
+        <!-- 내 프로필 수정 -->
+        <div class="profile__myinfoEdit">
             <a href="{% url 'edit_user_profile' %}">프로필 편집</a>
             <a href="{% url 'delete_user_profile' %}">회원탈퇴</a>
         </div>
+        <!-- 내 프로필 수정 끝 -->
     </div>
-    <hr>
-    <div>
-        <div>내찜 목록
-        {% for user_like in user.product_likes.all %}
-            <a href="{{user_like.get_absolute_url }}">
-                <li>
-                    <p>{{ user_like.name }}</p>
-                    <img src="{{ user_like.img.url }}" alt="">
-                </li>
-            </a>
-        </div>
-        {% endfor %}
-    </div>
-</div>
+    <!-- 내 프로필 보기 끝 -->
 
+    <!-- 내 활동 보기 -->
+    <div class="profile__myactivity">
+        <!-- 내 활동 보기 헤더 -->
+        <div class="profile__myactivityHeader">
+            <span class="">내 활동 보기</span>
+        </div>
+        <!-- 내 활동 보기 헤더 끝 -->
+
+        <!-- 내 활동 보기 내용 -->
+        <div class="profile__myactivityContents">
+            <div class="myactivityContents__header">
+                <a href="" class="">내 후기</a>
+                <a href="" class="">내 글</a>
+                <a href="" class="">내 댓글</a>
+            </div>
+            <div class="myactivityContents__contents">
+                <div class="contents__header">
+                    <span class="">작성일</span>
+                    <span class="">제목</span>
+                    <span class=""></span>
+                </div>
+
+                <div class="contents__content">
+                    <span class=""></span>
+                    <span class=""></span>
+                    <span class=""></span>
+                </div>
+            </div>
+        </div>
+        <!-- 내 활동 보기 내용 끝 -->
+    </div>
+    <!-- 내 활동 보기 끝 -->
+    
+    <!-- 내 편 보기 -->
+    <div class="profile__mycvs">
+        <!-- 내 편 보기 헤더 -->
+        <div class="profile__mycvsHeader">
+            <span class="">내편 보기</span>
+        </div>
+        <!-- 내 편 보기 헤더 끝 -->
+
+        <!-- 내 편 보기 내용 -->
+        <div class="profile__mycvsContents">
+            <div class="mycvsContents__header">
+                <div class="header__searchBar">
+                    <div class="searchBar__select">
+                        <input type="select">
+                        <input type="text">
+                    </div>
+                    <div class="searchBar__input"></div>
+                </div>
+            </div>
+            <div class="mycvsContents__contents">
+                <div class="contents__header">
+                    <span class="">브랜드</span>
+                    <span class="">지점명</span>
+                    <span class="">주소</span>
+                </div>
+                <div class="contents__content">
+                    <span class=""></span>
+                    <span class=""></span>
+                    <span class=""></span>
+                </div>
+            </div>
+        </div>
+        <!-- 내 편 보기 내용 끝-->
+    </div>
+    <!-- 내 편 보기 끝 -->
+
+        
+    <!-- 내 꺼 -->
+    <div class="profile__naeggu">
+        <!-- 내 꺼 헤더 -->
+        <div class="profile__naegguHeader">
+            <span class="">내 꺼 ({{ user.product_likes.count }}개)</span>
+        </div>
+        <!-- 내 꺼 헤더 끝 -->
+
+        <!-- 내 꺼 내용 -->
+        <div class="profile__naegguContents">
+            {% for naeggu in user.product_likes.all %}
+            <div class="naegguContents__product">
+                <a href="{{naeggu.get_absolute_url }}">
+                    <img src="{{ naeggu.img.url }}" alt="">
+                    <span>{{ naeggu.name }}</span>
+                    <span>{{ naeggu.price }}원</span>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- 내 꺼 내용 끝 -->
+    </div>
+    <!-- 내 꺼 끝-->
+</div>
 {% endblock %}
