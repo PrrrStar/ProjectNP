@@ -1,0 +1,83 @@
+
+
+{% load static %}
+<body>
+    <a href="{% url 'index' %}" class="card">
+        
+        <div class="box-wrap">
+            <div class="box">
+                <div class="img">
+                    <img src="{% static 'logo/chusokFont.png'%}" alt="Hover Effect" class="">
+                </div>
+                <div class="info">
+                    <h3>내편으로 가기</h3>
+                    <p>클릭시 내편 메인페이지로 이동합니다</p>
+                </div>
+            </div>
+        </div>
+    </a>
+</body>
+
+
+<style>
+body {
+    background-image: url("{% static 'logo/chusokBack.png' %}");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-wrap {
+    width: 100vw; height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box {
+    position: relative;
+    width: 600px; height: 400px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.box img {
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.box .info {
+    position: absolute; left: 0; bottom: 0;
+    color:black;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+.box .info h3 {
+    font-size: 40px;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-bottom: 3px;
+}
+.box .info p {
+    font-size: 24px;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.box:hover .info {
+    opacity: 1;
+}
+.box:hover img {
+    opacity: 0.2;
+}
+.box:hover:before {
+    width: 60px;
+}
+.box:hover:after {
+    height: 60px;
+}
+
+
+</style>

@@ -34,7 +34,8 @@ def get_product_queryset(query=None, category_id = None):
                 queryset.append(product)
     return list(set(queryset))
 
-
+def happyChusok(request):
+    return render(request, 'myside/happyChusok.html', {})
 
 def index(request):
     query = ""
