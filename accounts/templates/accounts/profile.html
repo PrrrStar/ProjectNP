@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block title %}내 정보{% endblock %}
+{% load static %}
+
+<!-- detail.html에서만 쓰이는 css -->
+{% block style %} 
+   <link rel="stylesheet" href="{% static 'css/include/profile.css' %}" />
+{% endblock %}
 
 {% block user-profile %}
 <div class="profile">
@@ -39,6 +45,10 @@
                     <span class="content__key">생년월일</span>
                     <span class="content__value">{{user.birth}}</span>
                 </div>
+                <div class="myinfoContents__content">
+                    <span class="content__key">성별</span>
+                    <span class="content__value">{{user.gender}}</span>
+                </div>
             </div>
         </div>
         <!-- 내 프로필 보기 내용 끝 -->
@@ -63,17 +73,19 @@
         <!-- 내 활동 보기 내용 -->
         <div class="profile__myactivityContents">
             <div class="myactivityContents__header">
-                <a href="" class="">내 후기</a>
-                <a href="" class="">내 글</a>
-                <a href="" class="">내 댓글</a>
+                <div class="header__channel">
+                    <a href="" class="">내 후기</a>
+                    <a href="" class="">내 글</a>
+                    <a href="" class="">내 댓글</a>
+                </div>
+                
+                <div class="header__title">
+                    <span class="title__createdAt">작성일</span>
+                    <span class="title__title">제목</span>
+                    <span class="title__likes">좋아요</span>
+                </div>
             </div>
             <div class="myactivityContents__contents">
-                <div class="contents__header">
-                    <span class="">작성일</span>
-                    <span class="">제목</span>
-                    <span class=""></span>
-                </div>
-
                 <div class="contents__content">
                     <span class=""></span>
                     <span class=""></span>
@@ -82,6 +94,9 @@
             </div>
         </div>
         <!-- 내 활동 보기 내용 끝 -->
+        <div class="profile__myactivityPage">
+            <span>◀ 1/3 ▶</span>
+        </div>
     </div>
     <!-- 내 활동 보기 끝 -->
     

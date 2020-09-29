@@ -6,18 +6,24 @@
 
 {% block edit-profile %}
 <br>
-<div class="">
-    <div class="">
+<div class="editProfile">
+    <div class="editProfile__header">
+        <span>내 프로필 수정</span>
+    <div class="editProfile__contents">
         <form method="POST" action="{% url 'edit_user_profile' %}" id="user-form" enctype="multipart/form-data">
             {% csrf_token %}
+            <div class="myinfoContents__myImg">
+                {{ form.profile }}
+            </div>
+            {{ form.username }}
             {{ form.nickname }}
             {{ form.email }}
-            {{ form.profile }}
             {{ form.introduction }}
             {{ form.gender }}
             {{ form.birth }}
             <button type="submit" id="btn-profile" class="btn btn-primary">프로필 수정</button>
         </form>
+
 </div>
 
 {% endblock %}

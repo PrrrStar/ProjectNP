@@ -34,6 +34,7 @@ def edit_user_profile(request):
         print(form)
         if form.is_valid():
             profile                 = form.save(commit=False)
+            profile.username        = form.cleaned_data['username']
             profile.email           = form.cleaned_data['email']
             profile.nickname        = form.cleaned_data['nickname']
             profile.profile         = request.FILES.get("profile")

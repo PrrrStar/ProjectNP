@@ -22,7 +22,7 @@ class User(AbstractUser):
         (GENDER_FEMALE,"Female"),
         (GENDER_OTHER,"Other"),
     )
-    username        = None
+    username        = models.TextField(max_length=100, blank=True, null=True)
     email           = models.EmailField(max_length=255, unique=True)
     nickname        = models.CharField(max_length=10, null=True, unique=True)
     profile         = models.ImageField(upload_to='profile', default="static/logo/person-24px.png", blank=True, null=True)

@@ -1,0 +1,137 @@
+.profile__myinfoHeader{
+    font-family: "Jua", sans-serif;
+    position: relative;
+    font-size: 28px;
+    line-height: 1.46;
+    letter-spacing: 2.8px;
+}
+
+.myinfoContents__myImg{
+    float:left;
+    width: 250px;
+    height: 250px;
+    background-color: #dfdfdf;
+}
+
+.myinfoContents__content{
+    width: 832px;
+    height: 50px;
+    border: solid 1px #dfdfdf;
+}
+
+.myinfoContents__content span{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 1.6px;
+}
+
+.profile__myinfoEdit a{
+    width: 120px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 1.6px;
+
+    border-radius: 5px;
+    background-color: #00b3b0;
+}
+.profile__myactivityHeader{
+    font-family: "Jua", sans-serif;
+    position: relative;
+    font-size: 28px;
+    line-height: 1.46;
+    letter-spacing: 2.8px; 
+}
+.profile__myactivityHeader .header__channel{
+    width: 1082px;
+    height: 70px;
+    background-color: #dfdfdf;
+}
+
+.profile__myactivityContents{
+    display: table;
+}
+.myactivityContents__header{
+    display: table-header-group;
+}
+.myactivityContents__contents{
+    display: table-row-group
+}
+
+.myactivityContents__header .header__channel {
+    display: table-row;
+    width: 1082px;
+    height: 70px;
+    background-color: #dfdfdf;
+}
+.myactivityContents__header .header__channel a {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color:red;
+    letter-spacing: 1.6px;
+}
+
+
+
+.myactivityContents__header .header__title {
+    display: table-row;
+    width: 1082px;
+    height: 70px;
+}
+.myactivityContents__header .header__title span{
+    display: table-cell;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color:blue;
+    letter-spacing: 1.6px;
+}
+
+
+.myactivityContents__header .header__title .title__createdAt {
+    width: 158px;
+    height: 50px;
+    border: solid 1px #dfdfdf;
+}
+
+.myactivityContents__header .header__title .title__title{
+    width: 819px;
+    height: 50px;
+    border: solid 1px #dfdfdf;
+}
+
+.myactivityContents__header .header__title .title__likes{
+    width: 107px;
+    height: 50px;
+    border: solid 1px #dfdfdf;
+}
+
+.myactivityContents__contents{
+    display: table-row-group
+}
+.myactivityContents__contents .contents__content{
+    display: table-row;
+}
+
+
+
+
+
+.profile__mycvsHeader{
+    font-family: "Jua", sans-serif;
+    position: relative;
+    font-size: 28px;
+    line-height: 1.46;
+    letter-spacing: 2.8px;
+}
+
+.profile__naegguHeader{
+    font-family: "Jua", sans-serif;
+    position: relative;
+    font-size: 28px;
+    line-height: 1.46;
+    letter-spacing: 2.8px;
+}

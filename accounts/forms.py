@@ -25,7 +25,15 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
         }
 '''
 class EditProfileForm(UserChangeForm):
-    
+    username = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control',
+                'name':'username',
+            }
+        )
+    )
     email= forms.EmailField(
         required=True,
         widget=forms.EmailInput(
