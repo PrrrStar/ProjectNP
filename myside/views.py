@@ -147,7 +147,7 @@ def product_comment_update(request, slug, id):
 
     comment = Comment.objects.get(id=id)
     product = get_object_or_404(Product, slug=slug)
-    url_ = product.get_absolute_url()
+
     
     if request.POST:
         comment_form = CommentForm(request.POST or None, request.FILES, instance=comment)
@@ -161,12 +161,13 @@ def product_comment_update(request, slug, id):
         comment_form = CommentForm(instance=comment)
     context = {
         'comment_form':comment_form,
-        'comment':comment,
+        'product':product,
         }
     if request.is_ajax():
+        print(comment.content)
         html = render_to_string('myside/_comment.html', context, request=request)
         return JsonResponse({'form':html})
-    return url_
+    return redirect('product_detail')
 
 
 @require_POST
