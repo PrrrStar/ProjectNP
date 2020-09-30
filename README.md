@@ -117,3 +117,22 @@ OS          : Window 10
       ```python
       $ python manage.py sqlmigrations [app 이름] [migration 이름]
       ```  
+
+   + **React 서버 실행하기** <br>
+      필수사항 : yarn 다운로드
+      
+      url : https://classic.yarnpkg.com/en/docs/install/#windows-stable
+
+      터미널에서 + 버튼을 눌러서 새로운 터미널 생성
+
+      frontend 폴더로 들어가기
+      ```
+      $ cd frontend
+      ```
+
+      서버 실행하기
+      ```
+      $ yarn start
+      ```
+
+      리액트 서버가 장고 서버와 따로 독립적으로 틀어집니다.
