@@ -30,8 +30,7 @@ def edit_user_profile(request):
     user = request.user
 
     if request.method == "POST":
-        form        = EditProfileForm(request.POST or request.FILES, instance =  request.user)
-        print(form)
+        form        = EditProfileForm(request.POST or request.FILES, instance=request.user)
         if form.is_valid():
             profile                 = form.save(commit=False)
             profile.username        = form.cleaned_data['username']
@@ -43,7 +42,6 @@ def edit_user_profile(request):
             profile.birth           = form.cleaned_data['birth']
             profile.save()
             return redirect('user_profile')
-        print('not valid')
     else:
         form = EditProfileForm(instance=request.user)
 

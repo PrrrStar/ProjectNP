@@ -12,7 +12,7 @@ urlpatterns = [
     
     path('products/<slug>/comments/', product_comment_create, name='product_comment_create'),
     path('products/<slug>/comments/<int:id>',product_comment_delete, name='product_comment_delete'),
-    path('comments/<int:id>/',comment_update, name='comment_update'),
+    path('products/<slug>/comments/<int:id>/',product_comment_update, name='product_comment_update'),
 
 
     path('api/', ApiRoot.as_view(), name=ApiRoot.name),

@@ -1,23 +1,41 @@
 $(".comment_delete").click(function () {
 
-  var delete_warning = confirm('댓글을 삭제하시겠습니까?');
-  var url = $(this).parents('.comment__editForm').attr('action');
+  var message = confirm('댓글을 삭제하시겠어요?');
+  var url = $(this).attr('data-url');
   var csrf = $('input[name=csrfmiddlewaretoken]').val();
-  if (delete_warning == true) {
+  if (message == true) {
     current_comment = $(this).parents('.comments');
     console.log(current_comment)
-    $.ajax({ // ajax로 서버와 통신
-      type: "POST", // 데이터를 전송하는 방법
-      url: url, // 통신할 url을 지정
-      data: {'csrfmiddlewaretoken': csrf}, // 서버로 데이터 전송시 옵션
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {'csrfmiddlewaretoken': csrf}, 
       dataType: "json",
-      success: function (response) { // 성공
+      success: function (response) { 
         current_comment.replaceWith('<div class="comments"><div class="comments__content">삭제된 댓글이에요</div></div>');
       },
-      error: function (request, status, error) { // 실패
+      error: function (request, status, error) {
         alert("댓글 삭제 실패 ㅠ")
-  //      window.location.replace("/") // 로그인 페이지로 넘어가기
+  //      window.location.replace("/") 
       },
     });
+  }
+})
+
+$(".comment_write").click(function(e){
+  e.preventDefault();
+  var url = $(this).attr('data-url');
+  $("#comment-modal").modal("show");
+  $("#comment-form").attr("action", url);
+})
+
+$(".comment_update").click(function (e) {
+  e.preventDefault();
+  var message = confirm('댓글을 수정하시겠어요?');
+  var url = $(this).attr('data-url');
+
+  if (message == true) {
+    $("#comment-modal").modal("show");
+    $("#comment-form").attr("action", url);
   }
 })

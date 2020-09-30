@@ -119,23 +119,22 @@ import json
 from django.http import HttpResponse
 
 def product_comment_create(request, slug):
-    comment_form = CommentForm(request.POST or None, request.FILES)
     product = get_object_or_404(Product, slug=slug)
     if request.POST:
+        comment_form = CommentForm(request.POST or None, request.FILES)
         if comment_form.is_valid():
             author= request.user
             if author.is_authenticated:
-                comment         = comment_form.save(commit=False)
-                comment.product = product
-                comment.author  = author
-                comment.img     = request.FILES.get("img")
-                comment.stars   = request.POST.get("star-input")
-                comment.save()
+                comment_form         = comment_form.save(commit=False)
+                comment_form.product = product
+                comment_form.author  = author
+                comment_form.img     = request.FILES.get("img")
+                comment_form.stars   = request.POST.get("star-input")
+                comment_form.save()
                 #redirect(product)
-        else:
-            comment_form = CommentForm()
+    else:
+        comment_form = CommentForm()
     context={
-        'comment':comment,
         'comment_form':comment_form,
         'product':product,
     }
@@ -144,20 +143,30 @@ def product_comment_create(request, slug):
         return JsonResponse({'form':html})
     return redirect(product)
 
-def comment_update(request, id=id):
+def product_comment_update(request, slug, id):
 
     comment = Comment.objects.get(id=id)
-    product = get_object_or_404(Product, id=comment.product.id)
-
-    form = CommentForm(instance=comment)
-    if request.method == "POST":
-        form = CommentForm(request.POST, instance=comment)
-        if form.is_valid():
-            form.save()
-            return redirect(product)
-
-    context = {'form':form}
-    return render(request, 'myside/detail.html', context)
+    product = get_object_or_404(Product, slug=slug)
+    url_ = product.get_absolute_url()
+    
+    if request.POST:
+        comment_form = CommentForm(request.POST or None, request.FILES, instance=comment)
+        if comment_form.is_valid():
+            comment_form         = comment_form.save(commit=False)
+            comment_form.img     = request.FILES.get("img")
+            comment_form.stars   = request.POST.get("star-input")
+            comment_form.save()
+            print(comment_form.content)
+    else:
+        comment_form = CommentForm(instance=comment)
+    context = {
+        'comment_form':comment_form,
+        'comment':comment,
+        }
+    if request.is_ajax():
+        html = render_to_string('myside/_comment.html', context, request=request)
+        return JsonResponse({'form':html})
+    return url_
 
 
 @require_POST
@@ -171,7 +180,6 @@ def product_comment_delete(request, slug, id):
         comment.delete()
         message = '댓글 삭제'            
     context={'message': message}
-    print(context)
     return HttpResponse(json.dumps(context), content_type="application/json") 
 
 
@@ -188,7 +196,7 @@ class ProductLikeToggle(RedirectView):
                 product.like.remove(user)
             else:
                 product.like.add(user)
-        return url_
+        return render(request, 'myside/detail.html', {'product',product})
 
 
 
