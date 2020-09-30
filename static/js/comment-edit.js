@@ -1,3 +1,4 @@
+//댓글 삭제 AJAX 요청
 $(".comment_delete").click(function () {
 
   var message = confirm('댓글을 삭제하시겠어요?');
@@ -5,7 +6,6 @@ $(".comment_delete").click(function () {
   var csrf = $('input[name=csrfmiddlewaretoken]').val();
   if (message == true) {
     current_comment = $(this).parents('.comments');
-    console.log(current_comment)
     $.ajax({
       type: "POST",
       url: url,
@@ -16,12 +16,12 @@ $(".comment_delete").click(function () {
       },
       error: function (request, status, error) {
         alert("댓글 삭제 실패 ㅠ")
-  //      window.location.replace("/") 
       },
     });
   }
 })
 
+//댓글 쓰기 눌렀을 때 모달 form 을 띄웁니다.
 $(".comment_write").click(function(e){
   e.preventDefault();
   var url = $(this).attr('data-url');
@@ -29,6 +29,7 @@ $(".comment_write").click(function(e){
   $("#comment-form").attr("action", url);
 })
 
+//댓글 쓰기 눌렀을 때 모달 form 을 띄웁니다.
 $(".comment_update").click(function (e) {
   e.preventDefault();
   var message = confirm('댓글을 수정하시겠어요?');
@@ -39,3 +40,10 @@ $(".comment_update").click(function (e) {
     $("#comment-form").attr("action", url);
   }
 })
+
+//댓글 Validation : 100자 제한
+var commentAlert = (e) => {
+  if (e.value.length > e.maxLength) {
+      alert("100자 이상 작성하실 수 없습니다.");
+  }
+}

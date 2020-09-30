@@ -20,11 +20,7 @@
   {% for comment in product.comments.all %}
   <div class="comments">
     <div class="comments__content">
-      {% if comment.author.profile %}
       <img class="comments__profile" src="{{comment.author.profile.url}}" />
-      {% else %}
-      <img class="comments__profile" src="{% static 'logo/heart__white.png' %}" />
-      {% endif %}
       <div class="comments__commentBox">
         <span class="comments__user"> {{ comment.author.nickname }} </span>
         <button type="button" class="btn-like-comment" data-url="{{ comment.get_api_like_url }}"
@@ -58,7 +54,7 @@
 </div>
 
 
+<script src="{% static 'js/comment-edit.js' %}"></script>
+<script src="{% static 'js/comment-more.js' %}"></script>
+<script src="{% static 'js/comment-image.js' %}"></script>
 <script src="{% static 'js/like-comment-toggle.js' %}"></script>
-<script src="{% static 'js/moreComments.js' %}"></script>
-<script src="{% static 'js/enlargeImage.js' %}"></script>
-<script src="{% static 'js/commentDelete.js' %}"></script>

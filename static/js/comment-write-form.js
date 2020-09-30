@@ -1,4 +1,4 @@
-
+//댓글 쓰기 및 수정 AJAX 요청
 $("#btn-comment").click(function (e) {
   e.preventDefault();
   $("#comment-modal").modal("hide");
@@ -26,3 +26,5 @@ $("#btn-comment").click(function (e) {
     },
   });
 });
+
+

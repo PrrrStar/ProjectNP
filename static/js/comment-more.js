@@ -16,6 +16,7 @@ function showMoreComments() {
   if (showMore.innerText == "접기"){
     for (i = 3; i < comments.length; i++) {
       comments[i].style.display = "none";
+      startNum=3;
     }
     showMore.innerHTML="더보기";
   }
