@@ -209,9 +209,17 @@ class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
 
     def get(self, request, *args, **kwargs):
+        user = self.request.user
+        isLoggedIn = False
+        if user.is_authenticated:
+            isLoggedIn = True
+        else:
+            isLoggedIn = False
+        
         return Response({
             'product-categories': reverse(ProductCategoryList.name, request=request),
             'products': reverse(ProductList.name, request=request),
+            'isLoggedIn': isLoggedIn,
         })
 
 class ProductCategoryList(generics.ListCreateAPIView):
