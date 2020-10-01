@@ -5,7 +5,6 @@ import '../css/category.css';
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
-  const [drop, setDrop] = useState();
 
   useEffect(() => {
     getCategories();
@@ -19,9 +18,9 @@ const Category = () => {
   const onClickCategory = event => {
     const children = document.querySelectorAll(".category__children");
     let name = event.target.getAttribute("value");
-    if (event.target.getAttribute("drop") == "f") {
+    if (event.target.getAttribute("drop") === "f") {
       for (var i = 0; i < children.length; i++) {
-        if (name == children[i].getAttribute("value")) {
+        if (name === children[i].getAttribute("value")) {
           children[i].style.display = "flex";
         }
         console.log(children[i]);
@@ -30,7 +29,7 @@ const Category = () => {
     }
     else {
       for (var j = 0; j < children.length; j++) {
-        if (name == children[j].getAttribute("value")) {
+        if (name === children[j].getAttribute("value")) {
           children[j].style.display = "none";
         }
       }
