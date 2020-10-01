@@ -58,13 +58,27 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'myside',
     'mptt',
-    'rest_framework',
     'taggit',
     'community',
     'accounts',
     'mycvs',
+    
+#글 쓰기 폼
     'ckeditor',
     'ckeditor_uploader',
+
+#all auth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+
+#for DRF
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+
+#for React
     'corsheaders',
 ]
 
@@ -133,7 +147,7 @@ MPTT_ADMIN_LEVEL_INDENT = 20
 
 
 SITE_ID = 1
-
+#REST_USE_JWT = True
 
 AUTH_USER_MODEL = 'accounts.User'
 
