@@ -7,16 +7,11 @@ class CategoryAdmin(MPTTModelAdmin):
     list_display = ['name','slug']
     prepopulated_fields = {'slug':('name',)}
 
-@admin.register(Brand)
-class BrandAdmin(admin.ModelAdmin):
-    list_display=('name','slug','img')
-    prepopulated_fields = {'slug':('name',)}
-
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name','category','img','price','stock','tags','available_display','created_at','modified_at')
     prepopulated_fields = {'slug':('name',)}
-    filter_horizontal = ('brand','like',)
+    filter_horizontal = ('like',)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

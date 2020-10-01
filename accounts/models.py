@@ -1,15 +1,6 @@
 from django.db import models
 from django.shortcuts import reverse
 
-'''
-이메일 (email)
-이름 (username)
-
-별명
-프사
-성별
-생일
-'''
 
 from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):

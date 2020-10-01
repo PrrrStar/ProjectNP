@@ -60,24 +60,6 @@ class Category(MPTTModel):
         return reverse('product_in_category', args=[self.slug])
 
 
-from mycvs.models import CVS
-class Brand(models.Model):
-    name        = models.CharField(max_length=20, verbose_name='브랜드', db_index=True)
-    slug        = models.SlugField(max_length=20, db_index=True, allow_unicode=True)
-    img         = models.ImageField(upload_to="brand", blank=True, null=True)
-    
-    cvs_name    = models.ForeignKey(CVS, verbose_name="지점명", null=True, blank=True,on_delete=models.CASCADE, related_name='cvs_name')
-
-
-    class Meta:
-        ordering            = ['-name']
-        index_together      = [['id', 'slug']]
-        verbose_name        = 'brand'
-        verbose_name_plural = 'brands'
-
-    def __str__(self):
-        return self.name
-
 
 class Product(models.Model):
     name                = models.CharField(max_length=20, db_index=True, verbose_name='제품명')
@@ -91,7 +73,6 @@ class Product(models.Model):
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
     
     category            = TreeForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
-    brand               = models.ManyToManyField(Brand, related_name='product_brand')
     like                = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='product_likes')
     tags                = TaggableManager(verbose_name='tags',blank=True, through=TaggedProduct)
 
