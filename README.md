@@ -11,14 +11,14 @@
 
 ## Environment
 > Language  : Python 3.8.5 <br/>
-Framework   : Django 3.1.1  <br/>
+Framework   : Django 3.1.1 <br/>
 Database    : PostgreSQL 12<br/>
 PaaS        : AWS RDS<br/>
 Server      : AWS EC2 - Ubuntu 18.04 <br/>
 Storage     : AWS S3<br/>
 IDE         : VS Code <br/>
 OS          : Window 10<br/>
-
+>>동적 웹 어플리케이션을 위한 'React' Frontend 라이브러리 도입
 <br>
 
 
@@ -66,17 +66,30 @@ OS          : Window 10<br/>
       $ source [가상환경 이름]/Scripts/activate    #윈도우 bash shell
       $ source [가상환경 이름]/bin/activate        #리눅스, 맥
       ```
-      아래는 config/settings/init.py 로 자동으로 실행되기 때문에 굳이 실행할 필요 없습니다.
+
       <br>
-      가상환경안에 개발 모드로 실행하기 위한 환경변수를 등록합니다.
+      개발 모드로 실행
       ```
-      $ DJANGO_SETTINGS_MODULES=config.settings.debug
+      #setting/__init__.py
+
+      from .base import * 
+      try: 
+         from .debug import * 
+      except: 
+      pass
+      ```
+      <br>
+      배포 모드로 실행
+      ```
+      #setting/__init__.py
+
+      from .base import * 
+      try: 
+         from .deploy import * 
+      except: 
+      pass
       ```
 
-      배포환경에서 실행하기 위해서는 환경변수를 아래와 같이 바꿔줍니다.
-      ```
-      $ DJANGO_SETTINGS_MODULES=config.settings.deploy
-      ```
       <br>
 
    + **Requirements 로 패키지 관리** <br>
@@ -123,7 +136,7 @@ OS          : Window 10<br/>
       
       url : https://classic.yarnpkg.com/en/docs/install/#windows-stable
 
-      터미널에서 + 버튼을 눌러서 새로운 터미널 생성
+      VSCode 터미널에서, + 버튼을 눌러서 새 터미널 생성
 
       frontend 폴더로 들어가기
       ```
@@ -136,9 +149,7 @@ OS          : Window 10<br/>
       $ yarn add react-router-dom
       ```
 
-      서버 실행하기
+      리엑트 서버 실행하기
       ```
       $ yarn start
       ```
-
-      리액트 서버가 장고 서버와 따로 독립적으로 틀어집니다.
