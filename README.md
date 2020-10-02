@@ -18,7 +18,7 @@ Server      : AWS EC2 - Ubuntu 18.04 <br/>
 Storage     : AWS S3<br/>
 IDE         : VS Code <br/>
 OS          : Window 10<br/>
->>동적 웹 어플리케이션을 위한 'React' Frontend 라이브러리 도입
+동적 웹 어플리케이션을 위한 'React' 라이브러리 도입
 <br>
 
 
