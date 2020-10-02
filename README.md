@@ -112,9 +112,8 @@ OS          : Window 10<br/>
    + **React 서버 실행하기** <br>
       yarn 다운로드<br>
       >url : https://classic.yarnpkg.com/en/docs/install/#windows-stable
-      <br>
-      VSCode 터미널에서, + 버튼을 눌러서 새 터미널 생성
 
+      VSCode 터미널에서, + 버튼을 눌러서 새 터미널 생성 후
       ProjectNP/frontend 로 진입
       ```
       $ cd frontend
