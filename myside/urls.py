@@ -15,6 +15,7 @@ urlpatterns = [
     path('products/<slug>/comments/<int:id>/',product_comment_update, name='product_comment_update'),
 
 
+
     path('api/', ApiRoot.as_view(), name=ApiRoot.name),
 
     path('api/auth/', include('rest_auth.urls')),
