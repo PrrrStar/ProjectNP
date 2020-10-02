@@ -129,6 +129,12 @@ OS          : Window 10
       ```
       $ cd frontend
       ```
+      
+      라이브러리 다운
+      ```
+      $ yarn add axios
+      $ yarn add react-router-dom
+      ```
 
       서버 실행하기
       ```
