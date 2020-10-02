@@ -156,7 +156,6 @@ def product_comment_update(request, slug, id):
             comment_form.img     = request.FILES.get("img")
             comment_form.stars   = request.POST.get("star-input")
             comment_form.save()
-            print(comment_form.content)
     else:
         comment_form = CommentForm(instance=comment)
     context = {
@@ -164,7 +163,6 @@ def product_comment_update(request, slug, id):
         'product':product,
         }
     if request.is_ajax():
-        print(comment.content)
         html = render_to_string('myside/_comment.html', context, request=request)
         return JsonResponse({'form':html})
     return redirect('product_detail')
