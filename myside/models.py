@@ -66,7 +66,6 @@ class Product(models.Model):
     img                 = models.ImageField(upload_to="products/%Y/%m/%d", blank=True, null=True)
     description         = models.TextField(verbose_name='설명', blank=True)
     price               = models.DecimalField(verbose_name='가격', max_digits=10, decimal_places=0)
-    stock               = models.PositiveIntegerField(verbose_name='재고')
     available_display   = models.BooleanField('판매 가능?', default=True)
     slug                = models.SlugField(max_length=20, db_index=True, allow_unicode=True)
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')

@@ -24,7 +24,7 @@ from myside.models import Product
 class Stock(models.Model):
     product = models.ForeignKey(Product, related_name='product', on_delete=models.CASCADE)
     cvs     = models.ForeignKey(CVS, related_name='cvs', on_delete=models.CASCADE)
-    stock   = models.PositiveIntegerField(default=0)
+    stock   = models.PositiveIntegerField(default=0, verbose_name='재고')
 
     class Meta:
         verbose_name        = 'stock'

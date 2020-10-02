@@ -56,19 +56,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.sites',
+
+#APP
     'myside',
-    'mptt',
-    'taggit',
     'community',
     'accounts',
     'mycvs',
-    
-#글 쓰기 폼
-    'ckeditor',
+        
+#Library
+    'mptt',                 #카테고리
+    'taggit',               #태그
+    'ckeditor',             #커뮤니티 글 쓰기 폼
     'ckeditor_uploader',
 
-#all auth
-    'django.contrib.sites',
+#all-auth
     'allauth',
     'allauth.account',
 
@@ -92,7 +94,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'config.urls'

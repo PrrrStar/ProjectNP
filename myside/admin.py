@@ -9,7 +9,7 @@ class CategoryAdmin(MPTTModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name','category','img','price','stock','tags','available_display','created_at','modified_at')
+    list_display = ('name','category','img','price','tags','available_display','created_at','modified_at')
     prepopulated_fields = {'slug':('name',)}
     filter_horizontal = ('like',)
 

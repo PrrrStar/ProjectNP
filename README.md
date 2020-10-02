@@ -13,11 +13,11 @@
 > Language  : Python 3.8.5 <br/>
 Framework   : Django 3.1.1  <br/>
 Database    : PostgreSQL 12<br/>
-PaaS        : AWS RDS
+PaaS        : AWS RDS<br/>
 Server      : AWS EC2 - Ubuntu 18.04 <br/>
-Storage     : AWS S3
+Storage     : AWS S3<br/>
 IDE         : VS Code <br/>
-OS          : Window 10
+OS          : Window 10<br/>
 
 <br>
 
