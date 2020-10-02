@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../css/category.css';
-
+import "../css/category.css";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -11,11 +10,11 @@ const Category = () => {
   }, []);
 
   const getCategories = async () => {
-    const { data } = await axios.get('/api/product-categories/');
+    const { data } = await axios.get("/api/product-categories/");
     setCategories(data);
-  }
+  };
 
-  const onClickCategory = event => {
+  const onClickCategory = (event) => {
     const children = document.querySelectorAll(".category__children");
     let name = event.target.getAttribute("value");
     if (event.target.getAttribute("drop") === "f") {
@@ -25,28 +24,34 @@ const Category = () => {
         }
         console.log(children[i]);
       }
-      event.target.setAttribute("drop", "t")
-    }
-    else {
+      event.target.setAttribute("drop", "t");
+    } else {
       for (var j = 0; j < children.length; j++) {
         if (name === children[j].getAttribute("value")) {
           children[j].style.display = "none";
         }
       }
-      event.target.setAttribute("drop", "f")
+      event.target.setAttribute("drop", "f");
     }
-  }
+  };
 
   return (
     <>
       <div class="category">
         <div class="category__container">
-          {categories.map(category => {
+          {categories.map((category) => {
             if (category.parent) {
-              return <div class="category__children" value={category.parent}><a
-                href="">{category.name}</a></div>
+              return (
+                <div class="category__children" value={category.parent}>
+                  <a href="">{category.name}</a>
+                </div>
+              );
             } else {
-              return <div class="category__parent" value={category.id} drop="f" onClick={onClickCategory}>{category.name}</div>
+              return (
+                <div class="category__parent" value={category.id} drop="f" onClick={onClickCategory}>
+                  {category.name}
+                </div>
+              );
             }
           })}
         </div>

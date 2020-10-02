@@ -1,23 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const MainSlider = () => {
+const MainSlider = ({ products }) => {
   return (
     <div class="index__slider index__best">
-      {% for product in best_products %}
-      <a href="{{product.get_absolute_url}}">
-        <img src="{{product.image_url}}" alt="Product IMG" class="index__slide--img" />
-        <div class="index__slideBox">
-          <div class="index__slide--header">
-            <span class="index__slide--name">{{product.name}}</span>
-            <div>
-              <img class="index__slide--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
-              <span>{{ product.like.count }}</span>
-            </div>
-          </div>
-          <div class="index__slide--description"><p>{{product.description}}</p></div>
-        </div>
-      </a>
-      {% endfor %}
+      {products.map((product) => (
+        <span>{product.name}</span>
+      ))}
     </div>
   );
 };
@@ -39,7 +28,7 @@ const MainIndexTitle = ({ title, search }) => {
   return (
     <div className="index__header">
       <span className="index__header--title">
-        <img src="/images/point.png" className="point" />
+        <img src="/images/point.png" className="point" alt="point" />
         {title}
       </span>
       {search && <Search />}
@@ -48,9 +37,21 @@ const MainIndexTitle = ({ title, search }) => {
 };
 
 const MainIndex = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = async () => {
+    const { data } = await axios.get("/api/products/");
+    setProducts(data);
+  };
+
   return (
     <div className="index">
       <MainIndexTitle title="베스트 상품" search={true} />
+      <MainSlider products={products} />
     </div>
   );
 };
