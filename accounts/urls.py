@@ -12,3 +12,4 @@ urlpatterns = [
     path('myprofile/', edit_user_profile, name = 'edit_user_profile'),
     path('delete/', delete_user_profile, name='delete_user_profile'),
 ]
+
