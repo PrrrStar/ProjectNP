@@ -74,25 +74,26 @@
 
   - **원하는 모드 설정**<br>
     seetings/__init__.py 의 코드를 수정해서 원하는 모드로 설정합니다.<br>
-    개발 모드로 설정
-    ```
-    #setting/__init__.py
-    from .base import _
-    try:
-    from .debug import _
-    except:
-    pass
-    ```
+    - 개발 모드로 설정
+      ```
+      #setting/__init__.py
+      from .base import _
+      try:
+      from .debug import _
+      except:
+      pass
+      ```
     <br>
-    배포 모드로 설정
-    ```
-    #setting/**init**.py
-    from .base import _
-    try:
-    from .deploy import _
-    except:
-    pass
-    ```
+
+    - 배포 모드로 설정
+      ```
+      #setting/**init**.py
+      from .base import _
+      try:
+      from .deploy import _
+      except:
+      pass
+      ```
     <br>
 
   - **Requirements 로 패키지 관리** <br>
@@ -110,7 +111,7 @@
 
      <br>
 
-  - **서버 실행하기**
+  - **서버 실행하기**<br>
     보안상 .secret.json 파일을 분리하여 settings에서 필요한 KEY들을 따로 관리 했습니다.<br>
     따라서 .secret.json 파일이 없으면 서버를 실행할 수 없습니다. <br>
     ```python
