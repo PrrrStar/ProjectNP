@@ -16,7 +16,7 @@ class MainSlider extends Component {
       <div class="index__slider">
         <Slider {...settings}>
           {products.map((product) => (
-            <a href="/">
+            <a href={"products/" + product.slug}>
               <img src={product.img} alt="Product IMG" class="index__slide--img" />
               <div class="index__slideBox">
                 <div class="index__slide--header">

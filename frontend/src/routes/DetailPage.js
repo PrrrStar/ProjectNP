@@ -1,9 +1,14 @@
 import React from "react";
-import { BrowserRouter, Route, Link, Switch, Router, useParams } from "react-router-dom";
+import Category from "../components/Category";
+import Detail from "../components/Detail";
 
 const DetailPage = () => {
-  let { slug } = useParams();
-  return <div>Now showing post {slug}</div>;
+  return (
+    <div className="main">
+      <Category />
+      <Detail />
+    </div>
+  );
 };
 
 export default DetailPage;
