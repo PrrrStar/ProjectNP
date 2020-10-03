@@ -184,14 +184,19 @@ def product_comment_delete(request, slug, pk):
 
 from rest_framework.views import APIView
 
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from rest_framework import generics
-from rest_framework import authentication, permissions
-
 from .serializers import CommentSerializer
 from .serializers import ProductSerializer
 from .serializers import ProductCategorySerializer
+
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from rest_framework import (generics,
+                            authentication,
+                            permissions,
+                            filters,
+                            )
+
+
 
 
 
@@ -207,25 +212,35 @@ class ApiRoot(generics.GenericAPIView):
             isLoggedIn = False
         
         return Response({
-            'product-categories': reverse(ProductCategoryList.name, request=request),
-            'products': reverse(ProductList.name, request=request),
+            'products-category': reverse(ProductCategoryList.name, request=request),
+            'products-best': reverse(ProductBestList.name, request=request),
+            'products-list': reverse(ProductList.name, request=request),
             'isLoggedIn': isLoggedIn,
         })
 
 class ProductCategoryList(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = ProductCategorySerializer
-    name = 'productcategory-list'
+
+    name = 'products-category'
 
 class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    name = 'product-list'
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name','description','tags']
+    name = 'products-list'
 
+
+class ProductBestList(generics.ListCreateAPIView):
+    queryset =  Product.objects.annotate(like_count=Count('like')).order_by('-like_count')
+    serializer_class = ProductSerializer
+    name = 'products-best'
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    lookup_field = 'slug'
     name = 'product-detail'
 
 class ProductLikeAPIToggle(APIView):

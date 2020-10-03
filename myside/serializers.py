@@ -9,7 +9,8 @@ class ProductCategorySerializer(serializers.ModelSerializer):
     products = serializers.HyperlinkedRelatedField(
         many=True,
         read_only=True,
-        view_name='product-detail'
+        view_name='product-detail',
+        lookup_field = 'slug'
     )
     class Meta:
         model = Category
@@ -23,7 +24,15 @@ class ProductSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = (
+            'name',
+            'img',
+            'description',
+            'price',
+            'category',
+            'like',
+            'comments',
+        )
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:

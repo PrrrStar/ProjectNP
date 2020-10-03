@@ -21,8 +21,9 @@ urlpatterns = [
     path('api/auth/', include('rest_auth.urls')),
     path('api/auth/registration/', include('rest_auth.registration.urls')),
 
-    path('api/products/', ProductList.as_view(), name=ProductList.name),
-    path('api/product-categories/', ProductCategoryList.as_view(), name=ProductCategoryList.name),
+    path('api/products-list/', ProductList.as_view(), name=ProductList.name),
+    path('api/products-best/', ProductBestList.as_view(), name=ProductBestList.name),
+    path('api/products-category/', ProductCategoryList.as_view(), name=ProductCategoryList.name),
     path('api/products/<slug>/', ProductDetail.as_view(), name=ProductDetail.name),
     path('api/products/<slug>/like', ProductLikeAPIToggle.as_view(), name=ProductLikeAPIToggle.name),
 
