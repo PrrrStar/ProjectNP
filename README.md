@@ -72,35 +72,28 @@
     $ source [가상환경 이름]/bin/activate        #리눅스, 맥
     ```
 
-     <br>
-     개발 모드로 실행
-     ```
-     #setting/__init__.py
-
+  - **원하는 모드 설정**<br>
+    seetings/__init__.py 의 코드를 수정해서 원하는 모드로 설정합니다.<br>
+    개발 모드로 설정
+    ```
+    #setting/__init__.py
     from .base import _
     try:
     from .debug import _
     except:
     pass
-
     ```
     <br>
-    배포 모드로 실행
+    배포 모드로 설정
     ```
-
     #setting/**init**.py
-
     from .base import _
     try:
     from .deploy import _
     except:
     pass
-
     ```
-
     <br>
-
-    ```
 
   - **Requirements 로 패키지 관리** <br>
     가상환경이 실행되었다면 패키지 설치를 합니다.
@@ -118,7 +111,8 @@
      <br>
 
   - **서버 실행하기**
-
+    보안상 .secret.json 파일을 분리하여 settings에서 필요한 KEY들을 따로 관리 했습니다.<br>
+    따라서 .secret.json 파일이 없으면 서버를 실행할 수 없습니다. <br>
     ```python
     $ python manage.py runserver
     ```
