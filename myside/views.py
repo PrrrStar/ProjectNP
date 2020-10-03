@@ -221,20 +221,23 @@ class ApiRoot(generics.GenericAPIView):
 class ProductCategoryList(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = ProductCategorySerializer
-
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name','description',]
     name = 'products-category'
 
 class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['name','description','tags']
+    search_fields = ['name','description',]
     name = 'products-list'
 
 
 class ProductBestList(generics.ListCreateAPIView):
     queryset =  Product.objects.annotate(like_count=Count('like')).order_by('-like_count')
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name','description',]
     name = 'products-best'
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
