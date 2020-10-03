@@ -21,18 +21,14 @@ urlpatterns = [
     path('api/auth/', include('rest_auth.urls')),
     path('api/auth/registration/', include('rest_auth.registration.urls')),
 
-    path('api/product-categories/', ProductCategoryList.as_view(), name=ProductCategoryList.name),
-    path('api/product-categories/<int:pk>/', ProductCategoryDetail.as_view(), name=ProductCategoryDetail.name),
     path('api/products/', ProductList.as_view(), name=ProductList.name),
-    path('api/products/<int:pk>/', ProductDetail.as_view(), name=ProductDetail.name),
-    path('api/products/<int:pk>/like', ProductLikeAPIToggle.as_view(), name=ProductLikeAPIToggle.name),
+    path('api/product-categories/', ProductCategoryList.as_view(), name=ProductCategoryList.name),
+    path('api/products/<slug>/', ProductDetail.as_view(), name=ProductDetail.name),
+    path('api/products/<slug>/like', ProductLikeAPIToggle.as_view(), name=ProductLikeAPIToggle.name),
 
     path('api/comments/', CommentList.as_view(),name=CommentList.name),
     path('api/comments/<int:pk>/', CommentDetail.as_view(),name=CommentDetail.name),
     path('api/comments/<int:pk>/like', CommentLikeAPIToggle.as_view(), name=CommentLikeAPIToggle.name),
-    
-    path('api/replies/', ReplyList.as_view(), name=ReplyList.name),
-    path('api/replies/<int:pk>/', ReplyDetail.as_view(), name=ReplyDetail.name),
     
 ]
 

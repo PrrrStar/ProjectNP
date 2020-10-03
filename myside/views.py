@@ -206,12 +206,9 @@ from rest_framework.reverse import reverse
 from rest_framework import generics
 from rest_framework import authentication, permissions
 
-from .serializers import ReplySerializer
 from .serializers import CommentSerializer
 from .serializers import ProductSerializer
 from .serializers import ProductCategorySerializer
-
-
 
 
 
@@ -237,13 +234,6 @@ class ProductCategoryList(generics.ListCreateAPIView):
     serializer_class = ProductCategorySerializer
     name = 'productcategory-list'
 
-
-class ProductCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Category.objects.all()
-    serializer_class = ProductCategorySerializer
-    name = 'productcategory-detail'
-
-
 class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -259,9 +249,9 @@ class ProductLikeAPIToggle(APIView):
     authentication_classes  = [authentication.SessionAuthentication,]
     permission_classes      = [permissions.IsAuthenticated,]
     name = 'product_like-api-toggle'
-    def get(self, request, pk=None, format=None):
+    def get(self, request, slug=None, format=None):
 
-        product = get_object_or_404(Product, pk=pk)
+        product = get_object_or_404(Product, slug=slug)
         url_ = product.get_absolute_url()
         user = self.request.user
         updated = False
@@ -287,7 +277,7 @@ class CommentLikeAPIToggle(APIView):
     def get(self, request, pk=None, format=None):
 
         comment = get_object_or_404(Comment, pk=pk)
-        product = get_object_or_404(Product, pk=comment.product.id)
+        product = get_object_or_404(Product, pk=comment.product.pk)
         url_ = product.get_absolute_url()
         user = self.request.user
         updated = False
@@ -316,15 +306,3 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     name = 'comment-detail'
-
-
-class ReplyList(generics.ListCreateAPIView):
-    queryset = Reply.objects.all()
-    serializer_class = ReplySerializer
-    name = 'reply-list'
-
-
-class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Reply.objects.all()
-    serializer_class = ReplySerializer
-    name = 'reply-detail'

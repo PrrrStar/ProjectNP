@@ -93,11 +93,8 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.slug])
 
-    def get_like_url(self):
-        return reverse('product_like-toggle', kwargs={'slug': self.slug})
-
     def get_api_like_url(self):
-        return reverse('product_like-api-toggle', kwargs={'pk': self.pk})
+        return reverse('product_like-api-toggle', kwargs={'slug': self.slug})
 
 
 class Comment(models.Model):
