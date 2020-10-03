@@ -143,9 +143,9 @@ def product_comment_create(request, slug):
         return JsonResponse({'form':html})
     return redirect(product)
 
-def product_comment_update(request, slug, id):
+def product_comment_update(request, slug, pk):
 
-    comment = Comment.objects.get(id=id)
+    comment = Comment.objects.get(pk=pk)
     product = get_object_or_404(Product, slug=slug)
 
     
@@ -169,8 +169,8 @@ def product_comment_update(request, slug, id):
 
 
 @require_POST
-def product_comment_delete(request, slug, id):
-    comment = get_object_or_404(Comment, id=id)
+def product_comment_delete(request, slug, pk):
+    comment = get_object_or_404(Comment, pk=pk)
     product = get_object_or_404(Product, slug=slug)
     user= request.user
     print(comment.content)
@@ -180,23 +180,6 @@ def product_comment_delete(request, slug, id):
         message = '댓글 삭제'            
     context={'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json") 
-
-
-from django.views.generic import RedirectView
-
-class ProductLikeToggle(RedirectView):
-    def get_redirect_url(self, *args, **kwargs):
-        id = self.kwargs.get('id')
-        product = get_object_or_404(Product, id = id)
-        url_ = product.get_absolute_url()
-        user = self.request.user
-        if user.is_authenticated:
-            if user in product.like.all():
-                product.like.remove(user)
-            else:
-                product.like.add(user)
-        return render(request, 'myside/detail.html', {'product',product})
-
 
 
 from rest_framework.views import APIView
