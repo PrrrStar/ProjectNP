@@ -1,15 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { Component, useState, useEffect } from "react";
 import axios from "axios";
+import Slider from "react-slick";
+import "../css/index-slider.css";
 
-const MainSlider = ({ products }) => {
-  return (
-    <div class="index__slider index__best">
-      {products.map((product) => (
-        <span>{product.name}</span>
-      ))}
-    </div>
-  );
-};
+class MainSlider extends Component {
+  render() {
+    const { products } = this.props;
+
+    const settings = {
+      slidesToShow: 4,
+      slidesToScroll: 4,
+    };
+
+    return (
+      <div class="index__slider">
+        <Slider {...settings}>
+          {products.map((product) => (
+            <a href="/">
+              <img src={product.img} alt="Product IMG" class="index__slide--img" />
+              <div class="index__slideBox">
+                <div class="index__slide--header">
+                  <span class="index__slide--name">{product.name}</span>
+                  <div>
+                    <img class="index__slide--good" src="/images/thumb_up_alt-24px.png"></img>
+                    <span>{product.like.length}</span>
+                  </div>
+                </div>
+                <div class="index__slide--description">
+                  <p>{product.description}</p>
+                </div>
+              </div>
+            </a>
+          ))}
+        </Slider>
+      </div>
+    );
+  }
+}
 
 const Search = () => {
   return (
@@ -52,6 +79,9 @@ const MainIndex = () => {
     <div className="index">
       <MainIndexTitle title="베스트 상품" search={true} />
       <MainSlider products={products} />
+      <MainIndexTitle title="전체 상품" search={false} />
+      <MainSlider products={products} />
+      <img class="index__banner" src="/images/sub__bn.png"></img>
     </div>
   );
 };
