@@ -2,8 +2,8 @@
 from .models import Category
 from .models import Product
 from .models import Comment
-from rest_framework import serializers
 
+from rest_framework import serializers
 
 class ProductCategorySerializer(serializers.ModelSerializer):
     products = serializers.HyperlinkedRelatedField(
@@ -32,6 +32,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'category',
             'like',
             'comments',
+            'slug',
         )
 
 class CommentSerializer(serializers.ModelSerializer):
