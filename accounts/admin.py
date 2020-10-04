@@ -17,7 +17,10 @@ class UserAdmin(admin.ModelAdmin):
         'is_active',
         'date_joined',
         )
-
+    list_display_links = (
+        'nickname',
+        'email',
+    )
 
 
    # prepopulated_fields = 

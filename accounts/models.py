@@ -5,6 +5,8 @@ from .managers import CustomUserManager
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
+    
+    objects = CustomUserManager()
 
     email           = models.EmailField(max_length=255, unique=True)
     username        = models.TextField(max_length=100, blank=True, null=True)
@@ -16,7 +18,6 @@ class User(AbstractUser):
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ['nickname',]
 
-    objects = CustomUserManager()
     
     def __str__(self):
         return self.email

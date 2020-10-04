@@ -242,6 +242,7 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'slug'
     name = 'product-detail'
 
+
 class ProductLikeAPIToggle(APIView):
     authentication_classes  = [authentication.SessionAuthentication,]
     permission_classes      = [permissions.IsAuthenticated,]

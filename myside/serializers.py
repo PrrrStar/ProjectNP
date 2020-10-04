@@ -1,7 +1,5 @@
 
-from .models import Category
-from .models import Product
-from .models import Comment
+from .models import *
 
 from rest_framework import serializers
 
@@ -14,7 +12,12 @@ class ProductCategorySerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = [
+            'id',
+            'name',
+            'parent',
+            'products',
+        ]
         
 class ProductSerializer(serializers.ModelSerializer):
     comments = serializers.HyperlinkedRelatedField(
@@ -22,6 +25,12 @@ class ProductSerializer(serializers.ModelSerializer):
         read_only=True,
         view_name='comment-detail'
     )
+    category_name = serializers.ReadOnlyField(source='category.name')
+    tags = serializers.PrimaryKeyRelatedField(
+        queryset=TaggedProduct.objects.all(),
+        many=True,
+        )
+
     class Meta:
         model = Product
         fields = (
@@ -30,13 +39,25 @@ class ProductSerializer(serializers.ModelSerializer):
             'description',
             'price',
             'category',
+            'category_name',
             'like',
             'comments',
             'slug',
+            'tags',
         )
+
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaggableManager
+        fields= '__all__'
