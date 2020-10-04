@@ -25,6 +25,10 @@ urlpatterns = [
     path('community/', include('community.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('mycvs/', include('mycvs.urls')),
+
+    path('api/auth/', include('rest_auth.urls')),
+    path('api/auth/registration/', include('rest_auth.registration.urls')),
+  #  path('api/auth/login', )
 ]
 
 

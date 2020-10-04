@@ -190,11 +190,7 @@ from .serializers import ProductCategorySerializer
 
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework import (generics,
-                            authentication,
-                            permissions,
-                            filters,
-                            )
+from rest_framework import (generics, authentication, permissions, filters,)
 
 
 
