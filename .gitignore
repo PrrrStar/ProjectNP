@@ -7,6 +7,6 @@ local_settings.py
 *.pot
 db.sqlite3
 db.sqlite3-journal
-media
+
 .secrets.json
 staticfiles

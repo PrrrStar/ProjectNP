@@ -159,7 +159,6 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 #커스텀 adapter
 ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #커스텀 User Model
 AUTH_USER_MODEL = 'accounts.User'
@@ -169,13 +168,20 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
+
+#이메일 인증
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/?verification=1'
-ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/?verification=1'
-#REST_USE_JWT = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'   #이메일 주소가 확인 되기 전까지 로그인 차단                 
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/account/registration/confirm_email/?verification=1'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/account/registration/confirm_email/?verification=1'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+OLD_PASSWORD_FIELD_ENABLED = True
+########################################################
 
 SITE_ID = 1
 
+#REST_USE_JWT = True
 
 LANGUAGE_CODE = 'ko-kr'
 
