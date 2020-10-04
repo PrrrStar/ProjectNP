@@ -73,6 +73,7 @@ INSTALLED_APPS = [
 #all-auth
     'allauth',
     'allauth.account',
+    'allauth.socialaccount', 
 
 #for DRF
     'rest_framework',
@@ -142,16 +143,25 @@ REST_FRAMEWORK = {
 
     ]
 }
+
+#커스텀 로그인, user 정보 사용
 REST_AUTH_SERIALIZERS = {
     'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer',
 #    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer',
     'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer',
 }
+
+#커스텀 serializer 사용
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
 }
 
+#커스텀 adapter
+ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#커스텀 User Model
 AUTH_USER_MODEL = 'accounts.User'
 
 

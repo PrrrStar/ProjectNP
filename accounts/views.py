@@ -50,15 +50,7 @@ def edit_user_profile(request):
         'form':form,
     }
     return render(request, 'accounts/edit_profile.html',context)
-'''
-            profile                 = form.save(commit=False)
-            profile.email           = request.POST.get('email')
-            profile.nickname        = request.POST.get('nickname')
-            profile.profile         = request.FILES.get('profile')
-            profile.introduction    = request.POST.get('introduction')
-            profile.gender          = request.POST.get('gender')
-            profile.birth           = request.POST.get('birth')
-'''
+
 @login_required
 def delete_user_profile(request):
     if request.method =="POST":
