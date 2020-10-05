@@ -132,7 +132,7 @@
     $ cd frontend
     ```
 
-    라이브러리 다운
+    라이브러리 다운(frontend로 진입 후 다운 부탁드립니다!)
 
     ```
     $ yarn add axios
