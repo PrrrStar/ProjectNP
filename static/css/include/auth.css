@@ -188,11 +188,18 @@
   
   .signup-modal__footer button {
     margin-right: 30px;
-    background-color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #333333;
+    color: #333333;
+  }
+  .signup-modal__footer button:hover,
+  .signup-modal__footer button:focus {
+    border: 1px solid #fe4737;
+    color: #fe4737;
   }
   
   .signup-modal__footer a {
-    background-color: #fe4737;
+    background-color: #333333;
   }
   
   .signup-modal__footer a:hover,
