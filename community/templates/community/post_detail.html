@@ -26,7 +26,11 @@
     <span>{{ comment.author.nickname }} : </span>
     <span>{{ comment.content }}</span>
     <div class="date">{{ comment.created_at }}</div>
+    <input type="button" class="btn btn-info btn-sm post_comment_delete" value="삭제"
+      data-url="{% url 'post_comment_delete' post.id comment.id %}">
+    <input type="button" class="btn btn-info btn-sm post_comment_update" value="수정">
   </div>
+
   {% endfor %}
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -70,4 +74,30 @@
       });
     })
   </script>
+
+  <script type="text/javascript">
+    $(".post_comment_delete").click(function () {
+
+      var message = confirm('댓글을 삭제하시겠어요?');
+      var url = $(this).attr('data-url');
+      var csrf = $('input[name=csrfmiddlewaretoken]').val();
+      if (message == true) {
+        current_comment = $(this).parents('.comment');
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: { 'csrfmiddlewaretoken': csrf },
+          dataType: "json",
+          success: function (response) {
+            current_comment.replaceWith('<div class="comment"> 삭제된 댓글이에요  </div>');
+          },
+          error: function (request, status, error) {
+            alert("댓글 삭제 실패 ㅠ")
+          },
+        });
+      }
+    })
+  </script>
+
+
   {% endblock %}

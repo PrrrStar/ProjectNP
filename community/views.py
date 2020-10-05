@@ -11,9 +11,9 @@ from .forms import *
 # Create your views here.
 
 
-def post_detail(request, pk):
+def post_detail(request, post_pk):
     try:
-        post = Post.objects.get(pk=pk)
+        post = Post.objects.get(pk=post_pk)
     except Post.DoesNotExist:
         raise Http404('게시글을 찾을 수 없습니다')
     context={'post': post}
@@ -31,12 +31,12 @@ def post_detail(request, pk):
         
         cookies = request.COOKIES.get(cookie_name)
         cookies_list = cookies.split('|')
-        if str(pk) not in cookies_list:
-            response.set_cookie(cookie_name, cookies + f'|{pk}', expires =expires)
+        if str(post_pk) not in cookies_list:
+            response.set_cookie(cookie_name, cookies + f'|{post_pk}', expires =expires)
             post.update_hits
             return response
     else:
-        response.set_cookie(cookie_name, pk, expires =expires)
+        response.set_cookie(cookie_name, post_pk, expires =expires)
         post.update_hits
         return response
 
@@ -58,8 +58,8 @@ def post_list(request):
 
 @login_required
 @require_POST
-def post_recommend(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+def post_recommend(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
     user = request.user
 
     if user in post.recommends.all():
@@ -74,8 +74,8 @@ def post_recommend(request, pk):
 
 @login_required
 @require_POST
-def post_derecommend(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+def post_derecommend(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
     user = request.user
 
     if user in post.derecommends.all():
@@ -104,9 +104,9 @@ def post_create(request):
         form = PostForm()
     return render(request, 'community/post_create.html', {'form': form})
 
-def comment_create(request, pk):
+def comment_create(request, post_pk):
     author = request.user
-    post = Post.objects.get(pk=pk)
+    post = Post.objects.get(pk=post_pk)
     if not author.is_authenticated:
         return redirect('/')    
     elif request.method == 'POST':
@@ -117,7 +117,20 @@ def comment_create(request, pk):
             comment.author = author
             comment.post = post
             comment.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('post_detail', post_pk=post.pk)
     else:
         comment_form = CommentForm()
     return HttpResponseRedirect(post.get_absolute_url())
+
+@require_POST
+def post_comment_delete(request, post_pk, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    post = get_object_or_404(Post, pk=post_pk)
+    user= request.user
+    print(comment.content)
+    if user.is_authenticated and user==comment.author: 
+        print(user)  
+        comment.delete()
+        message = '댓글 삭제'            
+    context={'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")     
