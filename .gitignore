@@ -11,3 +11,4 @@ media
 .secrets.json
 staticfiles
 *.sqlite3
+db.sqlite3
