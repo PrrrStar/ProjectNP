@@ -47,7 +47,7 @@ def post_detail(request, post_pk):
 def post_list(request):
     sort = request.GET.get('sort','')
     if sort == 'recommends':
-        posts = Post.objects.annotate(recommends_count=Count('recommend_count')).order_by('-recommend_count', '-created_at')
+        posts = Post.objects.annotate(recommends_count=Count('recommends')).order_by('-recommends', '-created_at')
     elif sort == 'hits':
         posts = Post.objects.order_by('-hits', '-created_at')
     elif sort == 'comments':
