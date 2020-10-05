@@ -42,8 +42,6 @@ def post_detail(request, post_pk):
 
     return render(request, 'community/post_detail.html', context)
 
-
-
 def post_list(request):
     sort = request.GET.get('sort','')
     if sort == 'recommends':
@@ -104,6 +102,12 @@ def post_create(request):
         form = PostForm()
     return render(request, 'community/post_create.html', {'form': form})
 
+def post_delete(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    post.delete()
+    return redirect('/community/list/')
+
+
 def comment_create(request, post_pk):
     author = request.user
     post = Post.objects.get(pk=post_pk)
@@ -127,10 +131,9 @@ def post_comment_delete(request, post_pk, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     post = get_object_or_404(Post, pk=post_pk)
     user= request.user
-    print(comment.content)
     if user.is_authenticated and user==comment.author: 
-        print(user)  
         comment.delete()
         message = '댓글 삭제'            
     context={'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")     
+    

@@ -2,8 +2,14 @@
 <div class="row mt-5">
   <div class="col-12">
     <div class="form-group">
-
-      <div>제목 : {{ post.title }}</div>
+      <div>
+        제목 : {{ post.title }}
+        {% if user.is_authenticated %} {% if user == post.author %}
+        <a href="{% url 'post_delete' post.id %}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+        <a href="#">수정</a>
+        {% endif %}
+        {% endif %}
+      </div>
       <div>{{ post.content | safe }}</div>
       <div>조회수 : {{ post.hits }}</div>
       <div id="recommend-{{ post.id }}">추천 : {{ post.total_recommends }}</div>
@@ -26,9 +32,12 @@
     <span>{{ comment.author.nickname }} : </span>
     <span>{{ comment.content }}</span>
     <div class="date">{{ comment.created_at }}</div>
+    {% if user.is_authenticated %} {% if user == comment.author %}
     <input type="button" class="btn btn-info btn-sm post_comment_delete" value="삭제"
       data-url="{% url 'post_comment_delete' post.id comment.id %}">
     <input type="button" class="btn btn-info btn-sm post_comment_update" value="수정">
+    {% endif %}
+    {% endif %}
   </div>
 
   {% endfor %}
