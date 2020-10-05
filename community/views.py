@@ -58,8 +58,7 @@ def post_list(request):
 
 @login_required
 @require_POST
-def post_recommend(request):
-    pk = request.POST.get('pk', None)
+def post_recommend(request, pk):
     post = get_object_or_404(Post, pk=pk)
     user = request.user
 
@@ -72,6 +71,22 @@ def post_recommend(request):
 
     context = {'recommends_count':post.recommends.count(), 'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")   
+
+@login_required
+@require_POST
+def post_derecommend(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    user = request.user
+
+    if user in post.derecommends.all():
+        post.derecommends.remove(user)
+        message = '반대 취소'
+    else:
+        post.derecommends.add(user)
+        message = '반대'
+
+    context = {'derecommends_count':post.derecommends.count(), 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")  
 
 def post_create(request):
     if not request.user.is_authenticated:
