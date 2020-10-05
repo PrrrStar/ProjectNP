@@ -7,6 +7,7 @@
 
 .detailBox {
   display: flex;
+  
 }
 
 .detail__leftContent {
@@ -55,9 +56,9 @@
   font-family: "Jua", sans-serif;
   position: relative;
   font-size: 28px;
-  line-height: 1.46;
+  line-height: 0.3;
   letter-spacing: 2.8px;
-  
+
 }
 
 .detail__price {
