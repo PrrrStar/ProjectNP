@@ -20,7 +20,11 @@
   {% for comment in product.comments.all %}
   <div class="comments">
     <div class="comments__content">
+      {% if comment.author.profile %}
       <img class="comments__profile" src="{{comment.author.profile.url}}" />
+      {% else %}
+      <img class="comments__profile" src="/static/logo/default_profile.png" />
+      {% endif %}
       <div class="comments__commentBox">
         <span class="comments__user"> {{ comment.author.nickname }} </span>
         <button type="button" class="btn-like-comment" data-url="{{ comment.get_api_like_url }}"
