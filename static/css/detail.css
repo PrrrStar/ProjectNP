@@ -33,7 +33,7 @@
 .detail__img {
   width: 450px;
   height: 450px;
-  border: 1px solid black;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
 }
 .brand__img {
   width: 35px;
@@ -57,6 +57,7 @@
   font-size: 28px;
   line-height: 1.46;
   letter-spacing: 2.8px;
+  
 }
 
 .detail__price {
@@ -65,15 +66,15 @@
   line-height: 1.45;
   letter-spacing: 2px;
   padding: 15px 0px;
-  border-top: 1px solid red;
-  border-bottom: 1px solid rgb(105, 93, 93);
+  border-top: 1px solid #fe4737;
+  border-bottom: 1px solid #d1d1d1;
   display: flex;
   align-items: center;
 }
 
 .detail__description {
   height: 250px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #d1d1d1;
   padding: 15px 0px;
   display: flex;
   flex-direction: column;
