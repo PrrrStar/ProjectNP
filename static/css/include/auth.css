@@ -72,8 +72,8 @@
   
   .login-modal__login:hover,
   .login-modal__login:active {
-    background-color: #ffffff;
-    color: #fe4737;  
+    background-color: #fe4737;
+    color: #ffffff;  
   }
   
   .login-modal__find {
@@ -98,6 +98,12 @@
     border-right: 1px solid black;
   }
   
+  .find__id,
+  .find__password:hover,
+  .find__id,
+  .find__password:active {
+    color: #fe4737;
+  }
   /* sign-up modal css */
   .signup-modal__header {
     height: 90px;
