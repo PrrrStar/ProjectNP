@@ -99,9 +99,7 @@
   }
   
   .find__id,
-  .find__password:hover,
-  .find__id,
-  .find__password:active {
+  .find__password:hover {
     color: #fe4737;
   }
   /* sign-up modal css */
