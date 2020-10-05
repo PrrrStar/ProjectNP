@@ -2,13 +2,22 @@
 <div class="row mt-5">
   <div class="col-12">
     <div class="form-group">
-
-      <div>제목 : {{ post.title }}</div>
+      <div>
+        제목 : {{ post.title }}
+        {% if user.is_authenticated %} {% if user == post.author %}
+        <a href="{% url 'post_delete' post.id %}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+        <a href="#">수정</a>
+        {% endif %}
+        {% endif %}
+      </div>
       <div>{{ post.content | safe }}</div>
       <div>조회수 : {{ post.hits }}</div>
-      <div id="count-{{ post.id }}">추천 : {{ post.total_recommends }}</div>
+      <div id="recommend-{{ post.id }}">추천 : {{ post.total_recommends }}</div>
+      <div id="derecommend-{{ post.id }}">반대 : {{ post.total_derecommends }}</div>
       <div>작성일 : {{ post.created_at }}</div>
       <input type="button" class="btn btn-info btn-sm recommend" name="{{ post.id }}" value="추천">
+      <input type="button" class="btn btn-info btn-sm derecommend" name="{{ post.id }}" value="반대">
+      </button>
       <button class="btn btn-primary" onclick="location.href='/community/list/'">돌아가기</button>
     </div>
 
@@ -23,27 +32,81 @@
     <span>{{ comment.author.nickname }} : </span>
     <span>{{ comment.content }}</span>
     <div class="date">{{ comment.created_at }}</div>
+    {% if user.is_authenticated %} {% if user == comment.author %}
+    <input type="button" class="btn btn-info btn-sm post_comment_delete" value="삭제"
+      data-url="{% url 'post_comment_delete' post.id comment.id %}">
+    <input type="button" class="btn btn-info btn-sm post_comment_update" value="수정">
+    {% endif %}
+    {% endif %}
   </div>
+
   {% endfor %}
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript">
-    $(".recommend").click(function () { // .like 버튼을 클릭 감지
+    $(".recommend").click(function () {
       var pk = $(this).attr('name')
-      $.ajax({ // ajax로 서버와 통신
-        type: "POST", // 데이터를 전송하는 방법
-        url: "{% url 'post_recommend' %}", // 통신할 url을 지정
-        data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, // 서버로 데이터 전송시 옵션, pk를 넘겨야 어떤 video인지 알 수 있음
+      $.ajax({
+        type: "POST",
+        url: "{% url 'post_recommend' post.id %}",
+        data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
         dataType: "json",
-        success: function (response) { // 성공
+        success: function (response) {
           alert(response.message);
-          $("#count-" + pk).html("추천 : " + response.recommends_count); // 좋아요 개수 변경
+          $("#recommend-" + pk).html("추천 : " + response.recommends_count);
         },
-        error: function (request, status, error) { // 실패
+        error: function (request, status, error) {
           alert("로그인이 필요합니다.")
-          window.location.replace("/") // 로그인 페이지로 넘어가기
+          window.location.replace("/")
         },
       });
     })
   </script>
+
+
+  <script type="text/javascript">
+    $(".derecommend").click(function () {
+      var pk = $(this).attr('name')
+      $.ajax({
+        type: "POST",
+        url: "{% url 'post_derecommend' post.id %}",
+        data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
+        dataType: "json",
+        success: function (response) {
+          alert(response.message);
+          $("#derecommend-" + pk).html("반대 : " + response.derecommends_count);
+        },
+        error: function (request, status, error) {
+          alert("로그인이 필요합니다.")
+          window.location.replace("/")
+        },
+      });
+    })
+  </script>
+
+  <script type="text/javascript">
+    $(".post_comment_delete").click(function () {
+
+      var message = confirm('댓글을 삭제하시겠어요?');
+      var url = $(this).attr('data-url');
+      var csrf = $('input[name=csrfmiddlewaretoken]').val();
+      if (message == true) {
+        current_comment = $(this).parents('.comment');
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: { 'csrfmiddlewaretoken': csrf },
+          dataType: "json",
+          success: function (response) {
+            current_comment.replaceWith('<div class="comment"> 삭제된 댓글이에요  </div>');
+          },
+          error: function (request, status, error) {
+            alert("댓글 삭제 실패 ㅠ")
+          },
+        });
+      }
+    })
+  </script>
+
+
   {% endblock %}
