@@ -93,13 +93,15 @@
     justify-content: center;
     align-items: center;
   }
+  .find__password:hover{
+    color: #fe4737;
+  }
   
   .find__id {
     border-right: 1px solid black;
   }
   
-  .find__id,
-  .find__password:hover {
+  .find__id:hover{
     color: #fe4737;
   }
   /* sign-up modal css */
