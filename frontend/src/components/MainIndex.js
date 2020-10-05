@@ -16,7 +16,7 @@ class MainSlider extends Component {
       <div class="index__slider">
         <Slider {...settings}>
           {products.map((product) => (
-            <a href={"products/" + product.slug}>
+            <a href={"products/" + product.slug + "/"}>
               <img src={product.img} alt="Product IMG" class="index__slide--img" />
               <div class="index__slideBox">
                 <div class="index__slide--header">
@@ -64,23 +64,30 @@ const MainIndexTitle = ({ title, search }) => {
 };
 
 const MainIndex = () => {
-  const [products, setProducts] = useState([]);
+  const [productsBest, setProductsBest] = useState([]);
+  const [productsList, setProductsList] = useState([]);
 
   useEffect(() => {
-    getProducts();
+    getProductsBest();
+    getProductsList();
   }, []);
 
-  const getProducts = async () => {
-    const { data } = await axios.get("/api/products/");
-    setProducts(data);
+  const getProductsBest = async () => {
+    const { data } = await axios.get("/api/products-best/");
+    setProductsBest(data);
+  };
+
+  const getProductsList = async () => {
+    const { data } = await axios.get("/api/products-list/");
+    setProductsList(data);
   };
 
   return (
     <div className="index">
       <MainIndexTitle title="베스트 상품" search={true} />
-      <MainSlider products={products} />
+      <MainSlider products={productsBest} />
       <MainIndexTitle title="전체 상품" search={false} />
-      <MainSlider products={products} />
+      <MainSlider products={productsList} />
       <img class="index__banner" src="/images/sub__bn.png"></img>
     </div>
   );

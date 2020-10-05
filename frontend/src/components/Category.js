@@ -10,7 +10,7 @@ const Category = () => {
   }, []);
 
   const getCategories = async () => {
-    const { data } = await axios.get("/api/product-categories/");
+    const { data } = await axios.get("/api/products-category/");
     setCategories(data);
   };
 
@@ -42,7 +42,7 @@ const Category = () => {
           {categories.map((category) => {
             if (category.parent) {
               return (
-                <div class="category__children" value={category.parent}>
+                <div class={"category__children" + " " + "subCategory" + category.id} value={category.parent} parent={}>
                   <a href="">{category.name}</a>
                 </div>
               );
