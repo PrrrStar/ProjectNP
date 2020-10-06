@@ -42,7 +42,7 @@ const Category = () => {
           {categories.map((category) => {
             if (category.parent) {
               return (
-                <div class={"category__children" + " " + "subCategory" + category.id} value={category.parent} parent={}>
+                <div class={"category__children" + " " + "subCategory" + category.id} value={category.parent}>
                   <a href="">{category.name}</a>
                 </div>
               );

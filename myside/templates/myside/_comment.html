@@ -23,7 +23,7 @@
       {% if comment.author.profile %}
       <img class="comments__profile" src="{{comment.author.profile.url}}" />
       {% else %}
-      <img class="comments__profile" src="{% static 'logo/default_profile.png' %}" />
+      <img class="comments__profile" src="/static/logo/default_profile.png" />
       {% endif %}
       <div class="comments__commentBox">
         <span class="comments__user"> {{ comment.author.nickname }} </span>
