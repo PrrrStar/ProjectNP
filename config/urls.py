@@ -17,13 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from ckeditor_uploader import views as uploader_views
+from django.views.decorators.cache import never_cache
 
 urlpatterns = [
     path('', include('myside.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('community/', include('community.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('ckeditor/upload/', uploader_views.upload, name='ckeditor_upload'),
+    path('ckeditor/browse/', never_cache(uploader_views.browse), name='ckeditor_browse'),
     path('mycvs/', include('mycvs.urls')),
 
     path('api/auth/', include('rest_auth.urls')),
