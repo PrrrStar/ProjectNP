@@ -3,9 +3,10 @@ from .models import *
 from mptt.admin import MPTTModelAdmin
 
 @admin.register(Category)
-class CategoryAdmin(MPTTModelAdmin):
-    list_display = ['name','slug']
-    prepopulated_fields = {'slug':('name',)}
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['id','first','second','slug']
+    prepopulated_fields = {'slug':('second',)}
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

@@ -27,39 +27,17 @@ class TaggedProduct(TaggedItemBase):
         verbose_name_plural = 'tagged products'
 
 
-class Category(MPTTModel):
-
-    name    = models.CharField(max_length=20, verbose_name='카테고리', unique=True, db_index=True)
-    parent  = TreeForeignKey('self', null=True, blank=True, verbose_name='상위 카테고리',related_name='children', on_delete=models.CASCADE)
-    slug    = models.SlugField(max_length=20, db_index=True, allow_unicode=True)
-
-    class MPTTMeta:
-        order_insertion_by = ['name']
-
+class Category(models.Model):
+    first               =models.CharField(max_length=20, verbose_name='상위카테고리', null=True)
+    second              =models.CharField(max_length=20, verbose_name='하위카테고리', null=True)
+    slug                =models.SlugField(max_length=20, db_index=True, allow_unicode=True, null=True)
     class Meta:
-        unique_together     = (('parent', 'slug',))
+        ordering            = ['-first', '-second']
+        index_together      = [['id', 'slug']]
         verbose_name        = 'category'
-        verbose_name_plural = 'categories'
-
-    def get_slug_list(self):
-        try:
-            ancestors = self.get_ancestors(include_self=True)
-        except:
-            ancestors = []
-        else:
-            ancestors = [i.slug for i in ancestors]
-        slugs = []
-        for i in range(len(ancestors)):
-            slugs.append('/'.join(ancestors[:i+1]))
-        return slugs
-
+        verbose_name_plural = 'cateogories'
     def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('product_in_category', args=[self.slug])
-
-
+        return self.second
 
 class Product(models.Model):
     name                = models.CharField(max_length=20, db_index=True, verbose_name='제품명')
@@ -70,8 +48,7 @@ class Product(models.Model):
     slug                = models.SlugField(max_length=20, db_index=True, allow_unicode=True)
     created_at          = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_at         = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
-    
-    category            = TreeForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
+    category            = models.ForeignKey(Category, verbose_name='category',related_name='products', on_delete=models.SET_NULL, null=True, blank=True)
     like                = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='product_likes')
     tags                = TaggableManager(verbose_name='tags',blank=True, through=TaggedProduct)
 

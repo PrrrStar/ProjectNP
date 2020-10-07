@@ -186,7 +186,7 @@ from rest_framework.views import APIView
 
 from .serializers import CommentSerializer
 from .serializers import ProductSerializer
-from .serializers import ProductCategorySerializer
+from .serializers import CategorySerializer
 
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -216,7 +216,7 @@ class ApiRoot(generics.GenericAPIView):
 
 class ProductCategoryList(generics.ListCreateAPIView):
     queryset = Category.objects.all()
-    serializer_class = ProductCategorySerializer
+    serializer_class = CategorySerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['name','description',]
     name = 'products-category'

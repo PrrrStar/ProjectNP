@@ -3,7 +3,7 @@ from .models import *
 
 from rest_framework import serializers
 
-class ProductCategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     products = serializers.HyperlinkedRelatedField(
         many=True,
         read_only=True,
@@ -14,9 +14,10 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = [
             'id',
-            'name',
-            'parent',
             'products',
+            'first',
+            'second',
+            'slug',
         ]
         
 class ProductSerializer(serializers.ModelSerializer):
@@ -25,7 +26,8 @@ class ProductSerializer(serializers.ModelSerializer):
         read_only=True,
         view_name='comment-detail'
     )
-    category_name = serializers.ReadOnlyField(source='category.name')
+    category = CategorySerializer()
+
     tags = serializers.PrimaryKeyRelatedField(
         queryset=TaggedProduct.objects.all(),
         many=True,
@@ -39,7 +41,6 @@ class ProductSerializer(serializers.ModelSerializer):
             'description',
             'price',
             'category',
-            'category_name',
             'like',
             'comments',
             'slug',
