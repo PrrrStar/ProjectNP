@@ -7,11 +7,13 @@ const Header = () => {
     <>
       <header id="header">
         <div className="header__logoBox">
-          <img src="/images/logo-02.jpg" className="header__logo" onclick="location.href='/index'" alt="logo" />
+          <a href="/">
+            <img src="/images/logo-02.jpg" className="header__logo" alt="logo" />
+          </a>
         </div>
         <ul className="header__menuBox">
           <li className="header__menu">
-            <a>내편찾기</a>
+            <a href="/mycvs">내편찾기</a>
           </li>
           <li className="header__menu">
             <a>할인행사</a>
