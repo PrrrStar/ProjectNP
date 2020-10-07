@@ -137,3 +137,25 @@ def post_comment_delete(request, post_pk, comment_pk):
     context={'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")     
     
+from rest_framework import generics
+from rest_framework import mixins
+from .serializers import *
+class PostList(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = PostSerializer
+    name = 'post-list'
+    def get_queryset(self):
+        return Post.objects.all().order_by('id')
+    
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    lookup_field = 'id'
+    name = 'post-detail'
+
+class CommentList(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    name = 'comment-list'

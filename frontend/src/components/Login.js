@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -16,15 +16,21 @@ const Login = () => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>로그인</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="">
+              <Form.Control autocomplete="off" type="text" placeholder="ID" class="login-modal__input" id="login-user-email" name="email" />
+            </Form.Group>
+            <Form.Group controlId="">
+              <Form.Control autocomplete="off" type="password" placeholder="PASSWORD" class="login-modal__input" id="login-user-password" name="password" />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" href="/" class="login-modal__login" id="btn-login">
+            Login
           </Button>
         </Modal.Footer>
       </Modal>

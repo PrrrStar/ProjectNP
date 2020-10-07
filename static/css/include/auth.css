@@ -58,7 +58,7 @@
     width: 400px;
     height: 50px;
     border-radius: 60px;
-    background-color: #fe4737;
+    background-color: #333333;
     border: none;
     display: flex;
     justify-content: center;
@@ -72,9 +72,8 @@
   
   .login-modal__login:hover,
   .login-modal__login:active {
-    background-color: #ffffff;
-    color: #fe4737;
-    border: 2px solid #fe4737;
+    background-color: #fe4737;
+    color: #ffffff;  
   }
   
   .login-modal__find {
@@ -94,11 +93,17 @@
     justify-content: center;
     align-items: center;
   }
+  .find__password:hover{
+    color: #fe4737;
+  }
   
   .find__id {
     border-right: 1px solid black;
   }
   
+  .find__id:hover{
+    color: #fe4737;
+  }
   /* sign-up modal css */
   .signup-modal__header {
     height: 90px;
@@ -183,11 +188,18 @@
   
   .signup-modal__footer button {
     margin-right: 30px;
-    background-color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #333333;
+    color: #333333;
+  }
+  .signup-modal__footer button:hover,
+  .signup-modal__footer button:focus {
+    border: 1px solid #fe4737;
+    color: #fe4737;
   }
   
   .signup-modal__footer a {
-    background-color: #fe4737;
+    background-color: #333333;
   }
   
   .signup-modal__footer a:hover,
