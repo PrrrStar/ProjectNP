@@ -10,7 +10,7 @@
 ## Environment
 
 > Language : Python 3.8.5 <br/>
-> Framework : Django 3.1.1 <br/>
+> Framework : Django 3.1.1, Django REST Framework 3.11.1(DRF) <br/>
 > Database : PostgreSQL 12<br/>
 > PaaS : AWS RDS<br/>
 > Server : AWS EC2 - Ubuntu 18.04 <br/>
