@@ -31,8 +31,8 @@
       <div class="detail__leftContent">
         <span class="detail__title">
           {% if current_category %}
-            {{current_category.parent}} 
-            <span> > {{current_category.name}}</span>
+            {{current_category.first}} 
+            <span> > {{current_category.second}}</span>
           {% else %}
             All Products
           {% endif %}
