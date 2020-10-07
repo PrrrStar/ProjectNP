@@ -5,8 +5,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('',happyChusok, name='happyChusok' ),
-    path('index/', index, name='index'),
+    #path('',happyChusok, name='happyChusok' ),
+    path('', index, name='index'),
     path('category/<category_slug>/', product_in_category, name='product_in_category'),
     path('products/<slug>/', product_detail, name='product_detail'),
     
