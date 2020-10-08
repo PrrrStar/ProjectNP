@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .models import *
+from myside.models import *
 
 
 class PostSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Post
         fields = ('id',
@@ -14,6 +14,7 @@ class PostSerializer(serializers.ModelSerializer):
         'hits',
         'recommends',
         'derecommends',
+        'tags'
         )
 
 class CommentSerializer(serializers.ModelSerializer):
