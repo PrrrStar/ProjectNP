@@ -16,6 +16,7 @@ class Post(models.Model):
     recommends          = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='recommends',blank=True)
     derecommends        = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='derecommends',blank=True)
     
+    tags                 = models.ManyToManyField('myside.Product',blank=True, related_name='posts')
     def __str__(self):
         return self.title
 
