@@ -1,0 +1,198 @@
+/* 상세페이지 css 입니다. */
+.detail {
+  width: 1320px;
+  padding: 58px 60px 0px 60px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.detailBox {
+  display: flex;
+  
+}
+
+.detail__leftContent {
+  width: 550px;
+  height: 500px;
+  margin: 0px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.detail__title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 2px;
+  color: #000000;
+}
+
+.detail__title span {
+  font-size: 15px;
+}
+
+.detail__img {
+  width: 450px;
+  height: 450px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+}
+.brand__img {
+  width: 35px;
+  height: 35px;
+}
+
+.detail__rightContent {
+  width: 650px;
+  height: 500px;
+  margin: 0px 49px 0px 31px;
+}
+
+.detail__header {
+  padding-top: 36px;
+  margin-bottom: 12px;
+}
+
+.detail__name {
+  font-family: "Jua", sans-serif;
+  position: relative;
+  font-size: 28px;
+  line-height: 0.3;
+  letter-spacing: 2.8px;
+
+}
+
+.detail__price {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 2px;
+  padding: 15px 0px;
+  border-top: 1px solid #fe4737;
+  border-bottom: 1px solid #d1d1d1;
+  display: flex;
+  align-items: center;
+}
+
+.detail__description {
+  height: 250px;
+  border-bottom: 1px solid #d1d1d1;
+  padding: 15px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.detail__description .description__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.description__content span:first-child {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 2px;
+}
+
+.description__content span:nth-child(2) {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 1.6px;
+  padding-top: 15px;
+}
+
+.detail__tagBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail__tag {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 2px;
+}
+
+.detail__tag span {
+  display: flex;
+}
+
+.detail__tag span form {
+  margin-left: 20px;
+  color: #00b3b0;
+}
+
+.detail__tag span form input {
+  border: none;
+  outline: none;
+  background-color: #ffffff;
+  color: #00b3b0;
+  padding: 0px;
+}
+
+.detail__tag--heart {
+  font-size: 20px;
+  line-height: 1.45;
+  letter-spacing: -0.24px;
+}
+
+.detail__tag--heart i {
+  color: #ff0808;
+}
+
+.detail__header,
+.detail__price,
+.detail__description {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.detail__button {
+  height: 96px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.detail__stock,
+.detail__naeggu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.detail__naeggu {
+  background-color:grey;
+  border: 1px #fe4737;
+  margin-left: 10px;
+}
+
+.detail__naeggu__active {
+  background-color: #fe4737;
+}
+
+.detail__stock {
+  background-color: #00b3b0;
+}
+
+.detail__naeggu img {
+  margin-bottom: -3px;
+}
+
+.detail__stock span,
+.detail__naeggu span {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 2px;
+  color: #ffffff;
+  padding-right: 5px;
+}
+
+.detail__related-container {
+  margin: 50px;
+}
