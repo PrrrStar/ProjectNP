@@ -15,7 +15,7 @@ class Post(models.Model):
     hits                = models.PositiveIntegerField(default=0, verbose_name='조회수')
     recommends          = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='recommends',blank=True)
     derecommends        = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='derecommends',blank=True)
-    tag                 = models.ManyToManyField('myside.Product',blank=True, related_name='posts')
+    products            = models.ManyToManyField('myside.Product',blank=True, related_name='posts')
     def __str__(self):
         return self.title
 

@@ -14,7 +14,7 @@ class PostSerializer(serializers.ModelSerializer):
         'hits',
         'recommends',
         'derecommends',
-        'tags'
+        'products'
         )
 
 class CommentSerializer(serializers.ModelSerializer):
