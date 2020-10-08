@@ -128,7 +128,7 @@ def post_comment_create(request, post_pk):
 
 @require_POST
 def post_comment_delete(request, post_pk, comment_pk):
-    comment = get_object_or_404(Comment, pk=comment_pk)
+    comment = get_object_or_404(PostComment, pk=comment_pk)
     post = get_object_or_404(Post, pk=post_pk)
     user= request.user
     if user.is_authenticated and user==comment.author: 
