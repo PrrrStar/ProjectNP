@@ -108,7 +108,7 @@ def post_delete(request, post_pk):
     return redirect('/community/list/')
 
 
-def comment_create(request, post_pk):
+def post_comment_create(request, post_pk):
     author = request.user
     post = Post.objects.get(pk=post_pk)
     if not author.is_authenticated:
@@ -116,7 +116,7 @@ def comment_create(request, post_pk):
     elif request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            comment = Comment()
+            comment = PostComment()
             comment.content = comment_form.cleaned_data['content']
             comment.author = author
             comment.post = post
@@ -137,17 +137,16 @@ def post_comment_delete(request, post_pk, comment_pk):
     context={'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")     
     
+
+
+from rest_framework.views import APIView
 from rest_framework import generics
-from rest_framework import mixins
 from .serializers import *
-class PostList(generics.GenericAPIView, mixins.ListModelMixin):
+
+class PostList(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
     name = 'post-list'
-    def get_queryset(self):
-        return Post.objects.all().order_by('id')
-    
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
@@ -155,7 +154,13 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'id'
     name = 'post-detail'
 
-class CommentList(generics.ListCreateAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    name = 'comment-list'
+class PostCommentList(generics.ListCreateAPIView):
+    queryset = PostComment.objects.all()
+    serializer_class = PostCommentSerializer
+    name = 'post-comment-list'
+
+class PostCommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PostComment.objects.all()
+    serializer_class = PostCommentSerializer
+    lookup_field = 'id'
+    name = 'post-comment-detail'
