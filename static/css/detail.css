@@ -160,13 +160,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 152px;
+  width: 200px;
   height: 60px;
   border-radius: 30px;
 }
 
 .detail__naeggu {
-  background-color: #bbbbbb;
+  background-color:grey;
+  border: 1px #fe4737;
   margin-left: 10px;
 }
 

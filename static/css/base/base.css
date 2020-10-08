@@ -43,7 +43,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid black;
+  border-bottom: 0px solid black;
 }
 
 /* header 로고 */
@@ -97,7 +97,8 @@ header {
 .bannerBox {
   max-width: 100%;
   height: 386px;
-  border-bottom: 1px solid black;
+  border-top: 1px solid #fe4737;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.11);
 }
 
 .banner {
