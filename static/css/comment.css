@@ -16,21 +16,22 @@
   letter-spacing: 2.8px;
   margin-left: 20px;
   margin-bottom: 8px;
+  display: inline-flex;
 }
 
 .comment__mycomment {
   margin: 0px 50px;
   display: flex;
   align-items: center;
-  margin-top: 20px;
-  border-bottom: 1px solid black;
-  padding-bottom: 20px;
+  margin-top: 0px;
+  border-bottom: 0px solid black;
+  padding-bottom: 0px;
 }
 
 .comment__mycomment--input {
   border: none;
   padding-bottom: 2px;
-  border-bottom: 1px solid black;
+  border-bottom: 0px solid black;
   width: 850px;
 }
 
@@ -42,7 +43,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(199, 199, 199);
   padding-bottom: 20px;
   height: 120px;
 }
@@ -52,7 +53,7 @@
   height: 80px;
   margin-right: 30px;
   border-radius: 50%;
-  border: 1px solid black;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.11);
 }
 
 .comments__content {

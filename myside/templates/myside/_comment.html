@@ -5,15 +5,16 @@
     <img src="{% static 'logo/point.png' %}" class="point" />
     상품후기({{ product.comments.count }}개)
     <!-- 회원만 댓글달 수 있는 창이 보입니다. -->
+    <div class="comment__main">
+      {% if request.user.is_authenticated %}
+      <div class="comment__mycomment">
+        <button type="button" class="btn btn-info btn-sm comment_write" data-url="{% url 'product_comment_create' product.slug %}"><img src="/static/logo/comment_addbutton.png" height="27px" width="30px"></button>
+      </div>
+      {% endif %}
+    </div>
   </div>
 </div>
-<div class="comment__main">
-  {% if request.user.is_authenticated %}
-  <div class="comment__mycomment">
-    <button type="button" class="btn btn-info btn-sm comment_write" data-url="{% url 'product_comment_create' product.slug %}">댓글 작성하기</button>
-  </div>
-  {% endif %}
-</div>
+
 
 <!-- 댓글 리스트 -->
 <div class="comment__comments">
