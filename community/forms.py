@@ -28,5 +28,5 @@ class CommentForm(forms.Form):
         widget=forms.Textarea, label="내용")
 
     class Meta:
-        model = Comment
+        model = PostComment
         fields = ['content','author',]

@@ -22,7 +22,7 @@
     </div>
 
   </div>
-  <form action="{% url 'comment_create' post.pk %}" method="POST">
+  <form action="{% url 'post_comment_create' post.pk %}" method="POST">
     {% csrf_token %}
     <input type="text" name="content" placeholder="write your comment">
     <input type="submit" value="Write" />

@@ -41,7 +41,7 @@ class Post(models.Model):
         return reverse('post_detail', args=[self.id])
 
 
-class Comment(models.Model):
+class PostComment(models.Model):
     post        = models.ForeignKey(Post, verbose_name="글", on_delete=models.CASCADE, related_name='comment')
     author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment')
     content     = models.TextField(max_length = 100, verbose_name='내용')
