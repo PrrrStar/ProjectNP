@@ -4,7 +4,7 @@ import axios from "axios";
 
 const Detail = () => {
   let { slug } = useParams();
-  const [productDetail, setProductDetail] = useState([]);
+  const [productDetail, setProductDetail] = useState();
 
   useEffect(() => {
     getProduct();
@@ -12,14 +12,19 @@ const Detail = () => {
 
   const getProduct = async () => {
     const { data } = await axios.get("/api/products/" + slug);
+    console.log(data.category.first);
     setProductDetail(data);
   };
 
-  let subCategory = document.querySelector(".category__children");
-
   return (
     <main className="detail">
-      {productDetail.category_name}
+      <div className="detailBox">
+        <div className="detail__leftContent">
+          <span className="detail__title">
+            {productDetail ? productDetail.category.first : null}
+          </span>
+        </div>
+      </div>
     </main>
   );
 };

@@ -140,6 +140,8 @@
     $ yarn add react-slick
     $ yarn add jquery
     $ yarn add react-bootstrap bootstrap
+    $ yarn add react-redux
+    $ yarn add @reduxjs/toolkit
     ```
 
     리엑트 서버 실행하기
