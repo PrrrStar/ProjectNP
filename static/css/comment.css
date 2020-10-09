@@ -28,6 +28,14 @@
   padding-bottom: 0px;
 }
 
+.comment__write {
+  background-color: red;
+}
+
+.comment__writeImg {
+  background-color: red;
+}
+
 .comment__mycomment--input {
   border: none;
   padding-bottom: 2px;

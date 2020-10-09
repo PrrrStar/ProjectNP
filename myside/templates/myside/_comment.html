@@ -8,7 +8,7 @@
     <div class="comment__main">
       {% if request.user.is_authenticated %}
       <div class="comment__mycomment">
-        <button type="button" class="btn btn-info btn-sm comment_write" ><img src="/static/logo/comment_addbutton.png" height="27px" width="30px"></button>
+        <button type="button" class="btn btn-info btn-sm comment__write" ><img src="/static/logo/comment_addbutton.png" class="comment__writeImg" height="27px" width="30px"></button>
       </div>
       {% endif %}
     </div>
