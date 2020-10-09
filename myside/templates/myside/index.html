@@ -33,13 +33,13 @@
         <img src="{{product.image_url}}" alt="Product IMG" class="index__slide--img" />
         <div class="index__slideBox">
           <div class="index__slide--header">
-            <span class="index__slide--name">{{product.name}}</span>
+            <span class="index__slide--name">{{product.name}}원</span>
             <div>
               <img class="index__slide--good" src="{% static 'logo/thumb_up_alt-24px.png' %}"></img>
               <span>{{ product.like.count }}</span>
             </div>
           </div>
-          <div class="index__slide--description"><p>{{product.description}}</p></div>
+          <div class="index__slide--description"><p>{{product.price}}원</p></div>
         </div>
       </a>
       {% endfor %}
@@ -61,7 +61,7 @@
               <span>{{ product.like.count }}</span>
             </div>
           </div>
-          <div class="index__slide--description"><p>{{product.description}}</p></div>
+          <div class="index__slide--description"><p>{{product.price}}원</p></div>
         </div>
       </a>
       {% endfor %}

@@ -27,16 +27,18 @@
       <img class="comments__profile" src="/static/logo/default_profile.png" />
       {% endif %}
       <div class="comments__commentBox">
-        <span class="comments__user"> {{ comment.author.nickname }} </span>
-        <button type="button" class="btn-like-comment" data-url="{{ comment.get_api_like_url }}"
-          data-like="{{comment.like.count}}">
-          <img src="{% static 'logo/thumb_up_alt-24px.png' %}" />
-          <span class="like-comment-count"> {{comment.like.count}} </span>
-        </button>
-        <span class="comments__comment">{{ comment.content }}</span>
-      </div>
-      <div>
-        <span>별점 : {{comment.stars}}</span>
+        <div class="comments__TopSpace">
+          <span class="comments__user"> {{ comment.author.nickname }} </span>
+          <button type="button" class="btn-like-comment" data-url="{{ comment.get_api_like_url }}"
+            data-like="{{comment.like.count}}">
+            <img src="{% static 'logo/thumb_up_alt-24px.png' %}" />
+            <span class="like-comment-count"> {{comment.like.count}} </span>
+          </button>
+          <span>별점 : {{comment.stars}}</span>
+        </div>
+        <div class="comments__BottomSpace">
+          <span class="comments__comment">{{ comment.content }}</span>
+        </div>
       </div>
     </div>
     {% if comment.img %}
