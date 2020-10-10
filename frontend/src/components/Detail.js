@@ -41,7 +41,7 @@ const CommentBox = ({ product }) => {
         </div>
       </div>
       <div className="comment__comments">
-        <Comment product={product} comments={comments} />
+        {comments.length}
       </div>
     </div>
   )
