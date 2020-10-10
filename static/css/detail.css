@@ -7,7 +7,8 @@
 
 .detailBox {
   display: flex;
-  
+  position: relative;
+  bottom: 20px;
 }
 
 .detail__leftContent {
@@ -44,7 +45,7 @@
 .detail__rightContent {
   width: 650px;
   height: 500px;
-  margin: 0px 49px 0px 31px;
+  margin: 30px 49px 0px 31px;
 }
 
 .detail__header {
