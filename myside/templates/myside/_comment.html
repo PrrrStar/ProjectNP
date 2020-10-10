@@ -34,7 +34,9 @@
             <img src="{% static 'logo/thumb_up_alt-24px.png' %}" />
             <span class="like-comment-count"> {{comment.like.count}} </span>
           </button>
-          <span>별점 : {{comment.stars}}</span>
+          <span class="comments__starBox">
+            {% include 'myside/_commentStar.html' %}
+          </span>
         </div>
         <div class="comments__BottomSpace">
           <span class="comments__comment">{{ comment.content }}</span>

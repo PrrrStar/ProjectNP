@@ -1,0 +1,76 @@
+{% load static %}
+
+{% if comment.stars == 0  %}
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+{% elif comment.stars == 0.5 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_half.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+{% elif comment.stars == 1.0 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+{% elif comment.stars == 1.5 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_half.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+{% elif comment.stars == 2.0 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+{% elif comment.stars == 2.5 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_half.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+{% elif comment.stars == 3.0 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+{% elif comment.stars == 3.5 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_half.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+{% elif comment.stars == 4.0 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+{% elif comment.stars == 4.5 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_half.png' %}" />
+{% elif comment.stars == 5.0 %}
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_1.png' %}" />
+{% else %}
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <img class="comments__star" src="{% static 'logo/comment_star_0.png' %}" />
+  <span>None일 떄의 처리도 필요할거같네요! </span>
+{% endif %}
