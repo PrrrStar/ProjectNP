@@ -8,7 +8,8 @@
     <div class="comment__main">
       {% if request.user.is_authenticated %}
       <div class="comment__mycomment">
-        <button type="button" class="btn btn-info btn-sm comment__write" ><img src="/static/logo/comment_addbutton.png" class="comment__writeImg" height="27px" width="30px"></button>
+        <img src="/static/logo/comment_addbutton.png" class="comment__writeImg" height="27px" width="30px">
+        <button type="button" class="btn btn-info btn-sm comment_write" ><img src="/static/logo/comment_addbutton.png" class="comment__writeImg" height="27px" width="30px"></button>
       </div>
       {% endif %}
     </div>
@@ -29,14 +30,14 @@
       <div class="comments__commentBox">
         <div class="comments__TopSpace">
           <span class="comments__user"> {{ comment.author.nickname }} </span>
-          <button type="button" class="btn-like-comment" data-url="{{ comment.get_api_like_url }}"
-            data-like="{{comment.like.count}}">
-            <img src="{% static 'logo/thumb_up_alt-24px.png' %}" />
-            <span class="like-comment-count"> {{comment.like.count}} </span>
-          </button>
           <span class="comments__starBox">
             {% include 'myside/_commentStar.html' %}
           </span>
+          <button type="button" class="btn-like-comment comment_like" data-url="{{ comment.get_api_like_url }}"
+            data-like="{{comment.like.count}}">
+            <img src="{% static 'logo/thumb_up_alt-24px.png' %}" height="25px" width="25px">
+            <span class="like-comment-count"> {{comment.like.count}} </span>
+          </button>          
         </div>
         <div class="comments__BottomSpace">
           <span class="comments__comment">{{ comment.content }}</span>

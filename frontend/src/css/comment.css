@@ -12,7 +12,7 @@
   position: relative;
   font-family: Jua;
   font-size: 28px;
-  line-height: 1.46;
+  
   letter-spacing: 2.8px;
   margin-left: 20px;
   margin-bottom: 8px;
@@ -28,12 +28,16 @@
   padding-bottom: 0px;
 }
 
-.comment__write {
+.comment_write {
   background-color: red;
 }
 
-.comment__writeImg {
+.comment_writeImg {
   background-color: red;
+}
+
+.comment_like {
+  background-color: white;
 }
 
 .comment__mycomment--input {

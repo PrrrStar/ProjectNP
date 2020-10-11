@@ -2,10 +2,12 @@
   width: 1200px;
   margin-top: 50px;
   padding: 0px 50px;
+
 }
 
 .comment__header {
   border-bottom: 1px solid red;
+  height: 45px;
 }
 
 .comment__header--title {
@@ -28,12 +30,20 @@
   padding-bottom: 0px;
 }
 
-.comment__write {
+.comment_write {
   background-color: red;
+  opacity: 100;
+  position: relative;
+  right: 70px;
+  opacity: 0;
 }
 
 .comment__writeImg {
-  background-color: red;
+  background-color: white;
+  opacity: 100;
+  right: 40px;
+  bottom: 3px;
+  position: relative;
 }
 
 .comment__mycomment--input {
