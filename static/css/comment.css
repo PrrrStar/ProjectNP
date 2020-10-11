@@ -46,6 +46,14 @@
   position: relative;
 }
 
+.comment_like {
+  background: white;
+  color: #fe4737;
+  position: relative;
+  left: 15px;
+  font-weight: 500;
+}
+
 .comment__mycomment--input {
   border: none;
   padding-bottom: 2px;
