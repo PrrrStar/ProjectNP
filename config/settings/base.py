@@ -192,9 +192,17 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'   #이메일 주소가 확인 되기 �
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/account/registration/confirm_email/?verification=1'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/account/registration/confirm_email/?verification=1'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+'''
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_PORT = 587 
+EMAIL_USE_TLS = True 
+EMAIL_HOST_USER = 'gmail_username' 
+EMAIL_HOST_PASSWORD = 'password from https://security.google.com/settings/security/apppasswords' 
+'''
+
 OLD_PASSWORD_FIELD_ENABLED = True
 ########################################################
-
 SITE_ID = 1
 
 #REST_USE_JWT = True
