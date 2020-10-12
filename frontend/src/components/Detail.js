@@ -30,8 +30,7 @@ const CommentBox = ({ product }) => {
       setComments(commentArray);
     };
   };
-  console.log(comments);
-  // 누군가 이걸 본다면 꼭 실험해주세요 진짜 왜 comments는 찍히는데 comments.length는 안찍히는지 도저히 모르겠다 정말로 왜이러는거지 진짜 아 정말 아ㅏㅇ아아아어ㅏ아ㅓ앙
+
   return (
     <div className="detail__comment">
       <div className="comment__header">
@@ -41,9 +40,9 @@ const CommentBox = ({ product }) => {
         </div>
       </div>
       <div className="comment__comments">
-        {comments.length}
+        {comments ? comments.map((c) => <div>{c.id}</div>) : null}
       </div>
-    </div>
+    </div >
   )
 }
 
