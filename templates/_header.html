@@ -16,8 +16,19 @@
   <nav class="header__auth">
     <!-- 유저가 로그인 중이면 -->
     {% if user.is_authenticated %}
-    <a href="{% url 'user_logout' %}" class="user-logout">Logout</a>
-    <a href="{% url 'user_profile' %}" class="user-profile">내정보</a>
+    <div class="header__user">
+      <div class="user__profileimg">
+      {% if comment.author.profile %}
+        <img class="header__profile" src="{{comment.author.profile.url}}" />
+      {% else %}
+        <img class="header__profile" src="/static/logo/default_profile.png" />
+      {% endif %}    
+        <div class="header__username">{{user.nickname}} 님</div>
+      </div>
+    </div>
+  
+
+    
 
     {% else %}
     <button data-toggle="modal" data-target="#modal-login" id="base__login-btn" class="header__authBtn">

@@ -124,3 +124,31 @@ footer {
   top: -45px;
   right: 90px;
 }
+
+/* 우측 상단 로그인 프로필 */
+.header__profile {
+  width: 50px;
+  height: 50px;
+  left: 0px;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.11);
+  position: relative;
+  bottom: 5px;
+}
+
+.header__user {
+  display: inline-block;
+  text-align: center;
+}
+
+.header__username {
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.36;
+  letter-spacing: normal;
+  text-align: center;
+  color: #707070;
+  position: relative;
+}
