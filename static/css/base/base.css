@@ -151,4 +151,28 @@ footer {
   text-align: center;
   color: #707070;
   position: relative;
+  left: 8px;
+}
+
+/* 드롭매뉴 버튼 관련 */
+.user__drop {
+  border: none;
+  outline: none;
+  background: white;
+}
+
+.dropdown__contents {
+  position: absolute;
+  z-index: 1;
+  display: none;
+}
+
+.dropdown__contents a{
+  display: block;
+  background: #ebebeb;
+  outline: 0.5px #707070;
+  color: #707070;
+  padding: 3px 12px;
+  margin: 0.5px;
+  font-weight: 500;
 }

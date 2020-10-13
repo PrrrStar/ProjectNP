@@ -23,12 +23,28 @@
       {% else %}
         <img class="header__profile" src="/static/logo/default_profile.png" />
       {% endif %}    
-        <div class="header__username">{{user.nickname}} 님</div>
+        <div class="header__username">{{user.nickname}} 님<button onclick="show_hide()" class="user__drop"><img src="/static/logo/dropdown.png" height="12px" width="12px"></button> 
+          <div class="dropdown__contents">
+            <a href="{% url 'user_profile' %}" class="user-profile">계정관리</a>
+            <a href="{% url 'user_logout' %}" class="user-logout">Logout</a>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!--해결해 줄 수 있으신 분,, 스크립트 적용이 안됨니다..-->
+    <script>
+      function show_hide(){
+        var click = document.getElementsById("dropdown__contents") ;
+        if(click.style.display === "none") {
+            click.style.display = "block" ;
+        }else{
+          click.style.display = "none" ;
+        }
+      }
+    </script>
   
 
-    
 
     {% else %}
     <button data-toggle="modal" data-target="#modal-login" id="base__login-btn" class="header__authBtn">
