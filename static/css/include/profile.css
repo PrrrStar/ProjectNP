@@ -4,12 +4,16 @@
     font-size: 28px;
     line-height: 1.46;
     letter-spacing: 2.8px;
+    left: 420px;
+    border-bottom: 1px #ff0808;
+
 }
 
 .profile__myinfoContents {
     position: relative;
-    left: 50%;
-    transform: translate(-50%,);
+    left: 420px;
+    top: 30px;
+    
 }
 
 .myinfoContents__myImg{
