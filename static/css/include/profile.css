@@ -6,6 +6,12 @@
     letter-spacing: 2.8px;
 }
 
+.profile__myinfoContents {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,);
+}
+
 .myinfoContents__myImg{
     float:left;
     width: 250px;
@@ -14,9 +20,13 @@
 }
 
 .myinfoContents__content{
-    width: 832px;
+    width: 1080px;
     height: 50px;
     border: solid 1px #dfdfdf;
+    position: relative;
+    align-content: center;
+    position: relative;
+
 }
 
 .myinfoContents__content span{
