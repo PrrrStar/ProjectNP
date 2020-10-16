@@ -164,7 +164,7 @@ footer {
 .dropdown__contents {
   position: absolute;
   z-index: 1;
-  display none;
+  display: none;
 }
 
 .dropdown__contents a{
