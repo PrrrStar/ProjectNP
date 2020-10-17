@@ -52,21 +52,20 @@
       
         <div class="header__username">내편이 아닙니다<button onclick="show_hide()" class="nonuser__drop"><img src="/static/logo/dropdown.png" height="12px" width="12px"></button> 
           <div class="non_dropdown__contents">
-            <a href="{% url 'user_profile' %}" class="user-profile">Log in</a>
-            <a href="{% url 'user_logout' %}" class="user-logout">Sign up</a>
+            <button data-toggle="modal" data-target="#modal-login" id="base__login-btn" class="header__authBtn">
+      
+              <span>로그인</span>
+            </button>
+            <button data-toggle="modal" data-target="#modal-signup" class="header__authBtn">
+      
+              <span>회원가입</span>
+            </button>
           </div>
         </div>
       </div>
     </div>
     
-    <button data-toggle="modal" data-target="#modal-login" id="base__login-btn" class="header__authBtn">
-      <img src="{% static 'logo/person-24px.png' %}" />
-      <span>Log in</span>
-    </button>
-    <button data-toggle="modal" data-target="#modal-signup" class="header__authBtn">
-      <img src="{% static 'logo/person-24px.png' %}" />
-      <span>Sign up</span>
-    </button>
+
 
     <script>
       function show_hide(){
@@ -78,7 +77,7 @@
         }
       }
     </script>
-    
+
     {% endif %}
   </nav>
 </header>
