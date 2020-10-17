@@ -161,6 +161,12 @@ footer {
   background: white;
 }
 
+.nonuser__drop {
+  border: none;
+  outline: none;
+  background: white;
+}
+
 .dropdown__contents {
   position: absolute;
   z-index: 1;

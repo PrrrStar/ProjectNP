@@ -14,6 +14,7 @@
   </ul>
   <!-- 로그인 로그아웃 -->
   <nav class="header__auth">
+    
     <!-- 유저가 로그인 중이면 -->
     {% if user.is_authenticated %}
     <div class="header__user">
@@ -32,7 +33,6 @@
       </div>
     </div>
 
-    <!--해결해 줄 수 있으신 분,, 스크립트 적용이 안됨니다..-->
 
     <script>
       function show_hide(){
@@ -45,8 +45,20 @@
       }
     </script>
 
-
     {% else %}
+    <div class="header__authmod">
+      <div class="user__profileimg">
+        <img class="header__profile" src="/static/logo/default_profile.png">
+      
+        <div class="header__username">내편이 아닙니다<button onclick="show_hide()" class="nonuser__drop"><img src="/static/logo/dropdown.png" height="12px" width="12px"></button> 
+          <div class="non_dropdown__contents">
+            <a href="{% url 'user_profile' %}" class="user-profile">Log in</a>
+            <a href="{% url 'user_logout' %}" class="user-logout">Sign up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <button data-toggle="modal" data-target="#modal-login" id="base__login-btn" class="header__authBtn">
       <img src="{% static 'logo/person-24px.png' %}" />
       <span>Log in</span>
@@ -55,6 +67,18 @@
       <img src="{% static 'logo/person-24px.png' %}" />
       <span>Sign up</span>
     </button>
+
+    <script>
+      function show_hide(){
+        var click = document.querySelector(".non_dropdown__contents") ;
+        if(click.style.display === "none") {
+            click.style.display = "block" ;
+        }else{
+          click.style.display = "none" ;
+        }
+      }
+    </script>
+    
     {% endif %}
   </nav>
 </header>
