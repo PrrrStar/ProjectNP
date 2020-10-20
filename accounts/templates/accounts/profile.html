@@ -22,30 +22,30 @@
         <!-- 내 프로필 보기 내용 -->
         <div class="profile__myinfoContents">
             <div class="myinfoContents__myImg">
-                {% if user.profile %}
-                <img class="round" src="{{user.profile.url}}" width="200"> <br>
+                {% if comment.author.profile %}
+                <img class="myinfoContents__myprofileImg" src="{{comment.author.profile.url}}" />
                 {% else %}
-                <img class="round" src="{% static 'logo/logo-02.jpg' %}" width="200"> <br>
-                {% endif %}
+                <img class="myinfoContents__myprofileImg" src="/static/logo/default_profile.png" />
+                {% endif %}    
             </div>
             <div class="myinfoContents__contents">
                 <div class="myinfoContents__content">
-                    <span class="content__key">이름</span>
-                    <span class="content__value">{{user.username}}</span>
+                    <span class="content__key" >이름</span>
+                    <span class="content__value1">{{user.username}}</span>
                 </div>
                 <div class="myinfoContents__content">
                     <span class="content__key">닉네임</span>
-                    <span class="content__value">{{user.nickname}}</span>
+                    <span class="content__value2">{{user.nickname}}</span>
                 </div>
                 <div class="myinfoContents__content">
                     <span class="content__key">이메일</span>
-                    <span class="content__value">{{user.email}}</span>
+                    <span class="content__value3">{{user.email}}</span>
                 </div>
                 <div class="myinfoContents__content">
                     <span class="content__key">생년월일</span>
                     <span class="content__value">{{user.birth}}</span>
                 </div>
-                <div class="myinfoContents__content">
+                <div class="myinfoContents__contentt">
                     <span class="content__key">성별</span>
                     <span class="content__value">{{user.gender}}</span>
                 </div>
