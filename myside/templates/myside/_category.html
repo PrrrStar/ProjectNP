@@ -3,21 +3,9 @@
 <div class="category">
   <div class="category__container">
     {% for category in categories %}
-      {% if category.parent == None %}
-        {% if category == current_category.parent %}
-          <div class="category__parent current__parent" value="{{category.name}}" drop="f">{{category.name}}</div>
-        {% else %}
-          <div class="category__parent" value="{{category.name}}" drop="f">{{category.name}}</div>
-        {% endif %}
-      {% else %}
-        {% if category == current_category %}
-          <div class="category__children current__category" value="{{category.parent}}"><a
-            href="{{category.get_absolute_url}}">{{category.name}}</a></div>
-        {% else %}
-          <div class="category__children" value="{{category.parent}}"><a
-            href="{{category.get_absolute_url}}">{{category.name}}</a></div>
-        {% endif %}
-      {% endif %} 
+          <div class="category__first" value="{{category.first}}">{{category.first}}
+            <a href="{{category.get_absolute_url}}">{{category.second}}</a>
+          </div>
     {% endfor %}
   </div>
 </div>

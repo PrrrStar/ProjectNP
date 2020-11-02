@@ -7,7 +7,7 @@
     justify-content: center;
   }
   
-  .category__parent {
+  .category__first {
     font-size: 20px;
     line-height: 1.45;
     letter-spacing: 2px;
@@ -15,7 +15,7 @@
     cursor: pointer;
   }
   
-  .category__parent:not(:last-child) {
+  .category__first:not(:last-child) {
     margin-bottom: 30px;
   }
   
