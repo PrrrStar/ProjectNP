@@ -27,18 +27,31 @@
     <input type="text" name="content" placeholder="write your comment">
     <input type="submit" value="Write" />
   </form>
-  {% for comment in post.comment.all %}
+  {% for comment in post.comments.all %}
   <div class="comment">
-    <span>{{ comment.author.nickname }} : </span>
-    <span>{{ comment.content }}</span>
-    <div class="date">{{ comment.created_at }}</div>
-    {% if user.is_authenticated %} {% if user == comment.author %}
-    <input type="button" class="btn btn-info btn-sm post_comment_delete" value="삭제"
-      data-url="{% url 'post_comment_delete' post.id comment.id %}">
-    <input type="button" class="btn btn-info btn-sm post_comment_update" value="수정">
-    {% endif %}
-    {% endif %}
+    <div class="comment__content">
+      <span>{{ comment.author.nickname }} : </span>
+      <span>{{ comment.content }}</span>
+      <div class="date">{{ comment.created_at }}</div>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="comment__recommend">
+      <span id="comment_recommend-{{ comment.id }}">{{ comment.recommends.count }}</span>
+      <input type="button" class="btn btn-info btn-sm post_comment_recommend" name="{{ comment.id }}" value="추천"
+        data-url="{% url 'post_comment_recommend' post.id comment.id %}">
+      <span id="comment_derecommend-{{ comment.id }}">{{ comment.derecommends.count }}</span>
+      <input type="button" class="btn btn-info btn-sm post_comment_derecommend" name="{{ comment.id }}" value="반대"
+        data-url="{% url 'post_comment_derecommend' post.id comment.id %}">
+    </div>
+    {% if user == comment.author %}
+    <div class="comment__UD">
+      <input type="button" class="btn btn-info btn-sm post_comment_delete" value="삭제"
+        data-url="{% url 'post_comment_delete' post.id comment.id %}">
+      <input type="button" class="btn btn-info btn-sm post_comment_update" value="수정">
+    </div>
   </div>
+  {% endif %}
+  {% endif %}
 
   {% endfor %}
 
@@ -53,7 +66,7 @@
         dataType: "json",
         success: function (response) {
           alert(response.message);
-          $("#recommend-" + pk).html("추천 : " + response.recommends_count);
+          $("#recommend-" + pk).html("추천 : " + response.post_recommends_count);
         },
         error: function (request, status, error) {
           alert("로그인이 필요합니다.")
@@ -74,7 +87,7 @@
         dataType: "json",
         success: function (response) {
           alert(response.message);
-          $("#derecommend-" + pk).html("반대 : " + response.derecommends_count);
+          $("#derecommend-" + pk).html("반대 : " + response.post_derecommends_count);
         },
         error: function (request, status, error) {
           alert("로그인이 필요합니다.")
@@ -98,7 +111,7 @@
           data: { 'csrfmiddlewaretoken': csrf },
           dataType: "json",
           success: function (response) {
-            current_comment.replaceWith('<div class="comment"> 삭제된 댓글이에요  </div>');
+            current_comment.replaceWith('<div class="comment"> 삭제된 댓글이에요  </div><br>');
           },
           error: function (request, status, error) {
             alert("댓글 삭제 실패 ㅠ")
@@ -108,5 +121,47 @@
     })
   </script>
 
+  <script type="text/javascript">
+    $(".post_comment_recommend").click(function () {
+      var url = $(this).attr('data-url');
+      var pk = $(this).attr('name')
+      var csrf = $('input[name=csrfmiddlewaretoken]').val();
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: { 'csrfmiddlewaretoken': csrf },
+        dataType: "json",
+        success: function (response) {
+          alert(response.message);
+          $("#comment_recommend-" + pk).html(response.comment_recommends_count);
+        },
+        error: function (request, status, error) {
+          alert("로그인이 필요합니다.")
+          window.location.replace("/")
+        },
+      });
+    })
+  </script>
 
+  <script type="text/javascript">
+    $(".post_comment_derecommend").click(function () {
+      var url = $(this).attr('data-url');
+      var pk = $(this).attr('name')
+      var csrf = $('input[name=csrfmiddlewaretoken]').val();
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: { 'csrfmiddlewaretoken': csrf },
+        dataType: "json",
+        success: function (response) {
+          alert(response.message);
+          $("#comment_derecommend-" + pk).html(response.comment_derecommends_count);
+        },
+        error: function (request, status, error) {
+          alert("로그인이 필요합니다.")
+          window.location.replace("/")
+        },
+      });
+    })
+  </script>
   {% endblock %}
