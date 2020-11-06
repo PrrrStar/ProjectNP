@@ -50,7 +50,7 @@ def post_list(request):
     elif sort == 'hits':
         posts = Post.objects.order_by('-hits', '-created_at')
     elif sort == 'comments':
-        posts = Post.objects.annotate(comment_count=Count('comments')).order_by('-comment_count', '-created_at')
+        posts = Post.objects.annotate(comment_count=Count('comment')).order_by('-comment_count', '-created_at')
     else :
         posts = Post.objects.order_by('-created_at')
     return render(request, 'community/post_list.html', {'posts': posts})
@@ -68,7 +68,7 @@ def post_recommend(request, post_pk):
         post.recommends.add(user)
         message = '추천'
 
-    context = {'post_recommends_count':post.recommends.count(), 'message': message}
+    context = {'recommends_count':post.recommends.count(), 'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")   
 
 @login_required
@@ -84,7 +84,7 @@ def post_derecommend(request, post_pk):
         post.derecommends.add(user)
         message = '반대'
 
-    context = {'post_derecommends_count':post.derecommends.count(), 'message': message}
+    context = {'derecommends_count':post.derecommends.count(), 'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")  
 
 def post_create(request):
@@ -138,36 +138,6 @@ def post_comment_delete(request, post_pk, comment_pk):
     context={'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")     
     
-def post_comment_recommend(request, post_pk, comment_pk):
-    comment = get_object_or_404(PostComment, pk=comment_pk)
-    user = request.user
-
-    if user in comment.recommends.all():
-        comment.recommends.remove(user)
-        message = '추천 취소'
-    else:
-        comment.recommends.add(user)
-        message = '추천'
-
-    context = {'comment_recommends_count':comment.recommends.count(), 'message': message}
-    return HttpResponse(json.dumps(context), content_type="application/json")   
-
-def post_comment_derecommend(request, post_pk, comment_pk):
-    comment = get_object_or_404(PostComment, pk=comment_pk)
-    user = request.user
-
-    if user in comment.derecommends.all():
-        comment.derecommends.remove(user)
-        message = '반대 취소'
-    else:
-        comment.derecommends.add(user)
-        message = '반대'
-
-    context = {'comment_derecommends_count':comment.recommends.count(), 'message': message}
-    return HttpResponse(json.dumps(context), content_type="application/json")   
-
-
-
 
 
 from rest_framework.views import APIView
