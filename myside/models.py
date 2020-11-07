@@ -38,6 +38,8 @@ class Category(models.Model):
         verbose_name_plural = 'cateogories'
     def __str__(self):
         return self.second
+    def get_absolute_url(self):
+        return reverse('product_in_category', args=[self.slug])
 
 class Product(models.Model):
     name                = models.CharField(max_length=20, db_index=True, verbose_name='제품명')

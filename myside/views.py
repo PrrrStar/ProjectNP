@@ -78,7 +78,7 @@ def product_in_category(request, category_slug=None):
         current_category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(
             category=current_category, available_display=True)
-        title = current_category.name
+        title = current_category.second
         if request.GET:
             query = request.GET['q']
             products = get_product_queryset(query, current_category)
