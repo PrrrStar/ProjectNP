@@ -1,58 +1,71 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}내편찾기{% endblock %}
-{% block mymap %} 
+{% block mymap %}
 
 {% block style %}
-  <link rel="stylesheet" href="{% static 'css/mymap.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/mymap.css' %}" />
 {% endblock %}
 
 <div class="container-fluid">
     <!-- <div class="mymap" style="width:100%;margin:50px;"> -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <input id="inputPlace" type="text"  onkeyup="enterkey();" autofocus placeholder="장소를 입력하세요 (동 이름, 역 이름, 학교 이름 등)" style="width: 100%;">
-                </div>
-                <div class="col-md-6">
-                    <button onclick="findPlace()" type="button" class="btn btn-info">편의점 검색</button>
-                    <button onclick="findCVS()" type="button" class="btn btn-info">현재 지도에서 찾기</button>        
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <input id="inputPlace" type="text" onkeyup="enterkey();" autofocus
+                    placeholder="장소를 입력하세요 (동 이름, 역 이름, 학교 이름 등)" style="width: 100%;">
+            </div>
+            <div class="col-md-6">
+                <button onclick="findPlace()" type="button" class="btn btn-info">편의점 검색</button>
+                <button onclick="findCVS()" type="button" class="btn btn-info">현재 지도에서 찾기</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <div class="map_wrap badge badge-light" style="width:100%;margin:10px;padding:10px;float:left;">
+                    <div id="map" style="height:500px;position:relative;overflow:hidden;"
+                        marker-url="{% static 'logo/point__circle-01.png' %}"></div>
                 </div>
             </div>
-            
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <div class="map_wrap badge badge-light" style="width:100%;margin:10px;padding:10px;float:left;" >
-                        <div id="map" style="height:500px;position:relative;overflow:hidden;" marker-url="{% static 'logo/point__circle-01.png' %}"></div>
+            <div class="col-md-4 col-sm-12" style="float:left;">
+                <div id="cvsInfo">
+                    <!-- <div>편의점 정보</div> -->
+                    <div id="info-title" class="h4"></div>
+                    <div>주소 <span id="info-address"></span></div>
+                    <br>
+                    <div>전화번호 <span id="info-phone"></span></div>
+                    <br>
+                    <div class="row">
+                        <a id="info-url" target="_blank"><button type="button" class="btn btn-success">상세</button></a>
+                        <a id="info-route" target="_blank"><button type="button"
+                                class="btn btn-success">길찾기</button></a>
+                        <button type="button" id="info-my" class="btn btn-danger" onclick="delMyCvs()">♥</button>
+                        <button type="button" id="info-not-my" class="btn btn-default" onclick="addMyCvs()">♡</button>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12" style="float:left;">
-                    <div id="cvsInfo">
-                        <!-- <div>편의점 정보</div> -->
-                        <div id="info-title" class="h4"></div>
-                        <div>주소 <span id="info-address"></span></div>
-                        <div>전화번호 <span id="info-phone"></span></div>
-                        <div class="row">
-                            <a id="info-url" target="_blank"><button type="button" class="btn btn-success">상세</button></a> 
-                            <a id="info-route" target="_blank"><button type="button" class="btn btn-success">길찾기</button></a> 
-                            <button type="button" id="info-my" class="btn btn-danger" onclick="delMyCvs()">♥</button>
-                            <button type="button" id="info-not-my" class="btn btn-default" onclick="addMyCvs()">♡</button>
-                        </div>
-                    </div>
-                    <div class="h3">내편 목록</div>
-                    <ul id="myCvsList" class="list-group"></ul>    
+                <div class="h3">내편 목록</div>
+                <div class=tempCvs>
+                    {% for mycvs in user.mycvs.all %}
+                    <!-- <td>{{mycvs.brand}} </td> -->
+                    <div>{{mycvs.name}}</div>
+                    <br>
+                    {% endfor %}
                 </div>
+
+                <ul id="myCvsList" class="list-group"></ul>
             </div>
-            
         </div>
+
+    </div>
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{KAKAO_MAP_API_KEY}}&libraries=services"></script>
+<script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{KAKAO_MAP_API_KEY}}&libraries=services"></script>
 
 {% endblock %}
-{% block script %} 
-    <script src="{% static 'js/mymap.js' %}"></script>
+{% block script %}
+<script src="{% static 'js/mymap.js' %}"></script>
 
 {% endblock %}
-

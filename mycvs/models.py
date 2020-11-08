@@ -11,7 +11,7 @@ class CVS(models.Model):
     longitude   = models.DecimalField(max_digits=9, decimal_places=6, verbose_name='경도')
     brand       = models.CharField(max_length=20, verbose_name='편의점 브랜드', null=True)
     brand_logo  = models.ImageField(upload_to="brand", blank=True, null=True)
-    mycvs       = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, verbose_name='내 편', related_name='mycvs')
+    user        = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, verbose_name='내 편', related_name='mycvs')
 
     class Meta:
         ordering            = ['-name']
