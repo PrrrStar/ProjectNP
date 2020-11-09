@@ -268,22 +268,3 @@
 
 }
 
-.index__slide--good {
-  position: relative;
-  left: 90px;
-  bottom: 7px;
-  
-}
-
-.index__slide--description span {
-  position: relative;
-  left: 90px;
-  bottom: 7px;
-  
-}
-
-.index__slide--description span {
-  color: #fe4737;
-  position: relative;
-  left: 3px;
-}
