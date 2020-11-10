@@ -201,9 +201,11 @@
 /* 연관상품 css 입니다. */
 
 .products__slider {
+  position: relative;
   height: 340px;
   width: 250px;
-  margin: 0px 25px;
+  top: 35px;
+  left: 50px;
   border-radius: 20px;
   -webkit-box-shadow : 0px 1px 4px 2px rgb(238, 238, 238);
   -moz-box-shadow : 0px 1px 4px 2px rgb(238, 238, 238);
@@ -267,4 +269,3 @@
   height: 22px;
 
 }
-
