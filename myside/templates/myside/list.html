@@ -32,7 +32,27 @@
 			{% include 'myside/_search.html' %}
 		</div>
 		
+	    <!-- Slick을 이용한 슬라이더 (베스트 상품) -->
+		<div class="index__slider index__best">
+			{% for product in best_products %}
+			<a href="{{product.get_absolute_url}}">
+			  <img src="{{product.image_url}}" alt="Product IMG" class="index__slide--img" />
+			  <div class="index__slideBox">
+				<div class="index__slide--header">
+				  <span class="index__slide--name">{{product.name}}</span>
+				</div>
+				<div class="index__slide--description">
+				  <p>{{product.price}}원</p>
+				  
+					<img class="index__slide--good" src="{% static 'logo/thumb_up_alt-24px.png' %}" height="25px" width="25px"></img>
+					<span>{{ product.like.count }}</span>
 		
+				</div>
+			  </div>
+	  
+			</a>
+			{% endfor %}
+		  </div>	
 		
 		{% if products %}
 		<div class="index__productsBox">
@@ -64,4 +84,20 @@
 {% block script %}
 	<!-- Slick.js cdn -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+	  <!-- Slick.js cdn -->
+	  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+	  <!-- Slick.js 슬라이더 -->
+	  <!-- 우선은 한번에 4개씩 넘어가게 했습니다. -->
+	  <script type="text/javascript">
+		$(".index__slider").slick({
+		  slidesToShow: 4,
+		  slidesToScroll: 4,
+		});
+	  </script>
+	
+	  <!-- 내꺼 슬라이더 js -->
+	  <!-- <script src="{% static 'js/naegguSlider.js' %}"></script> -->
 {% endblock %}
+
