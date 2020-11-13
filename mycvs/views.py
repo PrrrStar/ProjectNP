@@ -37,14 +37,19 @@ def add_mycvs(request):
     user = request.user  
     postedPlace=json.loads(request.POST.get("place",""))
     place_name=postedPlace['place_name']
-    mycvs=CVS()
-    mycvs.name=place_name
-    mycvs.slug=slugify(place_name, allow_unicode=True)
-    mycvs.latitude=postedPlace['x']
-    mycvs.longitude=postedPlace['y']
-    mycvs.brand, mycvs.brand_logo=find_brand(place_name)
-    mycvs.save()
-    mycvs.user.add(user)
+    postedCvs=CVS.objects.filter(name=place_name)
+    if(len(postedCvs)!=0): #try except로 바꿀 예정
+        postedCvs=CVS.objects.get(name=place_name)
+        postedCvs.user.add(user)
+    else:
+        mycvs=CVS()
+        mycvs.name=place_name
+        mycvs.slug=slugify(place_name, allow_unicode=True)
+        mycvs.latitude=postedPlace['x']
+        mycvs.longitude=postedPlace['y']
+        mycvs.brand, mycvs.brand_logo=find_brand(place_name)
+        mycvs.save()
+        mycvs.user.add(user)
     message = "좋아요"
     context = {'message': message }
     return HttpResponse(json.dumps(context), content_type="application/json")  
@@ -70,19 +75,3 @@ def find_brand( name):
         return "씨스페이스", "brand/씨스페이스.jpg" 
     else :
         return "기타"        
-
-def post_create(request):
-    if not request.user.is_authenticated:
-        return redirect('/')
-    elif request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = Post()
-            post.title = form.cleaned_data['title']
-            post.content = form.cleaned_data['content']
-            post.author = request.user
-            post.save()
-            return redirect('/community/list/')
-    else:
-        form = PostForm()
-    return render(request, 'community/post_create.html', {'form': form})
