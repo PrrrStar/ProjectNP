@@ -111,30 +111,53 @@ function addMyCvs() {
         x: Number(infoAddress.getAttribute('x')),
         y: Number(infoAddress.getAttribute('y'))
     }
-    myList.push(place);
+    var jsonPlace = JSON.stringify(place);
     hideMyMarkers();
     myMarkers = [];
-
     setMyList(myList);
-
+    $.ajax({
+        type: "POST",
+        url: "add_mycvs/",
+        data: { 'place': jsonPlace },
+        dataType: "json",
+        success: function (response) {
+            alert(response.message)
+        },
+        error: function (request, status, error) {
+            alert("실패.")
+            window.location.replace("/")
+        },
+    });
     //ajax 로직 추가
     infoMy.style.display = "block";
     infoNotMy.style.display = "none";
+
 }
 //3. 내편 목록에서 삭제
 //findIndex 반환값으로 splice(idx,1) , setMyList
 function delMyCvs() {
     place_name = infoTitle.innerText;
     var idx = inMyList(place_name);
-    console.log(idx);
     myList.splice(idx, 1);
-
+    var jsonPlace = JSON.stringify(place_name);
     hideMyMarkers();
     myMarkers = [];
 
     setMyList(myList);
     // myMarkers = null;
-
+    $.ajax({
+        type: "POST",
+        url: "delete_mycvs/",
+        data: { 'place': jsonPlace },
+        dataType: "json",
+        success: function (response) {
+            alert(response.message)
+        },
+        error: function (request, status, error) {
+            alert("실패.")
+            window.location.replace("/")
+        },
+    });
     setMyMarkers(map);
     //ajax 로직 추가
     infoMy.style.display = "none";
