@@ -3,7 +3,7 @@
 
 {% block style %}
 	<link rel="stylesheet" href="{% static 'css/include/category.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/index/index.css' %}" />
+  
   <link rel="stylesheet" href="{% static 'css/index/index-slider.css' %}" />
   <link rel="stylesheet" href="{% static 'css/include/naeggu.css' %}" />
   <link rel="stylesheet" href="{% static 'css/include/list.css' %}" />
@@ -38,7 +38,9 @@
 		<div class="index__productsBox">
 			{% for product in products %}
 			<a href="{{product.get_absolute_url}}">
+			<div class="index__slideBox--img">
 				<img src="{{product.image_url}}" alt="Product IMG" class="index__slide--img" />
+			</div>
 				<div class="index__slideBox">
 				  <div class="index__slide--header">
 					<span class="index__slide--name">{{product.name}}</span>

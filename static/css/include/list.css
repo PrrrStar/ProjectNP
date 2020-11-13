@@ -1,4 +1,89 @@
 .index {
     display: flex;
     padding: 0px;
+    width: 1320px;
 }
+
+/* index css */
+
+  
+  /* index header */
+  .index__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 60px 40px 40px;
+  }
+  
+  .index__header--title {
+    font-family: "Jua", sans-serif;
+    line-height: 1.46;
+    letter-spacing: 2.8px;
+    font-size: 28px;
+    position: relative;
+  }
+  
+  .index__header--search {
+    width: 320px;
+    height: 50px;
+    border-radius: 25px;
+    border: solid 1px #cccccc;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .index__header--search input {
+    border: none;
+    font-size: 16px;
+  }
+  
+  .index__header--search::placeholder {
+    color: #999999;
+  }
+  
+  .index__header button {
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .index__header--search i {
+    font-size: 24px;
+    color: #fe4737;
+  }
+  
+  .index__banner {
+    width: 1200px;
+    height: 200px;
+    margin-top: 50px;
+    margin-bottom: 108px;
+  }
+  
+  
+  /* 여기서부터는 slug를 통해 보여지는 페이지의  css 입니다.(list.html) */
+  .index__productsBox {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .index__productsBox a {
+    height: 310px;
+    width: 220px;
+    margin: 20px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+    -moz-box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+    box-shadow: 0px 2px 7px 0px rgba(209,209,209,1);
+    overflow: hidden;
+  }
+
+  .index__slideBox--img img {
+      height: 220px;
+      width: 220px;
+  }
+
+  .index__slide--good {
+      height: 24px;
+      width: 24px;
+
+  }
