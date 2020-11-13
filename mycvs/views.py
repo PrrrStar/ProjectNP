@@ -74,4 +74,17 @@ def find_brand( name):
     elif "씨스페이스" in name:
         return "씨스페이스", "brand/씨스페이스.jpg" 
     else :
-        return "기타"        
+        return "기타"  
+
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def delete_mycvs(request):
+    user = request.user  
+    postedPlace=json.loads(request.POST.get("place",""))
+    postedCvs=CVS.objects.get(name=postedPlace)
+    postedCvs.user.remove(user)
+    if (postedCvs.user.count()==0):
+        postedCvs.delete()
+    message = "좋아요 취소"
+    context = {'message': message }
+    return HttpResponse(json.dumps(context), content_type="application/json")  

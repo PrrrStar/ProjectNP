@@ -138,15 +138,26 @@ function addMyCvs() {
 function delMyCvs() {
     place_name = infoTitle.innerText;
     var idx = inMyList(place_name);
-    console.log(idx);
     myList.splice(idx, 1);
-
+    var jsonPlace = JSON.stringify(place_name);
     hideMyMarkers();
     myMarkers = [];
 
     setMyList(myList);
     // myMarkers = null;
-
+    $.ajax({
+        type: "POST",
+        url: "delete_mycvs/",
+        data: { 'place': jsonPlace },
+        dataType: "json",
+        success: function (response) {
+            alert(response.message)
+        },
+        error: function (request, status, error) {
+            alert("실패.")
+            window.location.replace("/")
+        },
+    });
     setMyMarkers(map);
     //ajax 로직 추가
     infoMy.style.display = "none";
