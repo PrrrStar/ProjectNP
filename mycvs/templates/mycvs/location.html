@@ -47,14 +47,6 @@
                     </div>
                 </div>
                 <div class="h3">내편 목록</div>
-                <div class=tempCvs>
-                    {% for mycvs in user.mycvs.all %}
-                    <!-- <td>{{mycvs.brand}} </td> -->
-                    <div>{{mycvs.name}}</div>
-                    <br>
-                    {% endfor %}
-                </div>
-
                 <ul id="myCvsList" class="list-group"></ul>
             </div>
         </div>
@@ -66,6 +58,9 @@
 
 {% endblock %}
 {% block script %}
-<script src="{% static 'js/mymap.js' %}"></script>
+<script>
+    var tempList = JSON.parse("{{mycvs |escapejs | safe}}");
+</script>
+<script src="{% static 'js/mymap.js' %}"> </script>
 
 {% endblock %}

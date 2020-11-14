@@ -18,6 +18,15 @@ class CVS(models.Model):
         index_together      = [['id', 'slug']]
         verbose_name        = 'cvs'
         verbose_name_plural = 'cvs'
+    
+    @property
+    def to_json(self):
+        return {
+            "place_name": self.name,
+            "y": self.longitude,
+            "x": self.latitude 
+        }
+
 
 
 from myside.models import Product
